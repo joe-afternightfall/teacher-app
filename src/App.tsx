@@ -50,10 +50,6 @@ class App extends Component<AppProps> {
 
 export interface AppProps extends WithStyles<typeof styles> {
   children: JSX.Element;
-  username: string | null;
-  checkAuthentication: Function | null;
-  hideAppShell: boolean;
-  thereAreAuditReports: boolean;
 }
 
 export default withStyles(styles, { withTheme: true })(App);
