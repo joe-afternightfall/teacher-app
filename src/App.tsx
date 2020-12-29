@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
 import {
-  StyledComponentProps,
   Theme,
-  ThemeProvider as MuiThemeProvider,
   WithStyles,
   withStyles,
+  StyledComponentProps,
+  ThemeProvider as MuiThemeProvider,
 } from '@material-ui/core/styles';
+import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
+import AppBar from './components/app-shell/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { getLightTheme } from './configs/theme/light-theme';
-// import AppBar from './components/app-shell/app-bar/AppBarConnector';
 
-const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
+const styles: Styles<Theme, StyledComponentProps> = () => ({
   root: {
     display: 'flex',
   },
@@ -24,7 +24,7 @@ class App extends Component<AppProps> {
       <MuiThemeProvider theme={getLightTheme()}>
         <div className={classes.root}>
           <CssBaseline />
-          {/*<AppBar />*/}
+          <AppBar />
 
           {'TEACHER-APP'}
         </div>
