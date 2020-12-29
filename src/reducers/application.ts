@@ -10,7 +10,7 @@ export default {
 
     switch (action.type) {
       case actions.INITIALIZE:
-        newState.appTitle = action.appTitle;
+        newState.username = action.username;
         break;
       default:
         newState = state;
@@ -21,5 +21,5 @@ export default {
 };
 
 export interface ApplicationState {
-  appTitle: string;
+  username: string;
 }

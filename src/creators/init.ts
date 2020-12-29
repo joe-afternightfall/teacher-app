@@ -1,9 +1,9 @@
 import actions from './actions';
 import { AnyAction } from 'redux';
 
-export const initApp = (appTitle: string): AnyAction => {
+export const initApp = (username: string): AnyAction => {
   return {
     type: actions.INITIALIZE,
-    appTitle: appTitle,
+    username: username,
   };
 };
