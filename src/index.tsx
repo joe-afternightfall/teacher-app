@@ -17,7 +17,6 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        {/*// @ts-ignore*/}
         <App>
           <div className={'route'}>
             <Route component={DashboardScreen} exact path={routes.DASHBOARD} />
