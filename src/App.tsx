@@ -11,22 +11,16 @@ import AppBar from './components/app-shell/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { getLightTheme } from './configs/theme/light-theme';
 
-const styles: Styles<Theme, StyledComponentProps> = () => ({
-  root: {
-    display: 'flex',
-  },
-});
+const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class App extends Component<AppProps> {
   render(): JSX.Element {
-    const { classes } = this.props;
     return (
       <MuiThemeProvider theme={getLightTheme()}>
-        <div className={classes.root}>
+        <div>
           <CssBaseline />
           <AppBar />
-
-          {'TEACHER-APP'}
+          <div>{this.props.children}</div>
         </div>
       </MuiThemeProvider>
     );

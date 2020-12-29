@@ -1,12 +1,9 @@
 import React from 'react';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
 import Menu from '@material-ui/core/Menu';
 import AppBar from '@material-ui/core/AppBar';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import MenuItem from '@material-ui/core/MenuItem';
-import { State } from '../../configs/redux/store';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -26,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function MenuAppBar() {
+export default function MenuAppBar() {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -89,19 +86,3 @@ function MenuAppBar() {
     </AppBar>
   );
 }
-
-export interface AppBarProps {
-  username: string | null;
-}
-
-const mapStateToProps = (state: State): AppBarProps => {
-  return ({
-    username: state.applicationState.username,
-  } as unknown) as AppBarProps;
-};
-
-const mapDispatchToProps = (dispatch: Dispatch): AppBarProps => {
-  return ({} as unknown) as AppBarProps;
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MenuAppBar);
