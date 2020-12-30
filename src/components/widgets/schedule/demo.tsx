@@ -52,54 +52,9 @@ import {
 } from '@material-ui/icons';
 import { appointments } from './appointments';
 import { Styles } from '@material-ui/styles';
+import EditingForm from './components/EditingForm';
 
-const containerStyles: Styles<Theme, StyledComponentProps> = (
-  theme: Theme
-) => ({
-  container: {
-    width: theme.spacing(68),
-    padding: 0,
-    paddingBottom: theme.spacing(2),
-  },
-  content: {
-    padding: theme.spacing(2),
-    paddingTop: 0,
-  },
-  header: {
-    overflow: 'hidden',
-    paddingTop: theme.spacing(0.5),
-  },
-  closeButton: {
-    float: 'right',
-  },
-  buttonGroup: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 2),
-  },
-  button: {
-    marginLeft: theme.spacing(2),
-  },
-  picker: {
-    marginRight: theme.spacing(2),
-    '&:last-child': {
-      marginRight: 0,
-    },
-    width: '50%',
-  },
-  wrapper: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: theme.spacing(1, 0),
-  },
-  icon: {
-    margin: theme.spacing(2, 0),
-    marginRight: theme.spacing(2),
-  },
-  textField: {
-    width: '100%',
-  },
-});
+const containerStyles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class AppointmentFormContainerBasic extends React.PureComponent<any, any> {
   constructor(props: any) {
@@ -153,7 +108,6 @@ class AppointmentFormContainerBasic extends React.PureComponent<any, any> {
 
   render() {
     const {
-      classes,
       visible,
       visibleChange,
       appointmentData,
@@ -174,29 +128,6 @@ class AppointmentFormContainerBasic extends React.PureComponent<any, any> {
       ? () => this.commitAppointment('added')
       : () => this.commitAppointment('changed');
 
-    const textEditorProps = (field: any) => ({
-      // variant: 'outlined',
-      onChange: (target: any) => this.changeAppointment([field], target.value),
-      value: displayAppointmentData[field] || '',
-      label: field[0].toUpperCase() + field.slice(1),
-      className: classes.textField,
-    });
-
-    const pickerEditorProps = (field: any) => ({
-      className: classes.picker,
-      // keyboard: true,
-      ampm: false,
-      value: displayAppointmentData[field],
-      onChange: (date: any) =>
-        this.changeAppointment(
-          [field],
-          date ? date.toDate() : new Date(displayAppointmentData[field])
-        ),
-      // inputVariant: 'outlined',
-      format: 'DD/MM/YYYY HH:mm',
-      onError: () => null,
-    });
-
     const cancelChanges = () => {
       this.setState({
         appointmentChanges: {},
@@ -206,83 +137,18 @@ class AppointmentFormContainerBasic extends React.PureComponent<any, any> {
     };
 
     return (
-      <AppointmentForm.Overlay
+      <EditingForm
+        isNewAppointment={isNewAppointment}
         visible={visible}
         target={target}
-        fullSize
+        displayAppointmentData={displayAppointmentData}
         onHide={onHide}
-      >
-        <div>
-          <div className={classes.header}>
-            <IconButton className={classes.closeButton} onClick={cancelChanges}>
-              <Close color="action" />
-            </IconButton>
-          </div>
-          <div className={classes.content}>
-            <div className={classes.wrapper}>
-              <Create className={classes.icon} color="action" />
-              <TextField variant={'outlined'} {...textEditorProps('title')} />
-            </div>
-            <div className={classes.wrapper}>
-              <CalendarToday className={classes.icon} color="action" />
-              <MuiPickersUtilsProvider utils={MomentUtils}>
-                <KeyboardDateTimePicker
-                  label="Start Date"
-                  inputVariant={'outlined'}
-                  {...pickerEditorProps('startDate')}
-                />
-                <KeyboardDateTimePicker
-                  label="End Date"
-                  inputVariant={'outlined'}
-                  {...pickerEditorProps('endDate')}
-                />
-              </MuiPickersUtilsProvider>
-            </div>
-            <div className={classes.wrapper}>
-              <LocationOn className={classes.icon} color="action" />
-              <TextField
-                variant={'outlined'}
-                {...textEditorProps('location')}
-              />
-            </div>
-            <div className={classes.wrapper}>
-              <Notes className={classes.icon} color="action" />
-              <TextField
-                multiline
-                rows="6"
-                variant={'outlined'}
-                {...textEditorProps('notes')}
-              />
-            </div>
-          </div>
-          <div className={classes.buttonGroup}>
-            {!isNewAppointment && (
-              <Button
-                variant="outlined"
-                color="secondary"
-                className={classes.button}
-                onClick={() => {
-                  visibleChange();
-                  this.commitAppointment('deleted');
-                }}
-              >
-                Delete
-              </Button>
-            )}
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.button}
-              onClick={() => {
-                visibleChange();
-                applyChanges();
-              }}
-            >
-              {isNewAppointment ? 'Create' : 'Save'}
-            </Button>
-          </div>
-        </div>
-      </AppointmentForm.Overlay>
+        cancelChanges={cancelChanges}
+        visibleChange={visibleChange}
+        applyChanges={applyChanges}
+        commitAppointment={this.commitAppointment}
+        changeAppointment={this.changeAppointment}
+      />
     );
   }
 }
