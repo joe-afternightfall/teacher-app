@@ -8,6 +8,6 @@ export const initApp = (username: string): InitAction => {
 };
 
 export interface InitAction {
-  type: string,
-  username: string
+  type: string;
+  username: string;
 }
