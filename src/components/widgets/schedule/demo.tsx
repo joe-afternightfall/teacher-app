@@ -458,7 +458,6 @@ class Demo extends React.PureComponent<any, any> {
           />
           <WeekView startDayHour={startDayHour} endDayHour={endDayHour} />
           <MonthView />
-          <AllDayPanel />
           <EditRecurrenceMenu />
           <Appointments />
           <AppointmentTooltip showOpenButton showCloseButton showDeleteButton />
