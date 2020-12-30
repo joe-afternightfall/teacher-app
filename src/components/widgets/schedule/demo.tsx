@@ -17,42 +17,19 @@ import {
   AppointmentForm,
   DragDropProvider,
   EditRecurrenceMenu,
-  AllDayPanel,
 } from '@devexpress/dx-react-scheduler-material-ui';
 import { connectProps } from '@devexpress/dx-react-core';
-import {
-  KeyboardDateTimePicker,
-  MuiPickersUtilsProvider,
-} from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
 import {
   StyledComponentProps,
   Theme,
   withStyles,
 } from '@material-ui/core/styles';
-import {
-  Fab,
-  Button,
-  Paper,
-  DialogTitle,
-  DialogContentText,
-  DialogContent,
-  DialogActions,
-  Dialog,
-  IconButton,
-  TextField,
-} from '@material-ui/core';
-import {
-  Create,
-  CalendarToday,
-  Close,
-  Notes,
-  LocationOn,
-  Add,
-} from '@material-ui/icons';
+import { Fab, Paper } from '@material-ui/core';
+import { Add } from '@material-ui/icons';
 import { appointments } from './appointments';
 import { Styles } from '@material-ui/styles';
 import EditingForm from './components/EditingForm';
+import DeleteDialog from './components/DeleteDialog';
 
 const containerStyles: Styles<Theme, StyledComponentProps> = () => ({});
 
@@ -337,30 +314,11 @@ class Demo extends React.PureComponent<any, any> {
           <DragDropProvider />
         </Scheduler>
 
-        <Dialog open={confirmationVisible}>
-          <DialogTitle>Delete Appointment</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Are you sure you want to delete this appointment?
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button
-              onClick={this.toggleConfirmationVisible}
-              color="primary"
-              variant="outlined"
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={this.commitDeletedAppointment}
-              color="secondary"
-              variant="outlined"
-            >
-              Delete
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <DeleteDialog
+          commitDeletedAppointment={this.commitDeletedAppointment}
+          toggleConfirmationVisible={this.toggleConfirmationVisible}
+          open={confirmationVisible}
+        />
 
         <Fab
           color="secondary"
