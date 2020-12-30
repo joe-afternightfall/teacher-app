@@ -1,5 +1,5 @@
 import actions from '../creators/actions';
-import application from "./application";
+import application from './application';
 
 describe('Application Reducer', () => {
   it('should set user on INIT with no state', () => {
@@ -12,9 +12,12 @@ describe('Application Reducer', () => {
   });
 
   it('should fall through to default', () => {
-    const state = application.reducer({ username: 'TESTING_APP' }, {
-      type: 'TESTING_DEFAULT',
-    });
+    const state = application.reducer(
+      { username: 'TESTING_APP' },
+      {
+        type: 'TESTING_DEFAULT',
+      }
+    );
 
     expect(state.username).toBe('TESTING_APP');
   });
