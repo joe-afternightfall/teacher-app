@@ -13,16 +13,23 @@ import AppBar from './components/app-shell/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { getLightTheme } from './configs/theme/light-theme';
 
-const styles: Styles<Theme, StyledComponentProps> = () => ({});
+const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
+  root: {
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+  },
+});
 
 class App extends Component<AppProps> {
   render(): JSX.Element {
+    const { classes } = this.props;
+
     return (
       <MuiThemeProvider theme={getLightTheme()}>
         <div>
           <CssBaseline />
           <AppBar />
-          <div>{this.props.children}</div>
+          <div className={classes.root}>{this.props.children}</div>
         </div>
       </MuiThemeProvider>
     );
