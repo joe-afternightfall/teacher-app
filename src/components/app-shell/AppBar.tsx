@@ -9,6 +9,9 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    root: {
+      marginBottom: theme.spacing(3),
+    },
     menuButton: {
       marginRight: theme.spacing(2),
     },
@@ -22,7 +25,7 @@ export default function TopAppBar() {
   const classes = useStyles();
 
   return (
-    <AppBar position={'static'}>
+    <AppBar position={'static'} className={classes.root}>
       <Toolbar>
         <IconButton
           edge={'start'}
