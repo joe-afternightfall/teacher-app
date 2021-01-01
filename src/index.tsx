@@ -8,7 +8,7 @@ import routes from './configs/constants/routes';
 import { createStore } from './configs/redux/store';
 import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './configs/service-worker';
-import DashboardScreen from './components/top-level-components/DashboardScreenConnector';
+import DashboardScreen from './components/top-level-components/DashboardScreen';
 
 const history = createHashHistory(),
   store = createStore(history);
