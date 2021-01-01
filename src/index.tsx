@@ -5,10 +5,10 @@ import { Route } from 'react-router';
 import { createHashHistory } from 'history';
 import { Provider } from 'react-redux';
 import routes from './configs/constants/routes';
-import * as serviceWorker from './configs/service-worker';
 import { createStore } from './configs/redux/store';
 import { ConnectedRouter } from 'connected-react-router';
-import DashboardScreen from './components/top-level-components/DashboardScreen';
+import * as serviceWorker from './configs/service-worker';
+import DashboardScreen from './components/top-level-components/DashboardScreenConnector';
 
 const history = createHashHistory(),
   store = createStore(history);
