@@ -4,7 +4,6 @@ import {
   Draggable,
   Droppable,
   DroppableProvided,
-  DraggableLocation,
   DropResult,
   DroppableStateSnapshot,
   DraggableProvided,
@@ -13,31 +12,17 @@ import {
 import { Card, Grid } from '@material-ui/core';
 import { Item } from '../../../configs/types/Item';
 import { IMoveResult } from '../../../configs/types/IMoveResult';
-import { getItems, move, reorder } from '../../../utils/weekly-schedule';
+import {
+  getItems,
+  getItemStyle,
+  getListStyle,
+  move,
+  reorder,
+} from '../../../utils/weekly-schedule';
 interface IAppState {
   [key: string]: Item[];
   selected: Item[];
 }
-
-const grid = 8;
-
-const getItemStyle = (
-  draggableStyle: any,
-  isDragging: boolean
-): Record<string, unknown> => ({
-  userSelect: 'none',
-  padding: 2 * grid,
-  margin: `0 0 ${grid}px 0`,
-  background: isDragging ? 'lightgreen' : 'grey',
-  ...draggableStyle,
-});
-
-const getListStyle = (isDraggingOver: boolean): Record<string, unknown> => ({
-  background: isDraggingOver ? 'lightblue' : 'lightgrey',
-  padding: grid,
-  width: 300,
-  minHeight: 400,
-});
 
 export default class DndDemo extends React.Component<
   Record<string, unknown>,

@@ -45,3 +45,25 @@ export const getItems = (count: number, offset = 0): Item[] => {
     id: `item-${k + offset}`,
   }));
 };
+
+const grid = 8;
+
+export const getItemStyle = (
+  draggableStyle: any,
+  isDragging: boolean
+): Record<string, unknown> => ({
+  userSelect: 'none',
+  padding: 2 * grid,
+  margin: `0 0 ${grid}px 0`,
+  background: isDragging ? 'lightgreen' : 'grey',
+  ...draggableStyle,
+});
+
+export const getListStyle = (
+  isDraggingOver: boolean
+): Record<string, unknown> => ({
+  background: isDraggingOver ? 'lightblue' : 'lightgrey',
+  padding: grid,
+  width: 300,
+  minHeight: 400,
+});
