@@ -103,57 +103,53 @@ export default class DndDemo extends React.Component<
       items: getItems(10, 0),
       selected: getItems(5, 10),
     };
-
-    this.onDragEnd = this.onDragEnd.bind(this);
-    this.getList = this.getList.bind(this);
-  }
-
-  public getList(id: string): Item[] {
-    // const myObj: {[index: string]:any} = {}
-    return this.state[this.id2List[id]];
-  }
-
-  public onDragEnd(result: DropResult): void {
-    const { source, destination } = result;
-
-    if (!destination) {
-      return;
-    }
-
-    if (source.droppableId === destination.droppableId) {
-      const items = reorder(
-        this.getList(source.droppableId),
-        source.index,
-        destination.index
-      );
-
-      let state: IAppState = { ...this.state };
-
-      if (source.droppableId === 'droppable2') {
-        state = { ...this.state, selected: items };
-      } else if (source.droppableId === 'droppable') {
-        state = { ...this.state, items };
-      }
-
-      this.setState(state);
-    } else {
-      const resultFromMove: IMoveResult = move(
-        this.getList(source.droppableId),
-        this.getList(destination.droppableId),
-        source,
-        destination
-      );
-
-      this.setState({
-        items: resultFromMove.droppable,
-        selected: resultFromMove.droppable2,
-      });
-    }
   }
 
   public render() {
+    const getList = (id: string): Item[] => {
+      return this.state[this.id2List[id]];
+    };
+
+    const onDragEnd = (result: DropResult): void => {
+      const { source, destination } = result;
+
+      if (!destination) {
+        return;
+      }
+
+      if (source.droppableId === destination.droppableId) {
+        const items = reorder(
+          getList(source.droppableId),
+          source.index,
+          destination.index
+        );
+
+        let state: IAppState = { ...this.state };
+
+        if (source.droppableId === 'droppable2') {
+          state = { ...this.state, selected: items };
+        } else if (source.droppableId === 'droppable') {
+          state = { ...this.state, items };
+        }
+
+        this.setState(state);
+      } else {
+        const resultFromMove: IMoveResult = move(
+          getList(source.droppableId),
+          getList(destination.droppableId),
+          source,
+          destination
+        );
+
+        this.setState({
+          items: resultFromMove.droppable,
+          selected: resultFromMove.droppable2,
+        });
+      }
+    };
+
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
+      <DragDropContext onDragEnd={onDragEnd}>
         <Grid container justify={'space-between'}>
           <Grid item>
             <Droppable droppableId={'droppable'}>
