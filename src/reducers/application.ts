@@ -1,6 +1,5 @@
 import actions from '../creators/actions';
 import { AnyAction } from 'redux';
-import { ScheduleItem } from '../configs/types/ScheduleItem';
 
 export default {
   reducer(
@@ -12,9 +11,6 @@ export default {
     switch (action.type) {
       case actions.INITIALIZE:
         newState.username = action.username;
-        break;
-      case actions.SELECT_SCHEDULE_ITEM:
-        newState.selectedScheduleItem = action.item;
         break;
       case actions.OPEN_EDITING_FORM:
         newState.displayEditingForm = true;
@@ -32,6 +28,5 @@ export default {
 
 export interface ApplicationState {
   username: string;
-  selectedScheduleItem: ScheduleItem;
   displayEditingForm: boolean;
 }
