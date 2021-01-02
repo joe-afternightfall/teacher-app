@@ -10,12 +10,10 @@ import {
   DraggableProvided,
   DraggableStateSnapshot,
 } from 'react-beautiful-dnd';
-// import {Flex} from 'grid-styled'
 import { Grid } from '@material-ui/core';
 
 interface Item {
   id: string;
-  // id: { [key: string]: string; };
   content: string;
 }
 interface IAppState {
