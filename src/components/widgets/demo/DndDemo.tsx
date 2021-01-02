@@ -10,7 +10,7 @@ import {
   DraggableProvided,
   DraggableStateSnapshot,
 } from 'react-beautiful-dnd';
-import { Grid } from '@material-ui/core';
+import { Card, Grid } from '@material-ui/core';
 
 interface Item {
   id: string;
@@ -152,27 +152,27 @@ export default class DndDemo extends React.Component<
       <DragDropContext onDragEnd={onDragEnd}>
         <Grid container justify={'center'} spacing={2}>
           <Grid item>
-            <Droppable droppableId={'droppable'}>
-              {(
-                provided: DroppableProvided,
-                snapshot: DroppableStateSnapshot
-              ) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  style={getListStyle(snapshot.isDraggingOver)}
-                >
-                  {this.state.items.map((item, index) => (
-                    <Draggable
-                      key={item.id}
-                      draggableId={item.id}
-                      index={index}
-                    >
-                      {(
-                        providedDraggable: DraggableProvided,
-                        snapshotDraggable: DraggableStateSnapshot
-                      ) => (
-                        <div>
+            <Card>
+              <Droppable droppableId={'droppable'}>
+                {(
+                  provided: DroppableProvided,
+                  snapshot: DroppableStateSnapshot
+                ) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    style={getListStyle(snapshot.isDraggingOver)}
+                  >
+                    {this.state.items.map((item, index) => (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
+                      >
+                        {(
+                          providedDraggable: DraggableProvided,
+                          snapshotDraggable: DraggableStateSnapshot
+                        ) => (
                           <div
                             ref={providedDraggable.innerRef}
                             {...providedDraggable.draggableProps}
@@ -184,58 +184,59 @@ export default class DndDemo extends React.Component<
                           >
                             {item.content}
                           </div>
-                          {/*{providedDraggable.placeholder}*/}
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </Card>
           </Grid>
 
           <Grid item>
-            <Droppable droppableId="droppable2">
-              {(
-                providedDroppable2: DroppableProvided,
-                snapshotDroppable2: DroppableStateSnapshot
-              ) => (
-                <div
-                  ref={providedDroppable2.innerRef}
-                  style={getListStyle(snapshotDroppable2.isDraggingOver)}
-                >
-                  {this.state.selected.map((item, index) => (
-                    <Draggable
-                      key={item.id}
-                      draggableId={item.id}
-                      index={index}
-                    >
-                      {(
-                        providedDraggable2: DraggableProvided,
-                        snapshotDraggable2: DraggableStateSnapshot
-                      ) => (
-                        <div>
-                          <div
-                            ref={providedDraggable2.innerRef}
-                            {...providedDraggable2.draggableProps}
-                            {...providedDraggable2.dragHandleProps}
-                            style={getItemStyle(
-                              providedDraggable2.draggableProps.style,
-                              snapshotDraggable2.isDragging
-                            )}
-                          >
-                            {item.content}
+            <Card>
+              <Droppable droppableId="droppable2">
+                {(
+                  providedDroppable2: DroppableProvided,
+                  snapshotDroppable2: DroppableStateSnapshot
+                ) => (
+                  <div
+                    ref={providedDroppable2.innerRef}
+                    style={getListStyle(snapshotDroppable2.isDraggingOver)}
+                  >
+                    {this.state.selected.map((item, index) => (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
+                      >
+                        {(
+                          providedDraggable2: DraggableProvided,
+                          snapshotDraggable2: DraggableStateSnapshot
+                        ) => (
+                          <div>
+                            <div
+                              ref={providedDraggable2.innerRef}
+                              {...providedDraggable2.draggableProps}
+                              {...providedDraggable2.dragHandleProps}
+                              style={getItemStyle(
+                                providedDraggable2.draggableProps.style,
+                                snapshotDraggable2.isDragging
+                              )}
+                            >
+                              {item.content}
+                            </div>
+                            {/*{providedDraggable2.}*/}
                           </div>
-                          {/*{providedDraggable2.}*/}
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {providedDroppable2.placeholder}
-                </div>
-              )}
-            </Droppable>
+                        )}
+                      </Draggable>
+                    ))}
+                    {providedDroppable2.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </Card>
           </Grid>
         </Grid>
       </DragDropContext>
