@@ -1,24 +1,25 @@
-import * as React from 'react';
 import {
-  DragDropContext,
   Draggable,
   Droppable,
-  DroppableProvided,
   DropResult,
-  DroppableStateSnapshot,
+  DragDropContext,
+  DroppableProvided,
   DraggableProvided,
+  DroppableStateSnapshot,
   DraggableStateSnapshot,
 } from 'react-beautiful-dnd';
-import { Card, Grid } from '@material-ui/core';
-import { Item } from '../../../configs/types/Item';
-import { IMoveResult } from '../../../configs/types/IMoveResult';
+import * as React from 'react';
 import {
+  move,
+  reorder,
   getItems,
   getItemStyle,
   getListStyle,
-  move,
-  reorder,
 } from '../../../utils/weekly-schedule';
+import { Card, Grid } from '@material-ui/core';
+import { Item } from '../../../configs/types/Item';
+import { IMoveResult } from '../../../configs/types/IMoveResult';
+
 interface IAppState {
   [key: string]: Item[];
   selected: Item[];
