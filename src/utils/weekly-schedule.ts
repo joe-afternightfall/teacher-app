@@ -1,6 +1,5 @@
-import { Item } from '../configs/types/Item';
 import { DraggableLocation } from 'react-beautiful-dnd';
-import { IMoveResult } from '../configs/types/IMoveResult';
+import { IMoveResult, Item } from '../configs/types/WeeklySchedule';
 
 /**
  * Reorder items in list
