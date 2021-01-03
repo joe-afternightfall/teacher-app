@@ -46,7 +46,7 @@ class ColumnList extends Component<ColumnProps> {
     const { items, dayOfWeek, color } = this.props;
 
     return (
-      <Grid item xs={2}>
+      <Grid item style={{ width: '20%' }}>
         <Card style={{ width: '100%' }}>
           <CardHeader
             style={{
