@@ -6,7 +6,7 @@ import {
 } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
-import DndDemo from '../widgets/demo/DndDemo';
+import WeeklyPlanner from '../widgets/weekly-planner/WeeklyPlanner';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
@@ -14,7 +14,7 @@ class DashboardScreen extends Component<DashboardScreenProps> {
   render(): JSX.Element {
     const { classes } = this.props;
 
-    return <DndDemo />;
+    return <WeeklyPlanner />;
   }
 }
 
