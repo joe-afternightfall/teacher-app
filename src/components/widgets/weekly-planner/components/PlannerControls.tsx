@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { Styles } from '@material-ui/styles';
 import {
-  StyledComponentProps,
+  Grid,
+  Paper,
+  Select,
+  Button,
+  MenuItem,
+  InputLabel,
+  FormControl,
+} from '@material-ui/core';
+import {
   Theme,
   WithStyles,
   withStyles,
+  StyledComponentProps,
 } from '@material-ui/core/styles';
-import {
-  Button,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-} from '@material-ui/core';
+import React, { Component } from 'react';
+import { Styles } from '@material-ui/styles';
+import AddIcon from '@material-ui/icons/Add';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
-import AddIcon from '@material-ui/icons/Add';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
@@ -26,20 +26,11 @@ class PlannerControls extends Component<PlannerControlsProps> {
     const { classes } = this.props;
 
     return (
-      <Grid
-        container
-        spacing={3}
-        alignItems={'flex-start'}
-        justify={'space-between'}
-      >
+      <Grid container alignItems={'center'} justify={'space-between'}>
         <Grid item xs={6}>
-          <Grid container>
+          <Grid container alignItems={'center'} spacing={2}>
             <Grid item>
-              <Button
-                variant={'contained'}
-                color={'primary'}
-                style={{ margin: 8 }}
-              >
+              <Button variant={'contained'} color={'primary'}>
                 <ArrowBack />
               </Button>
             </Grid>
@@ -58,11 +49,7 @@ class PlannerControls extends Component<PlannerControlsProps> {
             </Grid>
 
             <Grid item>
-              <Button
-                variant={'contained'}
-                color={'primary'}
-                style={{ margin: 8 }}
-              >
+              <Button variant={'contained'} color={'primary'}>
                 <ArrowForward />
               </Button>
             </Grid>
@@ -74,7 +61,6 @@ class PlannerControls extends Component<PlannerControlsProps> {
             variant={'contained'}
             color={'primary'}
             startIcon={<AddIcon />}
-            style={{ margin: 8 }}
           >
             {'Add New'}
           </Button>

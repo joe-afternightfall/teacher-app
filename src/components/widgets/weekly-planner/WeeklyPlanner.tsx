@@ -9,7 +9,7 @@ import {
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
-class WeeklySchedule extends Component<SchoolScheduleProps> {
+class WeeklyPlanner extends Component<SchoolScheduleProps> {
   render(): JSX.Element {
     const { classes } = this.props;
 
@@ -23,4 +23,4 @@ class WeeklySchedule extends Component<SchoolScheduleProps> {
 
 export type SchoolScheduleProps = WithStyles<typeof styles>;
 
-export default withStyles(styles, { withTheme: true })(WeeklySchedule);
+export default withStyles(styles, { withTheme: true })(WeeklyPlanner);

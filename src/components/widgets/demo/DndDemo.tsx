@@ -6,9 +6,9 @@ import {
   WeeklyScheduleState,
 } from '../../../configs/types/WeeklySchedule';
 import { DropResult, DragDropContext } from 'react-beautiful-dnd';
-import ColumnList from '../weekly-schedule/components/ColumnList';
+import ColumnList from '../weekly-planner/components/ColumnList';
 import { move, reorder, getItems } from '../../../utils/weekly-schedule';
-import PlannerControls from '../weekly-schedule/components/PlannerControls';
+import PlannerControls from '../weekly-planner/components/PlannerControls';
 
 export default class DndDemo extends React.Component<
   Record<string, unknown>,
