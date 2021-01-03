@@ -8,6 +8,7 @@ import {
 import { DropResult, DragDropContext } from 'react-beautiful-dnd';
 import ColumnList from '../weekly-schedule/components/ColumnList';
 import { move, reorder, getItems } from '../../../utils/weekly-schedule';
+import PlannerControls from '../weekly-schedule/components/PlannerControls';
 
 export default class DndDemo extends React.Component<
   Record<string, unknown>,
@@ -88,6 +89,8 @@ export default class DndDemo extends React.Component<
 
     return (
       <DragDropContext onDragEnd={onDragEnd}>
+        <PlannerControls />
+
         <Grid container justify={'center'} spacing={2}>
           <ColumnList
             color={'#f40407'}
