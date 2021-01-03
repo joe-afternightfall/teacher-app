@@ -89,11 +89,31 @@ export default class DndDemo extends React.Component<
     return (
       <DragDropContext onDragEnd={onDragEnd}>
         <Grid container justify={'center'} spacing={2}>
-          <ColumnList dayOfWeek={'monday'} items={this.state.monday} />
-          <ColumnList dayOfWeek={'tuesday'} items={this.state.tuesday} />
-          <ColumnList dayOfWeek={'wednesday'} items={this.state.wednesday} />
-          <ColumnList dayOfWeek={'thursday'} items={this.state.thursday} />
-          <ColumnList dayOfWeek={'friday'} items={this.state.friday} />
+          <ColumnList
+            color={'#f40407'}
+            dayOfWeek={'monday'}
+            items={this.state.monday}
+          />
+          <ColumnList
+            dayOfWeek={'tuesday'}
+            items={this.state.tuesday}
+            color={'#f5b90f'}
+          />
+          <ColumnList
+            dayOfWeek={'wednesday'}
+            items={this.state.wednesday}
+            color={'#6ecb3a'}
+          />
+          <ColumnList
+            dayOfWeek={'thursday'}
+            items={this.state.thursday}
+            color={'#06aceb'}
+          />
+          <ColumnList
+            dayOfWeek={'friday'}
+            items={this.state.friday}
+            color={'#993cba'}
+          />
         </Grid>
       </DragDropContext>
     );

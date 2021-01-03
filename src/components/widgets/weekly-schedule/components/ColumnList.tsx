@@ -15,6 +15,7 @@ import {
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import { Card, CardHeader, Grid } from '@material-ui/core';
+import { capitalizeFirstLetter } from '../../../../utils/string-formatter';
 
 interface Item {
   id: string;
@@ -42,12 +43,18 @@ const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class ColumnList extends Component<ColumnProps> {
   render(): JSX.Element {
-    const { items, dayOfWeek } = this.props;
+    const { items, dayOfWeek, color } = this.props;
 
     return (
       <Grid item xs={2}>
         <Card style={{ width: '100%' }}>
-          <CardHeader title={dayOfWeek} />
+          <CardHeader
+            style={{
+              background: color,
+              color: '#fff',
+            }}
+            title={capitalizeFirstLetter(dayOfWeek)}
+          />
           <Droppable droppableId={dayOfWeek}>
             {(
               providedDroppable2: DroppableProvided,
@@ -90,6 +97,7 @@ class ColumnList extends Component<ColumnProps> {
 export interface ColumnProps extends WithStyles<typeof styles> {
   items: Item[];
   dayOfWeek: string;
+  color: string;
 }
 
 export default withStyles(styles, { withTheme: true })(ColumnList);
