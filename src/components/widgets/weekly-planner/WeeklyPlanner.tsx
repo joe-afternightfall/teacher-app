@@ -1,28 +1,25 @@
-import React, { Component } from 'react';
-import { Styles } from '@material-ui/styles';
 import {
-  StyledComponentProps,
   Theme,
   WithStyles,
   withStyles,
+  StyledComponentProps,
 } from '@material-ui/core/styles';
-import PlannerControls from './components/PlannerControls';
 import { Grid } from '@material-ui/core';
-import ColumnList from './components/ColumnList';
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import React, { Component } from 'react';
+import { Styles } from '@material-ui/styles';
 import {
-  IMoveResult,
-  Item,
-  WeeklyScheduleState,
-} from '../../../configs/types/WeeklySchedule';
+  PlannerItem,
+  PlannerMoveResult,
+  WeeklyPlannerState,
+} from '../../../configs/types/WeeklyPlanner';
+import ColumnList from './components/ColumnList';
+import PlannerControls from './components/PlannerControls';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { getItems, move, reorder } from '../../../utils/weekly-schedule';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
-class WeeklyPlanner extends Component<
-  SchoolScheduleProps,
-  WeeklyScheduleState
-> {
+class WeeklyPlanner extends Component<SchoolScheduleProps, WeeklyPlannerState> {
   public id2List: { [index: string]: string } = {
     monday: 'monday',
     tuesday: 'tuesday',
@@ -44,7 +41,7 @@ class WeeklyPlanner extends Component<
   }
 
   render(): JSX.Element {
-    const getList = (id: string): Item[] => {
+    const getList = (id: string): PlannerItem[] => {
       return this.state[this.id2List[id]];
     };
 
@@ -62,14 +59,14 @@ class WeeklyPlanner extends Component<
           destination.index
         );
 
-        const state: WeeklyScheduleState = {
+        const state: WeeklyPlannerState = {
           ...this.state,
           [source.droppableId]: items,
         };
 
         this.setState(state);
       } else {
-        const resultFromMove: IMoveResult = move(
+        const resultFromMove: PlannerMoveResult = move(
           getList(source.droppableId),
           getList(destination.droppableId),
           source,

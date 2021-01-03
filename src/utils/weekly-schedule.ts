@@ -1,14 +1,14 @@
 import { DraggableLocation } from 'react-beautiful-dnd';
-import { IMoveResult, Item } from '../configs/types/WeeklySchedule';
+import { PlannerMoveResult, PlannerItem } from '../configs/types/WeeklyPlanner';
 
 /**
  * Reorder items in list
  */
 export const reorder = (
-  list: Item[],
+  list: PlannerItem[],
   startIndex: number,
   endIndex: number
-): Item[] => {
+): PlannerItem[] => {
   const result = [...list];
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
@@ -20,11 +20,11 @@ export const reorder = (
  * Moves an item from one list to another list.
  */
 export const move = (
-  source: Item[],
-  destination: Item[],
+  source: PlannerItem[],
+  destination: PlannerItem[],
   droppableSource: DraggableLocation,
   droppableDestination: DraggableLocation
-): IMoveResult | any => {
+): PlannerMoveResult | any => {
   const sourceClone = [...source];
   const destClone = [...destination];
   const [removed] = sourceClone.splice(droppableSource.index, 1);
@@ -38,7 +38,7 @@ export const move = (
   return result;
 };
 
-export const getItems = (count: number, offset = 0): Item[] => {
+export const getItems = (count: number, offset = 0): PlannerItem[] => {
   return Array.from({ length: count }, (v, k) => k).map((k) => ({
     content: `item ${k + offset}`,
     id: `item-${k + offset}`,
