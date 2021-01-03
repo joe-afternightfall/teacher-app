@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
-import { Card, Grid } from '@material-ui/core';
+import { Card, CardHeader, Grid } from '@material-ui/core';
 
 interface Item {
   id: string;
@@ -27,7 +27,6 @@ const getItemStyle = (
   draggableStyle: any,
   isDragging: boolean
 ): Record<string, unknown> => ({
-  userSelect: 'none',
   padding: 2 * grid,
   margin: `0 0 ${grid}px 0`,
   background: isDragging ? 'lightgreen' : 'grey',
@@ -36,8 +35,6 @@ const getItemStyle = (
 
 const getListStyle = (isDraggingOver: boolean): Record<string, unknown> => ({
   background: isDraggingOver ? 'lightblue' : 'lightgrey',
-  padding: grid,
-  width: 300,
   minHeight: 400,
 });
 
@@ -48,8 +45,9 @@ class ColumnList extends Component<ColumnProps> {
     const { items, dayOfWeek } = this.props;
 
     return (
-      <Grid item>
-        <Card>
+      <Grid item xs={2}>
+        <Card style={{ width: '100%' }}>
+          <CardHeader title={dayOfWeek} />
           <Droppable droppableId={dayOfWeek}>
             {(
               providedDroppable2: DroppableProvided,

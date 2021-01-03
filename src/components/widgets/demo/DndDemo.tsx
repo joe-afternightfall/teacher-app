@@ -1,13 +1,13 @@
-import { DropResult, DragDropContext } from 'react-beautiful-dnd';
 import * as React from 'react';
-import { move, reorder, getItems } from '../../../utils/weekly-schedule';
 import { Grid } from '@material-ui/core';
 import {
   Item,
   IMoveResult,
   WeeklyScheduleState,
 } from '../../../configs/types/WeeklySchedule';
+import { DropResult, DragDropContext } from 'react-beautiful-dnd';
 import ColumnList from '../weekly-schedule/components/ColumnList';
+import { move, reorder, getItems } from '../../../utils/weekly-schedule';
 
 export default class DndDemo extends React.Component<
   Record<string, unknown>,
