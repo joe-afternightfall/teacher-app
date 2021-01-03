@@ -4,8 +4,6 @@ export interface Item {
 }
 
 export interface IMoveResult {
-  droppable: Item[];
-  droppable2: Item[];
   monday: Item[];
   tuesday: Item[];
   wednesday: Item[];
@@ -15,5 +13,4 @@ export interface IMoveResult {
 
 export interface WeeklyScheduleState {
   [key: string]: Item[];
-  selected: Item[];
 }

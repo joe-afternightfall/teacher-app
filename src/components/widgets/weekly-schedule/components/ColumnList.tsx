@@ -45,12 +45,12 @@ const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class ColumnList extends Component<ColumnProps> {
   render(): JSX.Element {
-    const { selected, weekday } = this.props;
+    const { items, dayOfWeek } = this.props;
 
     return (
       <Grid item>
         <Card>
-          <Droppable droppableId={weekday}>
+          <Droppable droppableId={dayOfWeek}>
             {(
               providedDroppable2: DroppableProvided,
               snapshotDroppable2: DroppableStateSnapshot
@@ -59,7 +59,7 @@ class ColumnList extends Component<ColumnProps> {
                 ref={providedDroppable2.innerRef}
                 style={getListStyle(snapshotDroppable2.isDraggingOver)}
               >
-                {selected.map((item: Item, index: number) => (
+                {items.map((item: Item, index: number) => (
                   <Draggable key={item.id} draggableId={item.id} index={index}>
                     {(
                       providedDraggable2: DraggableProvided,
@@ -90,8 +90,8 @@ class ColumnList extends Component<ColumnProps> {
 }
 
 export interface ColumnProps extends WithStyles<typeof styles> {
-  selected: Item[];
-  weekday: string;
+  items: Item[];
+  dayOfWeek: string;
 }
 
 export default withStyles(styles, { withTheme: true })(ColumnList);
