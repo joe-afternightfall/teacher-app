@@ -93,9 +93,9 @@ export default class DndDemo extends React.Component<
 
         <Grid container justify={'center'} spacing={2}>
           <ColumnList
-            color={'#f40407'}
             dayOfWeek={'monday'}
             items={this.state.monday}
+            color={'#f40407'}
           />
           <ColumnList
             dayOfWeek={'tuesday'}
