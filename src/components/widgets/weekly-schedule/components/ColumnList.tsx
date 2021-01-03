@@ -1,4 +1,12 @@
 import {
+  Draggable,
+  Droppable,
+  DraggableProvided,
+  DroppableProvided,
+  DraggableStateSnapshot,
+  DroppableStateSnapshot,
+} from 'react-beautiful-dnd';
+import {
   Theme,
   WithStyles,
   withStyles,
@@ -7,14 +15,6 @@ import {
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import { Card, Grid } from '@material-ui/core';
-import {
-  Draggable,
-  DraggableProvided,
-  DraggableStateSnapshot,
-  Droppable,
-  DroppableProvided,
-  DroppableStateSnapshot,
-} from 'react-beautiful-dnd';
 
 interface Item {
   id: string;
