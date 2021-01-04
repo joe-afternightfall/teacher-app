@@ -8,20 +8,20 @@ import { Grid } from '@material-ui/core';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import {
+  MovePlannerResult,
   Planner,
   PlannerItem,
-  PlannerMoveResult,
-  WeeklyPlannerState,
+  PlannerItems,
 } from '../../../configs/types/WeeklyPlanner';
 import ColumnList from './components/ColumnList';
 import TimeColumn from './components/TimeColumn';
 import PlannerControls from './components/PlannerControls';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { getItems, move, reorder } from '../../../utils/weekly-schedule';
+import { move, reorder } from '../../../utils/weekly-schedule';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
-class WeeklyPlanner extends Component<WeeklyPlannerProps, WeeklyPlannerState> {
+class WeeklyPlanner extends Component<WeeklyPlannerProps> {
   render(): JSX.Element {
     const { selectedPlanner } = this.props;
     const plannerItems = selectedPlanner.items;
@@ -47,29 +47,32 @@ class WeeklyPlanner extends Component<WeeklyPlannerProps, WeeklyPlannerState> {
 
         this.props.reorderHandler(reorderedItems, dayOfWeek);
       } else {
-        // const resultFromMove: PlannerMoveResult = move(
-        //   getList(dayOfWeek),
-        //   getList(destination.droppableId),
-        //   source,
-        //   destination
-        // );
-        // this.setState({
-        //   monday: resultFromMove.monday
-        //     ? resultFromMove.monday
-        //     : this.state.monday,
-        //   tuesday: resultFromMove.tuesday
-        //     ? resultFromMove.tuesday
-        //     : this.state.tuesday,
-        //   wednesday: resultFromMove.wednesday
-        //     ? resultFromMove.wednesday
-        //     : this.state.wednesday,
-        //   thursday: resultFromMove.thursday
-        //     ? resultFromMove.thursday
-        //     : this.state.thursday,
-        //   friday: resultFromMove.friday
-        //     ? resultFromMove.friday
-        //     : this.state.friday,
-        // });
+        const resultFromMove: MovePlannerResult = move(
+          getList(dayOfWeek),
+          getList(destination.droppableId),
+          source,
+          destination
+        );
+
+        const updatedItems: PlannerItems = {
+          monday: resultFromMove.monday
+            ? resultFromMove.monday
+            : plannerItems.monday.items,
+          tuesday: resultFromMove.tuesday
+            ? resultFromMove.tuesday
+            : plannerItems.tuesday.items,
+          wednesday: resultFromMove.wednesday
+            ? resultFromMove.wednesday
+            : plannerItems.wednesday.items,
+          thursday: resultFromMove.thursday
+            ? resultFromMove.thursday
+            : plannerItems.thursday.items,
+          friday: resultFromMove.friday
+            ? resultFromMove.friday
+            : plannerItems.friday.items,
+        };
+
+        this.props.moveHandler(updatedItems);
       }
     };
 
@@ -114,6 +117,7 @@ class WeeklyPlanner extends Component<WeeklyPlannerProps, WeeklyPlannerState> {
 export interface WeeklyPlannerProps extends WithStyles<typeof styles> {
   selectedPlanner: Planner;
   reorderHandler: (items: PlannerItem[], sourceId: string) => void;
+  moveHandler: (items: PlannerItems) => void;
 }
 
 export default withStyles(styles, { withTheme: true })(WeeklyPlanner);
