@@ -22,7 +22,7 @@ function buildItem(text: string): JSX.Element {
   return (
     <React.Fragment>
       <Divider variant={'fullWidth'} component={'li'} />
-      <ListItem button>
+      <ListItem style={{ height: 64 }}>
         <ListItemText primary={text} />
       </ListItem>
     </React.Fragment>

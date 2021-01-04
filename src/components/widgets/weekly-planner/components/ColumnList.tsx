@@ -28,15 +28,15 @@ const getItemStyle = (
   draggableStyle: any,
   isDragging: boolean
 ): Record<string, unknown> => ({
-  padding: 2 * grid,
-  margin: `0 0 ${grid}px 0`,
+  height: 64,
+  borderBottom: '1px solid black',
   background: isDragging ? 'lightgreen' : 'grey',
   ...draggableStyle,
 });
 
 const getListStyle = (isDraggingOver: boolean): Record<string, unknown> => ({
   background: isDraggingOver ? 'lightblue' : 'lightgrey',
-  minHeight: 400,
+  minHeight: '100vh',
 });
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
