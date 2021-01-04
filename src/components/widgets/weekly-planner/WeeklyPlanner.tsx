@@ -17,7 +17,7 @@ import ColumnList from './components/ColumnList';
 import TimeColumn from './components/TimeColumn';
 import PlannerControls from './components/PlannerControls';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { move, reorder } from '../../../utils/weekly-schedule';
+import { move, reorder, updateAllItems } from '../../../utils/weekly-schedule';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
@@ -54,23 +54,10 @@ class WeeklyPlanner extends Component<WeeklyPlannerProps> {
           destination
         );
 
-        const updatedItems: PlannerItems = {
-          monday: resultFromMove.monday
-            ? resultFromMove.monday
-            : plannerItems.monday.items,
-          tuesday: resultFromMove.tuesday
-            ? resultFromMove.tuesday
-            : plannerItems.tuesday.items,
-          wednesday: resultFromMove.wednesday
-            ? resultFromMove.wednesday
-            : plannerItems.wednesday.items,
-          thursday: resultFromMove.thursday
-            ? resultFromMove.thursday
-            : plannerItems.thursday.items,
-          friday: resultFromMove.friday
-            ? resultFromMove.friday
-            : plannerItems.friday.items,
-        };
+        const updatedItems: PlannerItems = updateAllItems(
+          resultFromMove,
+          selectedPlanner
+        );
 
         this.props.moveHandler(updatedItems);
       }

@@ -1,8 +1,5 @@
 import actions from './actions';
-import {
-  PlannerItem,
-  PlannerItems,
-} from '../configs/types/WeeklyPlanner';
+import { PlannerItem, PlannerItems } from '../configs/types/WeeklyPlanner';
 
 export const reorderPlannerItems = (
   items: PlannerItem[],

@@ -2,6 +2,8 @@ import { DraggableLocation } from 'react-beautiful-dnd';
 import {
   PlannerItem,
   MovePlannerResult,
+  Planner,
+  PlannerItems,
 } from '../configs/types/WeeklyPlanner';
 
 /**
@@ -39,4 +41,27 @@ export const move = (
   result[droppableDestination.droppableId] = destClone;
 
   return result;
+};
+
+export const updateAllItems = (
+  resultFromMove: MovePlannerResult,
+  planner: Planner
+): PlannerItems => {
+  return {
+    monday: resultFromMove.monday
+      ? resultFromMove.monday
+      : planner.items.monday.items,
+    tuesday: resultFromMove.tuesday
+      ? resultFromMove.tuesday
+      : planner.items.tuesday.items,
+    wednesday: resultFromMove.wednesday
+      ? resultFromMove.wednesday
+      : planner.items.wednesday.items,
+    thursday: resultFromMove.thursday
+      ? resultFromMove.thursday
+      : planner.items.thursday.items,
+    friday: resultFromMove.friday
+      ? resultFromMove.friday
+      : planner.items.friday.items,
+  };
 };
