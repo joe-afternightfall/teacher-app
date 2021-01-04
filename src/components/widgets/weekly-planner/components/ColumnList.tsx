@@ -15,15 +15,11 @@ import {
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import { Card, CardHeader, Grid } from '@material-ui/core';
-import { PlannerDay } from '../../../../configs/types/WeeklyPlanner';
+import {
+  PlannerDay,
+  PlannerItem,
+} from '../../../../configs/types/WeeklyPlanner';
 import { capitalizeFirstLetter } from '../../../../utils/string-formatter';
-
-interface Item {
-  id: string;
-  content: string;
-}
-
-const grid = 8;
 
 const getItemStyle = (
   draggableStyle: any,
@@ -65,7 +61,7 @@ class ColumnList extends Component<ColumnProps> {
                 ref={providedDroppable2.innerRef}
                 style={getListStyle(snapshotDroppable2.isDraggingOver)}
               >
-                {plannerDay.items.map((item: Item, index: number) => (
+                {plannerDay.items.map((item: PlannerItem, index: number) => (
                   <Draggable key={item.id} draggableId={item.id} index={index}>
                     {(
                       providedDraggable2: DraggableProvided,
