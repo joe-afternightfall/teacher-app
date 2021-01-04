@@ -15,12 +15,16 @@ export default {
         newState.weeklyPlanners = action.weeklyPlanners;
         newState.selectedPlannerId = action.weeklyPlanners[0].id;
         break;
-      case actions.OPEN_EDITING_FORM:
-        newState.displayEditingForm = true;
+      case actions.REORDER_WEEKLY_PLANNER: {
+        const selectedPlanner = newState.weeklyPlanners.find((planner) => {
+          return planner.id === newState.selectedPlannerId;
+        });
+
+        if (selectedPlanner !== undefined) {
+          selectedPlanner.items[action.dayOfWeek].items = action.items;
+        }
         break;
-      case actions.CLOSE_EDITING_FORM:
-        newState.displayEditingForm = false;
-        break;
+      }
       default:
         newState = state;
     }
