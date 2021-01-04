@@ -1,6 +1,6 @@
-import actions from '../creators/actions';
 import { AnyAction } from 'redux';
-import { WeeklyPlanner } from '../configs/types/WeeklyPlanner';
+import actions from '../creators/actions';
+import { Planner } from '../configs/types/WeeklyPlanner';
 
 export default {
   reducer(
@@ -33,5 +33,5 @@ export interface ApplicationState {
   username: string;
   selectedPlannerId: string;
   displayEditingForm: boolean;
-  weeklyPlanners: WeeklyPlanner[];
+  weeklyPlanners: Planner[];
 }

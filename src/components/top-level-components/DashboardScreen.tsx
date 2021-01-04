@@ -6,7 +6,7 @@ import {
 } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
-import WeeklyPlanner from '../widgets/weekly-planner/WeeklyPlanner';
+import WeeklyPlanner from '../widgets/weekly-planner/WeeklyPlannerConnector';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
