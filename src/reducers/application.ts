@@ -25,6 +25,20 @@ export default {
         }
         break;
       }
+      case actions.MOVE_PLANNER_ITEMS: {
+        const selectedPlanner = newState.weeklyPlanners.find((planner) => {
+          return planner.id === newState.selectedPlannerId;
+        });
+
+        if (selectedPlanner !== undefined) {
+          selectedPlanner.items.monday.items = action.items.monday;
+          selectedPlanner.items.tuesday.items = action.items.tuesday;
+          selectedPlanner.items.wednesday.items = action.items.wednesday;
+          selectedPlanner.items.thursday.items = action.items.thursday;
+          selectedPlanner.items.friday.items = action.items.friday;
+        }
+        break;
+      }
       default:
         newState = state;
     }
