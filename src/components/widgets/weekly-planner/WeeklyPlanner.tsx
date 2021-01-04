@@ -22,82 +22,56 @@ import { getItems, move, reorder } from '../../../utils/weekly-schedule';
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class WeeklyPlanner extends Component<WeeklyPlannerProps, WeeklyPlannerState> {
-  public id2List: { [index: string]: string } = {
-    monday: 'monday',
-    tuesday: 'tuesday',
-    wednesday: 'wednesday',
-    thursday: 'thursday',
-    friday: 'friday',
-  };
-
-  constructor(props: any) {
-    super(props);
-
-    this.state = {
-      monday: getItems(2, 0),
-      tuesday: getItems(1, 2),
-      wednesday: getItems(2, 3),
-      thursday: getItems(1, 5),
-      friday: getItems(2, 6),
-    };
-  }
-
   render(): JSX.Element {
-    const getList = (id: string): PlannerItem[] => {
-      return this.state[this.id2List[id]];
+    const { selectedPlanner } = this.props;
+    const plannerItems = selectedPlanner.items;
+
+    const getList = (dayOfWeek: string): PlannerItem[] => {
+      return plannerItems[dayOfWeek].items;
     };
 
     const onDragEnd = (result: DropResult): void => {
       const { source, destination } = result;
+      const dayOfWeek = source.droppableId;
 
       if (!destination) {
         return;
       }
 
-      if (source.droppableId === destination.droppableId) {
-        const items = reorder(
-          getList(source.droppableId),
+      if (dayOfWeek === destination.droppableId) {
+        const reorderedItems = reorder(
+          getList(dayOfWeek),
           source.index,
           destination.index
         );
 
-        const state: WeeklyPlannerState = {
-          ...this.state,
-          [source.droppableId]: items,
-        };
-
-        this.setState(state);
+        this.props.reorderHandler(reorderedItems, dayOfWeek);
       } else {
-        const resultFromMove: PlannerMoveResult = move(
-          getList(source.droppableId),
-          getList(destination.droppableId),
-          source,
-          destination
-        );
-
-        this.setState({
-          monday: resultFromMove.monday
-            ? resultFromMove.monday
-            : this.state.monday,
-          tuesday: resultFromMove.tuesday
-            ? resultFromMove.tuesday
-            : this.state.tuesday,
-          wednesday: resultFromMove.wednesday
-            ? resultFromMove.wednesday
-            : this.state.wednesday,
-          thursday: resultFromMove.thursday
-            ? resultFromMove.thursday
-            : this.state.thursday,
-          friday: resultFromMove.friday
-            ? resultFromMove.friday
-            : this.state.friday,
-        });
+        // const resultFromMove: PlannerMoveResult = move(
+        //   getList(dayOfWeek),
+        //   getList(destination.droppableId),
+        //   source,
+        //   destination
+        // );
+        // this.setState({
+        //   monday: resultFromMove.monday
+        //     ? resultFromMove.monday
+        //     : this.state.monday,
+        //   tuesday: resultFromMove.tuesday
+        //     ? resultFromMove.tuesday
+        //     : this.state.tuesday,
+        //   wednesday: resultFromMove.wednesday
+        //     ? resultFromMove.wednesday
+        //     : this.state.wednesday,
+        //   thursday: resultFromMove.thursday
+        //     ? resultFromMove.thursday
+        //     : this.state.thursday,
+        //   friday: resultFromMove.friday
+        //     ? resultFromMove.friday
+        //     : this.state.friday,
+        // });
       }
     };
-
-    const { classes, selectedPlanner } = this.props;
-
-    console.log('selectedPlanner: ' + JSON.stringify(selectedPlanner));
 
     return (
       <DragDropContext onDragEnd={onDragEnd}>
@@ -108,27 +82,27 @@ class WeeklyPlanner extends Component<WeeklyPlannerProps, WeeklyPlannerState> {
 
           <ColumnList
             dayOfWeek={'monday'}
-            items={this.state.monday}
+            plannerDay={plannerItems.monday}
             color={'#f40407'}
           />
           <ColumnList
             dayOfWeek={'tuesday'}
-            items={this.state.tuesday}
+            plannerDay={plannerItems.tuesday}
             color={'#f5b90f'}
           />
           <ColumnList
             dayOfWeek={'wednesday'}
-            items={this.state.wednesday}
+            plannerDay={plannerItems.wednesday}
             color={'#6ecb3a'}
           />
           <ColumnList
             dayOfWeek={'thursday'}
-            items={this.state.thursday}
+            plannerDay={plannerItems.thursday}
             color={'#06aceb'}
           />
           <ColumnList
             dayOfWeek={'friday'}
-            items={this.state.friday}
+            plannerDay={plannerItems.friday}
             color={'#993cba'}
           />
         </Grid>
@@ -139,6 +113,7 @@ class WeeklyPlanner extends Component<WeeklyPlannerProps, WeeklyPlannerState> {
 
 export interface WeeklyPlannerProps extends WithStyles<typeof styles> {
   selectedPlanner: Planner;
+  reorderHandler: (items: PlannerItem[], sourceId: string) => void;
 }
 
 export default withStyles(styles, { withTheme: true })(WeeklyPlanner);

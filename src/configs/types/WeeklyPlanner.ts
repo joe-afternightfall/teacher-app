@@ -29,11 +29,7 @@ export interface Planner {
   id: string;
   title: string;
   items: {
-    monday: PlannerDay;
-    tuesday: PlannerDay;
-    wednesday: PlannerDay;
-    thursday: PlannerDay;
-    friday: PlannerDay;
+    [key: string]: PlannerDay;
   };
   notes: PlannerNote[];
 }
