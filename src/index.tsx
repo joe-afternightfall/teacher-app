@@ -2,8 +2,9 @@ import React from 'react';
 import App from './App';
 import ReactDOM from 'react-dom';
 import { Route } from 'react-router';
-import { createHashHistory } from 'history';
 import { Provider } from 'react-redux';
+import { initApp } from './creators/init';
+import { createHashHistory } from 'history';
 import routes from './configs/constants/routes';
 import { createStore } from './configs/redux/store';
 import { ConnectedRouter } from 'connected-react-router';
@@ -12,6 +13,8 @@ import DashboardScreen from './components/top-level-components/DashboardScreen';
 
 const history = createHashHistory(),
   store = createStore(history);
+
+store.dispatch(initApp('magoo 422'));
 
 ReactDOM.render(
   <React.StrictMode>
