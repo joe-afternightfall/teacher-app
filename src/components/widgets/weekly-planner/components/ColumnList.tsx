@@ -15,6 +15,7 @@ import {
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import { Card, CardHeader, Grid } from '@material-ui/core';
+import { PlannerDay } from '../../../../configs/types/WeeklyPlanner';
 import { capitalizeFirstLetter } from '../../../../utils/string-formatter';
 
 interface Item {
@@ -43,7 +44,7 @@ const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class ColumnList extends Component<ColumnProps> {
   render(): JSX.Element {
-    const { items, dayOfWeek, color } = this.props;
+    const { plannerDay, dayOfWeek, color } = this.props;
 
     return (
       <Grid item style={{ width: '17%' }}>
@@ -64,7 +65,7 @@ class ColumnList extends Component<ColumnProps> {
                 ref={providedDroppable2.innerRef}
                 style={getListStyle(snapshotDroppable2.isDraggingOver)}
               >
-                {items.map((item: Item, index: number) => (
+                {plannerDay.items.map((item: Item, index: number) => (
                   <Draggable key={item.id} draggableId={item.id} index={index}>
                     {(
                       providedDraggable2: DraggableProvided,
@@ -95,7 +96,7 @@ class ColumnList extends Component<ColumnProps> {
 }
 
 export interface ColumnProps extends WithStyles<typeof styles> {
-  items: Item[];
+  plannerDay: PlannerDay;
   dayOfWeek: string;
   color: string;
 }
