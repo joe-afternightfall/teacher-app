@@ -21,7 +21,7 @@ export interface PlannerDay {
   items: PlannerItem[];
 }
 
-export interface WeeklyPlannerState {
+export interface MovePlannerResult {
   [key: string]: PlannerItem[];
 }
 
@@ -32,4 +32,12 @@ export interface Planner {
     [key: string]: PlannerDay;
   };
   notes: PlannerNote[];
+}
+
+export interface PlannerItems {
+  monday: PlannerItem[];
+  tuesday: PlannerItem[];
+  wednesday: PlannerItem[];
+  thursday: PlannerItem[];
+  friday: PlannerItem[];
 }
