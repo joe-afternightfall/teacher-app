@@ -19,18 +19,27 @@ import AddIcon from '@material-ui/icons/Add';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 
-const styles: Styles<Theme, StyledComponentProps> = () => ({});
+const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
+  root: {
+    marginBottom: theme.spacing(2),
+  },
+});
 
 class PlannerControls extends Component<PlannerControlsProps> {
   render(): JSX.Element {
     const { classes } = this.props;
 
     return (
-      <Grid container alignItems={'center'} justify={'space-between'}>
+      <Grid
+        container
+        alignItems={'center'}
+        justify={'space-between'}
+        className={classes.root}
+      >
         <Grid item xs={6}>
           <Grid container alignItems={'center'} spacing={2}>
             <Grid item>
-              <Button variant={'contained'} color={'primary'}>
+              <Button variant={'contained'} color={'secondary'}>
                 <ArrowBack />
               </Button>
             </Grid>
@@ -49,7 +58,7 @@ class PlannerControls extends Component<PlannerControlsProps> {
             </Grid>
 
             <Grid item>
-              <Button variant={'contained'} color={'primary'}>
+              <Button variant={'contained'} color={'secondary'}>
                 <ArrowForward />
               </Button>
             </Grid>
