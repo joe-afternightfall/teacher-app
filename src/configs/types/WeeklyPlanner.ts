@@ -25,7 +25,7 @@ export interface WeeklyPlannerState {
   [key: string]: PlannerItem[];
 }
 
-export interface WeeklyPlanner {
+export interface Planner {
   id: string;
   title: string;
   items: {

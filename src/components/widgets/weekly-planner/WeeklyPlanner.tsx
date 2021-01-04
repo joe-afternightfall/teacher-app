@@ -8,6 +8,7 @@ import { Grid } from '@material-ui/core';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import {
+  Planner,
   PlannerItem,
   PlannerMoveResult,
   WeeklyPlannerState,
@@ -20,7 +21,7 @@ import { getItems, move, reorder } from '../../../utils/weekly-schedule';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
-class WeeklyPlanner extends Component<SchoolScheduleProps, WeeklyPlannerState> {
+class WeeklyPlanner extends Component<WeeklyPlannerProps, WeeklyPlannerState> {
   public id2List: { [index: string]: string } = {
     monday: 'monday',
     tuesday: 'tuesday',
@@ -94,7 +95,9 @@ class WeeklyPlanner extends Component<SchoolScheduleProps, WeeklyPlannerState> {
       }
     };
 
-    const { classes } = this.props;
+    const { classes, selectedPlanner } = this.props;
+
+    console.log('selectedPlanner: ' + JSON.stringify(selectedPlanner));
 
     return (
       <DragDropContext onDragEnd={onDragEnd}>
@@ -134,6 +137,8 @@ class WeeklyPlanner extends Component<SchoolScheduleProps, WeeklyPlannerState> {
   }
 }
 
-export type SchoolScheduleProps = WithStyles<typeof styles>;
+export interface WeeklyPlannerProps extends WithStyles<typeof styles> {
+  selectedPlanner: Planner;
+}
 
 export default withStyles(styles, { withTheme: true })(WeeklyPlanner);
