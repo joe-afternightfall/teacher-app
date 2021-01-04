@@ -3,6 +3,11 @@ export interface PlannerItem {
   content: string;
 }
 
+export interface PlannerNote {
+  id: string;
+  content: string;
+}
+
 export interface PlannerMoveResult {
   monday: PlannerItem[];
   tuesday: PlannerItem[];

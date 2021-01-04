@@ -13,6 +13,7 @@ import {
   WeeklyPlannerState,
 } from '../../../configs/types/WeeklyPlanner';
 import ColumnList from './components/ColumnList';
+import TimeColumn from './components/TimeColumn';
 import PlannerControls from './components/PlannerControls';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { getItems, move, reorder } from '../../../utils/weekly-schedule';
@@ -99,7 +100,9 @@ class WeeklyPlanner extends Component<SchoolScheduleProps, WeeklyPlannerState> {
       <DragDropContext onDragEnd={onDragEnd}>
         <PlannerControls />
 
-        <Grid container justify={'center'} spacing={2}>
+        <Grid container justify={'center'} spacing={1}>
+          <TimeColumn />
+
           <ColumnList
             dayOfWeek={'monday'}
             items={this.state.monday}
