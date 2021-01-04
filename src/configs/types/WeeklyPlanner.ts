@@ -8,14 +8,6 @@ export interface PlannerNote {
   content: string;
 }
 
-export interface PlannerMoveResult {
-  monday: PlannerItem[];
-  tuesday: PlannerItem[];
-  wednesday: PlannerItem[];
-  thursday: PlannerItem[];
-  friday: PlannerItem[];
-}
-
 export interface PlannerDay {
   date: string;
   items: PlannerItem[];
