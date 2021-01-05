@@ -51,7 +51,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "set \"CI=false\" && react-scripts build",
     "test": "react-scripts test -- --config jest.config.js",
     "test:ci": "CI=true npm test",
     "eject": "react-scripts eject",
