@@ -14,7 +14,7 @@ import DashboardScreen from './components/top-level-components/DashboardScreen';
 const history = createHashHistory(),
   store = createStore(history);
 
-store.dispatch(initApp('magoo 422'));
+store.dispatch(initApp());
 
 ReactDOM.render(
   <React.StrictMode>
