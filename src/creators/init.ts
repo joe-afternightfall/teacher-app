@@ -1,9 +1,7 @@
 import actions from './actions';
 import Firebase from 'firebase';
 import { weeklyPlanners } from '../configs/dummy-data';
-import {
-  Planner,
-} from '../configs/types/WeeklyPlanner';
+import { Planner } from '../configs/types/WeeklyPlanner';
 import firebase from 'firebase';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
