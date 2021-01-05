@@ -1,10 +1,12 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {
+  loadWeeklyPlanners,
   reorderPlannerItems,
   updatePlannerItems,
 } from '../../../creators/weekly-planner';
 import {
+  Planner,
   PlannerItem,
   PlannerItems,
 } from '../../../configs/types/WeeklyPlanner';
@@ -30,6 +32,9 @@ const mapDispatchToProps = (dispatch: Dispatch): WeeklyPlannerProps =>
     },
     moveHandler: (items: PlannerItems) => {
       dispatch(updatePlannerItems(items));
+    },
+    loadWeeklyPlannersHandler: (planners: Planner[]) => {
+      dispatch(loadWeeklyPlanners(planners));
     },
   } as unknown) as WeeklyPlannerProps);
 

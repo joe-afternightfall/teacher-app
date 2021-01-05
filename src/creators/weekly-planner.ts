@@ -1,5 +1,9 @@
 import actions from './actions';
-import { PlannerItem, PlannerItems } from '../configs/types/WeeklyPlanner';
+import {
+  Planner,
+  PlannerItem,
+  PlannerItems,
+} from '../configs/types/WeeklyPlanner';
 
 export const reorderPlannerItems = (
   items: PlannerItem[],
@@ -29,3 +33,10 @@ export interface UpdateItemsAction {
   type: string;
   items: PlannerItems;
 }
+
+export const loadWeeklyPlanners = (planners: Planner[]) => {
+  return {
+    type: actions.LOAD_WEEKLY_PLANNERS,
+    weeklyPlanners: planners,
+  };
+};

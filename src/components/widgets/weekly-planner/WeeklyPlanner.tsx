@@ -18,10 +18,17 @@ import TimeColumn from './components/TimeColumn';
 import PlannerControls from './components/PlannerControls';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { move, reorder, updateAllItems } from '../../../utils/weekly-schedule';
+import { getAllWeeklyPlanners } from '../../../services/weekly-planner';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class WeeklyPlanner extends Component<WeeklyPlannerProps> {
+  async componentDidMount() {
+    const planners = await getAllWeeklyPlanners();
+
+    this.props.loadWeeklyPlannersHandler(planners);
+  }
+
   render(): JSX.Element {
     const { selectedPlanner } = this.props;
     const plannerItems = selectedPlanner.items;
@@ -105,6 +112,7 @@ export interface WeeklyPlannerProps extends WithStyles<typeof styles> {
   selectedPlanner: Planner;
   reorderHandler: (items: PlannerItem[], sourceId: string) => void;
   moveHandler: (items: PlannerItems) => void;
+  loadWeeklyPlannersHandler: (planners: any) => Planner[];
 }
 
 export default withStyles(styles, { withTheme: true })(WeeklyPlanner);
