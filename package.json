@@ -51,13 +51,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "set \"CI=false\" && react-scripts build",
+    "build": "set CI=false && react-scripts build",
     "test": "react-scripts test -- --config jest.config.js",
     "test:ci": "CI=true npm test",
     "eject": "react-scripts eject",
     "fixlint": "eslint './src/**/*.{ts,tsx}' --fix",
     "lint": "eslint './src/**/*.{ts,tsx}'",
-    "deploy":  "npm install && npm run build CI=false"
+    "deploy":  "npm install && npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
