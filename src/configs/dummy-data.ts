@@ -8,15 +8,15 @@ export const weeklyPlanners = [
         items: [
           {
             id: 'b003ac80-121d-4835-bd69-7e4df5090e16',
-            content: 'first monday item',
+            content: '-----',
           },
           {
             id: '06f7208b-8cd3-4a63-a129-a83fe5fe5f50',
-            content: 'second monday item',
+            content: '-----',
           },
           {
             id: 'c1982588-e34d-4310-886a-6eb1de4ab92d',
-            content: 'third monday item',
+            content: '-----',
           },
         ],
       },
@@ -25,11 +25,11 @@ export const weeklyPlanners = [
         items: [
           {
             id: '3f02f6be-c510-4b13-b02d-95aed077e6be',
-            content: 'tuesday item one',
+            content: '-----',
           },
           {
             id: 'e1fc1cd1-83c5-4b66-8bab-fa8428971a8c',
-            content: 'tuesday item two',
+            content: '-----',
           },
         ],
       },
@@ -38,11 +38,11 @@ export const weeklyPlanners = [
         items: [
           {
             id: '47cb3790-1685-456e-8908-e764b43347f3',
-            content: 'wednesday item one',
+            content: '-----',
           },
           {
             id: '4b4871d3-628a-4cca-a907-57cf46973553',
-            content: 'wednesday item two',
+            content: '-----',
           },
         ],
       },
@@ -51,11 +51,11 @@ export const weeklyPlanners = [
         items: [
           {
             id: 'b7f26802-176c-4def-8c37-e9d75be583f4',
-            content: 'thursday item one',
+            content: '-----',
           },
           {
             id: '59afccd4-6fab-4cc4-a141-036c137ec5bb',
-            content: 'thursday item two',
+            content: '-----',
           },
         ],
       },
@@ -64,7 +64,7 @@ export const weeklyPlanners = [
         items: [
           {
             id: '8d391645-2d33-4fef-8069-888bd22eb66a',
-            content: 'friday item one',
+            content: '-----',
           },
         ],
       },
