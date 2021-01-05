@@ -11,7 +11,6 @@ export default {
 
     switch (action.type) {
       case actions.INITIALIZE:
-        newState.username = action.username;
         newState.weeklyPlanners = action.weeklyPlanners;
         newState.selectedPlannerId = action.weeklyPlanners[0].id;
         break;
@@ -39,6 +38,10 @@ export default {
         }
         break;
       }
+      case actions.LOAD_WEEKLY_PLANNERS:
+        newState.weeklyPlanners = action.weeklyPlanners;
+        newState.selectedPlannerId = action.weeklyPlanners[0].id;
+        break;
       default:
         newState = state;
     }
