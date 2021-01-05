@@ -18,6 +18,7 @@ export interface MovePlannerResult {
 }
 
 export interface Planner {
+  createdAt: string;
   id: string;
   title: string;
   items: {
