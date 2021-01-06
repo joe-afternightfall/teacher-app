@@ -1,10 +1,10 @@
-import { DraggableLocation } from 'react-beautiful-dnd';
 import {
   PlannerItem,
   MovePlannerResult,
   Planner,
   PlannerItems,
 } from '../configs/types/WeeklyPlanner';
+import { DraggableLocation } from 'react-beautiful-dnd';
 
 /**
  * Reorder items in list
