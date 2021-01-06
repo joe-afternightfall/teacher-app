@@ -43,7 +43,6 @@ class TimeColumn extends Component<TimeColumnProps> {
             {buildItem('9:30 - 10:00 am')}
             {buildItem('10:00 - 10:30 am')}
             {buildItem('10:30 - 11:00 am')}
-            {buildItem('10:30 - 11:00 am')}
             {buildItem('11:00 - 11:30 am')}
             {buildItem('11:30 - 12:00 pm')}
             {buildItem('12:00 - 12:30 pm')}
