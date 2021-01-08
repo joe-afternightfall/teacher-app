@@ -8,6 +8,14 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  CardHeader,
+  CardContent,
+  Card,
+  List,
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
 } from '@material-ui/core';
 import {
   Theme,
@@ -24,6 +32,8 @@ import {
   PlannerItem,
 } from '../../../../../configs/types/WeeklyPlanner';
 import WeekdaySelectionGroup from './WeekdaySelectionGroup';
+import NewLinkCard from './NewLinkCard';
+import ImageIcon from '@material-ui/icons/Image';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   closeButton: {
@@ -39,14 +49,39 @@ const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   },
 });
 
-class AddNewDialog extends Component<AddNewDialogProps> {
+export interface CustomLink {
+  linkUrl: string;
+  linkTitle: string;
+}
+
+interface AddNewDialogState {
+  [key: string]: string | boolean | string[] | CustomLink[] | CustomLink;
+  open: boolean;
+  title: string;
+  content: string;
+  links: CustomLink[];
+  addNewLink: boolean;
+  selectedDays: string[];
+  newLink: CustomLink;
+}
+
+class AddNewDialog extends Component<AddNewDialogProps, AddNewDialogState> {
   state = {
     open: false,
     content: '',
-    cardTitle: '',
-    linkUrl: '',
-    linkTitle: '',
+    title: '',
     selectedDays: [''],
+    links: [
+      {
+        linkUrl: '',
+        linkTitle: '',
+      },
+    ],
+    newLink: {
+      linkUrl: '',
+      linkTitle: '',
+    },
+    addNewLink: false,
   };
 
   render(): JSX.Element {
@@ -70,13 +105,12 @@ class AddNewDialog extends Component<AddNewDialogProps> {
       });
     };
 
-    const openLink = () => {
-      const url: string = this.state.linkUrl;
-
-      if (url.startsWith('http://')) {
-        window.open(url, '_blank');
+    // todo:  extract out to util
+    const cleanupLink = (url: string): string => {
+      if (url.startsWith('http://') || url.startsWith('https://')) {
+        return url;
       } else {
-        window.open(`https://${url}`, '_blank');
+        return `https://${url}`;
       }
     };
 
@@ -97,6 +131,31 @@ class AddNewDialog extends Component<AddNewDialogProps> {
       }
     };
 
+    const addNewLinkClickHandler = () => {
+      this.setState({
+        addNewLink: true,
+      });
+    };
+
+    const saveLinkClickHandler = (link: CustomLink) => {
+      this.setState(
+        {
+          addNewLink: false,
+          links: [...this.state.links, link],
+        },
+        clearNewLink
+      );
+    };
+
+    const clearNewLink = () => {
+      this.setState({
+        newLink: {
+          linkUrl: '',
+          linkTitle: '',
+        },
+      });
+    };
+
     return (
       <div>
         <Button
@@ -107,6 +166,7 @@ class AddNewDialog extends Component<AddNewDialogProps> {
         >
           {'Add New'}
         </Button>
+
         <Dialog
           maxWidth={'md'}
           fullWidth={true}
@@ -136,7 +196,7 @@ class AddNewDialog extends Component<AddNewDialogProps> {
                     }}
                     label={'Card Title'}
                     onChange={handleChange}
-                    value={this.state.cardTitle}
+                    value={this.state.title}
                   />
                 </Grid>
 
@@ -155,43 +215,62 @@ class AddNewDialog extends Component<AddNewDialogProps> {
                   />
                 </Grid>
 
-                <Grid item>
-                  <TextField
-                    id={'link-title'}
-                    label={'Link Title'}
-                    variant={'outlined'}
-                    fullWidth
-                    inputProps={{
-                      name: 'linkTitle',
-                    }}
-                    value={this.state.linkTitle}
-                    onChange={handleChange}
+                <Card>
+                  <CardHeader
+                    title={
+                      this.state.addNewLink ? 'Add New Link' : 'Subject Links'
+                    }
+                    action={
+                      !this.state.addNewLink && (
+                        <IconButton
+                          color={'primary'}
+                          onClick={addNewLinkClickHandler}
+                        >
+                          <AddIcon />
+                        </IconButton>
+                      )
+                    }
                   />
-                </Grid>
+                  <CardContent>
+                    {this.state.addNewLink ? (
+                      <NewLinkCard clickHandler={saveLinkClickHandler} />
+                    ) : (
+                      <List className={classes.root}>
+                        {this.state.links.map(
+                          (link: CustomLink, index: number) => {
+                            return (
+                              <ListItem key={index}>
+                                <ListItemAvatar>
+                                  <Avatar>
+                                    <ImageIcon />
+                                  </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                  primary={
+                                    <Link
+                                      href={cleanupLink(link.linkUrl)}
+                                      rel={'noopener noreferrer'}
+                                      className={classes.linkUrl}
+                                      target={'_blank'}
+                                    >
+                                      {link.linkTitle}
+                                    </Link>
+                                  }
+                                />
+                              </ListItem>
+                            );
+                          }
+                        )}
+                      </List>
+                    )}
+                  </CardContent>
 
-                <Grid item>
-                  <TextField
-                    fullWidth
-                    id={'url'}
-                    label={'URL'}
-                    variant={'outlined'}
-                    inputProps={{
-                      name: 'linkUrl',
-                    }}
-                    value={this.state.linkUrl}
-                    onChange={handleChange}
-                  />
-                </Grid>
-
-                <Grid item>
-                  <Link
-                    rel={'noopener noreferrer'}
-                    onClick={openLink}
-                    className={classes.linkUrl}
-                  >
-                    {this.state.linkTitle}
-                  </Link>
-                </Grid>
+                  {this.state.links.map((link: CustomLink) => {
+                    {
+                      link.linkTitle;
+                    }
+                  })}
+                </Card>
               </Grid>
 
               <Grid item xs={6}>
