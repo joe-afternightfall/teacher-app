@@ -23,11 +23,12 @@ import { getAllWeeklyPlanners } from '../../../services/weekly-planner';
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class WeeklyPlanner extends Component<WeeklyPlannerProps> {
-  async componentDidMount() {
-    const planners = await getAllWeeklyPlanners();
-
-    this.props.loadWeeklyPlannersHandler(planners);
-  }
+  // todo: uncomment out when ready for database
+  // async componentDidMount() {
+  //   const planners = await getAllWeeklyPlanners();
+  //
+  // this.props.loadWeeklyPlannersHandler(planners);
+  // }
 
   render(): JSX.Element {
     const { selectedPlanner } = this.props;
@@ -72,7 +73,10 @@ class WeeklyPlanner extends Component<WeeklyPlannerProps> {
 
     return (
       <DragDropContext onDragEnd={onDragEnd}>
-        <PlannerControls />
+        <PlannerControls
+          reorderHandler={this.props.reorderHandler}
+          selectedPlanner={selectedPlanner}
+        />
 
         <Grid container justify={'center'} spacing={1}>
           <TimeColumn />

@@ -16,19 +16,20 @@ const firebaseConfig = {
   measurementId: 'G-KGKB1RCQDK',
 };
 
-const app = Firebase.initializeApp(firebaseConfig);
-const dbConnection = app.database();
+//todo: uncomment out when ready for database
+// const app = Firebase.initializeApp(firebaseConfig);
+// const dbConnection = app.database();
 
 export const initApp = () => {
   return {
     type: actions.INITIALIZE,
     weeklyPlanners: weeklyPlanners,
-    dbConnection: dbConnection,
+    // dbConnection: dbConnection,
   };
 };
 
 export interface InitAction {
   type: string;
   weeklyPlanners: Planner[];
-  dbConnection: firebase.database.Database;
+  // dbConnection: firebase.database.Database;
 }
