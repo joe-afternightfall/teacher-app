@@ -15,9 +15,10 @@ import {
 } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
-import AddIcon from '@material-ui/icons/Add';
+import AddNewDialog from './dialog/AddNewDialog';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
+import { Planner, PlannerItem } from '../../../../configs/types/WeeklyPlanner';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   root: {
@@ -66,19 +67,19 @@ class PlannerControls extends Component<PlannerControlsProps> {
         </Grid>
 
         <Grid item>
-          <Button
-            variant={'contained'}
-            color={'primary'}
-            startIcon={<AddIcon />}
-          >
-            {'Add New'}
-          </Button>
+          <AddNewDialog
+            selectedPlanner={this.props.selectedPlanner}
+            reorderHandler={this.props.reorderHandler}
+          />
         </Grid>
       </Grid>
     );
   }
 }
 
-export type PlannerControlsProps = WithStyles<typeof styles>;
+export interface PlannerControlsProps extends WithStyles<typeof styles> {
+  reorderHandler: (items: PlannerItem[], sourceId: string) => void;
+  selectedPlanner: Planner;
+}
 
 export default withStyles(styles, { withTheme: true })(PlannerControls);
