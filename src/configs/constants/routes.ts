@@ -1,4 +1,4 @@
 export default {
   DASHBOARD: '/',
-  SCHEDULE: '/schedule',
+  WEEKLY_PLANNER: '/weekly-planner',
 };
