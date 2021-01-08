@@ -10,6 +10,7 @@ import { createStore } from './configs/redux/store';
 import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './configs/service-worker';
 import DashboardScreen from './components/top-level-components/DashboardScreen';
+import WeeklyPlanner from './components/widgets/weekly-planner/WeeklyPlannerConnector';
 
 const history = createHashHistory(),
   store = createStore(history);
@@ -23,6 +24,11 @@ ReactDOM.render(
         <App>
           <div className={'route'}>
             <Route component={DashboardScreen} exact path={routes.DASHBOARD} />
+            <Route
+              component={WeeklyPlanner}
+              exact
+              path={routes.WEEKLY_PLANNER}
+            />
           </div>
         </App>
       </ConnectedRouter>
