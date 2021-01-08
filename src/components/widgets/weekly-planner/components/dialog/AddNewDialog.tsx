@@ -34,6 +34,7 @@ import {
 import WeekdaySelectionGroup from './WeekdaySelectionGroup';
 import NewLinkCard from './NewLinkCard';
 import ImageIcon from '@material-ui/icons/Image';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   closeButton: {
@@ -137,6 +138,12 @@ class AddNewDialog extends Component<AddNewDialogProps, AddNewDialogState> {
       });
     };
 
+    const closeNewLinkClickHandler = () => {
+      this.setState({
+        addNewLink: false,
+      });
+    };
+
     const saveLinkClickHandler = (link: CustomLink) => {
       this.setState(
         {
@@ -174,7 +181,7 @@ class AddNewDialog extends Component<AddNewDialogProps, AddNewDialogState> {
           open={this.state.open}
         >
           <DialogTitle id="form-dialog-title">
-            {'New Card Details'}
+            {'New Subject Item'}
             <IconButton
               aria-label={'close'}
               className={classes.closeButton}
@@ -221,14 +228,16 @@ class AddNewDialog extends Component<AddNewDialogProps, AddNewDialogState> {
                       this.state.addNewLink ? 'Add New Link' : 'Subject Links'
                     }
                     action={
-                      !this.state.addNewLink && (
-                        <IconButton
-                          color={'primary'}
-                          onClick={addNewLinkClickHandler}
-                        >
-                          <AddIcon />
-                        </IconButton>
-                      )
+                      <IconButton
+                        color={this.state.addNewLink ? 'inherit' : 'primary'}
+                        onClick={
+                          this.state.addNewLink
+                            ? closeNewLinkClickHandler
+                            : addNewLinkClickHandler
+                        }
+                      >
+                        {this.state.addNewLink ? <CancelIcon /> : <AddIcon />}
+                      </IconButton>
                     }
                   />
                   <CardContent>
