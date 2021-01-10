@@ -1,5 +1,6 @@
 export const weeklyPlanners = [
   {
+    createdAt: '',
     id: '17',
     title: 'Week 18',
     items: {
@@ -83,5 +84,18 @@ export const weeklyPlanners = [
         content: 'my new note 3',
       },
     ],
+  },
+];
+
+export const subjectList = [
+  {
+    id: '1',
+    name: 'Science',
+    color: '',
+  },
+  {
+    id: '2',
+    name: 'Math',
+    color: '',
   },
 ];
