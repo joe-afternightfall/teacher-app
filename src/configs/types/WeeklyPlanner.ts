@@ -34,3 +34,9 @@ export interface PlannerItems {
   thursday: PlannerItem[];
   friday: PlannerItem[];
 }
+
+export interface Subject {
+  id: string;
+  name: string;
+  color: string;
+}
