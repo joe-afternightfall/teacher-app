@@ -19,6 +19,7 @@ import { routerActions } from 'connected-react-router';
 import plannerBackground from '../../configs/images/lovely-planning.jpg';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Subject } from '../../configs/types/WeeklyPlanner';
+import SubjectListDialog from './SubjectListDialog';
 
 const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -52,7 +53,10 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
               onClose={handleClose}
               open={Boolean(anchorEl)}
             >
-              <MenuItem onClick={handleClose}>{'Edit Subject List'}</MenuItem>
+              <SubjectListDialog
+                subjectList={props.subjectList}
+                closeMenuClickHandler={handleClose}
+              />
               <MenuItem onClick={handleClose}>{'My account'}</MenuItem>
               <MenuItem onClick={handleClose}>{'Logout'}</MenuItem>
             </Menu>
