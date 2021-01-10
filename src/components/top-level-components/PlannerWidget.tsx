@@ -34,10 +34,12 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
   return (
     <Card>
       <CardHeader
+        title={'Weekly Planners'}
+        subheader={`${props.subjectList.length} Subjects`}
         action={
           <div>
             <IconButton
-              aria-controls={'simple-menu'}
+              aria-controls={'planner-menu'}
               aria-haspopup={'true'}
               onClick={handleClick}
             >
@@ -45,18 +47,17 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
             </IconButton>
             <Menu
               keepMounted
-              id={'simple-menu'}
+              id={'planner-menu'}
               anchorEl={anchorEl}
               onClose={handleClose}
               open={Boolean(anchorEl)}
             >
-              <MenuItem onClick={handleClose}>{'Profile'}</MenuItem>
+              <MenuItem onClick={handleClose}>{'Edit Subject List'}</MenuItem>
               <MenuItem onClick={handleClose}>{'My account'}</MenuItem>
               <MenuItem onClick={handleClose}>{'Logout'}</MenuItem>
             </Menu>
           </div>
         }
-        title={'Weekly Planners'}
       />
 
       <CardActionArea>
@@ -69,10 +70,6 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
           onClick={props.routeToWidgetClickHandler}
         />
       </CardActionArea>
-
-      {props.subjectList.map((subject) => {
-        return subject.name;
-      })}
 
       <CardActions>
         <Grid container align-items={'center'} justify={'flex-end'}>
