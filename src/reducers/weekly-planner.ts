@@ -20,9 +20,11 @@ export default {
         newState.selectedPlannerId = action.weeklyPlanners[0].id;
         break;
       case actions.REORDER_WEEKLY_PLANNER: {
-        const selectedPlanner = newState.weeklyPlanners.find((planner) => {
-          return planner.id === newState.selectedPlannerId;
-        });
+        const selectedPlanner = newState.weeklyPlanners.find(
+          (planner: Planner) => {
+            return planner.id === newState.selectedPlannerId;
+          }
+        );
 
         if (selectedPlanner !== undefined) {
           selectedPlanner.items[action.dayOfWeek].items = action.items;
