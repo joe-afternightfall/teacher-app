@@ -1,7 +1,7 @@
 import actions from './actions';
 import Firebase from 'firebase';
-import { weeklyPlanners } from '../configs/dummy-data';
-import { Planner } from '../configs/types/WeeklyPlanner';
+import { subjectList, weeklyPlanners } from '../configs/dummy-data';
+import { Planner, Subject } from '../configs/types/WeeklyPlanner';
 import firebase from 'firebase';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -20,10 +20,11 @@ const firebaseConfig = {
 // const app = Firebase.initializeApp(firebaseConfig);
 // const dbConnection = app.database();
 
-export const initApp = () => {
+export const initApp = (): InitAction => {
   return {
     type: actions.INITIALIZE,
     weeklyPlanners: weeklyPlanners,
+    subjectList: subjectList,
     // dbConnection: dbConnection,
   };
 };
@@ -31,5 +32,6 @@ export const initApp = () => {
 export interface InitAction {
   type: string;
   weeklyPlanners: Planner[];
+  subjectList: Subject[];
   // dbConnection: firebase.database.Database;
 }
