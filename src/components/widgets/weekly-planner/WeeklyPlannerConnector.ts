@@ -14,9 +14,9 @@ import { State } from '../../../configs/redux/store';
 import WeeklyPlanner, { WeeklyPlannerProps } from './WeeklyPlanner';
 
 const mapStateToProps = (state: State): WeeklyPlannerProps => {
-  const selectedPlanner = state.applicationState.weeklyPlanners.find(
+  const selectedPlanner = state.weeklyPlannerState.weeklyPlanners.find(
     (planner) => {
-      return planner.id === state.applicationState.selectedPlannerId;
+      return planner.id === state.weeklyPlannerState.selectedPlannerId;
     }
   );
 
