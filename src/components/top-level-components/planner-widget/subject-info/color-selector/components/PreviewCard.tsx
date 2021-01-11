@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { Styles } from '@material-ui/styles';
 import {
-  StyledComponentProps,
   Theme,
   WithStyles,
   withStyles,
+  StyledComponentProps,
 } from '@material-ui/core/styles';
+import React, { Component } from 'react';
+import { Styles } from '@material-ui/styles';
 import {
-  Avatar,
   Card,
-  CardContent,
-  CardHeader,
   Grid,
+  Avatar,
+  CardHeader,
+  CardContent,
   SvgIconTypeMap,
 } from '@material-ui/core';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
