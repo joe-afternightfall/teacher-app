@@ -34,7 +34,11 @@ class ColorChoices extends Component<ColorChoicesProps> {
 
     return (
       <Grid item xs={5}>
-        <Grid container>
+        <Grid
+          container
+          style={{ width: '60%', margin: 'auto' }}
+          justify={'center'}
+        >
           {subjectColorChoices.map((choice: Choice, index: number) => {
             return (
               <Tooltip title={choice.name} placement={'right'} key={index}>

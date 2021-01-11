@@ -15,27 +15,29 @@ const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class ColorSelector extends Component<ColorSelectorProps> {
   render(): JSX.Element {
-    const { classes } = this.props;
-
     return (
-      <Grid item xs={12} container spacing={2}>
-        <Grid item xs={12}>
-          <Typography variant={'h6'}>
-            {`Subject Color: ${this.props.colorName}`}
-          </Typography>
+      <Grid item xs={12} container>
+        <Grid item xs={12} container alignItems={'flex-end'}>
+          <Grid item>
+            <Typography variant={'h6'}>
+              {`Subject Color: ${this.props.colorName}`}
+            </Typography>
+          </Grid>
         </Grid>
 
-        <ColorChoices
-          colorName={this.props.colorName}
-          selectClickHandler={this.props.selectClickHandler}
-        />
+        <Grid container alignItems={'center'} spacing={2}>
+          <ColorChoices
+            colorName={this.props.colorName}
+            selectClickHandler={this.props.selectClickHandler}
+          />
 
-        <PreviewCard
-          color={this.props.color}
-          secondaryColor={this.props.secondaryColor}
-          selectedIcon={this.props.selectedIcon}
-          subjectName={this.props.subjectName}
-        />
+          <PreviewCard
+            color={this.props.color}
+            secondaryColor={this.props.secondaryColor}
+            selectedIcon={this.props.selectedIcon}
+            subjectName={this.props.subjectName}
+          />
+        </Grid>
       </Grid>
     );
   }

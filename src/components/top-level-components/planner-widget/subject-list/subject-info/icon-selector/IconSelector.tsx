@@ -39,39 +39,35 @@ class IconSelector extends Component<IconSelectorProps> {
             return (
               <Grid
                 item
-                xs={3}
+                xs={2}
                 key={index}
                 style={{
-                  textAlign: 'center',
+                  textAlign: 'center'
                 }}
+                onMouseLeave={handleHover('')}
+                onMouseEnter={handleHover(icon.id)}
               >
-                <Grid
-                  item
-                  xs={12}
-                  onMouseLeave={handleHover('')}
-                  onMouseEnter={handleHover(icon.id)}
-                >
-                  {this.state.isHovering === icon.id ? (
-                    <Paper
-                      elevation={3}
-                      style={{
-                        textAlign: 'center',
-                        cursor: 'pointer',
-                      }}
-                      onClick={() => {
-                        selectIconHandler(icon.icon);
-                      }}
-                    >
-                      {React.createElement(icon.icon)}
-                    </Paper>
-                  ) : selectedIcon === icon.icon ? (
-                    <Paper elevation={3}>
-                      {React.createElement(icon.icon)}
-                    </Paper>
-                  ) : (
-                    React.createElement(icon.icon)
-                  )}
-                </Grid>
+                {this.state.isHovering === icon.id ? (
+                  <Paper
+                    elevation={3}
+                    style={{
+                      width: '100%',
+                      // textAlign: 'center',
+                      cursor: 'pointer',
+                    }}
+                    onClick={() => {
+                      selectIconHandler(icon.icon);
+                    }}
+                  >
+                    <Grid container alignItems={'center'} justify={'center'}>
+                      <Grid item>{React.createElement(icon.icon)}</Grid>
+                    </Grid>
+                  </Paper>
+                ) : selectedIcon === icon.icon ? (
+                  <Paper elevation={3}>{React.createElement(icon.icon)}</Paper>
+                ) : (
+                  React.createElement(icon.icon)
+                )}
               </Grid>
             );
           })}

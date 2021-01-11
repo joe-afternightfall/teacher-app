@@ -29,8 +29,8 @@ class PreviewCard extends Component<PreviewCardProps> {
     } = this.props;
 
     return (
-      <Grid item xs={5} style={{ margin: 'auto' }}>
-        <Card style={{ height: 200 }}>
+      <Grid item xs={7}>
+        <Card style={{ width: '75%', height: 200, margin: 'auto' }}>
           <CardHeader
             title={`Sample ${subjectName} Card`}
             style={{
