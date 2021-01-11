@@ -10,7 +10,6 @@ import PreviewCard from './components/PreviewCard';
 import ColorChoices from './components/ColorChoices';
 import { Grid, SvgIconTypeMap, Typography } from '@material-ui/core';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
-import { Choice } from '../../../../../../configs/theme/subject-color-choices';
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class ColorSelector extends Component<ColorSelectorProps> {
@@ -26,10 +25,7 @@ class ColorSelector extends Component<ColorSelectorProps> {
         </Grid>
 
         <Grid container alignItems={'center'} spacing={2}>
-          <ColorChoices
-            colorName={this.props.colorName}
-            selectClickHandler={this.props.selectClickHandler}
-          />
+          <ColorChoices />
 
           <PreviewCard
             color={this.props.color}
@@ -48,7 +44,6 @@ export interface ColorSelectorProps extends WithStyles<typeof styles> {
   colorName: string;
   subjectName: string;
   secondaryColor: string;
-  selectClickHandler: (choice: Choice) => void;
   selectedIcon: OverridableComponent<SvgIconTypeMap>;
 }
 
