@@ -1,3 +1,5 @@
+import AccountCircle from '@material-ui/icons/AccountCircle';
+
 export const weeklyPlanners = [
   {
     createdAt: '',
@@ -89,13 +91,11 @@ export const weeklyPlanners = [
 
 export const subjectList = [
   {
-    id: '1',
-    name: 'Science',
-    color: '',
-  },
-  {
-    id: '2',
-    name: 'Math',
-    color: '',
+    id: '',
+    subjectName: 'Blah',
+    primaryColorId: '',
+    primaryColor: '',
+    secondaryColor: '',
+    icon: AccountCircle,
   },
 ];
