@@ -3,6 +3,7 @@ import actions from '../creators/actions';
 import { ColorChoice } from '../configs/theme/subject-color-choices';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { SvgIconTypeMap } from '@material-ui/core';
+import { Subject } from '../configs/types/WeeklyPlanner';
 
 export default {
   reducer(
@@ -12,6 +13,9 @@ export default {
     let newState = Object.assign({}, state);
 
     switch (action.type) {
+      case actions.INITIALIZE:
+        newState.subjectList = action.subjectList;
+        break;
       case actions.SELECT_COLOR:
         newState.selectedColor = action.selectedColor;
         break;
@@ -33,4 +37,5 @@ export interface SubjectListState {
   selectedColor: ColorChoice;
   selectedIcon: OverridableComponent<SvgIconTypeMap>;
   subjectName: string;
+  subjectList: Subject[];
 }
