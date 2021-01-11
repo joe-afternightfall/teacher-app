@@ -12,6 +12,9 @@ import application, { ApplicationState } from '../../reducers/application';
 import weeklyPlannerState, {
   WeeklyPlannerState,
 } from '../../reducers/weekly-planner';
+import subjectListState, {
+  SubjectListState,
+} from '../../reducers/subject-list';
 
 export const createStore = (history: History): Store => {
   const createStoreFunc = applyMiddleware(
@@ -21,6 +24,7 @@ export const createStore = (history: History): Store => {
     allReducers = combineReducers({
       applicationState: application.reducer,
       weeklyPlannerState: weeklyPlannerState.reducer,
+      subjectListState: subjectListState.reducer,
       router: connectRouter(history),
       routing: routerReducer,
     });
@@ -29,10 +33,19 @@ export const createStore = (history: History): Store => {
     applicationState: ({
       openSideDrawer: false,
     } as unknown) as ApplicationState,
+    subjectListState: ({
+      selectedColor: {
+        id: '',
+        name: '',
+        color: '',
+        secondaryColor: '',
+      },
+    } as unknown) as SubjectListState,
   });
 };
 
 export interface State {
   applicationState: ApplicationState;
   weeklyPlannerState: WeeklyPlannerState;
+  subjectListState: SubjectListState;
 }
