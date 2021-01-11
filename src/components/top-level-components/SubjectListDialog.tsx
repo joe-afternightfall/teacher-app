@@ -40,6 +40,7 @@ import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { subjectColorChoices } from '../../configs/theme/subject-color-choices';
 import AddIcon from '@material-ui/icons/Add';
 import PreviewCard from './planner-widget/subject-info/PreviewCard';
+import ColorChoices from './planner-widget/subject-info/ColorChoices';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   closeButton: {
@@ -47,17 +48,6 @@ const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
     right: theme.spacing(1),
     top: theme.spacing(1),
     color: theme.palette.grey[500],
-  },
-  colorChoice: {
-    height: 50,
-    width: '100%',
-    '&:hover': {
-      cursor: 'pointer',
-    },
-    borderColor: '#fff',
-  },
-  selected: {
-    border: '1px solid #fff',
   },
   margin: {
     margin: theme.spacing(1),
@@ -241,45 +231,10 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
                     </Typography>
                   </Grid>
 
-                  <Grid item xs={5} container>
-                    {subjectColorChoices.map((choice, index) => {
-                      return (
-                        <Tooltip
-                          title={choice.name}
-                          placement={'right'}
-                          key={index}
-                        >
-                          <Grid
-                            item
-                            xs={3}
-                            className={clsx(classes.colorChoice, {
-                              [classes.selected]:
-                                this.state.colorName === choice.name,
-                            })}
-                            style={{
-                              backgroundColor: choice.color,
-                            }}
-                            onClick={() => {
-                              selectColor(choice);
-                            }}
-                          >
-                            {this.state.colorName === choice.name && (
-                              <Grid
-                                container
-                                alignItems={'center'}
-                                justify={'center'}
-                                style={{ height: '100%' }}
-                              >
-                                <CheckIcon
-                                  style={{ margin: 'auto', color: '#fff' }}
-                                />
-                              </Grid>
-                            )}
-                          </Grid>
-                        </Tooltip>
-                      );
-                    })}
-                  </Grid>
+                  <ColorChoices
+                    colorName={this.state.colorName}
+                    selectClickHandler={selectColor}
+                  />
 
                   <PreviewCard
                     color={this.state.color}
