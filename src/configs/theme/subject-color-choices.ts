@@ -17,7 +17,14 @@ import {
   deepOrange,
 } from '@material-ui/core/colors';
 
-export const subjectColorChoices = [
+export interface Choice {
+  id: string;
+  name: string;
+  color: string;
+  secondaryColor: string;
+}
+
+export const subjectColorChoices: Choice[] = [
   {
     id: 'f00c79b6-e08f-44dc-8d6a-0dc695e92c05',
     name: 'Red',
