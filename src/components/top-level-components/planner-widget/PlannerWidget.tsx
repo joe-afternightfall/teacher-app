@@ -19,7 +19,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { routerActions } from 'connected-react-router';
 import { Subject } from '../../../configs/types/WeeklyPlanner';
 import SubjectListDialog from './subject-list/SubjectListDialog';
-import plannerBackground from '../../configs/images/lovely-planning.jpg';
+import plannerBackground from '../../../configs/images/lovely-planning.jpg';
 
 const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
