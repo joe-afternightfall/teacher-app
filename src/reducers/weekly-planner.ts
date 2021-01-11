@@ -13,7 +13,6 @@ export default {
       case actions.INITIALIZE:
         newState.weeklyPlanners = action.weeklyPlanners;
         newState.selectedPlannerId = action.weeklyPlanners[0].id;
-        newState.subjectList = action.subjectList;
         break;
       case actions.LOAD_WEEKLY_PLANNERS:
         newState.weeklyPlanners = action.weeklyPlanners;
@@ -57,5 +56,4 @@ export interface WeeklyPlannerState {
   selectedPlannerId: string;
   displayEditingForm: boolean;
   weeklyPlanners: Planner[];
-  subjectList: Subject[];
 }
