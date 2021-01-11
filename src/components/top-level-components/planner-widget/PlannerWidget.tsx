@@ -13,13 +13,13 @@ import {
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { State } from '../../configs/redux/store';
-import routes from '../../configs/constants/routes';
+import { State } from '../../../configs/redux/store';
+import routes from '../../../configs/constants/routes';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { routerActions } from 'connected-react-router';
-import { Subject } from '../../configs/types/WeeklyPlanner';
+import { Subject } from '../../../configs/types/WeeklyPlanner';
+import SubjectListDialog from './subject-list/SubjectListDialog';
 import plannerBackground from '../../configs/images/lovely-planning.jpg';
-import SubjectListDialog from './planner-widget/subject-list/SubjectListDialog';
 
 const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
