@@ -6,11 +6,11 @@ import {
 } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
-import { Grid, SvgIconTypeMap, Typography } from '@material-ui/core';
-import ColorChoices from './components/ColorChoices';
 import PreviewCard from './components/PreviewCard';
+import ColorChoices from './components/ColorChoices';
+import { Grid, SvgIconTypeMap, Typography } from '@material-ui/core';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
-import { Choice } from '../../../../../configs/theme/subject-color-choices';
+import { Choice } from '../../../../../../configs/theme/subject-color-choices';
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class ColorSelector extends Component<ColorSelectorProps> {

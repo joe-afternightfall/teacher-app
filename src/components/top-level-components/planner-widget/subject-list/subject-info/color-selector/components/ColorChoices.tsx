@@ -12,7 +12,7 @@ import { Grid, Tooltip } from '@material-ui/core';
 import {
   Choice,
   subjectColorChoices,
-} from '../../../../../../configs/theme/subject-color-choices';
+} from '../../../../../../../configs/theme/subject-color-choices';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({
   colorChoice: {
