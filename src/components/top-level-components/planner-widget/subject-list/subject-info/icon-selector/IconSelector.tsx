@@ -42,7 +42,7 @@ class IconSelector extends Component<IconSelectorProps> {
                 xs={2}
                 key={index}
                 style={{
-                  textAlign: 'center'
+                  textAlign: 'center',
                 }}
                 onMouseLeave={handleHover('')}
                 onMouseEnter={handleHover(icon.id)}
