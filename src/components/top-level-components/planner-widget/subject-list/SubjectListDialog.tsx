@@ -101,7 +101,7 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
           open={this.state.open}
         >
           <DialogTitle id={'subject-list-dialog-title'}>
-            {'Subject List'}
+            {this.state.displaySubjectInfo ? 'Add New Subject' : 'Subject List'}
             <IconButton
               aria-label={'close'}
               className={classes.closeButton}

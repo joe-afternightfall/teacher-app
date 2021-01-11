@@ -27,10 +27,13 @@ class SubjectName extends Component<SubjectNameProps> {
           <Typography variant={'h6'}>{'Subject Name'}</Typography>
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{ textAlign: 'center' }}>
           <TextField
+            autoFocus
             value={subjectName}
             onChange={handleTextChange}
+            variant={'outlined'}
+            style={{ width: '70%' }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position={'start'}>
