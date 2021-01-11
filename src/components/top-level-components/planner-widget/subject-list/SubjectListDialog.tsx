@@ -59,19 +59,6 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
       });
     };
 
-    const selectColor = (color: {
-      id: string;
-      name: string;
-      color: string;
-      secondaryColor: string;
-    }) => {
-      this.setState({
-        colorName: color.name,
-        color: color.color,
-        secondaryColor: color.secondaryColor,
-      });
-    };
-
     const selectIcon = (icon: OverridableComponent<SvgIconTypeMap>) => {
       this.setState({
         selectedIcon: icon,
@@ -121,7 +108,6 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
                   colorName={this.state.colorName}
                   color={this.state.color}
                   secondaryColor={this.state.secondaryColor}
-                  selectColorHandler={selectColor}
                   selectIconHandler={selectIcon}
                 />
               ) : (
