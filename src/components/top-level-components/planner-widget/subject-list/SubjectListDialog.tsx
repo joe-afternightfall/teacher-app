@@ -15,13 +15,10 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  SvgIconTypeMap,
   Tooltip,
   Fab,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import SubjectList from './SubjectList';
 import SubjectInfo from './subject-info/SubjectInfo';
 import AddIcon from '@material-ui/icons/Add';
@@ -39,12 +36,6 @@ const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
 class SubjectListDialog extends Component<SubjectListDialogProps> {
   state = {
     open: false,
-    colorName: '',
-    color: '',
-    subjectName: '',
-    isHovering: '',
-    selectedIcon: AccountCircle,
-    secondaryColor: '',
     displaySubjectInfo: false,
   };
 
@@ -56,18 +47,6 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
       this.setState({
         open: !this.state.open,
         displaySubjectInfo: false,
-      });
-    };
-
-    const selectIcon = (icon: OverridableComponent<SvgIconTypeMap>) => {
-      this.setState({
-        selectedIcon: icon,
-      });
-    };
-
-    const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      this.setState({
-        subjectName: event.target.value,
       });
     };
 
@@ -101,15 +80,7 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
           <DialogContent>
             <Grid container spacing={2}>
               {this.state.displaySubjectInfo ? (
-                <SubjectInfo
-                  subjectName={this.state.subjectName}
-                  handleTextChange={handleTextChange}
-                  selectedIcon={this.state.selectedIcon}
-                  colorName={this.state.colorName}
-                  color={this.state.color}
-                  secondaryColor={this.state.secondaryColor}
-                  selectIconHandler={selectIcon}
-                />
+                <SubjectInfo />
               ) : (
                 <Grid item xs={12}>
                   <SubjectList />
@@ -153,7 +124,6 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
 
 export interface SubjectListDialogProps extends WithStyles<typeof styles> {
   closeMenuClickHandler: () => void;
-  subjectList: Subject[];
 }
 
 export default withStyles(styles, { withTheme: true })(SubjectListDialog);

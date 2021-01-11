@@ -1,4 +1,4 @@
-import { Grid, SvgIconTypeMap } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import {
   Theme,
   WithStyles,
@@ -10,7 +10,6 @@ import { Styles } from '@material-ui/styles';
 import SubjectName from './subject-name/SubjectName';
 import IconSelector from './icon-selector/IconSelector';
 import ColorSelector from './color-selector/ColorSelector';
-import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
@@ -27,38 +26,17 @@ class SubjectInfo extends Component<SubjectInfoProps> {
         }}
       >
         <Grid item xs={12} container>
-          <SubjectName
-            selectedIcon={this.props.selectedIcon}
-            handleTextChange={this.props.handleTextChange}
-            subjectName={this.props.subjectName}
-          />
+          <SubjectName />
 
-          <IconSelector
-            selectedIcon={this.props.selectedIcon}
-            selectIconHandler={this.props.selectIconHandler}
-          />
+          <IconSelector />
         </Grid>
 
-        <ColorSelector
-          colorName={this.props.colorName}
-          color={this.props.color}
-          secondaryColor={this.props.secondaryColor}
-          selectedIcon={this.props.selectedIcon}
-          subjectName={this.props.subjectName}
-        />
+        <ColorSelector />
       </Grid>
     );
   }
 }
 
-export interface SubjectInfoProps extends WithStyles<typeof styles> {
-  subjectName: string;
-  color: string;
-  colorName: string;
-  secondaryColor: string;
-  selectIconHandler: (icon: OverridableComponent<SvgIconTypeMap>) => void;
-  handleTextChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  selectedIcon: OverridableComponent<SvgIconTypeMap>;
-}
+export type SubjectInfoProps = WithStyles<typeof styles>;
 
 export default withStyles(styles, { withTheme: true })(SubjectInfo);
