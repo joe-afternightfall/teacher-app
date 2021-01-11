@@ -9,7 +9,6 @@ import {
 import {
   Grid,
   List,
-  Paper,
   Button,
   Dialog,
   ListItem,
@@ -29,8 +28,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { Subject } from '../../../../configs/types/WeeklyPlanner';
-import { subjectIcons } from '../../../../configs/theme/subject-icon-choices';
 import ColorSelector from './subject-info/color-selector/ColorSelector';
+import IconSelector from './subject-info/icon-selector/IconSelector';
+import SubjectName from './subject-info/subject-name/SubjectName';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   closeButton: {
@@ -75,12 +75,6 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
         colorName: color.name,
         color: color.color,
         secondaryColor: color.secondaryColor,
-      });
-    };
-
-    const handleHover = (id: string) => (event: any) => {
-      this.setState({
-        isHovering: id,
       });
     };
 
@@ -145,73 +139,16 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
                 spacing={2}
               >
                 <Grid item xs={12} container>
-                  <Grid item xs={5} container>
-                    <Grid item xs={12}>
-                      <Typography variant={'h6'}>{'Subject Name'}</Typography>
-                    </Grid>
+                  <SubjectName
+                    selectedIcon={this.state.selectedIcon}
+                    handleTextChange={handleTextChange}
+                    subjectName={this.state.subjectName}
+                  />
 
-                    <Grid item xs={12}>
-                      <TextField
-                        value={this.state.subjectName}
-                        onChange={handleTextChange}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position={'start'}>
-                              {React.createElement(this.state.selectedIcon)}
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    </Grid>
-                  </Grid>
-
-                  <Grid item xs={7} container>
-                    <Grid item xs={12}>
-                      <Typography variant={'h6'}>{'Subject Icon'}</Typography>
-                    </Grid>
-                    <Grid item xs={12} container>
-                      {subjectIcons.map((icon, index) => {
-                        return (
-                          <Grid
-                            item
-                            xs={3}
-                            key={index}
-                            style={{
-                              textAlign: 'center',
-                            }}
-                          >
-                            <Grid
-                              item
-                              xs={12}
-                              onMouseLeave={handleHover('')}
-                              onMouseEnter={handleHover(icon.id)}
-                            >
-                              {this.state.isHovering === icon.id ? (
-                                <Paper
-                                  elevation={3}
-                                  style={{
-                                    textAlign: 'center',
-                                    cursor: 'pointer',
-                                  }}
-                                  onClick={() => {
-                                    selectIcon(icon.icon);
-                                  }}
-                                >
-                                  {React.createElement(icon.icon)}
-                                </Paper>
-                              ) : this.state.selectedIcon === icon.icon ? (
-                                <Paper elevation={3}>
-                                  {React.createElement(icon.icon)}
-                                </Paper>
-                              ) : (
-                                React.createElement(icon.icon)
-                              )}
-                            </Grid>
-                          </Grid>
-                        );
-                      })}
-                    </Grid>
-                  </Grid>
+                  <IconSelector
+                    selectedIcon={this.state.selectedIcon}
+                    selectIconHandler={selectIcon}
+                  />
                 </Grid>
 
                 <ColorSelector
