@@ -1,83 +1,96 @@
 import clsx from 'clsx';
-import {
-  Theme,
-  WithStyles,
-  withStyles,
-  StyledComponentProps,
-} from '@material-ui/core/styles';
+import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 import React, { Component } from 'react';
-import { Styles } from '@material-ui/styles';
 import CheckIcon from '@material-ui/icons/Check';
 import { Grid, Tooltip } from '@material-ui/core';
 import {
-  Choice,
+  ColorChoice,
   subjectColorChoices,
 } from '../../../../../../../configs/theme/subject-color-choices';
+import { State } from '../../../../../../../configs/redux/store';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { selectColor } from '../../../../../../../creators/subject-list';
 
-const styles: Styles<Theme, StyledComponentProps> = () => ({
-  colorChoice: {
-    height: 50,
-    width: '100%',
-    '&:hover': {
-      cursor: 'pointer',
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    colorChoice: {
+      height: 50,
+      width: '100%',
+      '&:hover': {
+        cursor: 'pointer',
+      },
+      borderColor: '#fff',
     },
-    borderColor: '#fff',
-  },
-  selected: {
-    border: '1px solid #fff',
-  },
-});
+    selected: {
+      border: '1px solid #fff',
+    },
+  })
+);
 
-class ColorChoices extends Component<ColorChoicesProps> {
-  render(): JSX.Element {
-    const { classes, colorName, selectClickHandler } = this.props;
+const ColorChoices = (props: ColorChoicesProps) => {
+  const classes = useStyles();
 
-    return (
-      <Grid item xs={5}>
-        <Grid
-          container
-          style={{ width: '60%', margin: 'auto' }}
-          justify={'center'}
-        >
-          {subjectColorChoices.map((choice: Choice, index: number) => {
-            return (
-              <Tooltip title={choice.name} placement={'right'} key={index}>
-                <Grid
-                  item
-                  xs={3}
-                  className={clsx(classes.colorChoice, {
-                    [classes.selected]: colorName === choice.name,
-                  })}
-                  style={{
-                    backgroundColor: choice.color,
-                  }}
-                  onClick={() => {
-                    selectClickHandler(choice);
-                  }}
-                >
-                  {colorName === choice.name && (
-                    <Grid
-                      container
-                      alignItems={'center'}
-                      justify={'center'}
-                      style={{ height: '100%' }}
-                    >
-                      <CheckIcon style={{ margin: 'auto', color: '#fff' }} />
-                    </Grid>
-                  )}
-                </Grid>
-              </Tooltip>
-            );
-          })}
-        </Grid>
+  return (
+    <Grid item xs={5}>
+      <Grid
+        container
+        style={{ width: '60%', margin: 'auto' }}
+        justify={'center'}
+      >
+        {subjectColorChoices.map((choice: ColorChoice, index: number) => {
+          const selectedColorName = props.selectedColorName;
+
+          return (
+            <Tooltip title={choice.name} placement={'right'} key={index}>
+              <Grid
+                item
+                xs={3}
+                className={clsx(classes.colorChoice, {
+                  [classes.selected]: selectedColorName === choice.name,
+                })}
+                style={{
+                  backgroundColor: choice.color,
+                }}
+                onClick={() => {
+                  props.selectColorClickHandler(choice);
+                }}
+              >
+                {selectedColorName === choice.name && (
+                  <Grid
+                    container
+                    alignItems={'center'}
+                    justify={'center'}
+                    style={{ height: '100%' }}
+                  >
+                    <CheckIcon style={{ margin: 'auto', color: '#fff' }} />
+                  </Grid>
+                )}
+              </Grid>
+            </Tooltip>
+          );
+        })}
       </Grid>
-    );
-  }
+    </Grid>
+  );
+};
+
+export interface ColorChoicesProps {
+  selectedColorName: string;
+  selectColorClickHandler: (choice: ColorChoice) => void;
 }
 
-export interface ColorChoicesProps extends WithStyles<typeof styles> {
-  colorName: string;
-  selectClickHandler: (choice: Choice) => void;
-}
+const mapStateToProps = (state: State): ColorChoicesProps => {
+  return ({
+    selectedColorName: state.subjectListState.selectedColor.name,
+  } as unknown) as ColorChoicesProps;
+};
 
-export default withStyles(styles, { withTheme: true })(ColorChoices);
+const mapDispatchToProps = (dispatch: Dispatch): ColorChoicesProps =>
+  (({
+    selectColorClickHandler: (color: ColorChoice) => {
+      dispatch(selectColor(color));
+    },
+  } as unknown) as ColorChoicesProps);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ColorChoices);
