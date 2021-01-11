@@ -15,6 +15,7 @@ import weeklyPlannerState, {
 import subjectListState, {
   SubjectListState,
 } from '../../reducers/subject-list';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 export const createStore = (history: History): Store => {
   const createStoreFunc = applyMiddleware(
@@ -37,9 +38,11 @@ export const createStore = (history: History): Store => {
       selectedColor: {
         id: '',
         name: '',
-        color: '',
+        primaryColor: '',
         secondaryColor: '',
       },
+      selectedIcon: AccountCircle,
+      subjectName: '',
     } as unknown) as SubjectListState,
   });
 };

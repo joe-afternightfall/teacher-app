@@ -1,6 +1,8 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
 import { ColorChoice } from '../configs/theme/subject-color-choices';
+import { OverridableComponent } from '@material-ui/core/OverridableComponent';
+import { SvgIconTypeMap } from '@material-ui/core';
 
 export default {
   reducer(
@@ -13,6 +15,12 @@ export default {
       case actions.SELECT_COLOR:
         newState.selectedColor = action.selectedColor;
         break;
+      case actions.SELECT_ICON:
+        newState.selectedIcon = action.icon;
+        break;
+      case actions.UPDATE_SUBJECT_NAME:
+        newState.subjectName = action.subjectName;
+        break;
       default:
         newState = state;
     }
@@ -23,4 +31,6 @@ export default {
 
 export interface SubjectListState {
   selectedColor: ColorChoice;
+  selectedIcon: OverridableComponent<SvgIconTypeMap>;
+  subjectName: string;
 }
