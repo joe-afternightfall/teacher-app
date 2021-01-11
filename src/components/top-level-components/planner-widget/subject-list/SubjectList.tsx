@@ -1,69 +1,66 @@
-import React, { Component } from 'react';
-import { Styles } from '@material-ui/styles';
+import React from 'react';
 import {
-  StyledComponentProps,
-  Theme,
-  WithStyles,
-  withStyles,
-} from '@material-ui/core/styles';
-import { Subject } from '../../../../configs/types/WeeklyPlanner';
-import {
+  List,
   Avatar,
   Divider,
-  IconButton,
-  List,
   ListItem,
+  IconButton,
+  ListItemText,
   ListItemAvatar,
   ListItemSecondaryAction,
-  ListItemText,
 } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { connect } from 'react-redux';
 import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { State } from '../../../../configs/redux/store';
 import { subjectList } from '../../../../configs/dummy-data';
+import { Subject } from '../../../../configs/types/WeeklyPlanner';
 
-const styles: Styles<Theme, StyledComponentProps> = () => ({});
+const SubjectList = () => {
+  return (
+    <List
+      component={'nav'}
+      aria-labelledby={'nested-list-subheader'}
+      style={{ width: '100%', marginBottom: 32 }}
+    >
+      {subjectList.map((subject: Subject, index: number) => {
+        return (
+          <React.Fragment key={index}>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar>{React.createElement(subject.icon)}</Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={subject.subjectName} />
+              <ListItemSecondaryAction>
+                <IconButton edge={'end'} aria-label={'delete'}>
+                  <DeleteIcon />
+                </IconButton>
 
-class SubjectList extends Component<SubjectListProps> {
-  render(): JSX.Element {
-    const { classes } = this.props;
+                <IconButton
+                  edge={'end'}
+                  aria-label={'edit'}
+                  style={{ marginLeft: 12 }}
+                >
+                  <EditIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+            <Divider variant={'inset'} component={'li'} />
+          </React.Fragment>
+        );
+      })}
+    </List>
+  );
+};
 
-    return (
-      <List
-        component={'nav'}
-        aria-labelledby={'nested-list-subheader'}
-        style={{ width: '100%', marginBottom: 32 }}
-      >
-        {subjectList.map((subject: Subject, index: number) => {
-          return (
-            <React.Fragment key={index}>
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                </ListItemAvatar>
-                <ListItemText primary={subject.name} />
-                <ListItemSecondaryAction>
-                  <IconButton edge={'end'} aria-label={'delete'}>
-                    <DeleteIcon />
-                  </IconButton>
-
-                  <IconButton
-                    edge={'end'}
-                    aria-label={'edit'}
-                    style={{ marginLeft: 12 }}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-              <Divider variant={'inset'} component={'li'} />
-            </React.Fragment>
-          );
-        })}
-      </List>
-    );
-  }
+export interface SubjectListProps {
+  subjectList: Subject[];
 }
 
-export type SubjectListProps = WithStyles<typeof styles>;
+const mapStateToProps = (state: State): SubjectListProps => {
+  return ({
+    subjectList: state.subjectListState.subjectList,
+  } as unknown) as SubjectListProps;
+};
 
-export default withStyles(styles, { withTheme: true })(SubjectList);
+export default connect(mapStateToProps)(SubjectList);
