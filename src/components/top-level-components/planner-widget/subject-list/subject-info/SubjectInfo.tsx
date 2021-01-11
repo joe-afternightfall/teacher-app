@@ -1,7 +1,4 @@
-import {
-  Grid,
-  SvgIconTypeMap,
-} from '@material-ui/core';
+import { Grid, SvgIconTypeMap } from '@material-ui/core';
 import {
   Theme,
   WithStyles,
@@ -24,9 +21,11 @@ class SubjectInfo extends Component<SubjectInfoProps> {
       <Grid
         container
         item
-        xs={9}
-        style={{ backgroundColor: '#f5f5f5' }}
-        spacing={2}
+        xs={12}
+        style={{
+          height: '60vh',
+          backgroundColor: '#f5f5f5',
+        }}
       >
         <Grid item xs={12} container>
           <SubjectName
