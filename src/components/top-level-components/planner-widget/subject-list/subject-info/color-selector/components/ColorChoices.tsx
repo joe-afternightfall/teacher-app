@@ -33,37 +33,39 @@ class ColorChoices extends Component<ColorChoicesProps> {
     const { classes, colorName, selectClickHandler } = this.props;
 
     return (
-      <Grid item xs={5} container>
-        {subjectColorChoices.map((choice: Choice, index: number) => {
-          return (
-            <Tooltip title={choice.name} placement={'right'} key={index}>
-              <Grid
-                item
-                xs={3}
-                className={clsx(classes.colorChoice, {
-                  [classes.selected]: colorName === choice.name,
-                })}
-                style={{
-                  backgroundColor: choice.color,
-                }}
-                onClick={() => {
-                  selectClickHandler(choice);
-                }}
-              >
-                {colorName === choice.name && (
-                  <Grid
-                    container
-                    alignItems={'center'}
-                    justify={'center'}
-                    style={{ height: '100%' }}
-                  >
-                    <CheckIcon style={{ margin: 'auto', color: '#fff' }} />
-                  </Grid>
-                )}
-              </Grid>
-            </Tooltip>
-          );
-        })}
+      <Grid item xs={5}>
+        <Grid container>
+          {subjectColorChoices.map((choice: Choice, index: number) => {
+            return (
+              <Tooltip title={choice.name} placement={'right'} key={index}>
+                <Grid
+                  item
+                  xs={3}
+                  className={clsx(classes.colorChoice, {
+                    [classes.selected]: colorName === choice.name,
+                  })}
+                  style={{
+                    backgroundColor: choice.color,
+                  }}
+                  onClick={() => {
+                    selectClickHandler(choice);
+                  }}
+                >
+                  {colorName === choice.name && (
+                    <Grid
+                      container
+                      alignItems={'center'}
+                      justify={'center'}
+                      style={{ height: '100%' }}
+                    >
+                      <CheckIcon style={{ margin: 'auto', color: '#fff' }} />
+                    </Grid>
+                  )}
+                </Grid>
+              </Tooltip>
+            );
+          })}
+        </Grid>
       </Grid>
     );
   }
