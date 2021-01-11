@@ -38,6 +38,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import { subjectIcons } from '../../configs/theme/subject-icon-choices';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { subjectColorChoices } from '../../configs/theme/subject-color-choices';
+import AddIcon from '@material-ui/icons/Add';
+import PreviewCard from './planner-widget/subject-info/PreviewCard';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   closeButton: {
@@ -279,26 +281,12 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
                     })}
                   </Grid>
 
-                  <Grid item xs={5} style={{ margin: 'auto' }}>
-                    <Card style={{ height: 200 }}>
-                      <CardHeader
-                        title={`Sample ${this.state.subjectName} Card`}
-                        style={{
-                          backgroundColor: this.state.color,
-                          color: this.state.secondaryColor,
-                        }}
-                        avatar={
-                          <Avatar
-                            aria-label={'recipe'}
-                            className={classes.avatar}
-                          >
-                            {React.createElement(this.state.selectedIcon)}
-                          </Avatar>
-                        }
-                      />
-                      <CardContent>{'Sample Card Content'}</CardContent>
-                    </Card>
-                  </Grid>
+                  <PreviewCard
+                    color={this.state.color}
+                    secondaryColor={this.state.secondaryColor}
+                    selectedIcon={this.state.selectedIcon}
+                    subjectName={this.state.subjectName}
+                  />
                 </Grid>
               </Grid>
             </Grid>
@@ -307,6 +295,12 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
           <DialogActions>
             <Button color={'secondary'}>{'Cancel'}</Button>
             <Button color={'primary'}>{'Save'}</Button>
+
+            {/*<Tooltip title={'Add New'} placement={'top'}>*/}
+            {/*  <Fab color={'primary'} aria-label={'add'}>*/}
+            {/*    <AddIcon />*/}
+            {/*  </Fab>*/}
+            {/*</Tooltip>*/}
           </DialogActions>
         </Dialog>
       </div>
