@@ -10,7 +10,6 @@ import { Styles } from '@material-ui/styles';
 import SubjectName from './subject-name/SubjectName';
 import IconSelector from './icon-selector/IconSelector';
 import ColorSelector from './color-selector/ColorSelector';
-import { Choice } from '../../../../../configs/theme/subject-color-choices';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
@@ -46,7 +45,6 @@ class SubjectInfo extends Component<SubjectInfoProps> {
           secondaryColor={this.props.secondaryColor}
           selectedIcon={this.props.selectedIcon}
           subjectName={this.props.subjectName}
-          selectClickHandler={this.props.selectColorHandler}
         />
       </Grid>
     );
@@ -58,7 +56,6 @@ export interface SubjectInfoProps extends WithStyles<typeof styles> {
   color: string;
   colorName: string;
   secondaryColor: string;
-  selectColorHandler: (choice: Choice) => void;
   selectIconHandler: (icon: OverridableComponent<SvgIconTypeMap>) => void;
   handleTextChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   selectedIcon: OverridableComponent<SvgIconTypeMap>;
