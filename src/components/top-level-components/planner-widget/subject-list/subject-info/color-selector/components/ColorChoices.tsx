@@ -1,16 +1,16 @@
 import clsx from 'clsx';
-import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
-import React, { Component } from 'react';
+import React  from 'react';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 import CheckIcon from '@material-ui/icons/Check';
 import { Grid, Tooltip } from '@material-ui/core';
+import { State } from '../../../../../../../configs/redux/store';
 import {
   ColorChoice,
   subjectColorChoices,
 } from '../../../../../../../configs/theme/subject-color-choices';
-import { State } from '../../../../../../../configs/redux/store';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
 import { selectColor } from '../../../../../../../creators/subject-list';
+import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,7 +50,7 @@ const ColorChoices = (props: ColorChoicesProps) => {
                   [classes.selected]: selectedColorName === choice.name,
                 })}
                 style={{
-                  backgroundColor: choice.color,
+                  backgroundColor: choice.primaryColor,
                 }}
                 onClick={() => {
                   props.selectColorClickHandler(choice);
