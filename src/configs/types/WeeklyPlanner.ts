@@ -1,3 +1,6 @@
+import { OverridableComponent } from '@material-ui/core/OverridableComponent';
+import { SvgIconTypeMap } from '@material-ui/core';
+
 export interface PlannerItem {
   id: string;
   content: string;
@@ -37,6 +40,9 @@ export interface PlannerItems {
 
 export interface Subject {
   id: string;
-  name: string;
-  color: string;
+  subjectName: string;
+  primaryColorId: string;
+  primaryColor: string;
+  secondaryColor: string;
+  icon: OverridableComponent<SvgIconTypeMap>;
 }
