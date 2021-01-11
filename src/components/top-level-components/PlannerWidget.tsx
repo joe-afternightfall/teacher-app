@@ -53,10 +53,7 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
               onClose={handleClose}
               open={Boolean(anchorEl)}
             >
-              <SubjectListDialog
-                subjectList={props.subjectList}
-                closeMenuClickHandler={handleClose}
-              />
+              <SubjectListDialog closeMenuClickHandler={handleClose} />
               <MenuItem onClick={handleClose}>{'My account'}</MenuItem>
               <MenuItem onClick={handleClose}>{'Logout'}</MenuItem>
             </Menu>
