@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { Styles } from '@material-ui/styles';
+import clsx from 'clsx';
 import {
-  StyledComponentProps,
   Theme,
   WithStyles,
   withStyles,
+  StyledComponentProps,
 } from '@material-ui/core/styles';
+import React, { Component } from 'react';
+import { Styles } from '@material-ui/styles';
+import CheckIcon from '@material-ui/icons/Check';
+import { Grid, Tooltip } from '@material-ui/core';
 import {
   Choice,
   subjectColorChoices,
-} from '../../../../configs/theme/subject-color-choices';
-import { Grid, Tooltip } from '@material-ui/core';
-import clsx from 'clsx';
-import CheckIcon from '@material-ui/icons/Check';
+} from '../../../../../../configs/theme/subject-color-choices';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({
   colorChoice: {
