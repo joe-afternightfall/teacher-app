@@ -70,6 +70,7 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
     subjectName: '',
     isHovering: '',
     selectedIcon: AccountCircle,
+    secondaryColor: '',
   };
 
   render(): JSX.Element {
@@ -82,10 +83,16 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
       });
     };
 
-    const selectColor = (name: string, color: string) => {
+    const selectColor = (color: {
+      id: string;
+      name: string;
+      color: string;
+      secondaryColor: string;
+    }) => {
       this.setState({
-        colorName: name,
-        color: color,
+        colorName: color.name,
+        color: color.color,
+        secondaryColor: color.secondaryColor,
       });
     };
 
@@ -251,7 +258,7 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
                               backgroundColor: choice.color,
                             }}
                             onClick={() => {
-                              selectColor(choice.name, choice.color);
+                              selectColor(choice);
                             }}
                           >
                             {this.state.colorName === choice.name && (
@@ -278,6 +285,7 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
                         title={`Sample ${this.state.subjectName} Card`}
                         style={{
                           backgroundColor: this.state.color,
+                          color: this.state.secondaryColor,
                         }}
                         avatar={
                           <Avatar
