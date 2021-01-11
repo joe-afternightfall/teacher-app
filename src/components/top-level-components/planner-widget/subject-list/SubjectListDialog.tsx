@@ -8,29 +8,20 @@ import {
 } from '@material-ui/core/styles';
 import {
   Grid,
-  List,
   Button,
   Dialog,
-  ListItem,
   MenuItem,
-  TextField,
   IconButton,
-  Typography,
   DialogTitle,
-  ListItemText,
   DialogContent,
   DialogActions,
   SvgIconTypeMap,
-  InputAdornment,
-  ListItemSecondaryAction,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
-import { Subject } from '../../../../configs/types/WeeklyPlanner';
-import ColorSelector from './subject-info/color-selector/ColorSelector';
-import IconSelector from './subject-info/icon-selector/IconSelector';
-import SubjectName from './subject-info/subject-name/SubjectName';
+import SubjectList from './SubjectList';
+import SubjectInfo from './subject-info/SubjectInfo';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   closeButton: {
@@ -56,7 +47,7 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
   };
 
   render(): JSX.Element {
-    const { classes, subjectList } = this.props;
+    const { classes } = this.props;
 
     const toggleDialog = () => {
       this.props.closeMenuClickHandler();
@@ -114,52 +105,35 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
           <DialogContent>
             <Grid container spacing={2}>
               <Grid item xs={3}>
-                <List
-                  component={'nav'}
-                  aria-labelledby={'nested-list-subheader'}
-                >
-                  {subjectList.map((subject: Subject, index: number) => {
-                    return (
-                      <ListItem key={index}>
-                        <ListItemText primary={subject.name} />
-                        <ListItemSecondaryAction>
-                          <IconButton edge={'end'} aria-label={'delete'} />
-                        </ListItemSecondaryAction>
-                      </ListItem>
-                    );
-                  })}
-                </List>
+                <SubjectList />
+
+                {/*<List*/}
+                {/*  component={'nav'}*/}
+                {/*  aria-labelledby={'nested-list-subheader'}*/}
+                {/*>*/}
+                {/*  {subjectList.map((subject: Subject, index: number) => {*/}
+                {/*    return (*/}
+                {/*      <ListItem key={index}>*/}
+                {/*        <ListItemText primary={subject.name} />*/}
+                {/*        <ListItemSecondaryAction>*/}
+                {/*          <IconButton edge={'end'} aria-label={'delete'} />*/}
+                {/*        </ListItemSecondaryAction>*/}
+                {/*      </ListItem>*/}
+                {/*    );*/}
+                {/*  })}*/}
+                {/*</List>*/}
               </Grid>
 
-              <Grid
-                container
-                item
-                xs={9}
-                style={{ backgroundColor: '#f5f5f5' }}
-                spacing={2}
-              >
-                <Grid item xs={12} container>
-                  <SubjectName
-                    selectedIcon={this.state.selectedIcon}
-                    handleTextChange={handleTextChange}
-                    subjectName={this.state.subjectName}
-                  />
-
-                  <IconSelector
-                    selectedIcon={this.state.selectedIcon}
-                    selectIconHandler={selectIcon}
-                  />
-                </Grid>
-
-                <ColorSelector
-                  colorName={this.state.colorName}
-                  color={this.state.color}
-                  secondaryColor={this.state.secondaryColor}
-                  selectedIcon={this.state.selectedIcon}
-                  subjectName={this.state.subjectName}
-                  selectClickHandler={selectColor}
-                />
-              </Grid>
+              <SubjectInfo
+                subjectName={this.state.subjectName}
+                handleTextChange={handleTextChange}
+                selectedIcon={this.state.selectedIcon}
+                colorName={this.state.colorName}
+                color={this.state.color}
+                secondaryColor={this.state.secondaryColor}
+                selectColorHandler={selectColor}
+                selectIconHandler={selectIcon}
+              />
             </Grid>
           </DialogContent>
 
@@ -181,7 +155,6 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
 
 export interface SubjectListDialogProps extends WithStyles<typeof styles> {
   closeMenuClickHandler: () => void;
-  subjectList: Subject[];
 }
 
 export default withStyles(styles, { withTheme: true })(SubjectListDialog);
