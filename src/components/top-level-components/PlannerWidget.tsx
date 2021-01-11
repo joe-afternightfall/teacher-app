@@ -1,25 +1,25 @@
 import React from 'react';
 import {
+  Menu,
   Card,
   Grid,
   Button,
+  MenuItem,
   CardMedia,
   CardHeader,
+  IconButton,
   CardActions,
   CardActionArea,
-  IconButton,
-  Menu,
-  MenuItem,
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { State } from '../../configs/redux/store';
 import routes from '../../configs/constants/routes';
-import { routerActions } from 'connected-react-router';
-import plannerBackground from '../../configs/images/lovely-planning.jpg';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { routerActions } from 'connected-react-router';
 import { Subject } from '../../configs/types/WeeklyPlanner';
-import SubjectListDialog from './SubjectListDialog';
+import plannerBackground from '../../configs/images/lovely-planning.jpg';
+import SubjectListDialog from './planner-widget/subject-list/SubjectListDialog';
 
 const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
