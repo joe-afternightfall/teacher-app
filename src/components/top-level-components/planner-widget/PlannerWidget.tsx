@@ -17,7 +17,6 @@ import { State } from '../../../configs/redux/store';
 import routes from '../../../configs/constants/routes';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { routerActions } from 'connected-react-router';
-import { Subject } from '../../../configs/types/WeeklyPlanner';
 import SubjectListDialog from './subject-list/SubjectListDialog';
 import plannerBackground from '../../../configs/images/lovely-planning.jpg';
 
@@ -36,7 +35,7 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
     <Card>
       <CardHeader
         title={'Weekly Planners'}
-        subheader={`${props.subjectList.length} Subjects`}
+        subheader={`${props.numberOfSubjects} Subjects`}
         action={
           <div>
             <IconButton
@@ -87,13 +86,13 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
 
 interface PlannerWidgetProps {
   routeToWidgetClickHandler: () => void;
-  subjectList: Subject[];
+  numberOfSubjects: number;
 }
 
 const mapStateToProps = (state: State): PlannerWidgetProps => {
   return ({
     selectedPlannerId: state.weeklyPlannerState.selectedPlannerId,
-    subjectList: state.weeklyPlannerState.subjectList,
+    numberOfSubjects: state.subjectListState.subjectList.length,
   } as unknown) as PlannerWidgetProps;
 };
 
