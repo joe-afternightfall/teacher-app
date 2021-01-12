@@ -40,11 +40,11 @@ export const saveSubjectInfo = (subject: Subject) => {
 export const openSubjectInfoDialog = () => {
   return {
     type: actions.OPEN_SUBJECT_INFO_DIALOG,
-  }
-}
+  };
+};
 
 export const closeSubjectInfoDialog = () => {
   return {
     type: actions.CLOSE_SUBJECT_INFO_DIALOG,
-  }
-}
+  };
+};

@@ -19,6 +19,10 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { routerActions } from 'connected-react-router';
 import SubjectListDialog from './subject-list/SubjectListDialog';
 import plannerBackground from '../../../configs/images/lovely-planning.jpg';
+import {
+  closeSubjectInfoDialog,
+  openSubjectInfoDialog,
+} from '../../../creators/subject-list';
 
 const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -52,7 +56,12 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
               onClose={handleClose}
               open={Boolean(anchorEl)}
             >
-              <SubjectListDialog closeMenuClickHandler={handleClose} />
+              <SubjectListDialog
+                closeMenuClickHandler={handleClose}
+                openSubjectInfoHandler={props.openSubjectInfoHandler}
+                closeSubjectInfoHandler={props.closeSubjectInfoHandler}
+                shouldDisplaySubjectInfo={props.shouldDisplaySubjectInfo}
+              />
               <MenuItem onClick={handleClose}>{'My account'}</MenuItem>
               <MenuItem onClick={handleClose}>{'Logout'}</MenuItem>
             </Menu>
@@ -85,14 +94,17 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
 };
 
 interface PlannerWidgetProps {
-  routeToWidgetClickHandler: () => void;
   numberOfSubjects: number;
+  shouldDisplaySubjectInfo: boolean;
+  openSubjectInfoHandler: () => void;
+  routeToWidgetClickHandler: () => void;
+  closeSubjectInfoHandler: () => void;
 }
 
 const mapStateToProps = (state: State): PlannerWidgetProps => {
   return ({
-    selectedPlannerId: state.weeklyPlannerState.selectedPlannerId,
     numberOfSubjects: state.subjectListState.subjectList.length,
+    shouldDisplaySubjectInfo: state.subjectListState.displaySubjectInfo,
   } as unknown) as PlannerWidgetProps;
 };
 
@@ -100,6 +112,12 @@ const mapDispatchToProps = (dispatch: Dispatch): PlannerWidgetProps =>
   (({
     routeToWidgetClickHandler: () => {
       dispatch(routerActions.push(routes.WEEKLY_PLANNER));
+    },
+    openSubjectInfoHandler: () => {
+      dispatch(openSubjectInfoDialog());
+    },
+    closeSubjectInfoHandler: () => {
+      dispatch(closeSubjectInfoDialog());
     },
   } as unknown) as PlannerWidgetProps);
 
