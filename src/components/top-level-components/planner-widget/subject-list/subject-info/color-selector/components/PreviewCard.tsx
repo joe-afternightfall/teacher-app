@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Card,
-  Grid,
-  Avatar,
-  CardHeader,
-  CardContent,
-} from '@material-ui/core';
+import { Card, Grid, Avatar, CardHeader, CardContent } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { State } from '../../../../../../../configs/redux/store';
 import { ColorChoice } from '../../../../../../../configs/theme/subject-color-choices';
