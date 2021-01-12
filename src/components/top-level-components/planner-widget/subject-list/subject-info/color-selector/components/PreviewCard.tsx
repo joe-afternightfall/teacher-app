@@ -5,14 +5,15 @@ import {
   Avatar,
   CardHeader,
   CardContent,
-  SvgIconTypeMap,
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { State } from '../../../../../../../configs/redux/store';
-import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { ColorChoice } from '../../../../../../../configs/theme/subject-color-choices';
+import { getIcon } from '../../../../../../../utils/get-icon';
 
 const PreviewCard = (props: PreviewCardProps) => {
+  const icon = getIcon(props.selectedIconId);
+
   return (
     <Grid item xs={7}>
       <Card style={{ width: '75%', height: 200, margin: 'auto' }}>
@@ -24,7 +25,11 @@ const PreviewCard = (props: PreviewCardProps) => {
           }}
           avatar={
             <Avatar aria-label={'subject-icon'}>
-              {React.createElement(props.selectedIcon)}
+              {icon !== undefined ? (
+                <Avatar>{React.createElement(icon)}</Avatar>
+              ) : (
+                <React.Fragment />
+              )}
             </Avatar>
           }
         />
@@ -37,14 +42,14 @@ const PreviewCard = (props: PreviewCardProps) => {
 export interface PreviewCardProps {
   subjectName: string;
   selectedColor: ColorChoice;
-  selectedIcon: OverridableComponent<SvgIconTypeMap>;
+  selectedIconId: string;
 }
 
 const mapStateToProps = (state: State): PreviewCardProps => {
   return ({
     subjectName: state.subjectListState.subjectName,
     selectedColor: state.subjectListState.selectedColor,
-    selectedIcon: state.subjectListState.selectedIcon,
+    selectedIconId: state.subjectListState.selectedIconId,
   } as unknown) as PreviewCardProps;
 };
 

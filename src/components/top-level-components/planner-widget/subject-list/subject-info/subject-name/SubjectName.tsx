@@ -1,8 +1,8 @@
 import React from 'react';
 import {
+  Avatar,
   Grid,
   InputAdornment,
-  SvgIconTypeMap,
   TextField,
   Typography,
 } from '@material-ui/core';
@@ -10,9 +10,11 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { State } from '../../../../../../configs/redux/store';
 import { updateSubjectName } from '../../../../../../creators/subject-list';
-import { OverridableComponent } from '@material-ui/core/OverridableComponent';
+import { getIcon } from '../../../../../../utils/get-icon';
 
 const SubjectName = (props: SubjectNameProps) => {
+  const icon = getIcon(props.selectedIconId);
+
   return (
     <Grid item xs={5} container>
       <Grid item xs={12}>
@@ -29,7 +31,11 @@ const SubjectName = (props: SubjectNameProps) => {
           InputProps={{
             startAdornment: (
               <InputAdornment position={'start'}>
-                {React.createElement(props.selectedIcon)}
+                {icon !== undefined ? (
+                  <Avatar>{React.createElement(icon)}</Avatar>
+                ) : (
+                  <React.Fragment />
+                )}
               </InputAdornment>
             ),
           }}
@@ -41,7 +47,7 @@ const SubjectName = (props: SubjectNameProps) => {
 
 export interface SubjectNameProps {
   subjectName: string;
-  selectedIcon: OverridableComponent<SvgIconTypeMap>;
+  selectedIconId: string;
   updateSubjectNameHandler: (
     event: React.ChangeEvent<HTMLInputElement>
   ) => void;
@@ -50,7 +56,7 @@ export interface SubjectNameProps {
 const mapStateToProps = (state: State): SubjectNameProps => {
   return ({
     subjectName: state.subjectListState.subjectName,
-    selectedIcon: state.subjectListState.selectedIcon,
+    selectedIconId: state.subjectListState.selectedIconId,
   } as unknown) as SubjectNameProps;
 };
 

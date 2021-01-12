@@ -7,8 +7,7 @@ import {
 } from '../../../../../../configs/theme/subject-icon-choices';
 import { State } from '../../../../../../configs/redux/store';
 import { selectIcon } from '../../../../../../creators/subject-list';
-import { Grid, Paper, SvgIconTypeMap, Typography } from '@material-ui/core';
-import { OverridableComponent } from '@material-ui/core/OverridableComponent';
+import { Grid, Paper, Typography } from '@material-ui/core';
 
 const IconSelector = (props: IconSelectorProps) => {
   const [isHovering, setIsHovering] = React.useState<string>('');
@@ -43,14 +42,14 @@ const IconSelector = (props: IconSelectorProps) => {
                     cursor: 'pointer',
                   }}
                   onClick={() => {
-                    props.selectIconHandler(icon.icon);
+                    props.selectIconHandler(icon.id);
                   }}
                 >
                   <Grid container alignItems={'center'} justify={'center'}>
                     <Grid item>{React.createElement(icon.icon)}</Grid>
                   </Grid>
                 </Paper>
-              ) : props.selectedIcon === icon.icon ? (
+              ) : props.selectedIconId === icon.id ? (
                 <Paper elevation={3}>{React.createElement(icon.icon)}</Paper>
               ) : (
                 React.createElement(icon.icon)
@@ -64,20 +63,20 @@ const IconSelector = (props: IconSelectorProps) => {
 };
 
 export interface IconSelectorProps {
-  selectedIcon: OverridableComponent<SvgIconTypeMap>;
-  selectIconHandler: (icon: OverridableComponent<SvgIconTypeMap>) => void;
+  selectedIconId: string;
+  selectIconHandler: (iconId: string) => void;
 }
 
 const mapStateToProps = (state: State): IconSelectorProps => {
   return ({
-    selectedIcon: state.subjectListState.selectedIcon,
+    selectedIconId: state.subjectListState.selectedIconId,
   } as unknown) as IconSelectorProps;
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): IconSelectorProps =>
   (({
-    selectIconHandler: (icon: OverridableComponent<SvgIconTypeMap>) => {
-      dispatch(selectIcon(icon));
+    selectIconHandler: (iconId: string) => {
+      dispatch(selectIcon(iconId));
     },
   } as unknown) as IconSelectorProps);
 

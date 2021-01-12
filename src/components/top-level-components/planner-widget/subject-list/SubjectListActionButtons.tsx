@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { v4 as uuidv4 } from 'uuid';
 import {
   saveSubjectInfo,
   closeSubjectInfoDialog,
 } from '../../../../creators/subject-list';
 import { Button } from '@material-ui/core';
-import { ThunkDispatch } from 'redux-thunk';
-import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../../../configs/redux/store';
+import { Subject } from '../../../../configs/types/WeeklyPlanner';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -31,7 +32,12 @@ const SubjectListActionButtons = (
       >
         {'Cancel'}
       </Button>
-      <Button color={'primary'} onClick={props.saveSubjectClickHandler}>
+      <Button
+        color={'primary'}
+        onClick={() => {
+          props.saveSubjectClickHandler(props.subject);
+        }}
+      >
         {'Save'}
       </Button>
     </React.Fragment>
@@ -39,38 +45,32 @@ const SubjectListActionButtons = (
 };
 
 export interface SubjectListActionButtonsProps {
-  getState: () => State;
-  saveSubjectClickHandler: () => void;
+  subject: Subject;
   closeSubjectInfoHandler: () => void;
+  saveSubjectClickHandler: (subject: Subject) => void;
 }
 
 const mapStateToProps = (state: State): SubjectListActionButtonsProps => {
-  return ({} as unknown) as SubjectListActionButtonsProps;
+  const subject = {
+    id: uuidv4(),
+    subjectName: state.subjectListState.subjectName,
+    primaryColorId: state.subjectListState.selectedColor.id,
+    primaryColor: state.subjectListState.selectedColor.primaryColor,
+    secondaryColor: state.subjectListState.selectedColor.secondaryColor,
+    iconId: state.subjectListState.selectedIconId,
+  };
+
+  return ({
+    subject: subject,
+  } as unknown) as SubjectListActionButtonsProps;
 };
 
 const mapDispatchToProps = (
-  dispatch: Dispatch,
-  getState: any
+  dispatch: Dispatch
 ): SubjectListActionButtonsProps =>
   (({
-    saveSubjectClickHandler: () => {
-      const subjectState = getState().subjectListState;
-      const selectedColor = subjectState.selectedColor;
-      const subject = {
-        // todo:  add guid generator for ID
-        id: '',
-        subjectName: subjectState.subjectName,
-        primaryColorId: selectedColor.id,
-        primaryColor: selectedColor.primaryColor,
-        secondaryColor: selectedColor.secondaryColor,
-        icon: subjectState.selectedIcon,
-      };
-
-      console.log('subject: ' + JSON.stringify(subject));
-
-      (dispatch as ThunkDispatch<State, void, AnyAction>)(
-        dispatch(saveSubjectInfo(subject))
-      );
+    saveSubjectClickHandler: (subject: Subject) => {
+      dispatch(saveSubjectInfo(subject));
     },
     closeSubjectInfoHandler: () => {
       dispatch(closeSubjectInfoDialog());

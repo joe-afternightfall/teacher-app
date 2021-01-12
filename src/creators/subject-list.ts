@@ -1,7 +1,5 @@
 import actions from './actions';
 import { ColorChoice } from '../configs/theme/subject-color-choices';
-import { OverridableComponent } from '@material-ui/core/OverridableComponent';
-import { SvgIconTypeMap } from '@material-ui/core';
 import { Subject } from '../configs/types/WeeklyPlanner';
 
 export const selectColor = (color: ColorChoice): SelectColorAction => {
@@ -16,10 +14,10 @@ export interface SelectColorAction {
   selectedColor: ColorChoice;
 }
 
-export const selectIcon = (icon: OverridableComponent<SvgIconTypeMap>) => {
+export const selectIcon = (iconId: string) => {
   return {
     type: actions.SELECT_ICON,
-    icon: icon,
+    iconId: iconId,
   };
 };
 
@@ -27,13 +25,6 @@ export const updateSubjectName = (subjectName: string) => {
   return {
     type: actions.UPDATE_SUBJECT_NAME,
     subjectName: subjectName,
-  };
-};
-
-export const saveSubjectInfo = (subject: Subject) => {
-  return {
-    type: actions.SAVE_SUBJECT_INFO,
-    subject: subject,
   };
 };
 
@@ -47,4 +38,21 @@ export const closeSubjectInfoDialog = () => {
   return {
     type: actions.CLOSE_SUBJECT_INFO_DIALOG,
   };
+};
+
+export const saveSubjectInfo = (subject: Subject) => {
+  console.log('subject: ' + JSON.stringify(subject));
+
+  return {
+    type: actions.SAVE_SUBJECT_INFO,
+  };
+
+  // saveSubject(subject)
+  //   .then((response) => {
+  //     console.log('response: ' + JSON.stringify(response));
+  //     // (dispatch as ThunkDispatch<State, void, AnyAction>)(login(username));
+  //   })
+  //   .catch((error: Error) => {
+  //     console.log(`failed auth with error: ${error}`);
+  //   });
 };

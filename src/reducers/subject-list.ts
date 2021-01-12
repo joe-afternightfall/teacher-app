@@ -20,7 +20,7 @@ export default {
         newState.selectedColor = action.selectedColor;
         break;
       case actions.SELECT_ICON:
-        newState.selectedIcon = action.icon;
+        newState.selectedIconId = action.iconId;
         break;
       case actions.UPDATE_SUBJECT_NAME:
         newState.subjectName = action.subjectName;
@@ -40,9 +40,9 @@ export default {
 };
 
 export interface SubjectListState {
-  selectedColor: ColorChoice;
-  selectedIcon: OverridableComponent<SvgIconTypeMap>;
   subjectName: string;
+  selectedIconId: string;
   subjectList: Subject[];
+  selectedColor: ColorChoice;
   displaySubjectInfo: boolean;
 }
