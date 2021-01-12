@@ -96,6 +96,6 @@ export const subjectList = [
     primaryColorId: '',
     primaryColor: '',
     secondaryColor: '',
-    icon: AccountCircle,
+    iconId: '0fef5acb-6d2e-4bbc-9b5e-ea0a468ec35f',
   },
 ];
