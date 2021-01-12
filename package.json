@@ -11,6 +11,7 @@
     "@types/react-beautiful-dnd": "^13.0.0",
     "connected-react-router": "^6.8.0",
     "firebase": "^8.2.1",
+    "firebase-redux": "0.0.5",
     "history": "^4.10.1",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.0.0",
