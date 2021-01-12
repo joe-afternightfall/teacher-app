@@ -1,4 +1,3 @@
-import { Grid } from '@material-ui/core';
 import {
   Theme,
   WithStyles,
@@ -6,6 +5,7 @@ import {
   StyledComponentProps,
 } from '@material-ui/core/styles';
 import React, { Component } from 'react';
+import { Grid } from '@material-ui/core';
 import { Styles } from '@material-ui/styles';
 import SubjectName from './subject-name/SubjectName';
 import IconSelector from './icon-selector/IconSelector';

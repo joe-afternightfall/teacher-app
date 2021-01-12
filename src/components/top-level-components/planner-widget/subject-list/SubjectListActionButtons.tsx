@@ -1,16 +1,14 @@
 import React from 'react';
-import { AnyAction, Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Button, SvgIconTypeMap } from '@material-ui/core';
 import {
-  closeSubjectInfoDialog,
   saveSubjectInfo,
+  closeSubjectInfoDialog,
 } from '../../../../creators/subject-list';
-import { Subject } from '../../../../configs/types/WeeklyPlanner';
-import { State } from '../../../../configs/redux/store';
-import { OverridableComponent } from '@material-ui/core/OverridableComponent';
+import { Button } from '@material-ui/core';
 import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction, Dispatch } from 'redux';
+import { State } from '../../../../configs/redux/store';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
