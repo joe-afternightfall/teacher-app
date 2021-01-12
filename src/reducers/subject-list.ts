@@ -3,7 +3,7 @@ import actions from '../creators/actions';
 import { ColorChoice } from '../configs/theme/subject-color-choices';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { SvgIconTypeMap } from '@material-ui/core';
-import { Subject } from '../configs/types/WeeklyPlanner';
+import { Subject } from '../configs/types/Subject';
 
 export default {
   reducer(

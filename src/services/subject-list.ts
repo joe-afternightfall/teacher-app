@@ -1,4 +1,4 @@
-import { Subject } from '../configs/types/WeeklyPlanner';
+import { Subject } from '../configs/types/Subject';
 import firebase from 'firebase';
 
 export const saveSubject = async (subject: Subject) => {

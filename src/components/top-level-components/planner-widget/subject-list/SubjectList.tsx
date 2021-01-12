@@ -14,7 +14,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { State } from '../../../../configs/redux/store';
 import { subjectList } from '../../../../configs/dummy-data';
-import { Subject } from '../../../../configs/types/WeeklyPlanner';
+import { Subject } from '../../../../configs/types/Subject';
 import { getIcon } from '../../../../utils/get-icon';
 
 const SubjectList = () => {

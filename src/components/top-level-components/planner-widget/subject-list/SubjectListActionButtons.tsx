@@ -8,7 +8,7 @@ import {
 } from '../../../../creators/subject-list';
 import { Button } from '@material-ui/core';
 import { State } from '../../../../configs/redux/store';
-import { Subject } from '../../../../configs/types/WeeklyPlanner';
+import { Subject } from '../../../../configs/types/Subject';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
