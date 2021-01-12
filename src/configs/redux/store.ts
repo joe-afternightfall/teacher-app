@@ -43,6 +43,7 @@ export const createStore = (history: History): Store => {
       },
       selectedIcon: AccountCircle,
       subjectName: '',
+      displaySubjectInfo: false,
     } as unknown) as SubjectListState,
   });
 };

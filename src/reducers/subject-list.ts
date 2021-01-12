@@ -25,6 +25,12 @@ export default {
       case actions.UPDATE_SUBJECT_NAME:
         newState.subjectName = action.subjectName;
         break;
+      case actions.OPEN_SUBJECT_INFO_DIALOG:
+        newState.displaySubjectInfo = true;
+        break;
+      case actions.CLOSE_SUBJECT_INFO_DIALOG:
+        newState.displaySubjectInfo = false;
+        break;
       default:
         newState = state;
     }
@@ -38,4 +44,5 @@ export interface SubjectListState {
   selectedIcon: OverridableComponent<SvgIconTypeMap>;
   subjectName: string;
   subjectList: Subject[];
+  displaySubjectInfo: boolean;
 }
