@@ -71,6 +71,12 @@ export const editingSubject = (id: string) => {
   };
 };
 
+export const clearEditing = () => {
+  return {
+    type: actions.CLEAR_EDITING,
+  };
+};
+
 export const saveSubjectInfo = (
   subject: Subject
 ): ThunkAction<void, State, void, AnyAction> => async (
