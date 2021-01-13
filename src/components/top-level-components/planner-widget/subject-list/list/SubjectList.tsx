@@ -41,7 +41,9 @@ const SubjectList = (props: SubjectListProps) => {
               <ListItem>
                 <ListItemAvatar>
                   {icon !== undefined ? (
-                    <Avatar>{React.createElement(icon)}</Avatar>
+                    <Avatar style={{ backgroundColor: subject.primaryColor }}>
+                      {React.createElement(icon)}
+                    </Avatar>
                   ) : (
                     <React.Fragment />
                   )}

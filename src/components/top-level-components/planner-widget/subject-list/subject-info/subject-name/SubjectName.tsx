@@ -32,7 +32,9 @@ const SubjectName = (props: SubjectNameProps) => {
             startAdornment: (
               <InputAdornment position={'start'}>
                 {icon !== undefined ? (
-                  <Avatar>{React.createElement(icon)}</Avatar>
+                  <Avatar style={{ backgroundColor: props.subjectColor }}>
+                    {React.createElement(icon)}
+                  </Avatar>
                 ) : (
                   <React.Fragment />
                 )}
@@ -46,6 +48,7 @@ const SubjectName = (props: SubjectNameProps) => {
 };
 
 export interface SubjectNameProps {
+  subjectColor: string;
   subjectName: string;
   selectedIconId: string;
   updateSubjectNameHandler: (
@@ -56,6 +59,7 @@ export interface SubjectNameProps {
 const mapStateToProps = (state: State): SubjectNameProps => {
   return ({
     subjectName: state.subjectListState.subjectName,
+    subjectColor: state.subjectListState.selectedColor.primaryColor,
     selectedIconId: state.subjectListState.selectedIconId,
   } as unknown) as SubjectNameProps;
 };
