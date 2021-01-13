@@ -45,6 +45,7 @@ export const createStore = (history: History): Store => {
       subjectName: '',
       displaySubjectInfo: false,
       subjectList: [],
+      editingForm: false,
     } as unknown) as SubjectListState,
   });
 };
