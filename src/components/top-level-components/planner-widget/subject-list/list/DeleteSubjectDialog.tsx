@@ -73,8 +73,8 @@ export const DeleteSubjectDialog = (
             alignItems={'center'}
           >
             <Grid item>
-              <Typography>
-                {`Are you sure you want to delete ${props.subjectName}`}
+              <Typography variant={'h6'}>
+                {`Are you sure you want to delete ${props.subjectName}?`}
               </Typography>
             </Grid>
           </Grid>
