@@ -29,39 +29,45 @@ const SubjectList = (props: SubjectListProps) => {
       aria-labelledby={'nested-list-subheader'}
       style={{ width: '100%', marginBottom: 32 }}
     >
-      {props.subjectList.map((subject: Subject, index: number) => {
-        const icon = getIcon(subject.iconId);
-        return (
-          <React.Fragment key={index}>
-            <ListItem>
-              <ListItemAvatar>
-                {icon !== undefined ? (
-                  <Avatar>{React.createElement(icon)}</Avatar>
-                ) : (
-                  <React.Fragment />
-                )}
-              </ListItemAvatar>
-              <ListItemText primary={subject.subjectName} />
-              <ListItemSecondaryAction>
-                <DeleteSubjectDialog
-                  subjectName={subject.subjectName}
-                  firebaseId={subject.firebaseId}
-                  deleteClickHandler={props.deleteClickHandler}
-                />
+      {props.isEmpty ? (
+        <ListItem style={{ textAlign: 'center' }}>
+          <ListItemText primary={'subject list is empty'} />
+        </ListItem>
+      ) : (
+        props.subjectList.map((subject: Subject, index: number) => {
+          const icon = getIcon(subject.iconId);
+          return (
+            <React.Fragment key={index}>
+              <ListItem>
+                <ListItemAvatar>
+                  {icon !== undefined ? (
+                    <Avatar>{React.createElement(icon)}</Avatar>
+                  ) : (
+                    <React.Fragment />
+                  )}
+                </ListItemAvatar>
+                <ListItemText primary={subject.subjectName} />
+                <ListItemSecondaryAction>
+                  <DeleteSubjectDialog
+                    subjectName={subject.subjectName}
+                    firebaseId={subject.firebaseId}
+                    deleteClickHandler={props.deleteClickHandler}
+                  />
 
-                <IconButton
-                  edge={'end'}
-                  aria-label={'edit'}
-                  style={{ marginLeft: 12 }}
-                >
-                  <EditIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-            <Divider variant={'inset'} component={'li'} />
-          </React.Fragment>
-        );
-      })}
+                  <IconButton
+                    edge={'end'}
+                    aria-label={'edit'}
+                    style={{ marginLeft: 12 }}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+              <Divider variant={'inset'} component={'li'} />
+            </React.Fragment>
+          );
+        })
+      )}
     </List>
   );
 };
@@ -80,10 +86,10 @@ const mapStateToProps = (state: State): SubjectListProps => {
 
   // todo:  come back to isEmpty
 
-  if (subjects !== undefined || subjects !== 0) {
-    isEmpty = false;
-  } else {
+  if (subjects.length === 0) {
     isEmpty = true;
+  } else {
+    isEmpty = false;
   }
 
   return ({
