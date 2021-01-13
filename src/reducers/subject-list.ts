@@ -38,6 +38,16 @@ export default {
       case actions.LOAD_SUBJECT_LIST:
         newState.subjectList = action.subjectList;
         break;
+      case actions.CLEAR_SUBJECT_INFO_DIALOG:
+        newState.subjectName = '';
+        newState.selectedColor = {
+          id: '',
+          name: '',
+          primaryColor: '',
+          secondaryColor: '',
+        };
+        newState.selectedIconId = '';
+        break;
       default:
         newState = state;
     }

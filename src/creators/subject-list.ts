@@ -58,6 +58,12 @@ export const loadSubjectList = (subjectList: any) => {
   };
 };
 
+export const clearSubjectInfoDialog = () => {
+  return {
+    type: actions.CLEAR_SUBJECT_INFO_DIALOG,
+  };
+};
+
 export const saveSubjectInfo = (
   subject: Subject
 ): ThunkAction<void, State, void, AnyAction> => async (
@@ -86,6 +92,7 @@ export const saveSubjectInfo = (
         dispatch(subjectSaveFailed());
       } else {
         // todo:  rip out to common method
+        dispatch(clearSubjectInfoDialog());
         setTimeout(() => {
           dispatch(closeSubjectInfoDialog());
           dispatch(subjectSaveComplete());
