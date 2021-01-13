@@ -33,12 +33,37 @@ firebase.initializeApp(firebaseConfig);
 
 const subjectsRef = firebase.database().ref('/subjects');
 
-subjectsRef.on('child_added', async () => {
+const updateSubjects = async function () {
   const subjects = await getSubjects();
-  const output = Object.keys(subjects).map((key) => {
-    return subjects[key];
-  });
-  store.dispatch(loadSubjectList(output));
+  if (subjects !== null) {
+    const output = Object.keys(subjects).map((key) => {
+      return {
+        firebaseId: key,
+        id: subjects[key].id,
+        subjectName: subjects[key].subjectName,
+        primaryColorId: subjects[key].primaryColorId,
+        primaryColor: subjects[key].primaryColor,
+        secondaryColor: subjects[key].secondaryColor,
+        iconId: subjects[key].iconId,
+      };
+    });
+
+    store.dispatch(loadSubjectList(output));
+  } else {
+    store.dispatch(loadSubjectList([]));
+  }
+};
+
+subjectsRef.on('child_added', async () => {
+  await updateSubjects();
+});
+
+subjectsRef.on('child_changed', async () => {
+  await updateSubjects();
+});
+
+subjectsRef.on('child_removed', async () => {
+  await updateSubjects();
 });
 
 store.dispatch(initApp());
