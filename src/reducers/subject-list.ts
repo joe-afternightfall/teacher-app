@@ -5,6 +5,7 @@ import {
   ColorChoice,
   subjectColorChoices,
 } from '../configs/theme/subject-color-choices';
+import { checkForDuplicates } from '../utils/validate-name';
 
 export default {
   reducer(
@@ -24,6 +25,11 @@ export default {
         newState.selectedIconId = action.iconId;
         break;
       case actions.UPDATE_SUBJECT_NAME:
+        const isValidEntry = checkForDuplicates(
+          newState.subjectList,
+          action.subjectName
+        );
+        newState.subjectNameError = isValidEntry;
         newState.subjectName = action.subjectName;
         break;
       case actions.OPEN_SUBJECT_INFO_DIALOG:
@@ -90,4 +96,6 @@ export interface SubjectListState {
   displayLoader: boolean;
   editingFormFirebaseId: string;
   editingFormId: string;
+  subjectNameError: boolean;
+  ableToSubmit: boolean;
 }
