@@ -5,10 +5,10 @@ import {
 } from './loading-data';
 import actions from './actions';
 import firebase from 'firebase';
+import { v4 as uuidv4 } from 'uuid';
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../configs/redux/store';
-import { Subject } from '../configs/types/Subject';
 import { ColorChoice } from '../configs/theme/subject-color-choices';
 
 // todo: break up file
@@ -77,15 +77,13 @@ export const clearEditing = () => {
   };
 };
 
-export const saveSubjectInfo = (
-  subject: Subject
-): ThunkAction<void, State, void, AnyAction> => async (
-  dispatch: Dispatch,
-  getState: () => State
-): Promise<void> => {
-  // todo:  try using getState and not passing in anything
-
-  // todo:  make database().ref() dynamic
+export const saveSubjectInfo = (): ThunkAction<
+  void,
+  State,
+  void,
+  AnyAction
+> => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
+  const listState = getState().subjectListState;
   const subjectListRef = firebase.database().ref('/subjects');
   const newSubjectRef = subjectListRef.push();
 
@@ -93,12 +91,12 @@ export const saveSubjectInfo = (
 
   return await newSubjectRef.set(
     {
-      id: subject.id,
-      subjectName: subject.subjectName,
-      primaryColorId: subject.primaryColorId,
-      primaryColor: subject.primaryColor,
-      secondaryColor: subject.secondaryColor,
-      iconId: subject.iconId,
+      id: uuidv4(),
+      subjectName: listState.subjectName,
+      primaryColorId: listState.selectedColor.id,
+      primaryColor: listState.selectedColor.primaryColor,
+      secondaryColor: listState.selectedColor.secondaryColor,
+      iconId: listState.selectedIconId,
     },
     (error) => {
       if (error) {
