@@ -20,7 +20,11 @@ import EditIcon from '@material-ui/icons/Edit';
 import { getIcon } from '../../../../../utils/get-icon';
 import { State } from '../../../../../configs/redux/store';
 import { Subject } from '../../../../../configs/types/Subject';
-import { deleteSubject } from '../../../../../creators/subject-list';
+import {
+  deleteSubject,
+  editingSubject,
+  openSubjectInfoDialog,
+} from '../../../../../creators/subject-list';
 
 const SubjectList = (props: SubjectListProps) => {
   return (
@@ -60,6 +64,9 @@ const SubjectList = (props: SubjectListProps) => {
                     edge={'end'}
                     aria-label={'edit'}
                     style={{ marginLeft: 12 }}
+                    onClick={() => {
+                      props.editClickHandler(subject.id);
+                    }}
                   >
                     <EditIcon />
                   </IconButton>
@@ -78,6 +85,7 @@ export interface SubjectListProps {
   isEmpty: boolean;
   subjectList: Subject[];
   deleteClickHandler: (id: string) => void;
+  editClickHandler: (id: string) => void;
 }
 
 const mapStateToProps = (state: State): SubjectListProps => {
@@ -98,6 +106,10 @@ const mapDispatchToProps = (dispatch: Dispatch): DeleteSubjectDialogProps =>
     deleteClickHandler: (id: string) => {
       console.log('DELETEING_ID = ' + id);
       (dispatch as ThunkDispatch<State, void, AnyAction>)(deleteSubject(id));
+    },
+    editClickHandler: (id: string) => {
+      dispatch(editingSubject(id));
+      dispatch(openSubjectInfoDialog());
     },
   } as unknown) as DeleteSubjectDialogProps);
 

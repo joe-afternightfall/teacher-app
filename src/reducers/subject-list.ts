@@ -1,7 +1,10 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
 import { Subject } from '../configs/types/Subject';
-import { ColorChoice } from '../configs/theme/subject-color-choices';
+import {
+  ColorChoice,
+  subjectColorChoices,
+} from '../configs/theme/subject-color-choices';
 
 export default {
   reducer(
@@ -48,6 +51,24 @@ export default {
         };
         newState.selectedIconId = '';
         break;
+      case actions.EDITING_SUBJECT: {
+        const foundSubject = newState.subjectList.find((subject: Subject) => {
+          return subject.id === action.subjectId;
+        });
+
+        if (foundSubject !== undefined) {
+          newState.subjectName = foundSubject.subjectName;
+          newState.selectedIconId = foundSubject.iconId;
+
+          const foundColor = subjectColorChoices.find((color: ColorChoice) => {
+            return (color.id = foundSubject.primaryColorId);
+          });
+          if (foundColor !== undefined) {
+            newState.selectedColor = foundColor;
+          }
+        }
+        break;
+      }
       default:
         newState = state;
     }

@@ -64,6 +64,13 @@ export const clearSubjectInfoDialog = () => {
   };
 };
 
+export const editingSubject = (id: string) => {
+  return {
+    type: actions.EDITING_SUBJECT,
+    subjectId: id,
+  };
+};
+
 export const saveSubjectInfo = (
   subject: Subject
 ): ThunkAction<void, State, void, AnyAction> => async (
