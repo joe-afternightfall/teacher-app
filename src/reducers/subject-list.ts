@@ -1,7 +1,10 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
 import { Subject } from '../configs/types/Subject';
-import { ColorChoice } from '../configs/theme/subject-color-choices';
+import {
+  ColorChoice,
+  subjectColorChoices,
+} from '../configs/theme/subject-color-choices';
 
 export default {
   reducer(
@@ -48,6 +51,27 @@ export default {
         };
         newState.selectedIconId = '';
         break;
+      case actions.EDITING_SUBJECT: {
+        newState.subjectList.find((subject: Subject) => {
+          if (subject.id === action.subjectId) {
+            newState.editingForm = true;
+            newState.subjectName = subject.subjectName;
+            newState.selectedIconId = subject.iconId;
+            newState.editingFormFirebaseId = subject.firebaseId;
+            newState.editingFormId = subject.id;
+
+            subjectColorChoices.find((color: ColorChoice) => {
+              if (color.id === subject.primaryColorId) {
+                newState.selectedColor = color;
+              }
+            });
+          }
+        });
+        break;
+      }
+      case actions.CLEAR_EDITING:
+        newState.editingForm = false;
+        break;
       default:
         newState = state;
     }
@@ -57,10 +81,13 @@ export default {
 };
 
 export interface SubjectListState {
+  editingForm: boolean;
   subjectName: string;
   selectedIconId: string;
   subjectList: Subject[];
   selectedColor: ColorChoice;
   displaySubjectInfo: boolean;
   displayLoader: boolean;
+  editingFormFirebaseId: string;
+  editingFormId: string;
 }

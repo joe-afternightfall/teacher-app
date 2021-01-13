@@ -5,6 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   saveSubjectInfo,
   closeSubjectInfoDialog,
+  clearSubjectInfoDialog,
+  clearEditing,
+  editSubject,
 } from '../../../../creators/subject-list';
 import { Button } from '@material-ui/core';
 import { State } from '../../../../configs/redux/store';
@@ -18,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const SubjectListActionButtons = (
+const SubjectInfoActionButtons = (
   props: SubjectListActionButtonsProps
 ): JSX.Element => {
   const classes = useStyles();
@@ -28,7 +31,7 @@ const SubjectListActionButtons = (
       <Button
         color={'secondary'}
         onClick={() => {
-          props.closeSubjectInfoHandler();
+          props.closeSubjectInfoHandler(props.isEditing);
         }}
       >
         {'Cancel'}
@@ -36,19 +39,23 @@ const SubjectListActionButtons = (
       <Button
         color={'primary'}
         onClick={() => {
-          props.saveSubjectClickHandler(props.subject);
+          props.isEditing
+            ? props.editSubjectClickHandler()
+            : props.saveSubjectClickHandler(props.subject);
         }}
       >
-        {'Save'}
+        {props.isEditing ? 'Save Changes' : 'Save'}
       </Button>
     </React.Fragment>
   );
 };
 
 export interface SubjectListActionButtonsProps {
+  isEditing: boolean;
   subject: Subject;
-  closeSubjectInfoHandler: () => void;
+  closeSubjectInfoHandler: (isEditing: boolean) => void;
   saveSubjectClickHandler: (subject: Subject) => void;
+  editSubjectClickHandler: () => void;
 }
 
 const mapStateToProps = (state: State): SubjectListActionButtonsProps => {
@@ -63,6 +70,7 @@ const mapStateToProps = (state: State): SubjectListActionButtonsProps => {
 
   return ({
     subject: subject,
+    isEditing: state.subjectListState.editingForm,
   } as unknown) as SubjectListActionButtonsProps;
 };
 
@@ -75,12 +83,19 @@ const mapDispatchToProps = (
         saveSubjectInfo(subject)
       );
     },
-    closeSubjectInfoHandler: () => {
+    closeSubjectInfoHandler: (isEditing: boolean) => {
+      if (isEditing) {
+        dispatch(clearSubjectInfoDialog());
+        dispatch(clearEditing());
+      }
       dispatch(closeSubjectInfoDialog());
+    },
+    editSubjectClickHandler: () => {
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(editSubject());
     },
   } as unknown) as SubjectListActionButtonsProps);
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SubjectListActionButtons);
+)(SubjectInfoActionButtons);
