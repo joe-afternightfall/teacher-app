@@ -57,6 +57,8 @@ export default {
             newState.editingForm = true;
             newState.subjectName = subject.subjectName;
             newState.selectedIconId = subject.iconId;
+            newState.editingFormFirebaseId = subject.firebaseId;
+            newState.editingFormId = subject.id;
 
             subjectColorChoices.find((color: ColorChoice) => {
               if (color.id === subject.primaryColorId) {
@@ -86,4 +88,6 @@ export interface SubjectListState {
   selectedColor: ColorChoice;
   displaySubjectInfo: boolean;
   displayLoader: boolean;
+  editingFormFirebaseId: string;
+  editingFormId: string;
 }

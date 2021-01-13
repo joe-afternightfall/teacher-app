@@ -7,6 +7,7 @@ import {
   closeSubjectInfoDialog,
   clearSubjectInfoDialog,
   clearEditing,
+  editSubject,
 } from '../../../../creators/subject-list';
 import { Button } from '@material-ui/core';
 import { State } from '../../../../configs/redux/store';
@@ -90,7 +91,7 @@ const mapDispatchToProps = (
       dispatch(closeSubjectInfoDialog());
     },
     editSubjectClickHandler: () => {
-      alert('is editing');
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(editSubject());
     },
   } as unknown) as SubjectListActionButtonsProps);
 

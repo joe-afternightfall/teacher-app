@@ -140,6 +140,7 @@ export const deleteSubject = (
     .remove((error) => {
       if (error) {
         // dispatch error
+        alert('error');
       } else {
         setTimeout(() => {
           dispatch(closeSubjectInfoDialog());
@@ -147,4 +148,42 @@ export const deleteSubject = (
         }, 1000);
       }
     });
+};
+
+export const editSubject = (): ThunkAction<
+  void,
+  State,
+  void,
+  AnyAction
+> => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
+  dispatch(updatingSubjectInfo());
+
+  const subjectListState = getState().subjectListState;
+
+  return await firebase
+    .database()
+    .ref('/subjects')
+    .child(subjectListState.editingFormFirebaseId)
+    .update(
+      {
+        id: subjectListState.editingFormId,
+        subjectName: subjectListState.subjectName,
+        primaryColorId: subjectListState.selectedColor.id,
+        primaryColor: subjectListState.selectedColor.primaryColor,
+        secondaryColor: subjectListState.selectedColor.secondaryColor,
+        iconId: subjectListState.selectedIconId,
+      },
+      (error) => {
+        if (error) {
+          // dispatch error
+          alert('error');
+        } else {
+          dispatch(clearSubjectInfoDialog());
+          setTimeout(() => {
+            dispatch(closeSubjectInfoDialog());
+            dispatch(subjectSaveComplete());
+          }, 1000);
+        }
+      }
+    );
 };
