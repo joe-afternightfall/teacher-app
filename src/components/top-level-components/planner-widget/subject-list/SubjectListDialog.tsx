@@ -23,7 +23,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { Styles } from '@material-ui/styles';
 import CloseIcon from '@material-ui/icons/Close';
 import SubjectInfo from './subject-info/SubjectInfo';
-import SubjectListActionButtons from './SubjectListActionButtons';
+import SubjectInfoActionButtons from './SubjectInfoActionButtons';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   closeButton: {
@@ -42,6 +42,7 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
   render(): JSX.Element {
     const {
       classes,
+      isEditing,
       displayLoader,
       openSubjectInfoHandler,
       closeSubjectInfoHandler,
@@ -58,6 +59,16 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
       );
     };
 
+    let dialogMessage;
+
+    if (isEditing && shouldDisplaySubjectInfo) {
+      dialogMessage = 'Edit Subject Info';
+    } else if (shouldDisplaySubjectInfo) {
+      dialogMessage = 'Add New Subject';
+    } else {
+      dialogMessage = 'Subject List';
+    }
+
     return (
       <div>
         <MenuItem onClick={toggleDialog}>{'Subject List'}</MenuItem>
@@ -69,7 +80,7 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
           maxWidth={shouldDisplaySubjectInfo ? 'md' : 'xs'}
         >
           <DialogTitle id={'subject-list-dialog-title'}>
-            {shouldDisplaySubjectInfo ? 'Add New Subject' : 'Subject List'}
+            {dialogMessage}
             <IconButton
               aria-label={'close'}
               className={classes.closeButton}
@@ -115,7 +126,7 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
 
               <DialogActions>
                 {shouldDisplaySubjectInfo ? (
-                  <SubjectListActionButtons />
+                  <SubjectInfoActionButtons />
                 ) : (
                   <Tooltip title={'Add New'} placement={'top'}>
                     <Fab
@@ -140,6 +151,7 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
 
 export interface SubjectListDialogProps extends WithStyles<typeof styles> {
   displayLoader: boolean;
+  isEditing: boolean;
   closeMenuClickHandler: () => void;
   shouldDisplaySubjectInfo: boolean;
   openSubjectInfoHandler: () => void;
