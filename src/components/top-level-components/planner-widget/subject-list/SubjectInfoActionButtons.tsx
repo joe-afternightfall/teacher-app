@@ -41,7 +41,7 @@ const SubjectInfoActionButtons = (
         onClick={() => {
           props.isEditing
             ? props.editSubjectClickHandler()
-            : props.saveSubjectClickHandler(props.subject);
+            : props.saveSubjectClickHandler();
         }}
         disabled={props.isDisabled}
       >
@@ -54,22 +54,13 @@ const SubjectInfoActionButtons = (
 export interface SubjectInfoActionButtonsProps {
   isEditing: boolean;
   isDisabled: boolean;
-  subject: Subject;
   closeSubjectInfoHandler: (isEditing: boolean) => void;
-  saveSubjectClickHandler: (subject: Subject) => void;
+  saveSubjectClickHandler: () => void;
   editSubjectClickHandler: () => void;
 }
 
 const mapStateToProps = (state: State): SubjectInfoActionButtonsProps => {
   const listState = state.subjectListState;
-  const subject = {
-    id: uuidv4(),
-    subjectName: listState.subjectName,
-    primaryColorId: listState.selectedColor.id,
-    primaryColor: listState.selectedColor.primaryColor,
-    secondaryColor: listState.selectedColor.secondaryColor,
-    iconId: listState.selectedIconId,
-  };
 
   const isDisabled =
     listState.subjectNameError ||
@@ -79,7 +70,6 @@ const mapStateToProps = (state: State): SubjectInfoActionButtonsProps => {
 
   return ({
     isDisabled: isDisabled,
-    subject: subject,
     isEditing: listState.editingForm,
   } as unknown) as SubjectInfoActionButtonsProps;
 };
@@ -88,10 +78,8 @@ const mapDispatchToProps = (
   dispatch: Dispatch
 ): SubjectInfoActionButtonsProps =>
   (({
-    saveSubjectClickHandler: (subject: Subject) => {
-      (dispatch as ThunkDispatch<State, void, AnyAction>)(
-        saveSubjectInfo(subject)
-      );
+    saveSubjectClickHandler: () => {
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(saveSubjectInfo());
     },
     closeSubjectInfoHandler: (isEditing: boolean) => {
       if (isEditing) {
