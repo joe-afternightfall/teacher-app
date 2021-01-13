@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const SubjectInfoActionButtons = (
-  props: SubjectListActionButtonsProps
+  props: SubjectInfoActionButtonsProps
 ): JSX.Element => {
   const classes = useStyles();
 
@@ -43,6 +43,7 @@ const SubjectInfoActionButtons = (
             ? props.editSubjectClickHandler()
             : props.saveSubjectClickHandler(props.subject);
         }}
+        disabled={props.isDisabled}
       >
         {props.isEditing ? 'Save Changes' : 'Save'}
       </Button>
@@ -50,15 +51,16 @@ const SubjectInfoActionButtons = (
   );
 };
 
-export interface SubjectListActionButtonsProps {
+export interface SubjectInfoActionButtonsProps {
   isEditing: boolean;
+  isDisabled: boolean;
   subject: Subject;
   closeSubjectInfoHandler: (isEditing: boolean) => void;
   saveSubjectClickHandler: (subject: Subject) => void;
   editSubjectClickHandler: () => void;
 }
 
-const mapStateToProps = (state: State): SubjectListActionButtonsProps => {
+const mapStateToProps = (state: State): SubjectInfoActionButtonsProps => {
   const subject = {
     id: uuidv4(),
     subjectName: state.subjectListState.subjectName,
@@ -68,15 +70,30 @@ const mapStateToProps = (state: State): SubjectListActionButtonsProps => {
     iconId: state.subjectListState.selectedIconId,
   };
 
+  let isDisabled;
+
+  if (state.subjectListState.subjectNameError) {
+    isDisabled = true;
+  } else if (state.subjectListState.subjectName === '') {
+    isDisabled = true;
+  } else if (state.subjectListState.selectedColor.id === '') {
+    isDisabled = true;
+  } else if (state.subjectListState.selectedIconId === '') {
+    isDisabled = true;
+  } else {
+    isDisabled = false;
+  }
+
   return ({
+    isDisabled: isDisabled,
     subject: subject,
     isEditing: state.subjectListState.editingForm,
-  } as unknown) as SubjectListActionButtonsProps;
+  } as unknown) as SubjectInfoActionButtonsProps;
 };
 
 const mapDispatchToProps = (
   dispatch: Dispatch
-): SubjectListActionButtonsProps =>
+): SubjectInfoActionButtonsProps =>
   (({
     saveSubjectClickHandler: (subject: Subject) => {
       (dispatch as ThunkDispatch<State, void, AnyAction>)(
@@ -93,7 +110,7 @@ const mapDispatchToProps = (
     editSubjectClickHandler: () => {
       (dispatch as ThunkDispatch<State, void, AnyAction>)(editSubject());
     },
-  } as unknown) as SubjectListActionButtonsProps);
+  } as unknown) as SubjectInfoActionButtonsProps);
 
 export default connect(
   mapStateToProps,

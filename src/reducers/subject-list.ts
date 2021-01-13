@@ -24,14 +24,19 @@ export default {
       case actions.SELECT_ICON:
         newState.selectedIconId = action.iconId;
         break;
-      case actions.UPDATE_SUBJECT_NAME:
+      case actions.UPDATE_SUBJECT_NAME: {
         const isValidEntry = checkForDuplicates(
           newState.subjectList,
           action.subjectName
         );
-        newState.subjectNameError = isValidEntry;
+        if (newState.editingForm) {
+          newState.subjectNameError = false;
+        } else {
+          newState.subjectNameError = isValidEntry;
+        }
         newState.subjectName = action.subjectName;
         break;
+      }
       case actions.OPEN_SUBJECT_INFO_DIALOG:
         newState.displaySubjectInfo = true;
         break;
