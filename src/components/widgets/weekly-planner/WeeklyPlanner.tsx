@@ -23,12 +23,11 @@ import { getAllWeeklyPlanners } from '../../../services/weekly-planner';
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class WeeklyPlanner extends Component<WeeklyPlannerProps> {
-  // todo: uncomment out when ready for database
-  // async componentDidMount() {
-  //   const planners = await getAllWeeklyPlanners();
-  //
-  // this.props.loadWeeklyPlannersHandler(planners);
-  // }
+  async componentDidMount() {
+    const planners = await getAllWeeklyPlanners();
+
+    this.props.loadWeeklyPlannersHandler(planners);
+  }
 
   render(): JSX.Element {
     const { selectedPlanner } = this.props;
