@@ -54,6 +54,7 @@ export default {
       case actions.EDITING_SUBJECT: {
         newState.subjectList.find((subject: Subject) => {
           if (subject.id === action.subjectId) {
+            newState.editingForm = true;
             newState.subjectName = subject.subjectName;
             newState.selectedIconId = subject.iconId;
 
@@ -66,6 +67,9 @@ export default {
         });
         break;
       }
+      case actions.CLEAR_EDITING:
+        newState.editingForm = false;
+        break;
       default:
         newState = state;
     }
@@ -75,6 +79,7 @@ export default {
 };
 
 export interface SubjectListState {
+  editingForm: boolean;
   subjectName: string;
   selectedIconId: string;
   subjectList: Subject[];
