@@ -52,21 +52,18 @@ export default {
         newState.selectedIconId = '';
         break;
       case actions.EDITING_SUBJECT: {
-        const foundSubject = newState.subjectList.find((subject: Subject) => {
-          return subject.id === action.subjectId;
-        });
+        newState.subjectList.find((subject: Subject) => {
+          if (subject.id === action.subjectId) {
+            newState.subjectName = subject.subjectName;
+            newState.selectedIconId = subject.iconId;
 
-        if (foundSubject !== undefined) {
-          newState.subjectName = foundSubject.subjectName;
-          newState.selectedIconId = foundSubject.iconId;
-
-          const foundColor = subjectColorChoices.find((color: ColorChoice) => {
-            return (color.id = foundSubject.primaryColorId);
-          });
-          if (foundColor !== undefined) {
-            newState.selectedColor = foundColor;
+            subjectColorChoices.find((color: ColorChoice) => {
+              if (color.id === subject.primaryColorId) {
+                newState.selectedColor = color;
+              }
+            });
           }
-        }
+        });
         break;
       }
       default:
