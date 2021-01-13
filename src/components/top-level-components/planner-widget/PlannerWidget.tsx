@@ -20,6 +20,8 @@ import { routerActions } from 'connected-react-router';
 import SubjectListDialog from './subject-list/SubjectListDialog';
 import plannerBackground from '../../../configs/images/lovely-planning.jpg';
 import {
+  clearEditing,
+  clearSubjectInfoDialog,
   closeSubjectInfoDialog,
   openSubjectInfoDialog,
 } from '../../../creators/subject-list';
@@ -32,6 +34,9 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
   };
 
   const handleClose = () => {
+    if (props.isEditing) {
+      props.clearDialogHandler();
+    }
     setAnchorEl(null);
   };
 
@@ -57,6 +62,7 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
               open={Boolean(anchorEl)}
             >
               <SubjectListDialog
+                isEditing={props.isEditing}
                 displayLoader={props.displayLoader}
                 closeMenuClickHandler={handleClose}
                 openSubjectInfoHandler={props.openSubjectInfoHandler}
@@ -95,12 +101,14 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
 };
 
 interface PlannerWidgetProps {
+  isEditing: boolean;
   displayLoader: boolean;
   subheaderMessage: string;
   shouldDisplaySubjectInfo: boolean;
   openSubjectInfoHandler: () => void;
   routeToWidgetClickHandler: () => void;
   closeSubjectInfoHandler: () => void;
+  clearDialogHandler: () => void;
 }
 
 const mapStateToProps = (state: State): PlannerWidgetProps => {
@@ -117,6 +125,7 @@ const mapStateToProps = (state: State): PlannerWidgetProps => {
   }
 
   return ({
+    isEditing: state.subjectListState.editingForm,
     subheaderMessage: subheaderMessage,
     shouldDisplaySubjectInfo: state.subjectListState.displaySubjectInfo,
     displayLoader: state.subjectListState.displayLoader,
@@ -125,6 +134,10 @@ const mapStateToProps = (state: State): PlannerWidgetProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): PlannerWidgetProps =>
   (({
+    clearDialogHandler: () => {
+      dispatch(clearSubjectInfoDialog());
+      dispatch(clearEditing());
+    },
     routeToWidgetClickHandler: () => {
       dispatch(routerActions.push(routes.WEEKLY_PLANNER));
     },
