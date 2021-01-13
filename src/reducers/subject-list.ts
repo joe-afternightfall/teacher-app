@@ -1,9 +1,7 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
-import { ColorChoice } from '../configs/theme/subject-color-choices';
-import { OverridableComponent } from '@material-ui/core/OverridableComponent';
-import { SvgIconTypeMap } from '@material-ui/core';
 import { Subject } from '../configs/types/Subject';
+import { ColorChoice } from '../configs/theme/subject-color-choices';
 
 export default {
   reducer(
@@ -31,6 +29,12 @@ export default {
       case actions.CLOSE_SUBJECT_INFO_DIALOG:
         newState.displaySubjectInfo = false;
         break;
+      case actions.UPDATING_SUBJECT_INFO:
+        newState.displayLoader = true;
+        break;
+      case actions.SUBJECT_SAVE_COMPLETE:
+        newState.displayLoader = false;
+        break;
       default:
         newState = state;
     }
@@ -45,4 +49,5 @@ export interface SubjectListState {
   subjectList: Subject[];
   selectedColor: ColorChoice;
   displaySubjectInfo: boolean;
+  displayLoader: boolean;
 }
