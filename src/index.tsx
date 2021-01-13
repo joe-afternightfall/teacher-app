@@ -12,6 +12,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './configs/service-worker';
 import DashboardScreen from './components/top-level-components/DashboardScreen';
 import WeeklyPlanner from './components/widgets/weekly-planner/WeeklyPlannerConnector';
+import { getSubjects, loadSubjectList } from './creators/subject-list';
 
 const history = createHashHistory(),
   store = createStore(history);
@@ -29,6 +30,16 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+
+const subjectsRef = firebase.database().ref('/subjects');
+
+subjectsRef.on('child_added', async () => {
+  const subjects = await getSubjects();
+  const output = Object.keys(subjects).map((key) => {
+    return subjects[key];
+  });
+  store.dispatch(loadSubjectList(output));
+});
 
 store.dispatch(initApp());
 
