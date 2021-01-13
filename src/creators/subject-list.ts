@@ -73,7 +73,10 @@ export const saveSubjectInfo = (
       if (error) {
         dispatch(subjectSaveFailed());
       } else {
-        dispatch(subjectSaveComplete());
+        setTimeout(() => {
+          dispatch(closeSubjectInfoDialog());
+          dispatch(subjectSaveComplete());
+        }, 2500);
       }
     }
   );
