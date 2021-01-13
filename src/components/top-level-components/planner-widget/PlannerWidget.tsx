@@ -104,8 +104,9 @@ interface PlannerWidgetProps {
 }
 
 const mapStateToProps = (state: State): PlannerWidgetProps => {
+  const subjects = state.subjectListState.subjectList;
   return ({
-    numberOfSubjects: state.subjectListState.subjectList.length,
+    numberOfSubjects: subjects && subjects.length,
     shouldDisplaySubjectInfo: state.subjectListState.displaySubjectInfo,
     displayLoader: state.subjectListState.displayLoader,
   } as unknown) as PlannerWidgetProps;
