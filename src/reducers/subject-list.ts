@@ -35,6 +35,9 @@ export default {
       case actions.SUBJECT_SAVE_COMPLETE:
         newState.displayLoader = false;
         break;
+      case actions.LOAD_SUBJECT_LIST:
+        newState.subjectList = action.subjectList;
+        break;
       default:
         newState = state;
     }
