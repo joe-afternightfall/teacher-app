@@ -84,15 +84,8 @@ const mapStateToProps = (state: State): SubjectListProps => {
   const subjects = state.subjectListState.subjectList
     ? state.subjectListState.subjectList
     : [];
-  let isEmpty;
 
-  // todo:  come back to isEmpty
-
-  if (subjects.length === 0) {
-    isEmpty = true;
-  } else {
-    isEmpty = false;
-  }
+  const isEmpty = subjects.length === 0;
 
   return ({
     isEmpty: isEmpty,
