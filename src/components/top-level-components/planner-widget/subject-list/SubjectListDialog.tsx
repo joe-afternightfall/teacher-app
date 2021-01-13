@@ -23,7 +23,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { Styles } from '@material-ui/styles';
 import CloseIcon from '@material-ui/icons/Close';
 import SubjectInfo from './subject-info/SubjectInfo';
-import SubjectInfoActionButtons from './SubjectInfoActionButtons';
+import SubjectInfoActionButtons from './subject-info/SubjectInfoActionButtons';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   closeButton: {

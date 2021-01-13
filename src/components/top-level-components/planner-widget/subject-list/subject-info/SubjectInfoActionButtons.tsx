@@ -1,31 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button } from '@material-ui/core';
 import { AnyAction, Dispatch } from 'redux';
-import { v4 as uuidv4 } from 'uuid';
+import { ThunkDispatch } from 'redux-thunk';
 import {
+  editSubject,
+  clearEditing,
   saveSubjectInfo,
   closeSubjectInfoDialog,
   clearSubjectInfoDialog,
-  clearEditing,
-  editSubject,
-} from '../../../../creators/subject-list';
-import { Button } from '@material-ui/core';
-import { State } from '../../../../configs/redux/store';
-import { Subject } from '../../../../configs/types/Subject';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { ThunkDispatch } from 'redux-thunk';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {},
-  })
-);
+} from '../../../../../creators/subject-list';
+import { State } from '../../../../../configs/redux/store';
 
 const SubjectInfoActionButtons = (
   props: SubjectInfoActionButtonsProps
 ): JSX.Element => {
-  const classes = useStyles();
-
   return (
     <React.Fragment>
       <Button
