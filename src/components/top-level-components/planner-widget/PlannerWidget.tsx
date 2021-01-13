@@ -39,7 +39,7 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
     <Card>
       <CardHeader
         title={'Weekly Planners'}
-        subheader={`${props.numberOfSubjects} Subjects`}
+        subheader={props.subheaderMessage}
         action={
           <div>
             <IconButton
@@ -96,7 +96,7 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
 
 interface PlannerWidgetProps {
   displayLoader: boolean;
-  numberOfSubjects: number;
+  subheaderMessage: string;
   shouldDisplaySubjectInfo: boolean;
   openSubjectInfoHandler: () => void;
   routeToWidgetClickHandler: () => void;
@@ -105,8 +105,19 @@ interface PlannerWidgetProps {
 
 const mapStateToProps = (state: State): PlannerWidgetProps => {
   const subjects = state.subjectListState.subjectList;
+  const numberOfSubjects = subjects && subjects.length;
+  let subheaderMessage = '';
+
+  if (numberOfSubjects === 0 || numberOfSubjects === undefined) {
+    subheaderMessage = 'No Subjects';
+  } else if (numberOfSubjects === 1) {
+    subheaderMessage = '1 Subject';
+  } else {
+    subheaderMessage = `${numberOfSubjects} Subjects`;
+  }
+
   return ({
-    numberOfSubjects: subjects && subjects.length,
+    subheaderMessage: subheaderMessage,
     shouldDisplaySubjectInfo: state.subjectListState.displaySubjectInfo,
     displayLoader: state.subjectListState.displayLoader,
   } as unknown) as PlannerWidgetProps;

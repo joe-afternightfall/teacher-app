@@ -18,7 +18,7 @@ import {
   withStyles,
   StyledComponentProps,
 } from '@material-ui/core/styles';
-import SubjectList from './SubjectList';
+import SubjectList from './list/SubjectList';
 import AddIcon from '@material-ui/icons/Add';
 import { Styles } from '@material-ui/styles';
 import CloseIcon from '@material-ui/icons/Close';

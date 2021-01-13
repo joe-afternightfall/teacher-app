@@ -9,12 +9,18 @@ import {
   ListItemAvatar,
   ListItemSecondaryAction,
 } from '@material-ui/core';
+import {
+  DeleteSubjectDialog,
+  DeleteSubjectDialogProps,
+} from './DeleteSubjectDialog';
 import { connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction, Dispatch } from 'redux';
 import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { State } from '../../../../configs/redux/store';
-import { Subject } from '../../../../configs/types/Subject';
-import { getIcon } from '../../../../utils/get-icon';
+import { getIcon } from '../../../../../utils/get-icon';
+import { State } from '../../../../../configs/redux/store';
+import { Subject } from '../../../../../configs/types/Subject';
+import { deleteSubject } from '../../../../../creators/subject-list';
 
 const SubjectList = (props: SubjectListProps) => {
   return (
@@ -37,9 +43,11 @@ const SubjectList = (props: SubjectListProps) => {
               </ListItemAvatar>
               <ListItemText primary={subject.subjectName} />
               <ListItemSecondaryAction>
-                <IconButton edge={'end'} aria-label={'delete'}>
-                  <DeleteIcon />
-                </IconButton>
+                <DeleteSubjectDialog
+                  subjectName={subject.subjectName}
+                  firebaseId={subject.firebaseId}
+                  deleteClickHandler={props.deleteClickHandler}
+                />
 
                 <IconButton
                   edge={'end'}
@@ -59,13 +67,37 @@ const SubjectList = (props: SubjectListProps) => {
 };
 
 export interface SubjectListProps {
+  isEmpty: boolean;
   subjectList: Subject[];
+  deleteClickHandler: (id: string) => void;
 }
 
 const mapStateToProps = (state: State): SubjectListProps => {
+  const subjects = state.subjectListState.subjectList
+    ? state.subjectListState.subjectList
+    : [];
+  let isEmpty;
+
+  // todo:  come back to isEmpty
+
+  if (subjects !== undefined || subjects !== 0) {
+    isEmpty = false;
+  } else {
+    isEmpty = true;
+  }
+
   return ({
-    subjectList: state.subjectListState.subjectList,
+    isEmpty: isEmpty,
+    subjectList: subjects,
   } as unknown) as SubjectListProps;
 };
 
-export default connect(mapStateToProps)(SubjectList);
+const mapDispatchToProps = (dispatch: Dispatch): DeleteSubjectDialogProps =>
+  (({
+    deleteClickHandler: (id: string) => {
+      console.log('DELETEING_ID = ' + id);
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(deleteSubject(id));
+    },
+  } as unknown) as DeleteSubjectDialogProps);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SubjectList);
