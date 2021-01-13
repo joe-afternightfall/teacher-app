@@ -13,18 +13,17 @@ import { connect } from 'react-redux';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { State } from '../../../../configs/redux/store';
-import { subjectList } from '../../../../configs/dummy-data';
-import { Subject } from '../../../../configs/types/WeeklyPlanner';
+import { Subject } from '../../../../configs/types/Subject';
 import { getIcon } from '../../../../utils/get-icon';
 
-const SubjectList = () => {
+const SubjectList = (props: SubjectListProps) => {
   return (
     <List
       component={'nav'}
       aria-labelledby={'nested-list-subheader'}
       style={{ width: '100%', marginBottom: 32 }}
     >
-      {subjectList.map((subject: Subject, index: number) => {
+      {props.subjectList.map((subject: Subject, index: number) => {
         const icon = getIcon(subject.iconId);
         return (
           <React.Fragment key={index}>

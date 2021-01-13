@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import { AnyAction, Dispatch } from 'redux';
 import { v4 as uuidv4 } from 'uuid';
 import {
   saveSubjectInfo,
@@ -8,8 +8,9 @@ import {
 } from '../../../../creators/subject-list';
 import { Button } from '@material-ui/core';
 import { State } from '../../../../configs/redux/store';
-import { Subject } from '../../../../configs/types/WeeklyPlanner';
+import { Subject } from '../../../../configs/types/Subject';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { ThunkDispatch } from 'redux-thunk';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,7 +71,9 @@ const mapDispatchToProps = (
 ): SubjectListActionButtonsProps =>
   (({
     saveSubjectClickHandler: (subject: Subject) => {
-      dispatch(saveSubjectInfo(subject));
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(
+        saveSubjectInfo(subject)
+      );
     },
     closeSubjectInfoHandler: () => {
       dispatch(closeSubjectInfoDialog());

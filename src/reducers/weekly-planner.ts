@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
-import { Planner, Subject } from '../configs/types/WeeklyPlanner';
+import { Planner } from '../configs/types/WeeklyPlanner';
 
 export default {
   reducer(
