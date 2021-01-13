@@ -61,33 +61,26 @@ export interface SubjectInfoActionButtonsProps {
 }
 
 const mapStateToProps = (state: State): SubjectInfoActionButtonsProps => {
+  const listState = state.subjectListState;
   const subject = {
     id: uuidv4(),
-    subjectName: state.subjectListState.subjectName,
-    primaryColorId: state.subjectListState.selectedColor.id,
-    primaryColor: state.subjectListState.selectedColor.primaryColor,
-    secondaryColor: state.subjectListState.selectedColor.secondaryColor,
-    iconId: state.subjectListState.selectedIconId,
+    subjectName: listState.subjectName,
+    primaryColorId: listState.selectedColor.id,
+    primaryColor: listState.selectedColor.primaryColor,
+    secondaryColor: listState.selectedColor.secondaryColor,
+    iconId: listState.selectedIconId,
   };
 
-  let isDisabled;
-
-  if (state.subjectListState.subjectNameError) {
-    isDisabled = true;
-  } else if (state.subjectListState.subjectName === '') {
-    isDisabled = true;
-  } else if (state.subjectListState.selectedColor.id === '') {
-    isDisabled = true;
-  } else if (state.subjectListState.selectedIconId === '') {
-    isDisabled = true;
-  } else {
-    isDisabled = false;
-  }
+  const isDisabled =
+    listState.subjectNameError ||
+    listState.subjectName === '' ||
+    listState.selectedColor.id === '' ||
+    listState.selectedIconId === '';
 
   return ({
     isDisabled: isDisabled,
     subject: subject,
-    isEditing: state.subjectListState.editingForm,
+    isEditing: listState.editingForm,
   } as unknown) as SubjectInfoActionButtonsProps;
 };
 
