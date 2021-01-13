@@ -49,6 +49,13 @@ export const closeSubjectInfoDialog = () => {
   };
 };
 
+export const loadSubjectList = (subjectList: any) => {
+  return {
+    type: actions.LOAD_SUBJECT_LIST,
+    subjectList: subjectList,
+  };
+};
+
 export const saveSubjectInfo = (
   subject: Subject
 ): ThunkAction<void, State, void, AnyAction> => async (
