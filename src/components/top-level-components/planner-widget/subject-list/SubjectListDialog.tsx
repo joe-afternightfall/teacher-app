@@ -9,6 +9,8 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  CircularProgress,
+  Typography,
 } from '@material-ui/core';
 import {
   Theme,
@@ -40,9 +42,10 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
   render(): JSX.Element {
     const {
       classes,
-      shouldDisplaySubjectInfo,
+      displayLoader,
       openSubjectInfoHandler,
       closeSubjectInfoHandler,
+      shouldDisplaySubjectInfo,
     } = this.props;
 
     const toggleDialog = () => {
@@ -76,35 +79,59 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
             </IconButton>
           </DialogTitle>
 
-          <DialogContent>
-            <Grid container spacing={2}>
-              {shouldDisplaySubjectInfo ? (
-                <SubjectInfo />
-              ) : (
-                <Grid item xs={12}>
-                  <SubjectList />
+          {displayLoader ? (
+            <DialogContent>
+              <Grid
+                container
+                spacing={2}
+                justify={'center'}
+                direction={'column'}
+                style={{
+                  minHeight: '60vh',
+                }}
+                alignItems={'center'}
+              >
+                <Grid item>
+                  <CircularProgress />
                 </Grid>
-              )}
-            </Grid>
-          </DialogContent>
+                <Grid item>
+                  <Typography>{'Saving Subject Info'}</Typography>
+                </Grid>
+              </Grid>
+            </DialogContent>
+          ) : (
+            <React.Fragment>
+              <DialogContent>
+                <Grid container spacing={2}>
+                  {shouldDisplaySubjectInfo ? (
+                    <SubjectInfo />
+                  ) : (
+                    <Grid item xs={12}>
+                      <SubjectList />
+                    </Grid>
+                  )}
+                </Grid>
+              </DialogContent>
 
-          <DialogActions>
-            {shouldDisplaySubjectInfo ? (
-              <SubjectListActionButtons />
-            ) : (
-              <Tooltip title={'Add New'} placement={'top'}>
-                <Fab
-                  color={'primary'}
-                  aria-label={'add'}
-                  onClick={() => {
-                    openSubjectInfoHandler();
-                  }}
-                >
-                  <AddIcon />
-                </Fab>
-              </Tooltip>
-            )}
-          </DialogActions>
+              <DialogActions>
+                {shouldDisplaySubjectInfo ? (
+                  <SubjectListActionButtons />
+                ) : (
+                  <Tooltip title={'Add New'} placement={'top'}>
+                    <Fab
+                      color={'primary'}
+                      aria-label={'add'}
+                      onClick={() => {
+                        openSubjectInfoHandler();
+                      }}
+                    >
+                      <AddIcon />
+                    </Fab>
+                  </Tooltip>
+                )}
+              </DialogActions>
+            </React.Fragment>
+          )}
         </Dialog>
       </div>
     );
@@ -112,6 +139,7 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
 }
 
 export interface SubjectListDialogProps extends WithStyles<typeof styles> {
+  displayLoader: boolean;
   closeMenuClickHandler: () => void;
   shouldDisplaySubjectInfo: boolean;
   openSubjectInfoHandler: () => void;

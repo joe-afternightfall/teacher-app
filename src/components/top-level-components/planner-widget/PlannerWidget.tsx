@@ -57,6 +57,7 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
               open={Boolean(anchorEl)}
             >
               <SubjectListDialog
+                displayLoader={props.displayLoader}
                 closeMenuClickHandler={handleClose}
                 openSubjectInfoHandler={props.openSubjectInfoHandler}
                 closeSubjectInfoHandler={props.closeSubjectInfoHandler}
@@ -94,6 +95,7 @@ const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
 };
 
 interface PlannerWidgetProps {
+  displayLoader: boolean;
   numberOfSubjects: number;
   shouldDisplaySubjectInfo: boolean;
   openSubjectInfoHandler: () => void;
@@ -105,6 +107,7 @@ const mapStateToProps = (state: State): PlannerWidgetProps => {
   return ({
     numberOfSubjects: state.subjectListState.subjectList.length,
     shouldDisplaySubjectInfo: state.subjectListState.displaySubjectInfo,
+    displayLoader: state.subjectListState.displayLoader,
   } as unknown) as PlannerWidgetProps;
 };
 
