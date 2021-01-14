@@ -1,9 +1,10 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from '../../../configs/types/Link';
+import MaterialTable from 'material-table';
+import NewLinkDialog from './NewLinkDialog';
 import { State } from '../../../configs/redux/store';
-import MaterialTable, { Query } from 'material-table';
+import { openLinkDialog } from '../../../creators/link-dialog';
 
 const LinksWidget = (props: LinksWidgetProps): JSX.Element => {
   const dataList = [
@@ -13,6 +14,7 @@ const LinksWidget = (props: LinksWidgetProps): JSX.Element => {
       id: '',
       linkUrl: 'www.google.com',
       linkTitle: 'My Link',
+      subject: 'Science',
     },
     {
       number: '2',
@@ -20,51 +22,81 @@ const LinksWidget = (props: LinksWidgetProps): JSX.Element => {
       id: '',
       linkUrl: 'www.google.com',
       linkTitle: 'My Other Link',
+      subject: 'Math',
     },
   ];
 
   return (
-    <MaterialTable
-      title={'Links List'}
-      data={dataList}
-      options={{
-        // pageSize: 8,
-        draggable: false,
-        exportButton: true,
-        pageSizeOptions: [10, 20, 30],
-      }}
-      style={{
-        borderTop: '1px solid #E0E0E0',
-        borderTopLeftRadius: 0,
-        borderTopRightRadius: 0,
-      }}
-      columns={[
-        {
-          title: '#',
-          field: 'number',
-        },
-        {
-          title: 'Link Title',
-          field: 'linkTitle',
-        },
-        {
-          title: 'URL',
-          field: 'linkUrl',
-          // sorting: false,
-          // headerStyle: {
-          //   textAlign: 'center',
-          // },
-          // cellStyle: {
-          //   textAlign: 'center',
-          // },
-        },
-      ]}
-    />
+    <React.Fragment>
+      <NewLinkDialog />
+
+      <MaterialTable
+        title={'Links List'}
+        data={dataList}
+        options={{
+          // pageSize: 8,
+          draggable: false,
+          pageSizeOptions: [5, 10, 20, 30],
+          actionsColumnIndex: -1,
+        }}
+        // style={{
+        // borderTop: '1px solid #000',
+        // }}
+        columns={[
+          {
+            title: '#',
+            field: 'number',
+            cellStyle: {
+              width: '10%',
+            },
+          },
+          {
+            title: 'Link Title',
+            field: 'linkTitle',
+          },
+          {
+            title: 'URL',
+            field: 'linkUrl',
+            // headerStyle: {
+            //   textAlign: 'center',
+            // },
+            // cellStyle: {
+            //   textAlign: 'center',
+            // },
+          },
+          {
+            title: 'Subject',
+            field: 'subject',
+          },
+        ]}
+        actions={[
+          {
+            icon: 'add',
+            tooltip: 'Add Link',
+            isFreeAction: true,
+            onClick: () => props.addNewClickHandler(),
+          },
+          {
+            icon: 'edit',
+            tooltip: 'Edit',
+            onClick: (event) => alert('You want to EDIT row'),
+          },
+          (rowData) => ({
+            icon: 'delete',
+            tooltip: 'Delete Link',
+            onClick: () => {
+              alert(JSON.stringify(rowData));
+            },
+          }),
+        ]}
+      />
+    </React.Fragment>
   );
 };
 
 interface LinksWidgetProps {
   title: string;
+  addNewClickHandler: () => void;
 }
 
 const mapStateToProps = (state: State): LinksWidgetProps => {
@@ -72,6 +104,10 @@ const mapStateToProps = (state: State): LinksWidgetProps => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): LinksWidgetProps =>
-  (({} as unknown) as LinksWidgetProps);
+  (({
+    addNewClickHandler: () => {
+      dispatch(openLinkDialog());
+    },
+  } as unknown) as LinksWidgetProps);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LinksWidget);
