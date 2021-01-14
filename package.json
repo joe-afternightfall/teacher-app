@@ -13,6 +13,7 @@
     "firebase": "^8.2.1",
     "firebase-redux": "0.0.5",
     "history": "^4.10.1",
+    "material-table": "^1.69.2",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^17.0.1",
