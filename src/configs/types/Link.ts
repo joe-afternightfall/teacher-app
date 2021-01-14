@@ -3,4 +3,6 @@ export interface Link {
   id: string;
   linkUrl: string;
   linkTitle: string;
+  subjectId: string;
+  plannerItemIds: string[];
 }
