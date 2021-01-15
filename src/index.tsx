@@ -39,6 +39,7 @@ const linksRef = firebase.database().ref('/links');
 const updateSubjects = async () => {
   const subjects = await getSubjects();
   if (subjects !== null) {
+    // todo: rip out to util
     const output = Object.keys(subjects).map((key) => {
       return {
         firebaseId: key,
@@ -60,6 +61,7 @@ const updateSubjects = async () => {
 const updateLinks = async () => {
   const linksList = await getLinksList();
   if (linksList !== undefined) {
+    // todo: rip out to util
     const links = Object.keys(linksList).map((key) => {
       return {
         firebaseId: key,
