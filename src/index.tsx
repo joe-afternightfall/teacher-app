@@ -75,7 +75,7 @@ const updateLinks = async () => {
   } else {
     store.dispatch(loadLinksList([]));
   }
-}
+};
 
 linksRef.on('child_added', async () => {
   await updateLinks();

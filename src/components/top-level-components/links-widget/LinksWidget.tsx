@@ -3,28 +3,24 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
 import NewLinkDialog from './NewLinkDialog';
+import { Link } from '../../../configs/types/Link';
 import { State } from '../../../configs/redux/store';
 import { openLinkDialog } from '../../../creators/link-dialog';
+import { getSubjectName } from '../../../utils/subject-name';
+import { Subject } from '../../../configs/types/Subject';
 
 const LinksWidget = (props: LinksWidgetProps): JSX.Element => {
-  const dataList = [
-    {
-      number: '1',
-      firebaseId: '',
-      id: '',
-      linkUrl: 'www.google.com',
-      linkTitle: 'My Link',
-      subject: 'Science',
-    },
-    {
-      number: '2',
-      firebaseId: '',
-      id: '',
-      linkUrl: 'www.google.com',
-      linkTitle: 'My Other Link',
-      subject: 'Math',
-    },
-  ];
+  const data = props.links.map((link: Link, index: number) => {
+    return {
+      number: index,
+      firebaseId: link.firebaseId,
+      id: link.id,
+      linkUrl: link.linkUrl,
+      linkTitle: link.linkTitle,
+      subjectId: link.subjectId,
+      subjectName: getSubjectName(props.subjectList, link.subjectId),
+    };
+  });
 
   return (
     <React.Fragment>
@@ -32,7 +28,7 @@ const LinksWidget = (props: LinksWidgetProps): JSX.Element => {
 
       <MaterialTable
         title={'Links List'}
-        data={dataList}
+        data={data}
         options={{
           // pageSize: 8,
           draggable: false,
@@ -66,7 +62,7 @@ const LinksWidget = (props: LinksWidgetProps): JSX.Element => {
           },
           {
             title: 'Subject',
-            field: 'subject',
+            field: 'subjectName',
           },
         ]}
         actions={[
@@ -96,11 +92,18 @@ const LinksWidget = (props: LinksWidgetProps): JSX.Element => {
 
 interface LinksWidgetProps {
   title: string;
+  links: Link[];
+  subjectList: Subject[];
   addNewClickHandler: () => void;
 }
 
 const mapStateToProps = (state: State): LinksWidgetProps => {
-  return ({} as unknown) as LinksWidgetProps;
+  return ({
+    links: state.applicationState.links ? state.applicationState.links : [],
+    subjectList: state.subjectListState.subjectList
+      ? state.subjectListState.subjectList
+      : [],
+  } as unknown) as LinksWidgetProps;
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): LinksWidgetProps =>
