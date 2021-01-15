@@ -73,14 +73,54 @@ export const deleteLink = (
     });
 };
 
+export interface UpdateLinkProps {
+  firebaseId: string;
+  linkUrl: string;
+  linkTitle: string;
+  subjectId: string;
+}
+
+export const updateLink = (
+  updateLink: UpdateLinkProps
+): ThunkAction<void, State, void, AnyAction> => async (
+  dispatch: Dispatch,
+  getState: () => State
+): Promise<void> => {
+  return await firebase
+    .database()
+    .ref('/links')
+    .child(updateLink.firebaseId)
+    .update(
+      {
+        linkUrl: updateLink.linkUrl,
+        linkTitle: updateLink.linkTitle,
+        subjectId: updateLink.subjectId,
+      },
+      (error) => {
+        if (error) {
+          // todo: dispatch error snackbar
+        } else {
+          dispatch(
+            displayAppSnackbar({
+              text: `Updated ${updateLink.linkTitle}`,
+              severity: 'success',
+              position: {
+                vertical: 'bottom',
+                horizontal: 'left',
+              },
+            })
+          );
+        }
+      }
+    );
+};
+
 export const getLinksList = async () => {
   return await firebase
     .database()
     .ref('/links')
     .once('value')
     .then((snapshot) => {
-      console.log('snapshot: ' + snapshot.val());
-      // dispatch(loadLinksList(snapshot.val()));
       return snapshot.val();
     });
 };
