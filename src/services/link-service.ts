@@ -4,9 +4,8 @@ import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../configs/redux/store';
 import { closeLinkDialog } from '../creators/link-dialog';
-import { updatingSubjectInfo } from '../creators/loading-data';
-import { NewLinkForm } from '../components/top-level-components/links-widget/NewLinkDialog';
 import { displayAppSnackbar } from '../creators/app-snackbar';
+import { NewLinkForm } from '../components/top-level-components/links-widget/NewLinkDialog';
 
 export const saveLinkInfo = (
   link: NewLinkForm
@@ -16,8 +15,6 @@ export const saveLinkInfo = (
 ): Promise<void> => {
   const linkRef = firebase.database().ref('/links');
   const newLinkRef = linkRef.push();
-
-  dispatch(updatingSubjectInfo());
 
   return await newLinkRef.set(
     {
@@ -37,4 +34,16 @@ export const saveLinkInfo = (
       }
     }
   );
+};
+
+export const getLinksList = async () => {
+  return await firebase
+    .database()
+    .ref('/links')
+    .once('value')
+    .then((snapshot) => {
+      console.log('snapshot: ' + snapshot.val());
+      // dispatch(loadLinksList(snapshot.val()));
+      return snapshot.val();
+    });
 };
