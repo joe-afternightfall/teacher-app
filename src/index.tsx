@@ -13,6 +13,8 @@ import * as serviceWorker from './configs/service-worker';
 import DashboardScreen from './components/top-level-components/DashboardScreen';
 import WeeklyPlanner from './components/widgets/weekly-planner/WeeklyPlannerConnector';
 import { getSubjects, loadSubjectList } from './creators/subject-list';
+import { loadTopicLinksList } from './creators/topic-links/links';
+import { getLinksList } from './services/link-service';
 
 const history = createHashHistory(),
   store = createStore(history);
@@ -32,8 +34,9 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const subjectsRef = firebase.database().ref('/subjects');
+const linksRef = firebase.database().ref('/links');
 
-const updateSubjects = async function () {
+const updateSubjects = async () => {
   const subjects = await getSubjects();
   if (subjects !== null) {
     const output = Object.keys(subjects).map((key) => {
@@ -53,6 +56,38 @@ const updateSubjects = async function () {
     store.dispatch(loadSubjectList([]));
   }
 };
+
+const updateLinks = async () => {
+  const linksList = await getLinksList();
+  if (linksList !== undefined) {
+    const links = Object.keys(linksList).map((key) => {
+      return {
+        firebaseId: key,
+        id: linksList[key].id,
+        linkUrl: linksList[key].linkUrl,
+        linkTitle: linksList[key].linkTitle,
+        subjectId: linksList[key].subjectId,
+        plannerItemIds: linksList[key].plannerItemIds,
+      };
+    });
+
+    store.dispatch(loadTopicLinksList(links));
+  } else {
+    store.dispatch(loadTopicLinksList([]));
+  }
+};
+
+linksRef.on('child_added', async () => {
+  await updateLinks();
+});
+
+linksRef.on('child_changed', async () => {
+  await updateLinks();
+});
+
+linksRef.on('child_removed', async () => {
+  await updateLinks();
+});
 
 subjectsRef.on('child_added', async () => {
   await updateSubjects();
