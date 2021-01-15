@@ -4,9 +4,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { Grid, TextField } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import { Subject } from '../../../configs/types/Subject';
+import { Subject } from '../../../../configs/types/Subject';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { NewLinkForm } from '../../top-level-components/links-widget/NewLinkDialog';
+import { NewLinkForm } from './NewLinkDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
