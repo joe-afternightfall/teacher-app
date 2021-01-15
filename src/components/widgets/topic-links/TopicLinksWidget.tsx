@@ -2,15 +2,21 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
-import NewLinkDialog from './NewLinkDialog';
 import { Link } from '../../../configs/types/Link';
 import { State } from '../../../configs/redux/store';
-import { openLinkDialog } from '../../../creators/link-dialog';
-import { getSubjectName } from '../../../utils/subject-name';
 import { Subject } from '../../../configs/types/Subject';
+import TopicLinksDialog from './components/NewLinkDialog';
+import { getSubjectName } from '../../../utils/subject-name';
+import {
+  openDeleteLinkDialog,
+  openLinkDialog,
+} from '../../../creators/link-dialog';
+import DeleteLinkDialog from './components/DeleteLinkDialog';
 
-const LinksWidget = (props: LinksWidgetProps): JSX.Element => {
+const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {
   const data = props.links.map((link: Link, index: number) => {
+    index += 1;
+
     return {
       number: index,
       firebaseId: link.firebaseId,
@@ -24,7 +30,8 @@ const LinksWidget = (props: LinksWidgetProps): JSX.Element => {
 
   return (
     <React.Fragment>
-      <NewLinkDialog />
+      <TopicLinksDialog />
+      <DeleteLinkDialog />
 
       <MaterialTable
         title={'Links List'}
@@ -80,9 +87,8 @@ const LinksWidget = (props: LinksWidgetProps): JSX.Element => {
           (rowData) => ({
             icon: 'delete',
             tooltip: 'Delete Link',
-            onClick: () => {
-              alert(JSON.stringify(rowData));
-            },
+            onClick: () =>
+              props.deleteClickHandler(rowData.firebaseId, rowData.linkTitle),
           }),
         ]}
       />
@@ -95,6 +101,7 @@ interface LinksWidgetProps {
   links: Link[];
   subjectList: Subject[];
   addNewClickHandler: () => void;
+  deleteClickHandler: (id: string, title: string) => void;
 }
 
 const mapStateToProps = (state: State): LinksWidgetProps => {
@@ -111,6 +118,9 @@ const mapDispatchToProps = (dispatch: Dispatch): LinksWidgetProps =>
     addNewClickHandler: () => {
       dispatch(openLinkDialog());
     },
+    deleteClickHandler: (id: string, title: string) => {
+      dispatch(openDeleteLinkDialog(id, title));
+    },
   } as unknown) as LinksWidgetProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(LinksWidget);
+export default connect(mapStateToProps, mapDispatchToProps)(TopicLinksWidget);
