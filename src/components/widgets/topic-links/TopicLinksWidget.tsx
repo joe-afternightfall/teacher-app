@@ -10,7 +10,7 @@ import { getSubjectName } from '../../../utils/subject-name';
 import {
   openDeleteLinkDialog,
   openLinkDialog,
-} from '../../../creators/link-dialog';
+} from '../../../creators/topic-links-dialog';
 import DeleteLinkDialog from './components/DeleteLinkDialog';
 
 const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {

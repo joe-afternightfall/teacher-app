@@ -18,7 +18,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { State } from '../../../../configs/redux/store';
 import { Subject } from '../../../../configs/types/Subject';
 import { saveLinkInfo } from '../../../../services/link-service';
-import { closeLinkDialog } from '../../../../creators/link-dialog';
+import { closeLinkDialog } from '../../../../creators/topic-links-dialog';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
