@@ -9,16 +9,16 @@ import {
   DialogActions,
   DialogContent,
 } from '@material-ui/core';
+import LinkForm from './LinkForm';
 import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import CloseIcon from '@material-ui/icons/Close';
-import { State } from '../../../configs/redux/store';
-import LinkForm from '../../widgets/link-form/LinkForm';
-import { Subject } from '../../../configs/types/Subject';
-import { saveLinkInfo } from '../../../services/link-service';
-import { closeLinkDialog } from '../../../creators/link-dialog';
+import { State } from '../../../../configs/redux/store';
+import { Subject } from '../../../../configs/types/Subject';
+import { saveLinkInfo } from '../../../../services/link-service';
+import { closeLinkDialog } from '../../../../creators/link-dialog';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
