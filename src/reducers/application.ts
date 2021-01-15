@@ -1,6 +1,5 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
-import { Link } from '../configs/types/Link';
 
 export default {
   reducer(
@@ -12,9 +11,6 @@ export default {
     switch (action.type) {
       case actions.INITIALIZE:
         break;
-      case actions.LOAD_LINK_LIST:
-        newState.links = action.links;
-        break;
       case actions.DISPLAY_APP_SNACKBAR:
         newState.displayAppSnackbar = true;
         newState.snackbarText = action.snackbarText;
@@ -22,12 +18,6 @@ export default {
       case actions.HIDE_APP_SNACKBAR:
         newState.displayAppSnackbar = false;
         newState.snackbarText = '';
-        break;
-      case actions.OPEN_LINK_DIALOG:
-        newState.displayLinkDialog = true;
-        break;
-      case actions.CLOSE_LINK_DIALOG:
-        newState.displayLinkDialog = false;
         break;
       default:
         newState = state;
@@ -38,10 +28,6 @@ export default {
 };
 
 export interface ApplicationState {
-  username: string;
-  displayEditingForm: boolean;
-  displayLinkDialog: boolean;
-  displayAppSnackbar: boolean;
   snackbarText: string;
-  links: Link[];
+  displayAppSnackbar: boolean;
 }

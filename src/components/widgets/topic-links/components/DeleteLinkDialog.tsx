@@ -16,7 +16,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import CloseIcon from '@material-ui/icons/Close';
 import { State } from '../../../../configs/redux/store';
 import { deleteLink } from '../../../../services/link-service';
-import { closeDeleteLinkDialog } from '../../../../creators/topic-links-dialog';
+import { closeDeleteLinkDialog } from '../../../../creators/topic-links/links-dialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -83,8 +83,8 @@ export interface DeleteLinkDialogProps {
 
 const mapStateToProps = (state: State): DeleteLinkDialogProps => {
   return ({
-    open: state.applicationState.displayDeleteLinkDialog,
-    deleteTitle: state.applicationState.deleteLinkTitle,
+    open: state.topicLinksState.displayDeleteLinkDialog,
+    deleteTitle: state.topicLinksState.deleteLinkTitle,
   } as unknown) as DeleteLinkDialogProps;
 };
 

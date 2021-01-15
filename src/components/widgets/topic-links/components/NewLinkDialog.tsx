@@ -18,7 +18,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { State } from '../../../../configs/redux/store';
 import { Subject } from '../../../../configs/types/Subject';
 import { saveLinkInfo } from '../../../../services/link-service';
-import { closeLinkDialog } from '../../../../creators/topic-links-dialog';
+import { closeNewLinkDialog } from '../../../../creators/topic-links/links-dialog';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -68,7 +68,7 @@ const NewLinkDialog = (props: NewLinkDialogProps): JSX.Element => {
     <Dialog
       maxWidth={'sm'}
       fullWidth={true}
-      open={props.displayLinkDialog}
+      open={props.open}
       onClose={props.closeDialogHandler}
     >
       <DialogTitle id={'new-link-dialog-title'}>
@@ -112,8 +112,8 @@ const NewLinkDialog = (props: NewLinkDialogProps): JSX.Element => {
 };
 
 export interface NewLinkDialogProps {
+  open: boolean;
   displayName: string;
-  displayLinkDialog: boolean;
   closeDialogHandler: () => void;
   subjectList: Subject[];
   saveClickHandler: (link: NewLinkForm) => void;
@@ -121,7 +121,7 @@ export interface NewLinkDialogProps {
 
 const mapStateToProps = (state: State): NewLinkDialogProps => {
   return ({
-    displayLinkDialog: state.applicationState.displayLinkDialog,
+    open: state.topicLinksState.displayNewLinkDialog,
     subjectList: state.subjectListState.subjectList,
   } as unknown) as NewLinkDialogProps;
 };
@@ -129,7 +129,7 @@ const mapStateToProps = (state: State): NewLinkDialogProps => {
 const mapDispatchToProps = (dispatch: Dispatch): NewLinkDialogProps =>
   (({
     closeDialogHandler: () => {
-      dispatch(closeLinkDialog());
+      dispatch(closeNewLinkDialog());
     },
     saveClickHandler: (link: NewLinkForm) => {
       (dispatch as ThunkDispatch<State, void, AnyAction>)(saveLinkInfo(link));

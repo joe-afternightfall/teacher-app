@@ -5,8 +5,8 @@ import { AnyAction, Dispatch } from 'redux';
 import { State } from '../configs/redux/store';
 import {
   closeDeleteLinkDialog,
-  closeLinkDialog,
-} from '../creators/topic-links-dialog';
+  closeNewLinkDialog,
+} from '../creators/topic-links/links-dialog';
 import { displayAppSnackbar } from '../creators/app-snackbar';
 import { NewLinkForm } from '../components/widgets/topic-links/components/NewLinkDialog';
 
@@ -30,9 +30,9 @@ export const saveLinkInfo = (
       if (error) {
         // dispatch error
       } else {
-        dispatch(displayAppSnackbar('Saved Link'));
+        dispatch(displayAppSnackbar('Link Saved'));
         setTimeout(() => {
-          dispatch(closeLinkDialog());
+          dispatch(closeNewLinkDialog());
         }, 1000);
       }
     }
@@ -45,7 +45,7 @@ export const deleteLink = (): ThunkAction<
   void,
   AnyAction
 > => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
-  const id = getState().applicationState.deleteLinkId;
+  const id = getState().topicLinksState.deleteLinkId;
   return await firebase
     .database()
     .ref('/links')

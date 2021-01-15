@@ -13,7 +13,7 @@ import * as serviceWorker from './configs/service-worker';
 import DashboardScreen from './components/top-level-components/DashboardScreen';
 import WeeklyPlanner from './components/widgets/weekly-planner/WeeklyPlannerConnector';
 import { getSubjects, loadSubjectList } from './creators/subject-list';
-import { loadLinksList } from './creators/link-list';
+import { loadTopicLinksList } from './creators/topic-links/links';
 import { getLinksList } from './services/link-service';
 
 const history = createHashHistory(),
@@ -71,9 +71,9 @@ const updateLinks = async () => {
       };
     });
 
-    store.dispatch(loadLinksList(links));
+    store.dispatch(loadTopicLinksList(links));
   } else {
-    store.dispatch(loadLinksList([]));
+    store.dispatch(loadTopicLinksList([]));
   }
 };
 

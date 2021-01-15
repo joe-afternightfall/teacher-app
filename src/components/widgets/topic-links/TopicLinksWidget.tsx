@@ -9,8 +9,8 @@ import TopicLinksDialog from './components/NewLinkDialog';
 import { getSubjectName } from '../../../utils/subject-name';
 import {
   openDeleteLinkDialog,
-  openLinkDialog,
-} from '../../../creators/topic-links-dialog';
+  openNewLinkDialog,
+} from '../../../creators/topic-links/links-dialog';
 import DeleteLinkDialog from './components/DeleteLinkDialog';
 
 const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {
@@ -106,7 +106,7 @@ interface LinksWidgetProps {
 
 const mapStateToProps = (state: State): LinksWidgetProps => {
   return ({
-    links: state.applicationState.links ? state.applicationState.links : [],
+    links: state.topicLinksState.links ? state.topicLinksState.links : [],
     subjectList: state.subjectListState.subjectList
       ? state.subjectListState.subjectList
       : [],
@@ -116,7 +116,7 @@ const mapStateToProps = (state: State): LinksWidgetProps => {
 const mapDispatchToProps = (dispatch: Dispatch): LinksWidgetProps =>
   (({
     addNewClickHandler: () => {
-      dispatch(openLinkDialog());
+      dispatch(openNewLinkDialog());
     },
     deleteClickHandler: (id: string, title: string) => {
       dispatch(openDeleteLinkDialog(id, title));

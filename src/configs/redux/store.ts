@@ -15,6 +15,7 @@ import weeklyPlannerState, {
 import subjectListState, {
   SubjectListState,
 } from '../../reducers/subject-list';
+import topicLinksState, { TopicLinksState } from '../../reducers/topic-links';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 export const createStore = (history: History): Store => {
@@ -26,6 +27,7 @@ export const createStore = (history: History): Store => {
       applicationState: application.reducer,
       weeklyPlannerState: weeklyPlannerState.reducer,
       subjectListState: subjectListState.reducer,
+      topicLinksState: topicLinksState.reducer,
       router: connectRouter(history),
       routing: routerReducer,
     });
@@ -33,7 +35,6 @@ export const createStore = (history: History): Store => {
   return createStoreFunc(allReducers, {
     applicationState: ({
       openSideDrawer: false,
-      displayLinkDialog: false,
       displayAppSnackbar: false,
     } as unknown) as ApplicationState,
     subjectListState: ({
@@ -56,4 +57,5 @@ export interface State {
   applicationState: ApplicationState;
   weeklyPlannerState: WeeklyPlannerState;
   subjectListState: SubjectListState;
+  topicLinksState: TopicLinksState;
 }

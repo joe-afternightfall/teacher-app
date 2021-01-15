@@ -1,14 +1,14 @@
-import actions from './actions';
+import actions from '../actions';
 
-export const closeLinkDialog = () => {
+export const closeNewLinkDialog = () => {
   return {
-    type: actions.CLOSE_LINK_DIALOG,
+    type: actions.CLOSE_NEW_LINK_DIALOG,
   };
 };
 
-export const openLinkDialog = () => {
+export const openNewLinkDialog = () => {
   return {
-    type: actions.OPEN_LINK_DIALOG,
+    type: actions.OPEN_NEW_LINK_DIALOG,
   };
 };
 
