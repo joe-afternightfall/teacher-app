@@ -1,19 +1,22 @@
 import React from 'react';
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import {
+  deleteLink,
+  updateLink,
+  UpdateLinkProps,
+} from '../../../services/link-service';
 import MaterialTable from 'material-table';
+import { AnyAction, Dispatch } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 import { Link } from '../../../configs/types/Link';
 import { State } from '../../../configs/redux/store';
+import NewLinkDialog from './components/NewLinkDialog';
 import { Subject } from '../../../configs/types/Subject';
-import TopicLinksDialog from './components/NewLinkDialog';
 import { getSubjectName } from '../../../utils/subject-name';
-import {
-  openDeleteLinkDialog,
-  openNewLinkDialog,
-} from '../../../creators/topic-links/links-dialog';
-import DeleteLinkDialog from './components/DeleteLinkDialog';
+import { openNewLinkDialog } from '../../../creators/topic-links/links-dialog';
 
 const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {
+  // todo: rip out to util
   const data = props.links.map((link: Link, index: number) => {
     index += 1;
 
@@ -24,31 +27,55 @@ const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {
       linkUrl: link.linkUrl,
       linkTitle: link.linkTitle,
       subjectId: link.subjectId,
-      subjectName: getSubjectName(props.subjectList, link.subjectId),
+      plannerItemIds: link.plannerItemIds,
     };
   });
 
+  const subjects = props.links.reduce((obj: any, item: Link) => {
+    obj[item.subjectId] = getSubjectName(props.subjectList, item.subjectId);
+    return obj;
+  }, {});
+
   return (
     <React.Fragment>
-      <TopicLinksDialog />
-      <DeleteLinkDialog />
+      <NewLinkDialog />
 
       <MaterialTable
-        title={'Links List'}
         data={data}
+        // icons={tableIcons}
+        title={'Links List'}
         options={{
-          // pageSize: 8,
+          pageSize: 6,
           draggable: false,
-          pageSizeOptions: [5, 10, 20, 30],
+          pageSizeOptions: [6, 12, 18],
           actionsColumnIndex: -1,
         }}
-        // style={{
-        // borderTop: '1px solid #000',
-        // }}
+        editable={{
+          onRowUpdate: (newData, oldData): Promise<void> =>
+            new Promise((resolve, reject) => {
+              props.updateClickHandler({
+                firebaseId: newData.firebaseId,
+                linkUrl: newData.linkUrl,
+                linkTitle: newData.linkTitle,
+                subjectId: newData.subjectId,
+              });
+              setTimeout(() => {
+                resolve();
+              }, 1000);
+            }),
+          onRowDelete: (newData): Promise<void> =>
+            new Promise((resolve, reject) => {
+              props.deleteClickHandler(newData.firebaseId);
+              setTimeout(() => {
+                resolve();
+              }, 1500);
+            }),
+        }}
         columns={[
           {
             title: '#',
             field: 'number',
+            editable: 'never',
             cellStyle: {
               width: '10%',
             },
@@ -60,16 +87,11 @@ const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {
           {
             title: 'URL',
             field: 'linkUrl',
-            // headerStyle: {
-            //   textAlign: 'center',
-            // },
-            // cellStyle: {
-            //   textAlign: 'center',
-            // },
           },
           {
             title: 'Subject',
-            field: 'subjectName',
+            field: 'subjectId',
+            lookup: subjects,
           },
         ]}
         actions={[
@@ -79,17 +101,6 @@ const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {
             isFreeAction: true,
             onClick: () => props.addNewClickHandler(),
           },
-          {
-            icon: 'edit',
-            tooltip: 'Edit',
-            onClick: (event) => alert('You want to EDIT row'),
-          },
-          (rowData) => ({
-            icon: 'delete',
-            tooltip: 'Delete Link',
-            onClick: () =>
-              props.deleteClickHandler(rowData.firebaseId, rowData.linkTitle),
-          }),
         ]}
       />
     </React.Fragment>
@@ -97,11 +108,11 @@ const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {
 };
 
 interface LinksWidgetProps {
-  title: string;
   links: Link[];
   subjectList: Subject[];
   addNewClickHandler: () => void;
-  deleteClickHandler: (id: string, title: string) => void;
+  deleteClickHandler: (id: string) => void;
+  updateClickHandler: (link: UpdateLinkProps) => void;
 }
 
 const mapStateToProps = (state: State): LinksWidgetProps => {
@@ -118,8 +129,11 @@ const mapDispatchToProps = (dispatch: Dispatch): LinksWidgetProps =>
     addNewClickHandler: () => {
       dispatch(openNewLinkDialog());
     },
-    deleteClickHandler: (id: string, title: string) => {
-      dispatch(openDeleteLinkDialog(id, title));
+    deleteClickHandler: (id: string) => {
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(deleteLink(id));
+    },
+    updateClickHandler: (link: UpdateLinkProps) => {
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(updateLink(link));
     },
   } as unknown) as LinksWidgetProps);
 
