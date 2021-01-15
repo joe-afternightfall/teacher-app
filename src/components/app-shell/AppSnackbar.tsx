@@ -1,35 +1,21 @@
 import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import Alert from '@material-ui/lab/Alert';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { hideAppSnackbar } from '../../creators/app-snackbar';
+import {
+  hideAppSnackbar,
+  SnackbarCreatorProps,
+} from '../../creators/app-snackbar';
 import { State } from '../../configs/redux/store';
 
-function Alert(props: AlertProps) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      width: '100%',
-      '& > * + *': {
-        marginTop: theme.spacing(2),
-      },
-    },
-  })
-);
-
 const AppSnackbar = (props: AppSnackbarProps): JSX.Element => {
-  const classes = useStyles();
+  const snackbarProps = props.snackbarProps;
 
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
-
     props.handleClose();
   };
 
@@ -37,26 +23,34 @@ const AppSnackbar = (props: AppSnackbarProps): JSX.Element => {
     <Snackbar
       onClose={handleClose}
       autoHideDuration={3000}
-      open={props.shouldDisplay}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      open={props.open}
+      anchorOrigin={{
+        vertical: snackbarProps.position.vertical,
+        horizontal: snackbarProps.position.horizontal,
+      }}
     >
-      <Alert onClose={handleClose} severity="success">
-        {props.snackbarText}
+      <Alert
+        elevation={6}
+        variant={'filled'}
+        onClose={handleClose}
+        severity={snackbarProps.severity}
+      >
+        {snackbarProps.text}
       </Alert>
     </Snackbar>
   );
 };
 
 export interface AppSnackbarProps {
-  shouldDisplay: boolean;
-  snackbarText: string;
+  open: boolean;
+  snackbarProps: SnackbarCreatorProps;
   handleClose: () => void;
 }
 
 const mapStateToProps = (state: State): AppSnackbarProps => {
   return ({
-    shouldDisplay: state.applicationState.displayAppSnackbar,
-    snackbarText: state.applicationState.snackbarText,
+    open: state.applicationState.displayAppSnackbar,
+    snackbarProps: state.applicationState.snackbarProps,
   } as unknown) as AppSnackbarProps;
 };
 
