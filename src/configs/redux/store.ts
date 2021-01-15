@@ -33,6 +33,8 @@ export const createStore = (history: History): Store => {
   return createStoreFunc(allReducers, {
     applicationState: ({
       openSideDrawer: false,
+      displayLinkDialog: false,
+      displayAppSnackbar: false,
     } as unknown) as ApplicationState,
     subjectListState: ({
       selectedColor: {

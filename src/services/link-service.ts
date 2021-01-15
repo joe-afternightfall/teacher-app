@@ -6,6 +6,7 @@ import { State } from '../configs/redux/store';
 import { closeLinkDialog } from '../creators/link-dialog';
 import { updatingSubjectInfo } from '../creators/loading-data';
 import { NewLinkForm } from '../components/top-level-components/links-widget/NewLinkDialog';
+import { displayAppSnackbar } from '../creators/app-snackbar';
 
 export const saveLinkInfo = (
   link: NewLinkForm
@@ -29,6 +30,7 @@ export const saveLinkInfo = (
       if (error) {
         // dispatch error
       } else {
+        dispatch(displayAppSnackbar('Saved Link'));
         setTimeout(() => {
           dispatch(closeLinkDialog());
         }, 1000);

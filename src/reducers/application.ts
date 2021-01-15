@@ -11,6 +11,20 @@ export default {
     switch (action.type) {
       case actions.INITIALIZE:
         break;
+      case actions.DISPLAY_APP_SNACKBAR:
+        newState.displayAppSnackbar = true;
+        newState.snackbarText = action.snackbarText;
+        break;
+      case actions.HIDE_APP_SNACKBAR:
+        newState.displayAppSnackbar = false;
+        newState.snackbarText = '';
+        break;
+      case actions.OPEN_LINK_DIALOG:
+        newState.displayLinkDialog = true;
+        break;
+      case actions.CLOSE_LINK_DIALOG:
+        newState.displayLinkDialog = false;
+        break;
       default:
         newState = state;
     }
@@ -22,4 +36,7 @@ export default {
 export interface ApplicationState {
   username: string;
   displayEditingForm: boolean;
+  displayLinkDialog: boolean;
+  displayAppSnackbar: boolean;
+  snackbarText: string;
 }
