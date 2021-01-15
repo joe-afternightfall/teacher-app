@@ -1,5 +1,6 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
+import { SnackbarCreatorProps } from '../creators/app-snackbar';
 
 export default {
   reducer(
@@ -13,11 +14,10 @@ export default {
         break;
       case actions.DISPLAY_APP_SNACKBAR:
         newState.displayAppSnackbar = true;
-        newState.snackbarText = action.snackbarText;
+        newState.snackbarProps = action.snackbarProps;
         break;
       case actions.HIDE_APP_SNACKBAR:
         newState.displayAppSnackbar = false;
-        newState.snackbarText = '';
         break;
       default:
         newState = state;
@@ -28,6 +28,6 @@ export default {
 };
 
 export interface ApplicationState {
-  snackbarText: string;
   displayAppSnackbar: boolean;
+  snackbarProps: SnackbarCreatorProps;
 }
