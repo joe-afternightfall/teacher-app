@@ -15,14 +15,6 @@ export default {
       case actions.LOAD_TOPIC_LINKS_LIST:
         newState.links = action.links;
         break;
-      case actions.OPEN_DELETE_LINK_DIALOG:
-        newState.displayDeleteLinkDialog = true;
-        newState.deleteLinkId = action.id;
-        newState.deleteLinkTitle = action.title;
-        break;
-      case actions.CLOSE_DELETE_LINK_DIALOG:
-        newState.displayDeleteLinkDialog = false;
-        break;
       case actions.OPEN_NEW_LINK_DIALOG:
         newState.displayNewLinkDialog = true;
         break;
@@ -39,8 +31,5 @@ export default {
 
 export interface TopicLinksState {
   links: Link[];
-  deleteLinkId: string;
-  deleteLinkTitle: string;
   displayNewLinkDialog: boolean;
-  displayDeleteLinkDialog: boolean;
 }
