@@ -36,6 +36,14 @@ export const createStore = (history: History): Store => {
     applicationState: ({
       openSideDrawer: false,
       displayAppSnackbar: false,
+      snackbarProps: {
+        text: '',
+        severity: '',
+        position: {
+          vertical: '',
+          horizontal: '',
+        },
+      },
     } as unknown) as ApplicationState,
     subjectListState: ({
       selectedColor: {
