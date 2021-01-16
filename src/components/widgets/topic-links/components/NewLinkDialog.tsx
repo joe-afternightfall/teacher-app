@@ -64,6 +64,18 @@ const NewLinkDialog = (props: NewLinkDialogProps): JSX.Element => {
     setValues({ ...values, [name]: e.target.value });
   };
 
+  const save = () => {
+    props.saveClickHandler(values);
+    setTimeout(() => {
+      setValues({
+        id: uuidv4(),
+        linkUrl: '',
+        linkTitle: '',
+        subjectId: '',
+      });
+    }, 4000);
+  };
+
   return (
     <Dialog
       maxWidth={'sm'}
@@ -99,13 +111,7 @@ const NewLinkDialog = (props: NewLinkDialogProps): JSX.Element => {
 
       <DialogActions>
         <Button onClick={props.closeDialogHandler}>{'Cancel'}</Button>
-        <Button
-          onClick={() => {
-            props.saveClickHandler(values);
-          }}
-        >
-          {'Save'}
-        </Button>
+        <Button onClick={save}>{'Save'}</Button>
       </DialogActions>
     </Dialog>
   );
