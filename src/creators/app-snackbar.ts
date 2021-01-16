@@ -1,4 +1,5 @@
 import actions from './actions';
+import { AnyAction } from 'redux';
 
 export interface SnackbarCreatorProps {
   text: string;
@@ -23,7 +24,7 @@ export const displayAppSnackbar = (
   };
 };
 
-export const hideAppSnackbar = () => {
+export const hideAppSnackbar = (): AnyAction => {
   return {
     type: actions.HIDE_APP_SNACKBAR,
   };
