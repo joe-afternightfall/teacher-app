@@ -3,14 +3,16 @@ import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
+import { State } from '../../../../../configs/redux/store';
+import {
+  clearSubjectInfoDialog,
+  closeSubjectInfoDialog,
+} from '../../../../../creators/subject-list/subject-info-dialog';
+import { clearEditing } from '../../../../../creators/subject-list/editing-subject';
 import {
   editSubject,
-  clearEditing,
   saveSubjectInfo,
-  closeSubjectInfoDialog,
-  clearSubjectInfoDialog,
-} from '../../../../../creators/subject-list';
-import { State } from '../../../../../configs/redux/store';
+} from '../../../../../services/subject-list-service';
 
 const SubjectInfoActionButtons = (
   props: SubjectInfoActionButtonsProps

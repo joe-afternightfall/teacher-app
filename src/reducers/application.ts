@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
-import { SnackbarCreatorProps } from '../creators/app-snackbar';
+import { SnackbarCreatorProps } from '../creators/application/app-snackbar';
 
 export default {
   reducer(

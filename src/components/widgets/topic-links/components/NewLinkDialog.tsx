@@ -17,7 +17,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import CloseIcon from '@material-ui/icons/Close';
 import { State } from '../../../../configs/redux/store';
 import { Subject } from '../../../../configs/types/Subject';
-import { saveLinkInfo } from '../../../../services/link-service';
+import { saveLinkInfo } from '../../../../services/topic-links-service';
 import { closeNewLinkDialog } from '../../../../creators/topic-links/links-dialog';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 

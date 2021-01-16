@@ -20,11 +20,11 @@ import { routerActions } from 'connected-react-router';
 import SubjectListDialog from './subject-list/SubjectListDialog';
 import plannerBackground from '../../../configs/images/lovely-planning.jpg';
 import {
-  clearEditing,
   clearSubjectInfoDialog,
   closeSubjectInfoDialog,
   openSubjectInfoDialog,
-} from '../../../creators/subject-list';
+} from '../../../creators/subject-list/subject-info-dialog';
+import { clearEditing } from '../../../creators/subject-list/editing-subject';
 
 const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

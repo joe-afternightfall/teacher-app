@@ -12,9 +12,10 @@ import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './configs/service-worker';
 import DashboardScreen from './components/top-level-components/DashboardScreen';
 import WeeklyPlanner from './components/widgets/weekly-planner/WeeklyPlannerConnector';
-import { getSubjects, loadSubjectList } from './creators/subject-list';
 import { loadTopicLinksList } from './creators/topic-links/links';
-import { getLinksList } from './services/link-service';
+import { getLinksList } from './services/topic-links-service';
+import { getSubjects } from './services/subject-list-service';
+import { loadSubjectList } from './creators/subject-list/load-subjects';
 
 const history = createHashHistory(),
   store = createStore(history);

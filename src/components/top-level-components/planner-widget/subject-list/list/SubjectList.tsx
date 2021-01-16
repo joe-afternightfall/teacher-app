@@ -20,11 +20,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import { getIcon } from '../../../../../utils/get-icon';
 import { State } from '../../../../../configs/redux/store';
 import { Subject } from '../../../../../configs/types/Subject';
-import {
-  deleteSubject,
-  editingSubject,
-  openSubjectInfoDialog,
-} from '../../../../../creators/subject-list';
+import { deleteSubject } from '../../../../../services/subject-list-service';
+import { editingSubject } from '../../../../../creators/subject-list/editing-subject';
+import { openSubjectInfoDialog } from '../../../../../creators/subject-list/subject-info-dialog';
 
 const SubjectList = (props: SubjectListProps) => {
   return (

@@ -9,10 +9,10 @@ import {
   ColorChoice,
   subjectColorChoices,
 } from '../../../../../../../configs/theme/subject-color-choices';
-import { selectColor } from '../../../../../../../creators/subject-list';
-import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { selectColor } from '../../../../../../../creators/subject-list/select-color';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     colorChoice: {
       height: 50,

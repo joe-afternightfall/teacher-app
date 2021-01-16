@@ -9,8 +9,8 @@ import {
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { State } from '../../../../../../configs/redux/store';
-import { updateSubjectName } from '../../../../../../creators/subject-list';
 import { getIcon } from '../../../../../../utils/get-icon';
+import { updateSubjectName } from '../../../../../../creators/subject-list/update-subject-name';
 
 const SubjectName = (props: SubjectNameProps) => {
   const icon = getIcon(props.selectedIconId);
