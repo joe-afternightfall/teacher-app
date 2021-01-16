@@ -25,13 +25,6 @@ export interface SelectColorAction {
   selectedColor: ColorChoice;
 }
 
-export const selectIcon = (iconId: string) => {
-  return {
-    type: actions.SELECT_ICON,
-    iconId: iconId,
-  };
-};
-
 export const updateSubjectName = (subjectName: string) => {
   return {
     type: actions.UPDATE_SUBJECT_NAME,

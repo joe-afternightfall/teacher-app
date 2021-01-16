@@ -1,5 +1,5 @@
-import { displayAppSnackbar, hideAppSnackbar } from "./app-snackbar";
-import actions from "../actions";
+import { displayAppSnackbar, hideAppSnackbar } from './app-snackbar';
+import actions from '../actions';
 
 describe('application snackbar', () => {
   it('should return', () => {
@@ -9,7 +9,7 @@ describe('application snackbar', () => {
       position: {
         vertical: 'top',
         horizontal: 'left',
-      }
+      },
     });
 
     expect(response).toEqual({
@@ -20,8 +20,8 @@ describe('application snackbar', () => {
           horizontal: 'left',
         },
         severity: 'info',
-        text: 'test app snackbar'
-      }
+        text: 'test app snackbar',
+      },
     });
   });
 
