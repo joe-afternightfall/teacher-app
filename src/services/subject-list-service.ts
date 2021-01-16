@@ -1,74 +1,17 @@
-import {
-  updatingSubjectInfo,
-  subjectSaveFailed,
-  subjectSaveComplete,
-} from './loading-data';
-import actions from './actions';
-import firebase from 'firebase';
-import { v4 as uuidv4 } from 'uuid';
 import { ThunkAction } from 'redux-thunk';
-import { AnyAction, Dispatch } from 'redux';
 import { State } from '../configs/redux/store';
-import { ColorChoice } from '../configs/theme/subject-color-choices';
-
-// todo: break up file
-
-export const selectColor = (color: ColorChoice): SelectColorAction => {
-  return {
-    type: actions.SELECT_COLOR,
-    selectedColor: color,
-  };
-};
-
-export interface SelectColorAction {
-  type: string;
-  selectedColor: ColorChoice;
-}
-
-export const updateSubjectName = (subjectName: string) => {
-  return {
-    type: actions.UPDATE_SUBJECT_NAME,
-    subjectName: subjectName,
-  };
-};
-
-export const openSubjectInfoDialog = () => {
-  return {
-    type: actions.OPEN_SUBJECT_INFO_DIALOG,
-  };
-};
-
-export const closeSubjectInfoDialog = () => {
-  return {
-    type: actions.CLOSE_SUBJECT_INFO_DIALOG,
-  };
-};
-
-export const loadSubjectList = (subjectList: any) => {
-  return {
-    type: actions.LOAD_SUBJECT_LIST,
-    subjectList: subjectList,
-  };
-};
-
-export const clearSubjectInfoDialog = () => {
-  return {
-    type: actions.CLEAR_SUBJECT_INFO_DIALOG,
-  };
-};
-
-export const editingSubject = (id: string) => {
-  return {
-    type: actions.EDITING_SUBJECT,
-    subjectId: id,
-  };
-};
-
-export const clearEditing = () => {
-  return {
-    type: actions.CLEAR_EDITING,
-  };
-};
+import { AnyAction, Dispatch } from 'redux';
+import firebase from 'firebase';
+import {
+  subjectSaveComplete,
+  subjectSaveFailed,
+  updatingSubjectInfo,
+} from '../creators/loading-data';
+import { v4 as uuidv4 } from 'uuid';
+import {
+  clearSubjectInfoDialog,
+  closeSubjectInfoDialog,
+} from '../creators/subject-list/subject-info-dialog';
 
 export const saveSubjectInfo = (): ThunkAction<
   void,
@@ -104,16 +47,6 @@ export const saveSubjectInfo = (): ThunkAction<
       }
     }
   );
-};
-
-export const getSubjects = async () => {
-  return await firebase
-    .database()
-    .ref('/subjects')
-    .once('value')
-    .then((snapshot) => {
-      return snapshot.val();
-    });
 };
 
 export const deleteSubject = (
@@ -177,4 +110,14 @@ export const editSubject = (): ThunkAction<
         }
       }
     );
+};
+
+export const getSubjects = async () => {
+  return await firebase
+    .database()
+    .ref('/subjects')
+    .once('value')
+    .then((snapshot) => {
+      return snapshot.val();
+    });
 };
