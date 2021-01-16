@@ -1,5 +1,5 @@
-import { checkForDuplicates } from "./validate-name";
-import { v4 as uuidv4 } from "uuid";
+import { checkForDuplicates } from './validate-name';
+import { v4 as uuidv4 } from 'uuid';
 
 describe('validate name util', () => {
   const firstId = uuidv4();
