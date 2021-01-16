@@ -10,8 +10,6 @@ export default {
     let newState = Object.assign({}, state);
 
     switch (action.type) {
-      case actions.INITIALIZE:
-        break;
       case actions.LOAD_TOPIC_LINKS_LIST:
         newState.links = action.links;
         break;
