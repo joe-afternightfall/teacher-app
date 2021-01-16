@@ -49,4 +49,10 @@ describe('getting subject name', () => {
 
     expect(foundSubjectName).toEqual(secondSubjectName);
   });
+
+  it('should return null', () => {
+    const subjectName = getSubjectName(subjects, 'test-id');
+
+    expect(subjectName).toEqual(undefined);
+  });
 });
