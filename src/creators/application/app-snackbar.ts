@@ -1,4 +1,4 @@
-import actions from './actions';
+import actions from '../actions';
 import { AnyAction } from 'redux';
 
 export interface SnackbarCreatorProps {

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import {
   hideAppSnackbar,
   SnackbarCreatorProps,
-} from '../../creators/app-snackbar';
+} from '../../creators/application/app-snackbar';
 import { State } from '../../configs/redux/store';
 
 const AppSnackbar = (props: AppSnackbarProps): JSX.Element => {

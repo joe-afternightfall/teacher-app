@@ -4,7 +4,7 @@ import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../configs/redux/store';
 import { closeNewLinkDialog } from '../creators/topic-links/links-dialog';
-import { displayAppSnackbar } from '../creators/app-snackbar';
+import { displayAppSnackbar } from '../creators/application/app-snackbar';
 import { NewLinkForm } from '../components/widgets/topic-links/components/NewLinkDialog';
 
 export const saveLinkInfo = (
