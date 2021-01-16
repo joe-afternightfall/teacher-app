@@ -1,14 +1,14 @@
 import React from 'react';
 import Select from '@material-ui/core/Select';
+import { NewLinkForm } from './NewLinkDialog';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Grid, TextField } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { Subject } from '../../../../configs/types/Subject';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { NewLinkForm } from './NewLinkDialog';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     formControl: {
       width: 160,
