@@ -35,6 +35,8 @@ import WeekdaySelectionGroup from './WeekdaySelectionGroup';
 import NewLinkCard from './NewLinkCard';
 import ImageIcon from '@material-ui/icons/Image';
 import CancelIcon from '@material-ui/icons/Cancel';
+import { NewLinkForm } from '../../../topic-links/components/NewLinkDialog';
+import SubjectDropdown from '../../../subject-dropdown/SubjectDropdownConnector';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   closeButton: {
@@ -83,6 +85,7 @@ class AddNewDialog extends Component<AddNewDialogProps, AddNewDialogState> {
       linkTitle: '',
     },
     addNewLink: false,
+    subjectId: '',
   };
 
   render(): JSX.Element {
@@ -130,6 +133,14 @@ class AddNewDialog extends Component<AddNewDialogProps, AddNewDialogState> {
           }),
         });
       }
+    };
+
+    const dropdownChangeHandler = (
+      e: React.ChangeEvent<{ name?: string; value: string }>
+    ) => {
+      this.setState({
+        subjectId: e.target.value,
+      });
     };
 
     const addNewLinkClickHandler = () => {
@@ -191,95 +202,91 @@ class AddNewDialog extends Component<AddNewDialogProps, AddNewDialogState> {
             </IconButton>
           </DialogTitle>
           <DialogContent>
-            <Grid container>
+            <Grid container spacing={2}>
               <Grid item xs={6}>
                 <Grid item>
-                  <TextField
-                    autoFocus
-                    fullWidth
-                    id={'name'}
-                    inputProps={{
-                      name: 'cardTitle',
-                    }}
-                    label={'Card Title'}
-                    onChange={handleChange}
-                    value={this.state.title}
+                  <SubjectDropdown
+                    width={200}
+                    value={this.state.subjectId}
+                    changeHandler={dropdownChangeHandler}
                   />
                 </Grid>
 
-                <Grid item>
+                <Grid item style={{ marginTop: 40 }}>
                   <TextField
+                    style={{ width: '100%' }}
                     id={'filled-multiline-content'}
-                    label={'Multiline'}
+                    label={'Content'}
                     multiline
-                    rowsMax={4}
+                    rowsMax={8}
+                    rows={6}
                     value={this.state.content}
                     onChange={handleChange}
-                    variant={'filled'}
+                    variant={'outlined'}
                     inputProps={{
                       name: 'content',
                     }}
                   />
                 </Grid>
 
-                <Card>
-                  <CardHeader
-                    title={
-                      this.state.addNewLink ? 'Add New Link' : 'Subject Links'
-                    }
-                    action={
-                      <IconButton
-                        color={this.state.addNewLink ? 'inherit' : 'primary'}
-                        onClick={
-                          this.state.addNewLink
-                            ? closeNewLinkClickHandler
-                            : addNewLinkClickHandler
-                        }
-                      >
-                        {this.state.addNewLink ? <CancelIcon /> : <AddIcon />}
-                      </IconButton>
-                    }
-                  />
-                  <CardContent>
-                    {this.state.addNewLink ? (
-                      <NewLinkCard clickHandler={saveLinkClickHandler} />
-                    ) : (
-                      <List className={classes.root}>
-                        {this.state.links.map(
-                          (link: CustomLink, index: number) => {
-                            return (
-                              <ListItem key={index}>
-                                <ListItemAvatar>
-                                  <Avatar>
-                                    <ImageIcon />
-                                  </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText
-                                  primary={
-                                    <Link
-                                      href={cleanupLink(link.linkUrl)}
-                                      rel={'noopener noreferrer'}
-                                      className={classes.linkUrl}
-                                      target={'_blank'}
-                                    >
-                                      {link.linkTitle}
-                                    </Link>
-                                  }
-                                />
-                              </ListItem>
-                            );
-                          }
-                        )}
-                      </List>
-                    )}
-                  </CardContent>
+                {/*<Card>*/}
+                {/*  <CardHeader*/}
+                {/*    title={*/}
+                {/*      this.state.addNewLink ? 'Add New Link' : 'Subject Links'*/}
+                {/*    }*/}
+                {/*    action={*/}
+                {/*      <IconButton*/}
+                {/*        color={this.state.addNewLink ? 'inherit' : 'primary'}*/}
+                {/*        onClick={*/}
+                {/*          this.state.addNewLink*/}
+                {/*            ? closeNewLinkClickHandler*/}
+                {/*            : addNewLinkClickHandler*/}
+                {/*        }*/}
+                {/*      >*/}
+                {/*        {this.state.addNewLink ? <CancelIcon /> : <AddIcon />}*/}
+                {/*      </IconButton>*/}
+                {/*    }*/}
+                {/*  />*/}
+                {/*  <CardContent>*/}
+                {/*    {this.state.addNewLink ? (*/}
+                {/*      <NewLinkCard clickHandler={saveLinkClickHandler} />*/}
+                {/*    ) : (*/}
+                {/*      <List className={classes.root}>*/}
+                {/*        {this.state.links.map(*/}
+                {/*          (link: CustomLink, index: number) => {*/}
+                {/*            return (*/}
+                {/*              <ListItem key={index}>*/}
+                {/*                <ListItemAvatar>*/}
+                {/*                  <Avatar>*/}
+                {/*                    <ImageIcon />*/}
+                {/*                  </Avatar>*/}
+                {/*                </ListItemAvatar>*/}
+                {/*                <ListItemText*/}
+                {/*                  primary={*/}
+                {/*                    <Link*/}
+                {/*                      href={cleanupLink(link.linkUrl)}*/}
+                {/*                      rel={'noopener noreferrer'}*/}
+                {/*                      className={classes.linkUrl}*/}
+                {/*                      target={'_blank'}*/}
+                {/*                    >*/}
+                {/*                      {link.linkTitle}*/}
+                {/*                    </Link>*/}
+                {/*                  }*/}
+                {/*                />*/}
+                {/*              </ListItem>*/}
+                {/*            );*/}
+                {/*          }*/}
+                {/*        )}*/}
+                {/*      </List>*/}
+                {/*    )}*/}
+                {/*  </CardContent>*/}
 
-                  {this.state.links.map((link: CustomLink) => {
-                    {
-                      link.linkTitle;
-                    }
-                  })}
-                </Card>
+                {/*  {this.state.links.map((link: CustomLink) => {*/}
+                {/*    {*/}
+                {/*      link.linkTitle;*/}
+                {/*    }*/}
+                {/*  })}*/}
+                {/*</Card>*/}
               </Grid>
 
               <Grid item xs={6}>
