@@ -4,7 +4,7 @@ import {
   deleteLink,
   updateLink,
   UpdateLinkProps,
-} from '../../../services/link-service';
+} from '../../../services/topic-links-service';
 import MaterialTable from 'material-table';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
