@@ -1,6 +1,6 @@
-import { clearEditing, editingSubject } from "./editing-subject";
+import { clearEditing, editingSubject } from './editing-subject';
 import { v4 as uuidv4 } from 'uuid';
-import actions from "../actions";
+import actions from '../actions';
 
 describe('editing subject creator', () => {
   it('should return action', () => {
@@ -10,7 +10,7 @@ describe('editing subject creator', () => {
     expect(action).toEqual({
       type: actions.EDITING_SUBJECT,
       subjectId: id,
-    })
+    });
   });
 
   it('should return clear editing action', () => {
@@ -18,6 +18,6 @@ describe('editing subject creator', () => {
 
     expect(action).toEqual({
       type: actions.CLEAR_EDITING,
-    })
+    });
   });
 });
