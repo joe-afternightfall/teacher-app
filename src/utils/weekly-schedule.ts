@@ -1,19 +1,19 @@
 import {
-  PlannerItem,
-  MovePlannerResult,
-  Planner,
-  PlannerItems,
-} from '../configs/types/WeeklyPlanner';
+  LessonItem,
+  MoveLessonResult,
+  Lesson,
+  LessonItems,
+} from '../configs/types/LessonPlanner';
 import { DraggableLocation } from 'react-beautiful-dnd';
 
 /**
  * Reorder items in list
  */
 export const reorder = (
-  list: PlannerItem[],
+  list: LessonItem[],
   startIndex: number,
   endIndex: number
-): PlannerItem[] => {
+): LessonItem[] => {
   const result = [...list];
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
@@ -25,11 +25,11 @@ export const reorder = (
  * Moves an item from one list to another list.
  */
 export const move = (
-  source: PlannerItem[],
-  destination: PlannerItem[],
+  source: LessonItem[],
+  destination: LessonItem[],
   droppableSource: DraggableLocation,
   droppableDestination: DraggableLocation
-): MovePlannerResult[] | any => {
+): MoveLessonResult[] | any => {
   const sourceClone = [...source];
   const destClone = [...destination];
   const [removed] = sourceClone.splice(droppableSource.index, 1);
@@ -44,9 +44,9 @@ export const move = (
 };
 
 export const updateAllItems = (
-  resultFromMove: MovePlannerResult,
-  planner: Planner
-): PlannerItems => {
+  resultFromMove: MoveLessonResult,
+  planner: Lesson
+): LessonItems => {
   return {
     monday: resultFromMove.monday
       ? resultFromMove.monday

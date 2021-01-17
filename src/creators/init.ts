@@ -1,6 +1,6 @@
 import actions from './actions';
 import { weeklyPlanners } from '../configs/dummy-data';
-import { Planner } from '../configs/types/WeeklyPlanner';
+import { Lesson } from '../configs/types/LessonPlanner';
 
 export const initApp = (): InitAction => {
   return {
@@ -11,5 +11,5 @@ export const initApp = (): InitAction => {
 
 export interface InitAction {
   type: string;
-  weeklyPlanners: Planner[];
+  weeklyPlanners: Lesson[];
 }

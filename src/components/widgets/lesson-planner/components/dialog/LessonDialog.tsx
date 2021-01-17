@@ -28,9 +28,9 @@ import AddIcon from '@material-ui/icons/Add';
 import { Styles } from '@material-ui/styles';
 import CloseIcon from '@material-ui/icons/Close';
 import {
-  Planner,
-  PlannerItem,
-} from '../../../../../configs/types/WeeklyPlanner';
+  Lesson,
+  LessonItem,
+} from '../../../../../configs/types/LessonPlanner';
 import WeekdaySelectionGroup from './WeekdaySelectionGroup';
 import NewLinkCard from './NewLinkCard';
 import ImageIcon from '@material-ui/icons/Image';
@@ -314,8 +314,8 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
 }
 
 export interface LessonDialogProps extends WithStyles<typeof styles> {
-  reorderHandler: (items: PlannerItem[], sourceId: string) => void;
-  selectedPlanner: Planner;
+  reorderHandler: (items: LessonItem[], sourceId: string) => void;
+  selectedPlanner: Lesson;
 }
 
 export default withStyles(styles, { withTheme: true })(LessonDialog);

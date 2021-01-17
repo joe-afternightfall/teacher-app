@@ -18,7 +18,7 @@ import { Styles } from '@material-ui/styles';
 import AddNewDialog from './dialog/LessonDialog';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
-import { Planner, PlannerItem } from '../../../../configs/types/WeeklyPlanner';
+import { Lesson, LessonItem } from '../../../../configs/types/LessonPlanner';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   root: {
@@ -78,8 +78,8 @@ class PlannerControls extends Component<PlannerControlsProps> {
 }
 
 export interface PlannerControlsProps extends WithStyles<typeof styles> {
-  reorderHandler: (items: PlannerItem[], sourceId: string) => void;
-  selectedPlanner: Planner;
+  reorderHandler: (items: LessonItem[], sourceId: string) => void;
+  selectedPlanner: Lesson;
 }
 
 export default withStyles(styles, { withTheme: true })(PlannerControls);

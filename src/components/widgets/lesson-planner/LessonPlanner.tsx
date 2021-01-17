@@ -9,11 +9,11 @@ import { Grid } from '@material-ui/core';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import {
-  Planner,
-  PlannerItem,
-  PlannerItems,
-  MovePlannerResult,
-} from '../../../configs/types/WeeklyPlanner';
+  Lesson,
+  LessonItem,
+  LessonItems,
+  MoveLessonResult,
+} from '../../../configs/types/LessonPlanner';
 import TimeColumn from './components/TimeColumn';
 import PlannerControls from './components/PlannerControls';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
@@ -33,7 +33,7 @@ class LessonPlanner extends Component<LessonPlannerProps> {
     const { selectedPlanner } = this.props;
     const plannerItems = selectedPlanner.items;
 
-    const getList = (dayOfWeek: string): PlannerItem[] => {
+    const getList = (dayOfWeek: string): LessonItem[] => {
       return plannerItems[dayOfWeek].items;
     };
 
@@ -54,14 +54,14 @@ class LessonPlanner extends Component<LessonPlannerProps> {
 
         this.props.reorderHandler(reorderedItems, dayOfWeek);
       } else {
-        const resultFromMove: MovePlannerResult = move(
+        const resultFromMove: MoveLessonResult = move(
           getList(dayOfWeek),
           getList(destination.droppableId),
           source,
           destination
         );
 
-        const updatedItems: PlannerItems = updateAllItems(
+        const updatedItems: LessonItems = updateAllItems(
           resultFromMove,
           selectedPlanner
         );
@@ -111,10 +111,10 @@ class LessonPlanner extends Component<LessonPlannerProps> {
 }
 
 export interface LessonPlannerProps extends WithStyles<typeof styles> {
-  selectedPlanner: Planner;
-  reorderHandler: (items: PlannerItem[], sourceId: string) => void;
-  moveHandler: (items: PlannerItems) => void;
-  loadWeeklyPlannersHandler: (planners: any) => Planner[];
+  selectedPlanner: Lesson;
+  reorderHandler: (items: LessonItem[], sourceId: string) => void;
+  moveHandler: (items: LessonItems) => void;
+  loadWeeklyPlannersHandler: (planners: any) => Lesson[];
 }
 
 export default withStyles(styles, { withTheme: true })(LessonPlanner);

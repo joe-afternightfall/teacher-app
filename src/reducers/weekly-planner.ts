@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
-import { Planner } from '../configs/types/WeeklyPlanner';
+import { Lesson } from '../configs/types/LessonPlanner';
 
 export default {
   reducer(
@@ -20,7 +20,7 @@ export default {
         break;
       case actions.REORDER_WEEKLY_PLANNER: {
         const selectedPlanner = newState.weeklyPlanners.find(
-          (planner: Planner) => {
+          (planner: Lesson) => {
             return planner.id === newState.selectedPlannerId;
           }
         );
@@ -55,5 +55,5 @@ export default {
 export interface WeeklyPlannerState {
   selectedPlannerId: string;
   displayEditingForm: boolean;
-  weeklyPlanners: Planner[];
+  weeklyPlanners: Lesson[];
 }

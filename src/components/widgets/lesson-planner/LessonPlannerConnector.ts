@@ -6,10 +6,10 @@ import {
   updatePlannerItems,
 } from '../../../creators/weekly-planner';
 import {
-  Planner,
-  PlannerItem,
-  PlannerItems,
-} from '../../../configs/types/WeeklyPlanner';
+  Lesson,
+  LessonItem,
+  LessonItems,
+} from '../../../configs/types/LessonPlanner';
 import { State } from '../../../configs/redux/store';
 import LessonPlanner, { LessonPlannerProps } from './LessonPlanner';
 
@@ -27,13 +27,13 @@ const mapStateToProps = (state: State): LessonPlannerProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): LessonPlannerProps =>
   (({
-    reorderHandler: (items: PlannerItem[], dayOfWeek: string) => {
+    reorderHandler: (items: LessonItem[], dayOfWeek: string) => {
       dispatch(reorderPlannerItems(items, dayOfWeek));
     },
-    moveHandler: (items: PlannerItems) => {
+    moveHandler: (items: LessonItems) => {
       dispatch(updatePlannerItems(items));
     },
-    loadWeeklyPlannersHandler: (planners: Planner[]) => {
+    loadWeeklyPlannersHandler: (planners: Lesson[]) => {
       dispatch(loadWeeklyPlanners(planners));
     },
   } as unknown) as LessonPlannerProps);
