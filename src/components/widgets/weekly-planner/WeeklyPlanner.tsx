@@ -78,8 +78,7 @@ class WeeklyPlanner extends Component<WeeklyPlannerProps> {
         />
 
         <Grid container justify={'center'} spacing={1}>
-          <TimeColumn />
-
+          {/*<TimeColumn />*/}
           <ColumnList
             dayOfWeek={'monday'}
             plannerDay={plannerItems.monday}

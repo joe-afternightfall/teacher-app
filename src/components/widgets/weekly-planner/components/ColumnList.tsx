@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
-import { Card, CardHeader, Grid } from '@material-ui/core';
+import { Card, CardContent, CardHeader, Grid } from '@material-ui/core';
 import {
   PlannerDay,
   PlannerItem,
@@ -26,14 +26,22 @@ const getItemStyle = (
   isDragging: boolean
 ): Record<string, unknown> => ({
   height: 64,
-  borderBottom: '1px solid black',
-  background: isDragging ? 'lightgreen' : 'grey',
+  // color: '#ebebeb',
+  // color: '#C8C8C8',
+  // color: '#D4D4D4',
+  // color: '#E1E1E2',
+  // background: '#F5F5F5',
+  // borderBottom: '1px solid black',
+  marginTop: 8,
+  // borderLeft: '1px solid blue',
+  background: isDragging ? '#F2F2F2' : '#FFF',
   ...draggableStyle,
 });
 
 const getListStyle = (isDraggingOver: boolean): Record<string, unknown> => ({
-  background: isDraggingOver ? 'lightblue' : 'lightgrey',
+  background: isDraggingOver ? '#D0D0D0' : '#EBEBEB',
   minHeight: '100vh',
+  padding: 4,
 });
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
@@ -43,7 +51,7 @@ class ColumnList extends Component<ColumnProps> {
     const { plannerDay, dayOfWeek, color } = this.props;
 
     return (
-      <Grid item style={{ width: '17%' }}>
+      <Grid item style={{ width: '20%' }}>
         <Card style={{ width: '100%' }}>
           <CardHeader
             style={{
@@ -67,7 +75,7 @@ class ColumnList extends Component<ColumnProps> {
                       providedDraggable2: DraggableProvided,
                       snapshotDraggable2: DraggableStateSnapshot
                     ) => (
-                      <div
+                      <Card
                         ref={providedDraggable2.innerRef}
                         {...providedDraggable2.draggableProps}
                         {...providedDraggable2.dragHandleProps}
@@ -75,9 +83,10 @@ class ColumnList extends Component<ColumnProps> {
                           providedDraggable2.draggableProps.style,
                           snapshotDraggable2.isDragging
                         )}
+                        elevation={snapshotDraggable2.isDragging ? 10 : 2}
                       >
-                        {item.content}
-                      </div>
+                        <CardContent>{item.content}</CardContent>
+                      </Card>
                     )}
                   </Draggable>
                 ))}
