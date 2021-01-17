@@ -46,7 +46,7 @@ const getListStyle = (isDraggingOver: boolean): Record<string, unknown> => ({
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
-class ColumnList extends Component<ColumnProps> {
+class Column extends Component<ColumnProps> {
   render(): JSX.Element {
     const { plannerDay, dayOfWeek, color } = this.props;
 
@@ -106,4 +106,4 @@ export interface ColumnProps extends WithStyles<typeof styles> {
   color: string;
 }
 
-export default withStyles(styles, { withTheme: true })(ColumnList);
+export default withStyles(styles, { withTheme: true })(Column);

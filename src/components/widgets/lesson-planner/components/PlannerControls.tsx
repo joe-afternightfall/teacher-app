@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
-import AddNewDialog from './dialog/AddNewDialog';
+import AddNewDialog from './dialog/LessonDialog';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import { Planner, PlannerItem } from '../../../../configs/types/WeeklyPlanner';

@@ -57,7 +57,7 @@ export interface CustomLink {
   linkTitle: string;
 }
 
-interface AddNewDialogState {
+interface LessonDialogState {
   [key: string]: string | boolean | string[] | CustomLink[] | CustomLink;
   open: boolean;
   title: string;
@@ -68,7 +68,7 @@ interface AddNewDialogState {
   newLink: CustomLink;
 }
 
-class AddNewDialog extends Component<AddNewDialogProps, AddNewDialogState> {
+class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
   state = {
     open: false,
     content: '',
@@ -313,9 +313,9 @@ class AddNewDialog extends Component<AddNewDialogProps, AddNewDialogState> {
   }
 }
 
-export interface AddNewDialogProps extends WithStyles<typeof styles> {
+export interface LessonDialogProps extends WithStyles<typeof styles> {
   reorderHandler: (items: PlannerItem[], sourceId: string) => void;
   selectedPlanner: Planner;
 }
 
-export default withStyles(styles, { withTheme: true })(AddNewDialog);
+export default withStyles(styles, { withTheme: true })(LessonDialog);

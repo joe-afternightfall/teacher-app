@@ -11,9 +11,9 @@ import {
   PlannerItems,
 } from '../../../configs/types/WeeklyPlanner';
 import { State } from '../../../configs/redux/store';
-import WeeklyPlanner, { WeeklyPlannerProps } from './WeeklyPlanner';
+import LessonPlanner, { LessonPlannerProps } from './LessonPlanner';
 
-const mapStateToProps = (state: State): WeeklyPlannerProps => {
+const mapStateToProps = (state: State): LessonPlannerProps => {
   const selectedPlanner = state.weeklyPlannerState.weeklyPlanners.find(
     (planner) => {
       return planner.id === state.weeklyPlannerState.selectedPlannerId;
@@ -22,10 +22,10 @@ const mapStateToProps = (state: State): WeeklyPlannerProps => {
 
   return ({
     selectedPlanner: selectedPlanner,
-  } as unknown) as WeeklyPlannerProps;
+  } as unknown) as LessonPlannerProps;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): WeeklyPlannerProps =>
+const mapDispatchToProps = (dispatch: Dispatch): LessonPlannerProps =>
   (({
     reorderHandler: (items: PlannerItem[], dayOfWeek: string) => {
       dispatch(reorderPlannerItems(items, dayOfWeek));
@@ -36,6 +36,6 @@ const mapDispatchToProps = (dispatch: Dispatch): WeeklyPlannerProps =>
     loadWeeklyPlannersHandler: (planners: Planner[]) => {
       dispatch(loadWeeklyPlanners(planners));
     },
-  } as unknown) as WeeklyPlannerProps);
+  } as unknown) as LessonPlannerProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(WeeklyPlanner);
+export default connect(mapStateToProps, mapDispatchToProps)(LessonPlanner);
