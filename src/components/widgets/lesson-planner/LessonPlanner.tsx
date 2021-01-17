@@ -17,16 +17,16 @@ import {
 import TimeColumn from './components/TimeColumn';
 import PlannerControls from './components/PlannerControls';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { getAllWeeklyPlanners } from '../../../services/weekly-planner';
+import { getAllLessonPlanners } from '../../../services/lesson-planner-service';
 import { move, reorder, updateAllItems } from '../../../utils/weekly-schedule';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class LessonPlanner extends Component<LessonPlannerProps> {
   async componentDidMount() {
-    const planners = await getAllWeeklyPlanners();
+    const planners = await getAllLessonPlanners();
 
-    this.props.loadWeeklyPlannersHandler(planners);
+    this.props.loadLessonPlannersHandler(planners);
   }
 
   render(): JSX.Element {
@@ -114,7 +114,7 @@ export interface LessonPlannerProps extends WithStyles<typeof styles> {
   selectedPlanner: Lesson;
   reorderHandler: (items: LessonItem[], sourceId: string) => void;
   moveHandler: (items: LessonItems) => void;
-  loadWeeklyPlannersHandler: (planners: any) => Lesson[];
+  loadLessonPlannersHandler: (planners: any) => Lesson[];
 }
 
 export default withStyles(styles, { withTheme: true })(LessonPlanner);

@@ -1,10 +1,10 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {
-  loadWeeklyPlanners,
+  loadLessonPlanners,
   reorderPlannerItems,
   updatePlannerItems,
-} from '../../../creators/weekly-planner';
+} from '../../../creators/lesson-planner';
 import {
   Lesson,
   LessonItem,
@@ -14,9 +14,9 @@ import { State } from '../../../configs/redux/store';
 import LessonPlanner, { LessonPlannerProps } from './LessonPlanner';
 
 const mapStateToProps = (state: State): LessonPlannerProps => {
-  const selectedPlanner = state.weeklyPlannerState.weeklyPlanners.find(
+  const selectedPlanner = state.lessonPlannerState.lessonPlanners.find(
     (planner) => {
-      return planner.id === state.weeklyPlannerState.selectedPlannerId;
+      return planner.id === state.lessonPlannerState.selectedLessonId;
     }
   );
 
@@ -33,8 +33,8 @@ const mapDispatchToProps = (dispatch: Dispatch): LessonPlannerProps =>
     moveHandler: (items: LessonItems) => {
       dispatch(updatePlannerItems(items));
     },
-    loadWeeklyPlannersHandler: (planners: Lesson[]) => {
-      dispatch(loadWeeklyPlanners(planners));
+    loadLessonPlannersHandler: (planners: Lesson[]) => {
+      dispatch(loadLessonPlanners(planners));
     },
   } as unknown) as LessonPlannerProps);
 

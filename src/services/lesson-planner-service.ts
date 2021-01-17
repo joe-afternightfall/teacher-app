@@ -1,9 +1,9 @@
 import firebase from 'firebase';
 
-export const getAllWeeklyPlanners = async () => {
+export const getAllLessonPlanners = async () => {
   return await firebase
     .database()
-    .ref('/weeklyPlanners')
+    .ref('/lesson-planners')
     .once('value')
     .then((snapshot) => {
       return snapshot.val();

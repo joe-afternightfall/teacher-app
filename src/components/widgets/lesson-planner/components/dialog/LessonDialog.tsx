@@ -35,12 +35,35 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import { NewLinkForm } from '../../../topic-links/components/NewLinkDialog';
 import SubjectDropdown from '../../../subject-dropdown/SubjectDropdownConnector';
 
+const CssTextField = withStyles({
+  root: {
+    '& label.Mui-focused': {
+      color: 'white',
+    },
+    '& .MuiInputLabel-root': {
+      color: 'white',
+    },
+    '& .MuiOutlinedInput-label': {
+      color: 'white',
+    },
+    '& .MuiOutlinedInput-root': {
+      color: 'white',
+      '& fieldset': {
+        borderColor: '#fff',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white',
+      },
+    },
+  },
+})(TextField);
+
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   closeButton: {
     position: 'absolute',
     right: theme.spacing(1),
     top: theme.spacing(1),
-    color: theme.palette.grey[500],
+    color: '#fff',
   },
   linkUrl: {
     '&:hover': {
@@ -188,8 +211,17 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
           onClose={handleClose}
           open={this.state.open}
         >
-          <DialogTitle id="form-dialog-title">
-            {'New Subject Item'}
+          <DialogTitle
+            style={{ background: '#3BAAFC' }}
+            id={'form-dialog-title'}
+          >
+            <CssTextField
+              className={classes.margin}
+              label={'Lesson Name'}
+              variant={'outlined'}
+              id={'lesson-name'}
+            />
+
             <IconButton
               aria-label={'close'}
               className={classes.closeButton}

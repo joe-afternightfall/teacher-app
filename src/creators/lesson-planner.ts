@@ -10,7 +10,7 @@ export const reorderPlannerItems = (
   dayOfWeek: string
 ): ReorderItemsAction => {
   return {
-    type: actions.REORDER_WEEKLY_PLANNER,
+    type: actions.REORDER_LESSON_PLANNER,
     items: items,
     dayOfWeek: dayOfWeek,
   };
@@ -34,9 +34,9 @@ export interface UpdateItemsAction {
   items: LessonItems;
 }
 
-export const loadWeeklyPlanners = (planners: Lesson[]) => {
+export const loadLessonPlanners = (planners: Lesson[]) => {
   return {
-    type: actions.LOAD_WEEKLY_PLANNERS,
-    weeklyPlanners: planners,
+    type: actions.LOAD_LESSON_PLANNERS,
+    lessonPlanners: planners,
   };
 };
