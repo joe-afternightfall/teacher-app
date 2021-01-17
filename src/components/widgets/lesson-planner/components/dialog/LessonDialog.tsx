@@ -27,10 +27,7 @@ import React, { Component } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import { Styles } from '@material-ui/styles';
 import CloseIcon from '@material-ui/icons/Close';
-import {
-  Lesson,
-  LessonItem,
-} from '../../../../../configs/types/LessonPlanner';
+import { Lesson, LessonItem } from '../../../../../configs/types/LessonPlanner';
 import WeekdaySelectionGroup from './WeekdaySelectionGroup';
 import NewLinkCard from './NewLinkCard';
 import ImageIcon from '@material-ui/icons/Image';

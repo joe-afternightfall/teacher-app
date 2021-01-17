@@ -15,10 +15,7 @@ import {
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import { Card, CardContent, CardHeader, Grid } from '@material-ui/core';
-import {
-  WeekDay,
-  LessonItem,
-} from '../../../../configs/types/LessonPlanner';
+import { WeekDay, LessonItem } from '../../../../configs/types/LessonPlanner';
 import { capitalizeFirstLetter } from '../../../../utils/string-formatter';
 
 const getItemStyle = (
