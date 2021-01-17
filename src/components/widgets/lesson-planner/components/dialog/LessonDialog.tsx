@@ -216,10 +216,12 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
             id={'form-dialog-title'}
           >
             <CssTextField
+              autoFocus
               className={classes.margin}
               label={'Lesson Name'}
               variant={'outlined'}
               id={'lesson-name'}
+              style={{ width: '45%' }}
             />
 
             <IconButton
