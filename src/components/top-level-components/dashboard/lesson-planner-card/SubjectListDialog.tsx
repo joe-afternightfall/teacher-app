@@ -98,7 +98,7 @@ class SubjectListDialog extends Component<SubjectListDialogProps> {
                 justify={'center'}
                 direction={'column'}
                 style={{
-                  minHeight: '60vh',
+                  minHeight: '30vh',
                 }}
                 alignItems={'center'}
               >

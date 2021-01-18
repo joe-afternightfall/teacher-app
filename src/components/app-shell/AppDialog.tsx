@@ -29,6 +29,11 @@ class AppDialog extends Component<AppDialogProps> {
   render(): JSX.Element {
     const { classes, title, maxWidth, open, titleColor, content } = this.props;
 
+    const handleConfirmClick = () => {
+      this.props.confirmClickHandler();
+      this.props.handleClose();
+    };
+
     return (
       <Dialog
         maxWidth={maxWidth}
@@ -56,8 +61,8 @@ class AppDialog extends Component<AppDialogProps> {
           <Button onClick={this.props.handleClose} color={'secondary'}>
             {'Cancel'}
           </Button>
-          <Button onClick={this.props.handleClose} color={'primary'}>
-            {'Save'}
+          <Button onClick={handleConfirmClick} color={'primary'}>
+            {this.props.confirmButtonTitle}
           </Button>
         </DialogActions>
       </Dialog>
@@ -72,6 +77,8 @@ export interface AppDialogProps extends WithStyles<typeof styles> {
   content: JSX.Element;
   handleClose: () => void;
   maxWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
+  confirmClickHandler: any;
+  confirmButtonTitle: string;
 }
 
 export default withStyles(styles, { withTheme: true })(AppDialog);

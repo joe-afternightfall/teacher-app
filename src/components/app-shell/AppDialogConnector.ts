@@ -11,6 +11,8 @@ const mapStateToProps = (state: State) => {
     maxWidth: state.applicationState.dialogWidth,
     title: state.applicationState.dialogTitle,
     titleColor: state.applicationState.dialogTitleColor,
+    confirmButtonTitle: state.applicationState.confirmButtonTitle,
+    confirmClickHandler: state.applicationState.confirmClickHandler,
   };
 };
 

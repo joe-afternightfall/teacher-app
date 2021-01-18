@@ -9,8 +9,7 @@ import {
   ListItemAvatar,
   ListItemSecondaryAction,
 } from '@material-ui/core';
-import {
-  DeleteSubjectDialog,
+import DeleteSubjectDialog, {
   DeleteSubjectDialogProps,
 } from './DeleteSubjectDialog';
 import { connect } from 'react-redux';
@@ -79,7 +78,6 @@ const SubjectList = (props: SubjectListProps) => {
                   <DeleteSubjectDialog
                     subjectName={subject.subjectName}
                     firebaseId={subject.firebaseId}
-                    deleteClickHandler={props.deleteClickHandler}
                   />
                 </ListItemSecondaryAction>
               </ListItem>
@@ -95,7 +93,6 @@ const SubjectList = (props: SubjectListProps) => {
 export interface SubjectListProps {
   isEmpty: boolean;
   subjectList: Subject[];
-  deleteClickHandler: (id: string) => void;
   editClickHandler: (id: string) => void;
 }
 
@@ -114,10 +111,6 @@ const mapStateToProps = (state: State): SubjectListProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): DeleteSubjectDialogProps =>
   (({
-    deleteClickHandler: (id: string) => {
-      console.log('DELETEING_ID = ' + id);
-      (dispatch as ThunkDispatch<State, void, AnyAction>)(deleteSubject(id));
-    },
     editClickHandler: (id: string) => {
       dispatch(editingSubject(id));
       dispatch(openSubjectInfoDialog());

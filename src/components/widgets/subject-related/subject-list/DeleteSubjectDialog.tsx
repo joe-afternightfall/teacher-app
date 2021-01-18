@@ -1,82 +1,39 @@
+import { Grid, IconButton, Typography } from '@material-ui/core';
 import React from 'react';
-import {
-  Grid,
-  Button,
-  Dialog,
-  IconButton,
-  Typography,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-} from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import { connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction, Dispatch } from 'redux';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { State } from '../../../../configs/redux/store';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { displayAppDialog } from '../../../../creators/application/app-dialog';
+import { deleteSubject } from '../../../../services/subject-list-service';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    closeButton: {
-      position: 'absolute',
-      right: theme.spacing(1),
-      top: theme.spacing(1),
-      color: theme.palette.grey[500],
-    },
     deleteButton: {
       marginLeft: 12,
     },
   })
 );
 
-export const DeleteSubjectDialog = (
-  props: DeleteSubjectDialogProps
-): JSX.Element => {
+const DeleteSubjectDialog = (props: DeleteSubjectDialogProps): JSX.Element => {
   const classes = useStyles();
 
-  const [open, setOpen] = React.useState<boolean>(false);
-
-  const openDialog = () => {
-    setOpen(true);
-  };
-
-  const closeDialog = () => {
-    setOpen(false);
-  };
-
   return (
-    <React.Fragment>
-      <IconButton
-        className={classes.deleteButton}
-        edge={'end'}
-        aria-label={'delete'}
-        onClick={openDialog}
-      >
-        <DeleteIcon />
-      </IconButton>
-
-      <Dialog
-        fullWidth={true}
-        open={open}
-        onClose={closeDialog}
-        maxWidth={'sm'}
-      >
-        <DialogTitle id={'subject-list-dialog-title'}>
-          <IconButton
-            aria-label={'close'}
-            className={classes.closeButton}
-            onClick={closeDialog}
-          >
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
-
-        <DialogContent>
+    <IconButton
+      className={classes.deleteButton}
+      edge={'end'}
+      aria-label={'delete'}
+      onClick={() => {
+        props.displayAppDialogHandler(
           <Grid
             container
             spacing={2}
             justify={'center'}
             direction={'column'}
             style={{
-              minHeight: '50vh',
+              minHeight: '30vh',
             }}
             alignItems={'center'}
           >
@@ -85,21 +42,15 @@ export const DeleteSubjectDialog = (
                 {`Are you sure you want to delete ${props.subjectName}?`}
               </Typography>
             </Grid>
-          </Grid>
-        </DialogContent>
-
-        <DialogActions>
-          <Button onClick={closeDialog}>{'Cancel'}</Button>
-          <Button
-            onClick={() => {
-              props.deleteClickHandler(props.firebaseId);
-            }}
-          >
-            {'Delete'}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
+          </Grid>,
+          () => {
+            props.deleteClickHandler(props.firebaseId);
+          }
+        );
+      }}
+    >
+      <DeleteIcon />
+    </IconButton>
   );
 };
 
@@ -107,4 +58,43 @@ export interface DeleteSubjectDialogProps {
   subjectName: string;
   firebaseId: string;
   deleteClickHandler: (id: string) => void;
+  displayAppDialogHandler: (
+    content: JSX.Element,
+    clickHandler: (id: string) => void
+  ) => void;
 }
+
+const mapStateToProps = (state: any): DeleteSubjectDialogProps => {
+  return ({} as unknown) as DeleteSubjectDialogProps;
+};
+
+const mapDispatchToProps = (
+  dispatch: Dispatch,
+  ownProps: any
+): DeleteSubjectDialogProps =>
+  (({
+    displayAppDialogHandler: (
+      content: JSX.Element,
+      clickHandler: (id: string) => void
+    ) => {
+      dispatch(
+        displayAppDialog({
+          maxWidth: 'sm',
+          titleColor: '',
+          content: content,
+          title: '',
+          confirmButtonTitle: 'Delete',
+          confirmClickHandler: clickHandler,
+        })
+      );
+    },
+    deleteClickHandler: (id: string) => {
+      console.log('DELETING_ID = ' + id);
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(deleteSubject(id));
+    },
+  } as unknown) as DeleteSubjectDialogProps);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DeleteSubjectDialog);
