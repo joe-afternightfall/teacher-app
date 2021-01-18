@@ -1,6 +1,7 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
 import { SnackbarCreatorProps } from '../creators/application/app-snackbar';
+import React from 'react';
 
 export default {
   reducer(
@@ -19,6 +20,19 @@ export default {
       case actions.HIDE_APP_SNACKBAR:
         newState.displayAppSnackbar = false;
         break;
+      case actions.DISPLAY_APP_DIALOG:
+        newState.displayAppDialog = true;
+        newState.dialogContent = action.content;
+        newState.dialogWidth = action.maxWidth;
+        newState.dialogTitleColor = action.titleColor;
+        newState.dialogTitle = action.title;
+        break;
+      case actions.CLOSE_APP_DIALOG:
+        newState.displayAppDialog = false;
+        // newState.dialogContent = React.createElement(React.Fragment);
+        // newState.dialogWidth = false;
+        // newState.dialogTitleColor = '';
+        break;
       default:
         newState = state;
     }
@@ -28,6 +42,11 @@ export default {
 };
 
 export interface ApplicationState {
+  dialogTitleColor: string;
+  displayAppDialog: boolean;
+  dialogContent: JSX.Element;
   displayAppSnackbar: boolean;
+  dialogTitle: string | JSX.Element;
   snackbarProps: SnackbarCreatorProps;
+  dialogWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
 }

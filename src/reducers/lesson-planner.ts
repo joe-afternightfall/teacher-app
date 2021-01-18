@@ -44,6 +44,9 @@ export default {
         }
         break;
       }
+      case actions.UPDATE_LESSON_SUBJECT:
+        newState.lessonSubjectId = action.id;
+        break;
       default:
         newState = state;
     }
@@ -56,4 +59,5 @@ export interface LessonPlannerState {
   selectedLessonId: string;
   displayEditingForm: boolean;
   lessonPlanners: Lesson[];
+  lessonSubjectId: string;
 }
