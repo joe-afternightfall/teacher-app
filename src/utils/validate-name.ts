@@ -4,7 +4,8 @@ export const checkForDuplicates = (
   subjectList: Subject[],
   newSubject: string
 ): boolean => {
-  return subjectList.some(
-    (subject: Subject) => subject.subjectName === newSubject
+  return (
+    subjectList &&
+    subjectList.some((subject: Subject) => subject.subjectName === newSubject)
   );
 };

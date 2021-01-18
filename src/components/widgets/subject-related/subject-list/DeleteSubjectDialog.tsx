@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme: Theme) =>
       top: theme.spacing(1),
       color: theme.palette.grey[500],
     },
+    deleteButton: {
+      marginLeft: 12,
+    },
   })
 );
 
@@ -41,7 +44,12 @@ export const DeleteSubjectDialog = (
 
   return (
     <React.Fragment>
-      <IconButton edge={'end'} aria-label={'delete'} onClick={openDialog}>
+      <IconButton
+        className={classes.deleteButton}
+        edge={'end'}
+        aria-label={'delete'}
+        onClick={openDialog}
+      >
         <DeleteIcon />
       </IconButton>
 

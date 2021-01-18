@@ -4,13 +4,13 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import CheckIcon from '@material-ui/icons/Check';
 import { Grid, Tooltip } from '@material-ui/core';
-import { State } from '../../../../../../../configs/redux/store';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import {
   ColorChoice,
   subjectColorChoices,
-} from '../../../../../../../configs/theme/subject-color-choices';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { selectColor } from '../../../../../../../creators/subject-list/select-color';
+} from '../../../../../../configs/theme/subject-color-choices';
+import { State } from '../../../../../../configs/redux/store';
+import { selectColor } from '../../../../../../creators/subject-list/select-color';
 
 const useStyles = makeStyles(() =>
   createStyles({

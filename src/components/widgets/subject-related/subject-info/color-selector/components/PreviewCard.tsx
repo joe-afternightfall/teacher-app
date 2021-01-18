@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, Grid, Avatar, CardHeader, CardContent } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { State } from '../../../../../../../configs/redux/store';
-import { ColorChoice } from '../../../../../../../configs/theme/subject-color-choices';
-import { getIcon } from '../../../../../../../utils/get-icon';
+import { getIcon } from '../../../../../../utils/get-icon';
+import { ColorChoice } from '../../../../../../configs/theme/subject-color-choices';
+import { State } from '../../../../../../configs/redux/store';
 
 const PreviewCard = (props: PreviewCardProps) => {
   const icon = getIcon(props.selectedIconId);

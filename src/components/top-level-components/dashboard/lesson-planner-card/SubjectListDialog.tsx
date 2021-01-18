@@ -18,12 +18,12 @@ import {
   withStyles,
   StyledComponentProps,
 } from '@material-ui/core/styles';
-import SubjectList from './list/SubjectList';
 import AddIcon from '@material-ui/icons/Add';
 import { Styles } from '@material-ui/styles';
 import CloseIcon from '@material-ui/icons/Close';
-import SubjectInfo from './subject-info/SubjectInfo';
-import SubjectInfoActionButtons from './subject-info/SubjectInfoActionButtons';
+import SubjectInfoActionButtons from '../../../widgets/subject-related/subject-info/SubjectInfoActionButtons';
+import SubjectInfo from '../../../widgets/subject-related/subject-info/SubjectInfo';
+import SubjectList from '../../../widgets/subject-related/subject-list/SubjectList';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   closeButton: {

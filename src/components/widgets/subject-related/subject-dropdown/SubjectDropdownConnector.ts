@@ -1,11 +1,13 @@
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import SubjectDropdown from './SubjectDropdown';
-import { State } from '../../../configs/redux/store';
-import { Dispatch } from 'redux';
+import { State } from '../../../../configs/redux/store';
 
 const mapStateToProps = (state: State) => {
   return {
-    subjectList: state.subjectListState.subjectList,
+    subjectList: state.subjectListState.subjectList
+      ? state.subjectListState.subjectList
+      : [],
   };
 };
 

@@ -5,9 +5,9 @@ import { Grid, Paper, Typography } from '@material-ui/core';
 import {
   SubjectIcon,
   subjectIcons,
-} from '../../../../../../configs/theme/subject-icon-choices';
-import { State } from '../../../../../../configs/redux/store';
-import { selectIcon } from '../../../../../../creators/subject-list/select-icon';
+} from '../../../../../configs/theme/subject-icon-choices';
+import { State } from '../../../../../configs/redux/store';
+import { selectIcon } from '../../../../../creators/subject-list/select-icon';
 
 const IconSelector = (props: IconSelectorProps) => {
   const [isHovering, setIsHovering] = React.useState<string>('');

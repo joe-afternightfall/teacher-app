@@ -1,7 +1,10 @@
 import * as React from 'react';
 import DashboardScreen from './DashboardScreen';
 import '@testing-library/jest-dom/extend-expect';
-import { getStore, renderWithRedux } from '../../configs/test-utils/mock-redux';
+import {
+  getStore,
+  renderWithRedux,
+} from '../../../configs/test-utils/mock-redux';
 
 describe('Dashboard Screen', () => {
   it('should render with default title', () => {
