@@ -5,6 +5,7 @@ interface AppDialogAction {
   titleColor: string;
   content: JSX.Element;
   maxWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
+  title: string | JSX.Element;
 }
 
 export const displayAppDialog = (props: AppDialogAction): AnyAction => {
@@ -13,6 +14,7 @@ export const displayAppDialog = (props: AppDialogAction): AnyAction => {
     maxWidth: props.maxWidth,
     titleColor: props.titleColor,
     content: props.content,
+    title: props.title,
   };
 };
 

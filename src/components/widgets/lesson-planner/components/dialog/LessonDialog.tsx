@@ -112,18 +112,6 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
   render(): JSX.Element {
     const { classes } = this.props;
 
-    const handleClickOpen = () => {
-      this.setState({
-        open: true,
-      });
-    };
-
-    const handleClose = () => {
-      this.setState({
-        open: false,
-      });
-    };
-
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
       this.setState({
         [event.target.name]: event.target.value,
@@ -154,14 +142,6 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
           }),
         });
       }
-    };
-
-    const dropdownChangeHandler = (
-      e: React.ChangeEvent<{ name?: string; value: string }>
-    ) => {
-      this.setState({
-        subjectId: e.target.value,
-      });
     };
 
     const addNewLinkClickHandler = () => {
@@ -196,51 +176,19 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
     };
 
     return (
-      <div>
-        <Button
-          color={'primary'}
-          variant={'contained'}
-          startIcon={<AddIcon />}
-          onClick={handleClickOpen}
-        >
-          {'Add New'}
-        </Button>
-
-        <Dialog
-          maxWidth={'md'}
-          fullWidth={true}
-          onClose={handleClose}
-          open={this.state.open}
-        >
-          <DialogTitle
-            style={{ background: '#3BAAFC' }}
-            id={'form-dialog-title'}
-          >
-            <CssTextField
-              autoFocus
-              id={'lesson-name'}
-              variant={'outlined'}
-              label={'Lesson Name'}
-              style={{ width: '45%' }}
-              className={classes.margin}
-            />
-
-            <IconButton
-              aria-label={'close'}
-              className={classes.closeButton}
-              onClick={handleClose}
-            >
-              <CloseIcon />
-            </IconButton>
-          </DialogTitle>
-          <DialogContent>
+      <Button
+        color={'primary'}
+        variant={'contained'}
+        startIcon={<AddIcon />}
+        onClick={() => {
+          this.props.displayAppDialogHandler(
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <Grid item>
                   <SubjectDropdown
                     width={200}
-                    value={this.state.subjectId}
-                    changeHandler={dropdownChangeHandler}
+                    value={this.props.subjectId}
+                    changeHandler={this.props.dropdownChangeHandler}
                   />
                 </Grid>
 
@@ -333,25 +281,30 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
                   />
                 </Grid>
               </Grid>
-            </Grid>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              {'Cancel'}
-            </Button>
-            <Button onClick={handleClose} color={'primary'}>
-              {'Save'}
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+            </Grid>,
+            <CssTextField
+              autoFocus
+              id={'lesson-name'}
+              variant={'outlined'}
+              label={'Lesson Name'}
+              style={{ width: '45%' }}
+              className={classes.margin}
+            />
+          );
+        }}
+      >
+        {'Add New'}
+      </Button>
     );
   }
 }
 
 export interface LessonDialogProps extends WithStyles<typeof styles> {
-  reorderHandler: (items: LessonItem[], sourceId: string) => void;
-  selectedPlanner: Lesson;
+  displayAppDialogHandler: (content: JSX.Element, title: JSX.Element) => void;
+  subjectId: string;
+  dropdownChangeHandler: (
+    e: React.ChangeEvent<{ name?: string; value: string }>
+  ) => void;
 }
 
 export default withStyles(styles, { withTheme: true })(LessonDialog);

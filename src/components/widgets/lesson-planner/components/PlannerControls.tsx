@@ -95,12 +95,13 @@ const mapDispatchToProps = (
   ownProps: any
 ): PlannerControlsProps =>
   (({
-    displayAppDialogHandler: (content: JSX.Element) => {
+    displayAppDialogHandler: (content: JSX.Element, title: JSX.Element) => {
       dispatch(
         displayAppDialog({
           maxWidth: 'lg',
-          titleColor: '',
+          titleColor: '#3baafc',
           content: content,
+          title: title,
         })
       );
     },

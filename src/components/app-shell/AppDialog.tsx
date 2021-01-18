@@ -21,13 +21,13 @@ const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
     position: 'absolute',
     right: theme.spacing(1),
     top: theme.spacing(1),
-    color: '#fff',
+    // color: '#fff',
   },
 });
 
 class AppDialog extends Component<AppDialogProps> {
   render(): JSX.Element {
-    const { classes, maxWidth, open, titleColor, content } = this.props;
+    const { classes, title, maxWidth, open, titleColor, content } = this.props;
 
     return (
       <Dialog
@@ -40,6 +40,7 @@ class AppDialog extends Component<AppDialogProps> {
           style={{ background: titleColor }}
           id={'form-dialog-title'}
         >
+          {title}
           <IconButton
             aria-label={'close'}
             className={classes.closeButton}
@@ -67,6 +68,7 @@ class AppDialog extends Component<AppDialogProps> {
 export interface AppDialogProps extends WithStyles<typeof styles> {
   open: boolean;
   titleColor: string;
+  title: string | JSX.Element;
   content: JSX.Element;
   handleClose: () => void;
   maxWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;

@@ -9,6 +9,8 @@ const mapStateToProps = (state: State) => {
     open: state.applicationState.displayAppDialog,
     content: state.applicationState.dialogContent,
     maxWidth: state.applicationState.dialogWidth,
+    title: state.applicationState.dialogTitle,
+    titleColor: state.applicationState.dialogTitleColor,
   };
 };
 
