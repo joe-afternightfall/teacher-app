@@ -32,7 +32,7 @@ export const initialState = {
   },
 };
 
-export function getStore(state: object, dispatchMock: any): MockStore {
+export function getStore(state: any, dispatchMock: any): MockStore {
   const store = createStore(middleware)({
     ...initialState,
     applicationState: { ...initialState.applicationState, ...state },
