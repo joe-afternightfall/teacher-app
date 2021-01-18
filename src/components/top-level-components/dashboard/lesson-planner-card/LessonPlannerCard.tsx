@@ -13,20 +13,20 @@ import {
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { State } from '../../../configs/redux/store';
-import routes from '../../../configs/constants/routes';
+import SubjectListDialog from './SubjectListDialog';
+import { State } from '../../../../configs/redux/store';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { routerActions } from 'connected-react-router';
-import SubjectListDialog from './subject-list/SubjectListDialog';
-import plannerBackground from '../../../configs/images/lovely-planning.jpg';
+import routes from '../../../../configs/constants/routes';
 import {
   clearSubjectInfoDialog,
   closeSubjectInfoDialog,
   openSubjectInfoDialog,
-} from '../../../creators/subject-list/subject-info-dialog';
-import { clearEditing } from '../../../creators/subject-list/editing-subject';
+} from '../../../../creators/subject-list/subject-info-dialog';
+import { clearEditing } from '../../../../creators/subject-list/editing-subject';
+import plannerBackground from '../../../../configs/images/lovely-planning.jpg';
 
-const PlannerWidget = (props: PlannerWidgetProps): JSX.Element => {
+const LessonPlannerCard = (props: PlannerWidgetProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -149,4 +149,4 @@ const mapDispatchToProps = (dispatch: Dispatch): PlannerWidgetProps =>
     },
   } as unknown) as PlannerWidgetProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlannerWidget);
+export default connect(mapStateToProps, mapDispatchToProps)(LessonPlannerCard);

@@ -61,7 +61,7 @@ const updateSubjects = async () => {
 
 const updateLinks = async () => {
   const linksList = await getLinksList();
-  if (linksList !== undefined) {
+  if (linksList !== undefined && linksList !== null) {
     // todo: rip out to util
     const links = Object.keys(linksList).map((key) => {
       return {

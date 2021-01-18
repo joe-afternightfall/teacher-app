@@ -56,13 +56,14 @@ export default function LinkForm(props: LinkFormProps): JSX.Element {
                   <MenuItem value={''}>
                     <em>{'None'}</em>
                   </MenuItem>
-                  {props.subjectList.map((subject: Subject, index: number) => {
-                    return (
-                      <MenuItem key={index} value={subject.id}>
-                        {subject.subjectName}
-                      </MenuItem>
-                    );
-                  })}
+                  {props.subjectList &&
+                    props.subjectList.map((subject: Subject, index: number) => {
+                      return (
+                        <MenuItem key={index} value={subject.id}>
+                          {subject.subjectName}
+                        </MenuItem>
+                      );
+                    })}
                 </Select>
               </FormControl>
             </Grid>
