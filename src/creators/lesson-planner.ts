@@ -4,6 +4,7 @@ import {
   LessonItem,
   LessonItems,
 } from '../configs/types/LessonPlanner';
+import { AnyAction } from 'redux';
 
 export const reorderPlannerItems = (
   items: LessonItem[],
@@ -38,5 +39,12 @@ export const loadLessonPlanners = (planners: Lesson[]) => {
   return {
     type: actions.LOAD_LESSON_PLANNERS,
     lessonPlanners: planners,
+  };
+};
+
+export const updateLessonSubject = (subjectId: string): AnyAction => {
+  return {
+    type: actions.UPDATE_LESSON_SUBJECT,
+    id: subjectId,
   };
 };
