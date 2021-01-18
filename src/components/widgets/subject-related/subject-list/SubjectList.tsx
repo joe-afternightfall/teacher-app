@@ -17,14 +17,28 @@ import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import EditIcon from '@material-ui/icons/Edit';
-import { getIcon } from '../../../../../utils/get-icon';
-import { State } from '../../../../../configs/redux/store';
-import { Subject } from '../../../../../configs/types/Subject';
-import { deleteSubject } from '../../../../../services/subject-list-service';
-import { editingSubject } from '../../../../../creators/subject-list/editing-subject';
-import { openSubjectInfoDialog } from '../../../../../creators/subject-list/subject-info-dialog';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Subject } from '../../../../configs/types/Subject';
+import { getIcon } from '../../../../utils/get-icon';
+import { State } from '../../../../configs/redux/store';
+import { deleteSubject } from '../../../../services/subject-list-service';
+import { openSubjectInfoDialog } from '../../../../creators/subject-list/subject-info-dialog';
+import { editingSubject } from '../../../../creators/subject-list/editing-subject';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      marginBottom: theme.spacing(3),
+    },
+    title: {
+      flexGrow: 1,
+    },
+  })
+);
 
 const SubjectList = (props: SubjectListProps) => {
+  const classes = useStyles();
+
   return (
     <List
       component={'nav'}
