@@ -5,7 +5,9 @@ import { State } from '../../../../configs/redux/store';
 
 const mapStateToProps = (state: State) => {
   return {
-    subjectList: state.subjectListState.subjectList,
+    subjectList: state.subjectListState.subjectList
+      ? state.subjectListState.subjectList
+      : [],
   };
 };
 
