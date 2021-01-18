@@ -66,22 +66,21 @@ const SubjectList = (props: SubjectListProps) => {
                 </ListItemAvatar>
                 <ListItemText primary={subject.subjectName} />
                 <ListItemSecondaryAction>
-                  <DeleteSubjectDialog
-                    subjectName={subject.subjectName}
-                    firebaseId={subject.firebaseId}
-                    deleteClickHandler={props.deleteClickHandler}
-                  />
-
                   <IconButton
                     edge={'end'}
                     aria-label={'edit'}
-                    style={{ marginLeft: 12 }}
                     onClick={() => {
                       props.editClickHandler(subject.id);
                     }}
                   >
                     <EditIcon />
                   </IconButton>
+
+                  <DeleteSubjectDialog
+                    subjectName={subject.subjectName}
+                    firebaseId={subject.firebaseId}
+                    deleteClickHandler={props.deleteClickHandler}
+                  />
                 </ListItemSecondaryAction>
               </ListItem>
               <Divider variant={'inset'} component={'li'} />
