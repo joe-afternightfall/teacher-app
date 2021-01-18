@@ -34,6 +34,7 @@ import ImageIcon from '@material-ui/icons/Image';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { NewLinkForm } from '../../../topic-links/components/NewLinkDialog';
 import SubjectDropdown from '../../../subject-dropdown/SubjectDropdownConnector';
+import StartAndEndTime from './StartAndEnd';
 
 const CssTextField = withStyles({
   root: {
@@ -241,6 +242,10 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
                     value={this.state.subjectId}
                     changeHandler={dropdownChangeHandler}
                   />
+                </Grid>
+
+                <Grid item>
+                  <StartAndEndTime />
                 </Grid>
 
                 <Grid item style={{ marginTop: 40 }}>
