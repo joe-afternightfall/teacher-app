@@ -1,16 +1,16 @@
 import actions from './actions';
 import {
-  Planner,
-  PlannerItem,
-  PlannerItems,
-} from '../configs/types/WeeklyPlanner';
+  Lesson,
+  LessonItem,
+  LessonItems,
+} from '../configs/types/LessonPlanner';
 
 export const reorderPlannerItems = (
-  items: PlannerItem[],
+  items: LessonItem[],
   dayOfWeek: string
 ): ReorderItemsAction => {
   return {
-    type: actions.REORDER_WEEKLY_PLANNER,
+    type: actions.REORDER_LESSON_PLANNER,
     items: items,
     dayOfWeek: dayOfWeek,
   };
@@ -18,11 +18,11 @@ export const reorderPlannerItems = (
 
 export interface ReorderItemsAction {
   type: string;
-  items: PlannerItem[];
+  items: LessonItem[];
   dayOfWeek: string;
 }
 
-export const updatePlannerItems = (items: PlannerItems): UpdateItemsAction => {
+export const updatePlannerItems = (items: LessonItems): UpdateItemsAction => {
   return {
     type: actions.MOVE_PLANNER_ITEMS,
     items: items,
@@ -31,12 +31,12 @@ export const updatePlannerItems = (items: PlannerItems): UpdateItemsAction => {
 
 export interface UpdateItemsAction {
   type: string;
-  items: PlannerItems;
+  items: LessonItems;
 }
 
-export const loadWeeklyPlanners = (planners: Planner[]) => {
+export const loadLessonPlanners = (planners: Lesson[]) => {
   return {
-    type: actions.LOAD_WEEKLY_PLANNERS,
-    weeklyPlanners: planners,
+    type: actions.LOAD_LESSON_PLANNERS,
+    lessonPlanners: planners,
   };
 };

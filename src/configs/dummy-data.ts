@@ -1,6 +1,6 @@
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
-export const weeklyPlanners = [
+export const lessonPlanners = [
   {
     createdAt: '',
     id: '17',

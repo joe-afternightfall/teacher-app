@@ -1,27 +1,27 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
-import { Planner } from '../configs/types/WeeklyPlanner';
+import { Lesson } from '../configs/types/LessonPlanner';
 
 export default {
   reducer(
-    state: WeeklyPlannerState = ({} as unknown) as WeeklyPlannerState,
+    state: LessonPlannerState = ({} as unknown) as LessonPlannerState,
     action: AnyAction
-  ): WeeklyPlannerState {
+  ): LessonPlannerState {
     let newState = Object.assign({}, state);
 
     switch (action.type) {
       case actions.INITIALIZE:
-        newState.weeklyPlanners = action.weeklyPlanners;
-        newState.selectedPlannerId = action.weeklyPlanners[0].id;
+        newState.lessonPlanners = action.lessonPlanners;
+        newState.selectedLessonId = action.lessonPlanners[0].id;
         break;
-      case actions.LOAD_WEEKLY_PLANNERS:
-        newState.weeklyPlanners = action.weeklyPlanners;
-        newState.selectedPlannerId = action.weeklyPlanners[0].id;
+      case actions.LOAD_LESSON_PLANNERS:
+        newState.lessonPlanners = action.lessonPlanners;
+        newState.selectedLessonId = action.lessonPlanners[0].id;
         break;
-      case actions.REORDER_WEEKLY_PLANNER: {
-        const selectedPlanner = newState.weeklyPlanners.find(
-          (planner: Planner) => {
-            return planner.id === newState.selectedPlannerId;
+      case actions.REORDER_LESSON_PLANNER: {
+        const selectedPlanner = newState.lessonPlanners.find(
+          (planner: Lesson) => {
+            return planner.id === newState.selectedLessonId;
           }
         );
 
@@ -31,8 +31,8 @@ export default {
         break;
       }
       case actions.MOVE_PLANNER_ITEMS: {
-        const selectedPlanner = newState.weeklyPlanners.find((planner) => {
-          return planner.id === newState.selectedPlannerId;
+        const selectedPlanner = newState.lessonPlanners.find((planner) => {
+          return planner.id === newState.selectedLessonId;
         });
 
         if (selectedPlanner !== undefined) {
@@ -52,8 +52,8 @@ export default {
   },
 };
 
-export interface WeeklyPlannerState {
-  selectedPlannerId: string;
+export interface LessonPlannerState {
+  selectedLessonId: string;
   displayEditingForm: boolean;
-  weeklyPlanners: Planner[];
+  lessonPlanners: Lesson[];
 }

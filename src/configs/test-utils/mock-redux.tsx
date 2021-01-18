@@ -23,16 +23,16 @@ export async function renderAsyncWithRedux(ui: JSX.Element, store: any) {
   });
 }
 
-const weeklyPlanners = [buildWeeklyPlanner()];
+const lessonPlanners = [buildLessonPlanner()];
 
 export const initialState = {
   applicationState: {
-    weeklyPlanners: weeklyPlanners,
-    selectedPlannerId: weeklyPlanners[0].id,
+    lessonPlanners: lessonPlanners,
+    selectedPlannerId: lessonPlanners[0].id,
   },
 };
 
-export function getStore(state: object, dispatchMock: any): MockStore {
+export function getStore(state: any, dispatchMock: any): MockStore {
   const store = createStore(middleware)({
     ...initialState,
     applicationState: { ...initialState.applicationState, ...state },
@@ -91,7 +91,7 @@ export function buildPlannerItem(items: number) {
   return builtList;
 }
 
-export function buildWeeklyPlanner() {
+export function buildLessonPlanner() {
   return {
     createdAt: '123456789',
     id: 'planner-id',

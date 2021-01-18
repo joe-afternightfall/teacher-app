@@ -9,9 +9,9 @@ import thunkMiddleware from 'redux-thunk';
 import { routerReducer } from 'react-router-redux';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import application, { ApplicationState } from '../../reducers/application';
-import weeklyPlannerState, {
-  WeeklyPlannerState,
-} from '../../reducers/weekly-planner';
+import lessonPlannerState, {
+  LessonPlannerState,
+} from '../../reducers/lesson-planner';
 import subjectListState, {
   SubjectListState,
 } from '../../reducers/subject-list';
@@ -25,7 +25,7 @@ export const createStore = (history: History): Store => {
     )(originalCreateStore),
     allReducers = combineReducers({
       applicationState: application.reducer,
-      weeklyPlannerState: weeklyPlannerState.reducer,
+      lessonPlannerState: lessonPlannerState.reducer,
       subjectListState: subjectListState.reducer,
       topicLinksState: topicLinksState.reducer,
       router: connectRouter(history),
@@ -63,7 +63,7 @@ export const createStore = (history: History): Store => {
 
 export interface State {
   applicationState: ApplicationState;
-  weeklyPlannerState: WeeklyPlannerState;
+  lessonPlannerState: LessonPlannerState;
   subjectListState: SubjectListState;
   topicLinksState: TopicLinksState;
 }

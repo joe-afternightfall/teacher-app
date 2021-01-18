@@ -27,23 +27,44 @@ import React, { Component } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import { Styles } from '@material-ui/styles';
 import CloseIcon from '@material-ui/icons/Close';
-import {
-  Planner,
-  PlannerItem,
-} from '../../../../../configs/types/WeeklyPlanner';
+import { Lesson, LessonItem } from '../../../../../configs/types/LessonPlanner';
 import WeekdaySelectionGroup from './WeekdaySelectionGroup';
 import NewLinkCard from './NewLinkCard';
 import ImageIcon from '@material-ui/icons/Image';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { NewLinkForm } from '../../../topic-links/components/NewLinkDialog';
 import SubjectDropdown from '../../../subject-dropdown/SubjectDropdownConnector';
+import StartAndEndTime from './StartAndEnd';
+
+const CssTextField = withStyles({
+  root: {
+    '& label.Mui-focused': {
+      color: 'white',
+    },
+    '& .MuiInputLabel-root': {
+      color: 'white',
+    },
+    '& .MuiOutlinedInput-label': {
+      color: 'white',
+    },
+    '& .MuiOutlinedInput-root': {
+      color: 'white',
+      '& fieldset': {
+        borderColor: '#fff',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white',
+      },
+    },
+  },
+})(TextField);
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   closeButton: {
     position: 'absolute',
     right: theme.spacing(1),
     top: theme.spacing(1),
-    color: theme.palette.grey[500],
+    color: '#fff',
   },
   linkUrl: {
     '&:hover': {
@@ -57,7 +78,7 @@ export interface CustomLink {
   linkTitle: string;
 }
 
-interface AddNewDialogState {
+interface LessonDialogState {
   [key: string]: string | boolean | string[] | CustomLink[] | CustomLink;
   open: boolean;
   title: string;
@@ -68,7 +89,7 @@ interface AddNewDialogState {
   newLink: CustomLink;
 }
 
-class AddNewDialog extends Component<AddNewDialogProps, AddNewDialogState> {
+class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
   state = {
     open: false,
     content: '',
@@ -191,8 +212,19 @@ class AddNewDialog extends Component<AddNewDialogProps, AddNewDialogState> {
           onClose={handleClose}
           open={this.state.open}
         >
-          <DialogTitle id="form-dialog-title">
-            {'New Subject Item'}
+          <DialogTitle
+            style={{ background: '#3BAAFC' }}
+            id={'form-dialog-title'}
+          >
+            <CssTextField
+              autoFocus
+              id={'lesson-name'}
+              variant={'outlined'}
+              label={'Lesson Name'}
+              style={{ width: '45%' }}
+              className={classes.margin}
+            />
+
             <IconButton
               aria-label={'close'}
               className={classes.closeButton}
@@ -210,6 +242,10 @@ class AddNewDialog extends Component<AddNewDialogProps, AddNewDialogState> {
                     value={this.state.subjectId}
                     changeHandler={dropdownChangeHandler}
                   />
+                </Grid>
+
+                <Grid item>
+                  <StartAndEndTime />
                 </Grid>
 
                 <Grid item style={{ marginTop: 40 }}>
@@ -313,9 +349,9 @@ class AddNewDialog extends Component<AddNewDialogProps, AddNewDialogState> {
   }
 }
 
-export interface AddNewDialogProps extends WithStyles<typeof styles> {
-  reorderHandler: (items: PlannerItem[], sourceId: string) => void;
-  selectedPlanner: Planner;
+export interface LessonDialogProps extends WithStyles<typeof styles> {
+  reorderHandler: (items: LessonItem[], sourceId: string) => void;
+  selectedPlanner: Lesson;
 }
 
-export default withStyles(styles, { withTheme: true })(AddNewDialog);
+export default withStyles(styles, { withTheme: true })(LessonDialog);

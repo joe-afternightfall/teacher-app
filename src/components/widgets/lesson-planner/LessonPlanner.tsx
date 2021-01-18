@@ -4,36 +4,36 @@ import {
   withStyles,
   StyledComponentProps,
 } from '@material-ui/core/styles';
+import Column from './components/Column';
 import { Grid } from '@material-ui/core';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import {
-  MovePlannerResult,
-  Planner,
-  PlannerItem,
-  PlannerItems,
-} from '../../../configs/types/WeeklyPlanner';
-import ColumnList from './components/ColumnList';
+  Lesson,
+  LessonItem,
+  LessonItems,
+  MoveLessonResult,
+} from '../../../configs/types/LessonPlanner';
 import TimeColumn from './components/TimeColumn';
 import PlannerControls from './components/PlannerControls';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { getAllLessonPlanners } from '../../../services/lesson-planner-service';
 import { move, reorder, updateAllItems } from '../../../utils/weekly-schedule';
-import { getAllWeeklyPlanners } from '../../../services/weekly-planner';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
-class WeeklyPlanner extends Component<WeeklyPlannerProps> {
+class LessonPlanner extends Component<LessonPlannerProps> {
   async componentDidMount() {
-    const planners = await getAllWeeklyPlanners();
+    const planners = await getAllLessonPlanners();
 
-    this.props.loadWeeklyPlannersHandler(planners);
+    this.props.loadLessonPlannersHandler(planners);
   }
 
   render(): JSX.Element {
     const { selectedPlanner } = this.props;
     const plannerItems = selectedPlanner.items;
 
-    const getList = (dayOfWeek: string): PlannerItem[] => {
+    const getList = (dayOfWeek: string): LessonItem[] => {
       return plannerItems[dayOfWeek].items;
     };
 
@@ -54,14 +54,14 @@ class WeeklyPlanner extends Component<WeeklyPlannerProps> {
 
         this.props.reorderHandler(reorderedItems, dayOfWeek);
       } else {
-        const resultFromMove: MovePlannerResult = move(
+        const resultFromMove: MoveLessonResult = move(
           getList(dayOfWeek),
           getList(destination.droppableId),
           source,
           destination
         );
 
-        const updatedItems: PlannerItems = updateAllItems(
+        const updatedItems: LessonItems = updateAllItems(
           resultFromMove,
           selectedPlanner
         );
@@ -78,29 +78,28 @@ class WeeklyPlanner extends Component<WeeklyPlannerProps> {
         />
 
         <Grid container justify={'center'} spacing={1}>
-          <TimeColumn />
-
-          <ColumnList
+          {/*<TimeColumn />*/}
+          <Column
             dayOfWeek={'monday'}
             plannerDay={plannerItems.monday}
             color={'#f40407'}
           />
-          <ColumnList
+          <Column
             dayOfWeek={'tuesday'}
             plannerDay={plannerItems.tuesday}
             color={'#f5b90f'}
           />
-          <ColumnList
+          <Column
             dayOfWeek={'wednesday'}
             plannerDay={plannerItems.wednesday}
             color={'#6ecb3a'}
           />
-          <ColumnList
+          <Column
             dayOfWeek={'thursday'}
             plannerDay={plannerItems.thursday}
             color={'#06aceb'}
           />
-          <ColumnList
+          <Column
             dayOfWeek={'friday'}
             plannerDay={plannerItems.friday}
             color={'#993cba'}
@@ -111,11 +110,11 @@ class WeeklyPlanner extends Component<WeeklyPlannerProps> {
   }
 }
 
-export interface WeeklyPlannerProps extends WithStyles<typeof styles> {
-  selectedPlanner: Planner;
-  reorderHandler: (items: PlannerItem[], sourceId: string) => void;
-  moveHandler: (items: PlannerItems) => void;
-  loadWeeklyPlannersHandler: (planners: any) => Planner[];
+export interface LessonPlannerProps extends WithStyles<typeof styles> {
+  selectedPlanner: Lesson;
+  reorderHandler: (items: LessonItem[], sourceId: string) => void;
+  moveHandler: (items: LessonItems) => void;
+  loadLessonPlannersHandler: (planners: any) => Lesson[];
 }
 
-export default withStyles(styles, { withTheme: true })(WeeklyPlanner);
+export default withStyles(styles, { withTheme: true })(LessonPlanner);

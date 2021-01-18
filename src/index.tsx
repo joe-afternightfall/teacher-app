@@ -10,12 +10,12 @@ import routes from './configs/constants/routes';
 import { createStore } from './configs/redux/store';
 import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './configs/service-worker';
-import DashboardScreen from './components/top-level-components/DashboardScreen';
-import WeeklyPlanner from './components/widgets/weekly-planner/WeeklyPlannerConnector';
-import { loadTopicLinksList } from './creators/topic-links/links';
 import { getLinksList } from './services/topic-links-service';
 import { getSubjects } from './services/subject-list-service';
+import { loadTopicLinksList } from './creators/topic-links/links';
 import { loadSubjectList } from './creators/subject-list/load-subjects';
+import DashboardScreen from './components/top-level-components/DashboardScreen';
+import LessonPlanner from './components/widgets/lesson-planner/LessonPlannerConnector';
 
 const history = createHashHistory(),
   store = createStore(history);
@@ -114,7 +114,7 @@ ReactDOM.render(
           <div className={'route'}>
             <Route component={DashboardScreen} exact path={routes.DASHBOARD} />
             <Route
-              component={WeeklyPlanner}
+              component={LessonPlanner}
               exact
               path={routes.WEEKLY_PLANNER}
             />
