@@ -6,6 +6,8 @@ interface AppDialogAction {
   content: JSX.Element;
   maxWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
   title: string | JSX.Element;
+  confirmButtonTitle: string;
+  confirmClickHandler: any;
 }
 
 export const displayAppDialog = (props: AppDialogAction): AnyAction => {
@@ -15,6 +17,8 @@ export const displayAppDialog = (props: AppDialogAction): AnyAction => {
     titleColor: props.titleColor,
     content: props.content,
     title: props.title,
+    buttonTitle: props.confirmButtonTitle,
+    clickHandler: props.confirmClickHandler,
   };
 };
 

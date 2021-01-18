@@ -102,6 +102,8 @@ const mapDispatchToProps = (
           titleColor: '#3baafc',
           content: content,
           title: title,
+          confirmButtonTitle: 'Save',
+          confirmClickHandler: null,
         })
       );
     },

@@ -26,6 +26,8 @@ export default {
         newState.dialogWidth = action.maxWidth;
         newState.dialogTitleColor = action.titleColor;
         newState.dialogTitle = action.title;
+        newState.confirmButtonTitle = action.buttonTitle;
+        newState.confirmClickHandler = action.clickHandler;
         break;
       case actions.CLOSE_APP_DIALOG:
         newState.displayAppDialog = false;
@@ -49,4 +51,6 @@ export interface ApplicationState {
   dialogTitle: string | JSX.Element;
   snackbarProps: SnackbarCreatorProps;
   dialogWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
+  confirmClickHandler: any;
+  confirmButtonTitle: string;
 }
