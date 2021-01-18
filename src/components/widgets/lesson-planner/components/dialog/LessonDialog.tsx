@@ -175,10 +175,6 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
                   />
                 </Grid>
 
-                <Grid item>
-                  <StartAndEndTime />
-                </Grid>
-
                 <Grid item style={{ marginTop: 40 }}>
                   <TextField
                     style={{ width: '100%' }}
@@ -259,6 +255,10 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
               <Grid item xs={6}>
                 <Grid item>
                   <WeekdaySelectionGroup />
+                </Grid>
+
+                <Grid item>
+                  <StartAndEndTime />
                 </Grid>
               </Grid>
             </Grid>,

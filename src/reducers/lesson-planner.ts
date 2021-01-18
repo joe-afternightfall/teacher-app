@@ -58,6 +58,10 @@ export default {
         }
         break;
       }
+      case actions.UPDATE_ALL_SELECTED_DAYS: {
+        newState.allDaysSelected = action.checked;
+        break;
+      }
       default:
         newState = state;
     }
@@ -72,4 +76,5 @@ export interface LessonPlannerState {
   lessonPlanners: Lesson[];
   lessonSubjectId: string;
   selectedDays: string[];
+  allDaysSelected: boolean;
 }

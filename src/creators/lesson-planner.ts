@@ -55,3 +55,10 @@ export const updateSelectedDays = (selectedDay: string) => {
     selectedDay: selectedDay,
   };
 };
+
+export const updateAllSelectedDays = (checked: boolean) => {
+  return {
+    type: actions.UPDATE_ALL_SELECTED_DAYS,
+    checked: checked,
+  };
+};
