@@ -48,3 +48,17 @@ export const updateLessonSubject = (subjectId: string): AnyAction => {
     id: subjectId,
   };
 };
+
+export const updateSelectedDays = (selectedDay: string) => {
+  return {
+    type: actions.UPDATE_SELECTED_DAYS,
+    selectedDay: selectedDay,
+  };
+};
+
+export const updateAllSelectedDays = (checked: boolean) => {
+  return {
+    type: actions.UPDATE_ALL_SELECTED_DAYS,
+    checked: checked,
+  };
+};

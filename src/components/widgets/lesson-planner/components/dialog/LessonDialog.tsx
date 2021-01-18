@@ -127,23 +127,6 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
       }
     };
 
-    const handleDayChange = (e: React.MouseEvent<HTMLElement>) => {
-      const element = e.currentTarget as HTMLInputElement;
-      const value = element.value;
-
-      if (this.state.selectedDays.indexOf(value) === -1) {
-        this.setState({
-          selectedDays: [...this.state.selectedDays, value],
-        });
-      } else {
-        this.setState({
-          selectedDays: this.state.selectedDays.filter((day) => {
-            return day !== value;
-          }),
-        });
-      }
-    };
-
     const addNewLinkClickHandler = () => {
       this.setState({
         addNewLink: true,
@@ -190,10 +173,6 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
                     value={this.props.subjectId}
                     changeHandler={this.props.dropdownChangeHandler}
                   />
-                </Grid>
-
-                <Grid item>
-                  <StartAndEndTime />
                 </Grid>
 
                 <Grid item style={{ marginTop: 40 }}>
@@ -275,10 +254,11 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
 
               <Grid item xs={6}>
                 <Grid item>
-                  <WeekdaySelectionGroup
-                    selectedDays={this.state.selectedDays}
-                    changeHandler={handleDayChange}
-                  />
+                  <WeekdaySelectionGroup />
+                </Grid>
+
+                <Grid item>
+                  <StartAndEndTime />
                 </Grid>
               </Grid>
             </Grid>,

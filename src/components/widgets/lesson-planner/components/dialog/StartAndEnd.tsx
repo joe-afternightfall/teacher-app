@@ -7,6 +7,7 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import ScheduleIcon from '@material-ui/icons/Schedule';
 
 export default function StartAndEnd() {
   // The first commit of Material-UI
@@ -27,7 +28,7 @@ export default function StartAndEnd() {
           format="MM/dd/yyyy"
           margin="normal"
           id="date-picker-inline"
-          label="Date picker inline"
+          label="Start Date"
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{
@@ -35,10 +36,10 @@ export default function StartAndEnd() {
           }}
         />
         <KeyboardDatePicker
-          margin="normal"
-          id="date-picker-dialog"
-          label="Date picker dialog"
-          format="MM/dd/yyyy"
+          margin={'normal'}
+          id={'date-picker-dialog'}
+          label={'End Date'}
+          format={'MM/dd/yyyy'}
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{
@@ -54,6 +55,7 @@ export default function StartAndEnd() {
           KeyboardButtonProps={{
             'aria-label': 'change time',
           }}
+          keyboardIcon={<ScheduleIcon />}
         />
 
         <KeyboardTimePicker
@@ -65,6 +67,7 @@ export default function StartAndEnd() {
           KeyboardButtonProps={{
             'aria-label': 'change time',
           }}
+          keyboardIcon={<ScheduleIcon />}
         />
       </Grid>
     </MuiPickersUtilsProvider>

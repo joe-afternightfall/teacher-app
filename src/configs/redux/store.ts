@@ -58,6 +58,9 @@ export const createStore = (history: History): Store => {
       subjectList: [],
       editingForm: false,
     } as unknown) as SubjectListState,
+    lessonPlannerState: ({
+      selectedDays: [],
+    } as unknown) as LessonPlannerState,
   });
 };
 
