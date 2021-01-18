@@ -11,6 +11,7 @@ import AppBar from './components/app-shell/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { getLightTheme } from './configs/theme/light-theme';
 import AppSnackbar from './components/app-shell/AppSnackbar';
+import AppDialog from './components/app-shell/AppDialogConnector';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   root: {
@@ -25,6 +26,7 @@ class App extends Component<AppProps> {
 
     return (
       <MuiThemeProvider theme={getLightTheme()}>
+        <AppDialog />
         <CssBaseline />
         <AppBar />
         <AppSnackbar />
