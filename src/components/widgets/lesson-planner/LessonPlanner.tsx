@@ -72,10 +72,7 @@ class LessonPlanner extends Component<LessonPlannerProps> {
 
     return (
       <DragDropContext onDragEnd={onDragEnd}>
-        <PlannerControls
-          reorderHandler={this.props.reorderHandler}
-          selectedPlanner={selectedPlanner}
-        />
+        <PlannerControls />
 
         <Grid container justify={'center'} spacing={1}>
           {/*<TimeColumn />*/}
