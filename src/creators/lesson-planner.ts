@@ -48,3 +48,10 @@ export const updateLessonSubject = (subjectId: string): AnyAction => {
     id: subjectId,
   };
 };
+
+export const updateSelectedDays = (selectedDay: string) => {
+  return {
+    type: actions.UPDATE_SELECTED_DAYS,
+    selectedDay: selectedDay,
+  };
+};

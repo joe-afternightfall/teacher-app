@@ -47,6 +47,17 @@ export default {
       case actions.UPDATE_LESSON_SUBJECT:
         newState.lessonSubjectId = action.id;
         break;
+      case actions.UPDATE_SELECTED_DAYS: {
+        const value = action.selectedDay;
+        if (newState.selectedDays.indexOf(value) === -1) {
+          newState.selectedDays = [...newState.selectedDays, value];
+        } else {
+          newState.selectedDays = newState.selectedDays.filter((day) => {
+            return day !== value;
+          });
+        }
+        break;
+      }
       default:
         newState = state;
     }
@@ -60,4 +71,5 @@ export interface LessonPlannerState {
   displayEditingForm: boolean;
   lessonPlanners: Lesson[];
   lessonSubjectId: string;
+  selectedDays: string[];
 }
