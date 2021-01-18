@@ -175,9 +175,7 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
                   />
                 </Grid>
 
-                <Grid item>
-                  {/*<StartAndEndTime />*/}
-                </Grid>
+                <Grid item>{/*<StartAndEndTime />*/}</Grid>
 
                 <Grid item style={{ marginTop: 40 }}>
                   <TextField
