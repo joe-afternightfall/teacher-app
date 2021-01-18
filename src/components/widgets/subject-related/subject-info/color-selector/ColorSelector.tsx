@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PreviewCard from './components/PreviewCard';
 import { Grid, Typography } from '@material-ui/core';
-import { State } from '../../../../../../configs/redux/store';
 import ColorChoices, { ColorChoicesProps } from './components/ColorChoices';
+import { State } from '../../../../../configs/redux/store';
 
 const ColorSelector = (props: ColorSelectorProps) => {
   return (

@@ -14,7 +14,7 @@ import { getLinksList } from './services/topic-links-service';
 import { getSubjects } from './services/subject-list-service';
 import { loadTopicLinksList } from './creators/topic-links/links';
 import { loadSubjectList } from './creators/subject-list/load-subjects';
-import DashboardScreen from './components/top-level-components/DashboardScreen';
+import DashboardScreen from './components/top-level-components/dashboard/DashboardScreen';
 import LessonPlanner from './components/widgets/lesson-planner/LessonPlannerConnector';
 
 const history = createHashHistory(),

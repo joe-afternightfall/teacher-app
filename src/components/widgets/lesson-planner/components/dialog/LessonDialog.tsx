@@ -33,8 +33,8 @@ import NewLinkCard from './NewLinkCard';
 import ImageIcon from '@material-ui/icons/Image';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { NewLinkForm } from '../../../topic-links/components/NewLinkDialog';
-import SubjectDropdown from '../../../subject-dropdown/SubjectDropdownConnector';
 import StartAndEndTime from './StartAndEnd';
+import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDropdownConnector';
 
 const CssTextField = withStyles({
   root: {
@@ -169,7 +169,6 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
               <Grid item xs={6}>
                 <Grid item>
                   <SubjectDropdown
-                    width={200}
                     value={this.props.subjectId}
                     changeHandler={this.props.dropdownChangeHandler}
                   />
