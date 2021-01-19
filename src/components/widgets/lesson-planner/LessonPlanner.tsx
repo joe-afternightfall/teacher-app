@@ -15,20 +15,12 @@ import {
   MoveLessonResult,
 } from '../../../configs/types/LessonPlanner';
 import TimeColumn from './components/TimeColumn';
-import PlannerControls from './components/PlannerControls';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { getAllLessonPlanners } from '../../../services/lesson-planner-service';
 import { move, reorder, updateAllItems } from '../../../utils/weekly-schedule';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class LessonPlanner extends Component<LessonPlannerProps> {
-  async componentDidMount() {
-    const planners = await getAllLessonPlanners();
-
-    this.props.loadLessonPlannersHandler(planners);
-  }
-
   render(): JSX.Element {
     const { selectedPlanner } = this.props;
     const plannerItems = selectedPlanner.items;
@@ -72,8 +64,6 @@ class LessonPlanner extends Component<LessonPlannerProps> {
 
     return (
       <DragDropContext onDragEnd={onDragEnd}>
-        <PlannerControls />
-
         <Grid container justify={'center'} spacing={1}>
           {/*<TimeColumn />*/}
           <Column
@@ -111,7 +101,6 @@ export interface LessonPlannerProps extends WithStyles<typeof styles> {
   selectedPlanner: Lesson;
   reorderHandler: (items: LessonItem[], sourceId: string) => void;
   moveHandler: (items: LessonItems) => void;
-  loadLessonPlannersHandler: (planners: any) => Lesson[];
 }
 
 export default withStyles(styles, { withTheme: true })(LessonPlanner);

@@ -3,9 +3,8 @@ import actions from './actions';
 
 describe('init creator', () => {
   it('should update username', () => {
-    const action: InitAction = initApp('test username');
+    const action: InitAction = initApp();
 
     expect(action.type).toBe(actions.INITIALIZE);
-    expect(action.username).toBe('test username');
   });
 });

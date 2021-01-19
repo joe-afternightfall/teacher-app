@@ -139,7 +139,7 @@ const mapDispatchToProps = (dispatch: Dispatch): PlannerWidgetProps =>
       dispatch(clearEditing());
     },
     routeToWidgetClickHandler: () => {
-      dispatch(routerActions.push(routes.WEEKLY_PLANNER));
+      dispatch(routerActions.push(routes.LESSON_PLANNER));
     },
     openSubjectInfoHandler: () => {
       dispatch(openSubjectInfoDialog());

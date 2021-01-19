@@ -15,7 +15,7 @@ import { getSubjects } from './services/subject-list-service';
 import { loadTopicLinksList } from './creators/topic-links/links';
 import { loadSubjectList } from './creators/subject-list/load-subjects';
 import DashboardScreen from './components/top-level-components/dashboard/DashboardScreen';
-import LessonPlanner from './components/widgets/lesson-planner/LessonPlannerConnector';
+import LessonPlannerScreen from './components/top-level-components/lesson-planner/LessonPlannerScreenConnector';
 
 const history = createHashHistory(),
   store = createStore(history);
@@ -114,9 +114,9 @@ ReactDOM.render(
           <div className={'route'}>
             <Route component={DashboardScreen} exact path={routes.DASHBOARD} />
             <Route
-              component={LessonPlanner}
+              component={LessonPlannerScreen}
               exact
-              path={routes.WEEKLY_PLANNER}
+              path={routes.LESSON_PLANNER}
             />
           </div>
         </App>

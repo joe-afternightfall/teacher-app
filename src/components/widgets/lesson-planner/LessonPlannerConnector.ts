@@ -33,9 +33,6 @@ const mapDispatchToProps = (dispatch: Dispatch): LessonPlannerProps =>
     moveHandler: (items: LessonItems) => {
       dispatch(updatePlannerItems(items));
     },
-    loadLessonPlannersHandler: (planners: Lesson[]) => {
-      dispatch(loadLessonPlanners(planners));
-    },
   } as unknown) as LessonPlannerProps);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LessonPlanner);
