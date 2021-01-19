@@ -16,6 +16,7 @@ import { loadTopicLinksList } from './creators/topic-links/links';
 import { loadSubjectList } from './creators/subject-list/load-subjects';
 import DashboardScreen from './components/top-level-components/dashboard/DashboardScreen';
 import LessonPlannerScreen from './components/top-level-components/lesson-planner/LessonPlannerScreenConnector';
+import TemplateBuilderScreen from './components/top-level-components/template-builder/TemplateBuilderScreenConnector';
 
 const history = createHashHistory(),
   store = createStore(history);
@@ -117,6 +118,11 @@ ReactDOM.render(
               component={LessonPlannerScreen}
               exact
               path={routes.LESSON_PLANNER}
+            />
+            <Route
+              component={TemplateBuilderScreen}
+              exact
+              path={routes.TEMPLATE_BUILDER}
             />
           </div>
         </App>

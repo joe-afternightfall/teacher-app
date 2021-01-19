@@ -14,11 +14,13 @@ import { State } from '../../../configs/redux/store';
 import LessonPlanner, { LessonPlannerProps } from './LessonPlanner';
 
 const mapStateToProps = (state: State): LessonPlannerProps => {
-  const selectedPlanner = state.lessonPlannerState.lessonPlanners.find(
-    (planner) => {
+  const lessons = state.lessonPlannerState.lessonPlanners;
+
+  const selectedPlanner =
+    lessons &&
+    lessons.find((planner) => {
       return planner.id === state.lessonPlannerState.selectedLessonId;
-    }
-  );
+    });
 
   return ({
     selectedPlanner: selectedPlanner,

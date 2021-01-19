@@ -23,7 +23,7 @@ const styles: Styles<Theme, StyledComponentProps> = () => ({});
 class LessonPlanner extends Component<LessonPlannerProps> {
   render(): JSX.Element {
     const { selectedPlanner } = this.props;
-    const plannerItems = selectedPlanner.items;
+    const plannerItems = selectedPlanner && selectedPlanner.items;
 
     const getList = (dayOfWeek: string): LessonItem[] => {
       return plannerItems[dayOfWeek].items;
@@ -68,27 +68,27 @@ class LessonPlanner extends Component<LessonPlannerProps> {
           {/*<TimeColumn />*/}
           <Column
             dayOfWeek={'monday'}
-            plannerDay={plannerItems.monday}
+            plannerDay={plannerItems && plannerItems.monday}
             color={'#f40407'}
           />
           <Column
             dayOfWeek={'tuesday'}
-            plannerDay={plannerItems.tuesday}
+            plannerDay={plannerItems && plannerItems.tuesday}
             color={'#f5b90f'}
           />
           <Column
             dayOfWeek={'wednesday'}
-            plannerDay={plannerItems.wednesday}
+            plannerDay={plannerItems && plannerItems.wednesday}
             color={'#6ecb3a'}
           />
           <Column
             dayOfWeek={'thursday'}
-            plannerDay={plannerItems.thursday}
+            plannerDay={plannerItems && plannerItems.thursday}
             color={'#06aceb'}
           />
           <Column
             dayOfWeek={'friday'}
-            plannerDay={plannerItems.friday}
+            plannerDay={plannerItems && plannerItems.friday}
             color={'#993cba'}
           />
         </Grid>
