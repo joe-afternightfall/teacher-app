@@ -9,29 +9,21 @@ import { Grid } from '@material-ui/core';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import {
-  Lesson,
+  LessonPlanner,
   LessonItem,
   LessonItems,
   MoveLessonResult,
 } from '../../../configs/types/LessonPlanner';
 import TimeColumn from './components/TimeColumn';
-import PlannerControls from './components/PlannerControls';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { getAllLessonPlanners } from '../../../services/lesson-planner-service';
 import { move, reorder, updateAllItems } from '../../../utils/weekly-schedule';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
-class LessonPlanner extends Component<LessonPlannerProps> {
-  async componentDidMount() {
-    const planners = await getAllLessonPlanners();
-
-    this.props.loadLessonPlannersHandler(planners);
-  }
-
+class LessonPlannerComp extends Component<LessonPlannerProps> {
   render(): JSX.Element {
     const { selectedPlanner } = this.props;
-    const plannerItems = selectedPlanner.items;
+    const plannerItems = selectedPlanner && selectedPlanner.weekdays;
 
     const getList = (dayOfWeek: string): LessonItem[] => {
       return plannerItems[dayOfWeek].items;
@@ -72,33 +64,31 @@ class LessonPlanner extends Component<LessonPlannerProps> {
 
     return (
       <DragDropContext onDragEnd={onDragEnd}>
-        <PlannerControls />
-
         <Grid container justify={'center'} spacing={1}>
           {/*<TimeColumn />*/}
           <Column
             dayOfWeek={'monday'}
-            plannerDay={plannerItems.monday}
+            plannerDay={plannerItems && plannerItems.monday}
             color={'#f40407'}
           />
           <Column
             dayOfWeek={'tuesday'}
-            plannerDay={plannerItems.tuesday}
+            plannerDay={plannerItems && plannerItems.tuesday}
             color={'#f5b90f'}
           />
           <Column
             dayOfWeek={'wednesday'}
-            plannerDay={plannerItems.wednesday}
+            plannerDay={plannerItems && plannerItems.wednesday}
             color={'#6ecb3a'}
           />
           <Column
             dayOfWeek={'thursday'}
-            plannerDay={plannerItems.thursday}
+            plannerDay={plannerItems && plannerItems.thursday}
             color={'#06aceb'}
           />
           <Column
             dayOfWeek={'friday'}
-            plannerDay={plannerItems.friday}
+            plannerDay={plannerItems && plannerItems.friday}
             color={'#993cba'}
           />
         </Grid>
@@ -108,10 +98,9 @@ class LessonPlanner extends Component<LessonPlannerProps> {
 }
 
 export interface LessonPlannerProps extends WithStyles<typeof styles> {
-  selectedPlanner: Lesson;
+  selectedPlanner: LessonPlanner;
   reorderHandler: (items: LessonItem[], sourceId: string) => void;
   moveHandler: (items: LessonItems) => void;
-  loadLessonPlannersHandler: (planners: any) => Lesson[];
 }
 
-export default withStyles(styles, { withTheme: true })(LessonPlanner);
+export default withStyles(styles, { withTheme: true })(LessonPlannerComp);

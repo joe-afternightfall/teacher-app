@@ -1,6 +1,6 @@
 import actions from './actions';
 import {
-  Lesson,
+  LessonPlanner,
   LessonItem,
   LessonItems,
 } from '../configs/types/LessonPlanner';
@@ -35,7 +35,7 @@ export interface UpdateItemsAction {
   items: LessonItems;
 }
 
-export const loadLessonPlanners = (planners: Lesson[]) => {
+export const loadLessonPlanners = (planners: LessonPlanner[]) => {
   return {
     type: actions.LOAD_LESSON_PLANNERS,
     lessonPlanners: planners,

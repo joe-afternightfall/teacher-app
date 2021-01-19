@@ -42,7 +42,7 @@ class AppDialog extends Component<AppDialogProps> {
         open={open}
       >
         <DialogTitle
-          style={{ background: titleColor }}
+          style={{ background: titleColor, minHeight: 56 }}
           id={'form-dialog-title'}
         >
           {title}

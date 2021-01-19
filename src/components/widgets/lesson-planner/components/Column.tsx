@@ -66,27 +66,32 @@ class Column extends Component<ColumnProps> {
                 ref={providedDroppable2.innerRef}
                 style={getListStyle(snapshotDroppable2.isDraggingOver)}
               >
-                {plannerDay.items.map((item: LessonItem, index: number) => (
-                  <Draggable key={item.id} draggableId={item.id} index={index}>
-                    {(
-                      providedDraggable2: DraggableProvided,
-                      snapshotDraggable2: DraggableStateSnapshot
-                    ) => (
-                      <Card
-                        ref={providedDraggable2.innerRef}
-                        {...providedDraggable2.draggableProps}
-                        {...providedDraggable2.dragHandleProps}
-                        style={getItemStyle(
-                          providedDraggable2.draggableProps.style,
-                          snapshotDraggable2.isDragging
-                        )}
-                        elevation={snapshotDraggable2.isDragging ? 10 : 2}
-                      >
-                        <CardContent>{item.content}</CardContent>
-                      </Card>
-                    )}
-                  </Draggable>
-                ))}
+                {plannerDay &&
+                  plannerDay.items.map((item: LessonItem, index: number) => (
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id}
+                      index={index}
+                    >
+                      {(
+                        providedDraggable2: DraggableProvided,
+                        snapshotDraggable2: DraggableStateSnapshot
+                      ) => (
+                        <Card
+                          ref={providedDraggable2.innerRef}
+                          {...providedDraggable2.draggableProps}
+                          {...providedDraggable2.dragHandleProps}
+                          style={getItemStyle(
+                            providedDraggable2.draggableProps.style,
+                            snapshotDraggable2.isDragging
+                          )}
+                          elevation={snapshotDraggable2.isDragging ? 10 : 2}
+                        >
+                          <CardContent>{item.content}</CardContent>
+                        </Card>
+                      )}
+                    </Draggable>
+                  ))}
                 {providedDroppable2.placeholder}
               </div>
             )}

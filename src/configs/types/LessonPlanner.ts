@@ -1,6 +1,11 @@
 export interface LessonItem {
   id: string;
   content: string;
+  startTime: TimeRanges;
+  endTime: TimeRanges;
+  startDate: Date;
+  endDate: Date;
+  subjectId: string;
 }
 
 export interface LessonNote {
@@ -17,11 +22,11 @@ export interface MoveLessonResult {
   [key: string]: LessonItem[];
 }
 
-export interface Lesson {
-  createdAt: string;
+export interface LessonPlanner {
+  createdAt: Date;
   id: string;
   title: string;
-  items: {
+  weekdays: {
     [key: string]: WeekDay;
   };
   notes: LessonNote[];

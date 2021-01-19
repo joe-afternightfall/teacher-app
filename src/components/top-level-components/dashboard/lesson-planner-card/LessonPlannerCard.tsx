@@ -69,8 +69,13 @@ const LessonPlannerCard = (props: PlannerWidgetProps): JSX.Element => {
                 closeSubjectInfoHandler={props.closeSubjectInfoHandler}
                 shouldDisplaySubjectInfo={props.shouldDisplaySubjectInfo}
               />
-              <MenuItem onClick={handleClose}>{'My account'}</MenuItem>
-              <MenuItem onClick={handleClose}>{'Logout'}</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  props.routeToTemplateBuilderHandler();
+                }}
+              >
+                {'Template Builder'}
+              </MenuItem>
             </Menu>
           </div>
         }
@@ -109,6 +114,7 @@ interface PlannerWidgetProps {
   routeToWidgetClickHandler: () => void;
   closeSubjectInfoHandler: () => void;
   clearDialogHandler: () => void;
+  routeToTemplateBuilderHandler: () => void;
 }
 
 const mapStateToProps = (state: State): PlannerWidgetProps => {
@@ -139,13 +145,16 @@ const mapDispatchToProps = (dispatch: Dispatch): PlannerWidgetProps =>
       dispatch(clearEditing());
     },
     routeToWidgetClickHandler: () => {
-      dispatch(routerActions.push(routes.WEEKLY_PLANNER));
+      dispatch(routerActions.push(routes.LESSON_PLANNER));
     },
     openSubjectInfoHandler: () => {
       dispatch(openSubjectInfoDialog());
     },
     closeSubjectInfoHandler: () => {
       dispatch(closeSubjectInfoDialog());
+    },
+    routeToTemplateBuilderHandler: () => {
+      dispatch(routerActions.push(routes.TEMPLATE_BUILDER));
     },
   } as unknown) as PlannerWidgetProps);
 

@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
-import { Lesson } from '../configs/types/LessonPlanner';
+import { LessonPlanner } from '../configs/types/LessonPlanner';
 
 export default {
   reducer(
@@ -11,22 +11,23 @@ export default {
 
     switch (action.type) {
       case actions.INITIALIZE:
-        newState.lessonPlanners = action.lessonPlanners;
-        newState.selectedLessonId = action.lessonPlanners[0].id;
+        // newState.lessonPlanners = action.lessonPlanners;
+        // newState.selectedLessonId = action.lessonPlanners[0].id;
         break;
       case actions.LOAD_LESSON_PLANNERS:
+        // todo:  rewrite load lesson planners logic below
         newState.lessonPlanners = action.lessonPlanners;
         newState.selectedLessonId = action.lessonPlanners[0].id;
         break;
       case actions.REORDER_LESSON_PLANNER: {
         const selectedPlanner = newState.lessonPlanners.find(
-          (planner: Lesson) => {
+          (planner: LessonPlanner) => {
             return planner.id === newState.selectedLessonId;
           }
         );
 
         if (selectedPlanner !== undefined) {
-          selectedPlanner.items[action.dayOfWeek].items = action.items;
+          selectedPlanner.weekdays[action.dayOfWeek].items = action.items;
         }
         break;
       }
@@ -36,11 +37,11 @@ export default {
         });
 
         if (selectedPlanner !== undefined) {
-          selectedPlanner.items.monday.items = action.items.monday;
-          selectedPlanner.items.tuesday.items = action.items.tuesday;
-          selectedPlanner.items.wednesday.items = action.items.wednesday;
-          selectedPlanner.items.thursday.items = action.items.thursday;
-          selectedPlanner.items.friday.items = action.items.friday;
+          selectedPlanner.weekdays.monday.items = action.items.monday;
+          selectedPlanner.weekdays.tuesday.items = action.items.tuesday;
+          selectedPlanner.weekdays.wednesday.items = action.items.wednesday;
+          selectedPlanner.weekdays.thursday.items = action.items.thursday;
+          selectedPlanner.weekdays.friday.items = action.items.friday;
         }
         break;
       }
@@ -62,6 +63,10 @@ export default {
         newState.allDaysSelected = action.checked;
         break;
       }
+      case actions.LOAD_LESSON_TEMPLATE:
+        newState.lessonPlanners = [action.template];
+        newState.selectedLessonId = action.template.id;
+        break;
       default:
         newState = state;
     }
@@ -73,7 +78,7 @@ export default {
 export interface LessonPlannerState {
   selectedLessonId: string;
   displayEditingForm: boolean;
-  lessonPlanners: Lesson[];
+  lessonPlanners: LessonPlanner[];
   lessonSubjectId: string;
   selectedDays: string[];
   allDaysSelected: boolean;

@@ -5,20 +5,18 @@ import {
   reorderPlannerItems,
   updatePlannerItems,
 } from '../../../creators/lesson-planner';
-import {
-  Lesson,
-  LessonItem,
-  LessonItems,
-} from '../../../configs/types/LessonPlanner';
+import { LessonItem, LessonItems } from '../../../configs/types/LessonPlanner';
 import { State } from '../../../configs/redux/store';
-import LessonPlanner, { LessonPlannerProps } from './LessonPlanner';
+import LessonPlannerComp, { LessonPlannerProps } from './LessonPlanner';
 
 const mapStateToProps = (state: State): LessonPlannerProps => {
-  const selectedPlanner = state.lessonPlannerState.lessonPlanners.find(
-    (planner) => {
+  const lessons = state.lessonPlannerState.lessonPlanners;
+
+  const selectedPlanner =
+    lessons &&
+    lessons.find((planner) => {
       return planner.id === state.lessonPlannerState.selectedLessonId;
-    }
-  );
+    });
 
   return ({
     selectedPlanner: selectedPlanner,
@@ -33,9 +31,6 @@ const mapDispatchToProps = (dispatch: Dispatch): LessonPlannerProps =>
     moveHandler: (items: LessonItems) => {
       dispatch(updatePlannerItems(items));
     },
-    loadLessonPlannersHandler: (planners: Lesson[]) => {
-      dispatch(loadLessonPlanners(planners));
-    },
   } as unknown) as LessonPlannerProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(LessonPlanner);
+export default connect(mapStateToProps, mapDispatchToProps)(LessonPlannerComp);

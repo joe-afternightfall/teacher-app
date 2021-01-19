@@ -16,6 +16,7 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemText,
+  Typography,
 } from '@material-ui/core';
 import {
   Theme,
@@ -27,7 +28,10 @@ import React, { Component } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import { Styles } from '@material-ui/styles';
 import CloseIcon from '@material-ui/icons/Close';
-import { Lesson, LessonItem } from '../../../../../configs/types/LessonPlanner';
+import {
+  LessonPlanner,
+  LessonItem,
+} from '../../../../../configs/types/LessonPlanner';
 import WeekdaySelectionGroup from './WeekdaySelectionGroup';
 import NewLinkCard from './NewLinkCard';
 import ImageIcon from '@material-ui/icons/Image';
@@ -261,14 +265,20 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
                 </Grid>
               </Grid>
             </Grid>,
-            <CssTextField
-              autoFocus
-              id={'lesson-name'}
-              variant={'outlined'}
-              label={'Lesson Name'}
-              style={{ width: '45%' }}
-              className={classes.margin}
-            />
+            this.props.displayTitleTextfield ? (
+              <CssTextField
+                autoFocus
+                id={'lesson-name'}
+                variant={'outlined'}
+                label={'Lesson Name'}
+                style={{ width: '45%' }}
+                className={classes.margin}
+              />
+            ) : (
+              <Typography variant={'h6'} style={{ color: 'white' }}>
+                {'New Lesson'}
+              </Typography>
+            )
           );
         }}
       >
@@ -279,6 +289,7 @@ class LessonDialog extends Component<LessonDialogProps, LessonDialogState> {
 }
 
 export interface LessonDialogProps extends WithStyles<typeof styles> {
+  displayTitleTextfield: boolean;
   displayAppDialogHandler: (content: JSX.Element, title: JSX.Element) => void;
   subjectId: string;
   dropdownChangeHandler: (
