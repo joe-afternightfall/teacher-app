@@ -6,10 +6,11 @@ import {
 } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
-import { Grid, Typography } from '@material-ui/core';
-import LessonPlanner from '../../widgets/lesson-planner/LessonPlannerConnector';
+import { Grid } from '@material-ui/core';
+import LessonPlannerComp from '../../widgets/lesson-planner/LessonPlannerConnector';
 import PlannerControls from '../../widgets/lesson-planner/components/PlannerControls';
 import { getTemplateBuilder } from '../../../services/template-builder-service';
+import { LessonPlanner } from "../../../configs/types/LessonPlanner";
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
@@ -19,9 +20,11 @@ class TemplateBuilderScreen extends Component<TemplateBuilderScreenProps> {
 
     if (templateBuilder === null) {
       // load new default template with empty values
+      console.log('inside null, dispatching empty array')
+      this.props.loadTemplateBuilderHandler([]);
     } else {
       console.log('found template, inside else');
-      this.props.loadTemplateBuilderHandler(templateBuilder);
+      this.props.loadTemplateBuilderHandler([templateBuilder]);
     }
     console.log('templateBuilder: ' + JSON.stringify(templateBuilder));
   }
@@ -33,14 +36,14 @@ class TemplateBuilderScreen extends Component<TemplateBuilderScreenProps> {
       <Grid>
         <PlannerControls displayNavigation={false} />
 
-        <LessonPlanner />
+        <LessonPlannerComp />
       </Grid>
     );
   }
 }
 
 export interface TemplateBuilderScreenProps extends WithStyles<typeof styles> {
-  loadTemplateBuilderHandler: (template: any) => void;
+  loadTemplateBuilderHandler: (template: LessonPlanner[]) => void;
 }
 
 export default withStyles(styles, { withTheme: true })(TemplateBuilderScreen);

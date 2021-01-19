@@ -15,6 +15,7 @@ export default {
         // newState.selectedLessonId = action.lessonPlanners[0].id;
         break;
       case actions.LOAD_LESSON_PLANNERS:
+        // todo:  rewrite load lesson planners logic below
         newState.lessonPlanners = action.lessonPlanners;
         newState.selectedLessonId = action.lessonPlanners[0].id;
         break;
@@ -62,6 +63,11 @@ export default {
         newState.allDaysSelected = action.checked;
         break;
       }
+      case actions.LOAD_LESSON_TEMPLATE:
+        console.log('action.template: ' + JSON.stringify(action.template));
+        newState.lessonPlanners = [action.template];
+        newState.selectedLessonId = action.lessonPlanners[0].id;
+        break;
       default:
         newState = state;
     }
