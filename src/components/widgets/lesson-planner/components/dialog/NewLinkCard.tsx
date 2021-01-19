@@ -8,7 +8,11 @@ import { Button, Grid, TextField } from '@material-ui/core';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import SaveIcon from '@material-ui/icons/Save';
-import { CustomLink } from './LessonDialog';
+
+export interface CustomLink {
+  linkUrl: string;
+  linkTitle: string;
+}
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
