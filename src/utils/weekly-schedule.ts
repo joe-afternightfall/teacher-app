@@ -1,7 +1,7 @@
 import {
   LessonItem,
   MoveLessonResult,
-  Lesson,
+  LessonPlanner,
   LessonItems,
 } from '../configs/types/LessonPlanner';
 import { DraggableLocation } from 'react-beautiful-dnd';
@@ -45,23 +45,23 @@ export const move = (
 
 export const updateAllItems = (
   resultFromMove: MoveLessonResult,
-  planner: Lesson
+  planner: LessonPlanner
 ): LessonItems => {
   return {
     monday: resultFromMove.monday
       ? resultFromMove.monday
-      : planner.items.monday.items,
+      : planner.weekdays.monday.items,
     tuesday: resultFromMove.tuesday
       ? resultFromMove.tuesday
-      : planner.items.tuesday.items,
+      : planner.weekdays.tuesday.items,
     wednesday: resultFromMove.wednesday
       ? resultFromMove.wednesday
-      : planner.items.wednesday.items,
+      : planner.weekdays.wednesday.items,
     thursday: resultFromMove.thursday
       ? resultFromMove.thursday
-      : planner.items.thursday.items,
+      : planner.weekdays.thursday.items,
     friday: resultFromMove.friday
       ? resultFromMove.friday
-      : planner.items.friday.items,
+      : planner.weekdays.friday.items,
   };
 };
