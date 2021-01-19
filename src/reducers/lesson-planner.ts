@@ -48,6 +48,9 @@ export default {
       case actions.UPDATE_LESSON_SUBJECT:
         newState.lessonSubjectId = action.id;
         break;
+      case actions.UPDATE_LESSON_CONTENT:
+        newState.lessonContent = action.content;
+        break;
       case actions.UPDATE_SELECTED_DAYS: {
         const value = action.selectedDay;
         if (newState.selectedDays.indexOf(value) === -1) {
@@ -82,4 +85,5 @@ export interface LessonPlannerState {
   lessonSubjectId: string;
   selectedDays: string[];
   allDaysSelected: boolean;
+  lessonContent: string;
 }
