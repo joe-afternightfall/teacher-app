@@ -34,7 +34,7 @@ class TemplateBuilderScreen extends Component<TemplateBuilderScreenProps> {
 
     return (
       <Grid>
-        <PlannerControls displayNavigation={false} />
+        <PlannerControls />
 
         <LessonPlannerComp />
       </Grid>

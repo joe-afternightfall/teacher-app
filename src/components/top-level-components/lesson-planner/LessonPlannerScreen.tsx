@@ -26,7 +26,7 @@ class LessonPlannerScreen extends Component<LessonPlannerScreenProps> {
 
     return (
       <Grid>
-        <PlannerControls displayNavigation={true} />
+        <PlannerControls />
 
         <LessonPlannerComp />
       </Grid>
