@@ -6,6 +6,7 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  Typography,
 } from '@material-ui/core';
 import React from 'react';
 import { Dispatch } from 'redux';
@@ -36,40 +37,47 @@ const PlannerControls = (props: PlannerControlsProps): JSX.Element => {
       justify={'space-between'}
       className={classes.root}
     >
-      <Grid item xs={6}>
-        <Grid container alignItems={'center'} spacing={2}>
-          <Grid item>
-            <Button variant={'contained'} color={'secondary'}>
-              <ArrowBack />
-            </Button>
-          </Grid>
+      {props.displayNavigation ? (
+        <Grid item xs={6}>
+          <Grid container alignItems={'center'} spacing={2}>
+            <Grid item>
+              <Button variant={'contained'} color={'secondary'}>
+                <ArrowBack />
+              </Button>
+            </Grid>
 
-          <Grid item xs={6}>
-            <Paper elevation={3} style={{ padding: '0 8px 8px 8px' }}>
-              <FormControl style={{ width: '100%' }}>
-                <InputLabel id={'current-week'}>{'Current Week'}</InputLabel>
-                <Select labelId={'current-week'} id={'current-week'}>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
-            </Paper>
-          </Grid>
+            <Grid item xs={6}>
+              <Paper elevation={3} style={{ padding: '0 8px 8px 8px' }}>
+                <FormControl style={{ width: '100%' }}>
+                  <InputLabel id={'current-week'}>{'Current Week'}</InputLabel>
+                  <Select labelId={'current-week'} id={'current-week'}>
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                </FormControl>
+              </Paper>
+            </Grid>
 
-          <Grid item>
-            <Button variant={'contained'} color={'secondary'}>
-              <ArrowForward />
-            </Button>
+            <Grid item>
+              <Button variant={'contained'} color={'secondary'}>
+                <ArrowForward />
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      ) : (
+        <Grid item>
+          <Typography variant={'h6'}>{'Template Builder'}</Typography>
+        </Grid>
+      )}
 
       <Grid item>
         <LessonDialog
           subjectId={props.lessonSubjectId}
           displayAppDialogHandler={props.displayAppDialogHandler}
           dropdownChangeHandler={props.dropdownChangeHandler}
+          displayTitleTextfield={props.displayNavigation}
         />
       </Grid>
     </Grid>
@@ -77,6 +85,7 @@ const PlannerControls = (props: PlannerControlsProps): JSX.Element => {
 };
 
 export interface PlannerControlsProps {
+  displayNavigation: boolean;
   displayAppDialogHandler: (content: JSX.Element) => void;
   lessonSubjectId: string;
   dropdownChangeHandler: (
