@@ -3,32 +3,10 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import AddIcon from '@material-ui/icons/Add';
 import LessonForm from '../lesson-form/LessonForm';
-import { Button, TextField } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { Button } from '@material-ui/core';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
-
-const CssTextField = withStyles({
-  root: {
-    '& label.Mui-focused': {
-      color: 'white',
-    },
-    '& .MuiInputLabel-root': {
-      color: 'white',
-    },
-    '& .MuiOutlinedInput-label': {
-      color: 'white',
-    },
-    '& .MuiOutlinedInput-root': {
-      color: 'white',
-      '& fieldset': {
-        borderColor: '#fff',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: 'white',
-      },
-    },
-  },
-})(TextField);
+import { State } from '../../../../../configs/redux/store';
+import LessonName from '../lesson-form/components/LessonName';
 
 const LessonDialog = (props: LessonDialogProps): JSX.Element => {
   return (
@@ -37,17 +15,7 @@ const LessonDialog = (props: LessonDialogProps): JSX.Element => {
       variant={'contained'}
       startIcon={<AddIcon />}
       onClick={() => {
-        props.displayAppDialogHandler(
-          <LessonForm />,
-          <CssTextField
-            autoFocus
-            id={'lesson-name'}
-            variant={'outlined'}
-            label={'Lesson Name'}
-            style={{ width: '45%' }}
-            // className={classes.margin}
-          />
-        );
+        props.displayAppDialogHandler(<LessonForm />, <LessonName />);
       }}
     >
       {'Add New'}
@@ -59,7 +27,7 @@ export interface LessonDialogProps {
   displayAppDialogHandler: (content: JSX.Element, title: JSX.Element) => void;
 }
 
-const mapStateToProps = (state: any): LessonDialogProps => {
+const mapStateToProps = (state: State): LessonDialogProps => {
   return ({} as unknown) as LessonDialogProps;
 };
 
