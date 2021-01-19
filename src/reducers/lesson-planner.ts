@@ -64,9 +64,8 @@ export default {
         break;
       }
       case actions.LOAD_LESSON_TEMPLATE:
-        console.log('action.template: ' + JSON.stringify(action.template));
         newState.lessonPlanners = [action.template];
-        newState.selectedLessonId = action.lessonPlanners[0].id;
+        newState.selectedLessonId = action.template.id;
         break;
       default:
         newState = state;

@@ -23,7 +23,7 @@ export interface MoveLessonResult {
 }
 
 export interface LessonPlanner {
-  createdAt: string;
+  createdAt: Date;
   id: string;
   title: string;
   weekdays: {
