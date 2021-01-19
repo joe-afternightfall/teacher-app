@@ -7,10 +7,10 @@ import {
   withStyles,
 } from '@material-ui/core/styles';
 import { getAllLessonPlanners } from '../../../services/lesson-planner-service';
-import { Lesson } from '../../../configs/types/LessonPlanner';
+import { LessonPlanner } from '../../../configs/types/LessonPlanner';
 import { Grid } from '@material-ui/core';
 import PlannerControls from '../../widgets/lesson-planner/components/PlannerControls';
-import LessonPlanner from '../../widgets/lesson-planner/LessonPlannerConnector';
+import LessonPlannerComp from '../../widgets/lesson-planner/LessonPlannerConnector';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
@@ -28,14 +28,14 @@ class LessonPlannerScreen extends Component<LessonPlannerScreenProps> {
       <Grid>
         <PlannerControls displayNavigation={true} />
 
-        <LessonPlanner />
+        <LessonPlannerComp />
       </Grid>
     );
   }
 }
 
 export interface LessonPlannerScreenProps extends WithStyles<typeof styles> {
-  loadLessonPlannersHandler: (planners: any) => Lesson[];
+  loadLessonPlannersHandler: (planners: any) => LessonPlanner[];
 }
 
 export default withStyles(styles, { withTheme: true })(LessonPlannerScreen);

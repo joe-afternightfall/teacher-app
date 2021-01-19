@@ -6,12 +6,11 @@ import {
   updatePlannerItems,
 } from '../../../creators/lesson-planner';
 import {
-  Lesson,
   LessonItem,
   LessonItems,
 } from '../../../configs/types/LessonPlanner';
 import { State } from '../../../configs/redux/store';
-import LessonPlanner, { LessonPlannerProps } from './LessonPlanner';
+import LessonPlannerComp, { LessonPlannerProps } from './LessonPlanner';
 
 const mapStateToProps = (state: State): LessonPlannerProps => {
   const lessons = state.lessonPlannerState.lessonPlanners;
@@ -37,4 +36,4 @@ const mapDispatchToProps = (dispatch: Dispatch): LessonPlannerProps =>
     },
   } as unknown) as LessonPlannerProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(LessonPlanner);
+export default connect(mapStateToProps, mapDispatchToProps)(LessonPlannerComp);

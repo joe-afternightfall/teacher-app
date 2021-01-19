@@ -9,7 +9,7 @@ import { Grid } from '@material-ui/core';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import {
-  Lesson,
+  LessonPlanner,
   LessonItem,
   LessonItems,
   MoveLessonResult,
@@ -20,10 +20,10 @@ import { move, reorder, updateAllItems } from '../../../utils/weekly-schedule';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
-class LessonPlanner extends Component<LessonPlannerProps> {
+class LessonPlannerComp extends Component<LessonPlannerProps> {
   render(): JSX.Element {
     const { selectedPlanner } = this.props;
-    const plannerItems = selectedPlanner && selectedPlanner.items;
+    const plannerItems = selectedPlanner && selectedPlanner.weekdays;
 
     const getList = (dayOfWeek: string): LessonItem[] => {
       return plannerItems[dayOfWeek].items;
@@ -98,9 +98,9 @@ class LessonPlanner extends Component<LessonPlannerProps> {
 }
 
 export interface LessonPlannerProps extends WithStyles<typeof styles> {
-  selectedPlanner: Lesson;
+  selectedPlanner: LessonPlanner;
   reorderHandler: (items: LessonItem[], sourceId: string) => void;
   moveHandler: (items: LessonItems) => void;
 }
 
-export default withStyles(styles, { withTheme: true })(LessonPlanner);
+export default withStyles(styles, { withTheme: true })(LessonPlannerComp);

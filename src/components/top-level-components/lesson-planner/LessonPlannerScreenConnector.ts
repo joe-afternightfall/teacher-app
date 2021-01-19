@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import LessonPlannerScreen, {
   LessonPlannerScreenProps,
 } from './LessonPlannerScreen';
-import { Lesson } from '../../../configs/types/LessonPlanner';
+import { LessonPlanner } from '../../../configs/types/LessonPlanner';
 import { loadLessonPlanners } from '../../../creators/lesson-planner';
 import { Dispatch } from 'redux';
 import { State } from '../../../configs/redux/store';
@@ -12,7 +12,7 @@ const mapStateToProps = (state: State): LessonPlannerScreenProps => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: any) => ({
-  loadLessonPlannersHandler: (planners: Lesson[]) => {
+  loadLessonPlannersHandler: (planners: LessonPlanner[]) => {
     dispatch(loadLessonPlanners(planners));
   },
 });
