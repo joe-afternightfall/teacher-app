@@ -69,3 +69,10 @@ export const updateLessonContent = (content: string) => {
     content: content,
   };
 };
+
+export const updateLessonName = (name: string) => {
+  return {
+    type: actions.UPDATE_LESSON_NAME,
+    name: name,
+  };
+};
