@@ -5,10 +5,7 @@ import {
   reorderPlannerItems,
   updatePlannerItems,
 } from '../../../creators/lesson-planner';
-import {
-  LessonItem,
-  LessonItems,
-} from '../../../configs/types/LessonPlanner';
+import { LessonItem, LessonItems } from '../../../configs/types/LessonPlanner';
 import { State } from '../../../configs/redux/store';
 import LessonPlannerComp, { LessonPlannerProps } from './LessonPlanner';
 

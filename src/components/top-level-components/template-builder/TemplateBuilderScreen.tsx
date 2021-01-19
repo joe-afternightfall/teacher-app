@@ -10,7 +10,7 @@ import { Grid } from '@material-ui/core';
 import LessonPlannerComp from '../../widgets/lesson-planner/LessonPlannerConnector';
 import PlannerControls from '../../widgets/lesson-planner/components/PlannerControls';
 import { getTemplateBuilder } from '../../../services/template-builder-service';
-import { LessonPlanner } from "../../../configs/types/LessonPlanner";
+import { LessonPlanner } from '../../../configs/types/LessonPlanner';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
@@ -20,7 +20,7 @@ class TemplateBuilderScreen extends Component<TemplateBuilderScreenProps> {
 
     if (templateBuilder === null) {
       // load new default template with empty values
-      console.log('inside null, dispatching empty array')
+      console.log('inside null, dispatching empty array');
       this.props.loadTemplateBuilderHandler([]);
     } else {
       console.log('found template, inside else');
