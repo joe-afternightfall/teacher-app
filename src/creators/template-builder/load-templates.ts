@@ -3,7 +3,7 @@ import { LessonPlanner } from '../../configs/types/LessonPlanner';
 
 export const loadTemplate = (template: LessonPlanner) => {
   Object.keys(template).map((key: string) => {
-    template.fireBaseId = key;
+    template.firebaseId = key;
   });
   return {
     type: actions.LOAD_LESSON_TEMPLATE,
