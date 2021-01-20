@@ -12,7 +12,6 @@ import { Link } from '../../../configs/types/Link';
 import { State } from '../../../configs/redux/store';
 import NewLinkDialog from './components/NewLinkDialog';
 import { Subject } from '../../../configs/types/Subject';
-import { getSubjectName } from '../../../utils/subject-name';
 import { openNewLinkDialog } from '../../../creators/topic-links/links-dialog';
 
 const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {
@@ -31,8 +30,8 @@ const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {
     };
   });
 
-  const subjects = props.links.reduce((obj: any, item: Link) => {
-    obj[item.subjectId] = getSubjectName(props.subjectList, item.subjectId);
+  const subjects = props.subjectList.reduce((obj: any, subject: Subject) => {
+    obj[subject.id] = subject.subjectName;
     return obj;
   }, {});
 
