@@ -1,68 +1,75 @@
-import React, { Component } from 'react';
-import { Styles } from '@material-ui/styles';
+import React from 'react';
 import {
-  StyledComponentProps,
-  Theme,
-  WithStyles,
-  withStyles,
-} from '@material-ui/core/styles';
-import DateFnsUtils from '@date-io/date-fns';
-import Grid from '@material-ui/core/Grid';
-import {
-  MuiPickersUtilsProvider,
   KeyboardTimePicker,
+  MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
 import ScheduleIcon from '@material-ui/icons/Schedule';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { updateDateTime } from '../../../../../../creators/lesson-planner';
+import { State } from '../../../../../../configs/redux/store';
 
-const styles: Styles<Theme, StyledComponentProps> = () => ({});
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {},
+  })
+);
 
-class TimeInput extends Component<TimeInputProps> {
-  state = {
-    startTime: new Date(),
-    endTime: new Date(),
-  };
+const TimeInput = (props: TimeInputProps): JSX.Element => {
+  const classes = useStyles();
 
-  render(): JSX.Element {
-    const { classes } = this.props;
+  return (
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid container justify={'space-around'}>
+        <KeyboardTimePicker
+          label={'Start time'}
+          margin={'normal'}
+          id={'start-time-picker'}
+          value={props.startTime}
+          onChange={(date) => props.handleChange('startTime', date)}
+          KeyboardButtonProps={{
+            'aria-label': 'change time',
+          }}
+          keyboardIcon={<ScheduleIcon />}
+        />
 
-    const handleDateChange = (date: Date | null, name: string) => {
-      this.setState({
-        [name]: date,
-      });
-    };
+        <KeyboardTimePicker
+          label={'End time'}
+          margin={'normal'}
+          id={'end-time-picker'}
+          value={props.endTime}
+          onChange={(date) => props.handleChange('endTime', date)}
+          KeyboardButtonProps={{
+            'aria-label': 'change time',
+          }}
+          keyboardIcon={<ScheduleIcon />}
+        />
+      </Grid>
+    </MuiPickersUtilsProvider>
+  );
+};
 
-    return (
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container justify={'space-around'}>
-          <KeyboardTimePicker
-            label={'Start time'}
-            margin={'normal'}
-            id={'start-time-picker'}
-            value={this.state.startTime}
-            onChange={(date) => handleDateChange(date, 'startTime')}
-            KeyboardButtonProps={{
-              'aria-label': 'change time',
-            }}
-            keyboardIcon={<ScheduleIcon />}
-          />
-
-          <KeyboardTimePicker
-            label={'End time'}
-            margin={'normal'}
-            id={'end-time-picker'}
-            value={this.state.endTime}
-            onChange={(date) => handleDateChange(date, 'endTime')}
-            KeyboardButtonProps={{
-              'aria-label': 'change time',
-            }}
-            keyboardIcon={<ScheduleIcon />}
-          />
-        </Grid>
-      </MuiPickersUtilsProvider>
-    );
-  }
+export interface TimeInputProps {
+  startTime: Date;
+  endTime: Date;
+  handleChange: (name: string, value: Date | null) => void;
 }
 
-export type TimeInputProps = WithStyles<typeof styles>;
+const mapStateToProps = (state: State): TimeInputProps => {
+  return ({
+    startTime: state.lessonPlannerState.startTime,
+    endTime: state.lessonPlannerState.endTime,
+  } as unknown) as TimeInputProps;
+};
 
-export default withStyles(styles, { withTheme: true })(TimeInput);
+const mapDispatchToProps = (dispatch: Dispatch): TimeInputProps =>
+  (({
+    handleChange: (name: string, value: Date) => {
+      dispatch(updateDateTime(name, value));
+    },
+  } as unknown) as TimeInputProps);
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimeInput);

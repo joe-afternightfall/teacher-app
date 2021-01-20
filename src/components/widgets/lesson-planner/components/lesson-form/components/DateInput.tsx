@@ -1,96 +1,77 @@
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
-import React, { Component } from 'react';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import ScheduleIcon from '@material-ui/icons/Schedule';
-import { Styles } from '@material-ui/styles';
-import {
-  StyledComponentProps,
-  Theme,
-  WithStyles,
-  withStyles,
-} from '@material-ui/core/styles';
+import React from 'react';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { State } from '../../../../../../configs/redux/store';
+import { updateDateTime } from '../../../../../../creators/lesson-planner';
 
-const styles: Styles<Theme, StyledComponentProps> = () => ({});
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {},
+  })
+);
 
-class DateInput extends Component<DateInputProps> {
-  state = {
-    startDate: new Date(),
-    endDate: new Date(),
-  };
+const DateInput = (props: DateInputProps): JSX.Element => {
+  const classes = useStyles();
 
-  render(): JSX.Element {
-    const { classes } = this.props;
+  return (
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid container justify={'space-around'}>
+        <KeyboardDatePicker
+          // disableToolbar
+          // variant={'inline'}
+          margin={'normal'}
+          id={'start-date-picker'}
+          label={'Start Date'}
+          format={'MM/dd/yyyy'}
+          value={props.startDate}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+          onChange={(date) => props.handleChange('startDate', date)}
+        />
 
-    const handleDateChange = (date: Date | null, name: string) => {
-      this.setState({
-        [name]: date,
-      });
-    };
+        <KeyboardDatePicker
+          margin={'normal'}
+          id={'date-picker-dialog'}
+          label={'End Date'}
+          format={'MM/dd/yyyy'}
+          value={props.endDate}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+          onChange={(date) => props.handleChange('endDate', date)}
+        />
+      </Grid>
+    </MuiPickersUtilsProvider>
+  );
+};
 
-    return (
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container justify={'space-around'}>
-          <KeyboardDatePicker
-            // disableToolbar
-            // variant={'inline'}
-            margin={'normal'}
-            id={'start-date-picker'}
-            label={'Start Date'}
-            format={'MM/dd/yyyy'}
-            value={this.state.startDate}
-            KeyboardButtonProps={{
-              'aria-label': 'change date',
-            }}
-            onChange={(date) => handleDateChange(date, 'startDate')}
-          />
-
-          <KeyboardDatePicker
-            margin={'normal'}
-            id={'date-picker-dialog'}
-            label={'End Date'}
-            format={'MM/dd/yyyy'}
-            value={this.state.endDate}
-            KeyboardButtonProps={{
-              'aria-label': 'change date',
-            }}
-            onChange={(date) => handleDateChange(date, 'endDate')}
-          />
-
-          {/*<KeyboardTimePicker*/}
-          {/*  label={'Start time'}*/}
-          {/*  margin={'normal'}*/}
-          {/*  id={'start-time-picker'}*/}
-          {/*  value={selectedDate}*/}
-          {/*  onChange={(date) => handleDateChange(date, 'startTime')}*/}
-          {/*  KeyboardButtonProps={{*/}
-          {/*    'aria-label': 'change time',*/}
-          {/*  }}*/}
-          {/*  keyboardIcon={<ScheduleIcon />}*/}
-          {/*/>*/}
-
-          {/*<KeyboardTimePicker*/}
-          {/*  label={'End time'}*/}
-          {/*  margin={'normal'}*/}
-          {/*  id={'end-time-picker'}*/}
-          {/*  value={selectedDate}*/}
-          {/*  onChange={(date) => handleDateChange(date, 'endTime')}*/}
-          {/*  KeyboardButtonProps={{*/}
-          {/*    'aria-label': 'change time',*/}
-          {/*  }}*/}
-          {/*  keyboardIcon={<ScheduleIcon />}*/}
-          {/*/>*/}
-        </Grid>
-      </MuiPickersUtilsProvider>
-    );
-  }
+export interface DateInputProps {
+  startDate: string;
+  endDate: string;
+  handleChange: (name: string, value: Date | null) => void;
 }
 
-export type DateInputProps = WithStyles<typeof styles>;
+const mapStateToProps = (state: State): DateInputProps => {
+  return ({
+    endDate: state.lessonPlannerState.endDate,
+    startDate: state.lessonPlannerState.startDate,
+  } as unknown) as DateInputProps;
+};
 
-export default withStyles(styles, { withTheme: true })(DateInput);
+const mapDispatchToProps = (dispatch: Dispatch): DateInputProps =>
+  (({
+    handleChange: (name: string, value: Date) => {
+      dispatch(updateDateTime(name, value));
+    },
+  } as unknown) as DateInputProps);
+
+export default connect(mapStateToProps, mapDispatchToProps)(DateInput);

@@ -76,3 +76,11 @@ export const updateLessonName = (name: string) => {
     name: name,
   };
 };
+
+export const updateDateTime = (name: string, value: Date) => {
+  return {
+    type: actions.UPDATE_DATE_TIME,
+    name: name,
+    value: value,
+  };
+};

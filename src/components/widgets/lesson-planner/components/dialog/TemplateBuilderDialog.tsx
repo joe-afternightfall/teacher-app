@@ -27,7 +27,10 @@ const TemplateBuilderDialog = (
       variant={'contained'}
       startIcon={<AddIcon />}
       onClick={() => {
-        props.displayAppDialogHandler(<TemplateBuilderForm />, 'New Lesson');
+        props.displayAppDialogHandler(
+          <TemplateBuilderForm />,
+          'New Lesson Template'
+        );
       }}
     >
       {'Add New'}

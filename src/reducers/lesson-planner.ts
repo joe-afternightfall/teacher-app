@@ -54,6 +54,9 @@ export default {
       case actions.UPDATE_LESSON_NAME:
         newState.lessonName = action.name;
         break;
+      case actions.UPDATE_DATE_TIME:
+        newState[action.name] = action.value;
+        break;
       case actions.UPDATE_SELECTED_DAYS: {
         const value = action.selectedDay;
         if (newState.selectedDays.indexOf(value) === -1) {
@@ -82,6 +85,7 @@ export default {
 };
 
 export interface LessonPlannerState {
+  [key: string]: string | boolean | LessonPlanner[] | string[] | Date;
   selectedLessonId: string;
   displayEditingForm: boolean;
   lessonPlanners: LessonPlanner[];
@@ -90,4 +94,8 @@ export interface LessonPlannerState {
   allDaysSelected: boolean;
   lessonContent: string;
   lessonName: string;
+  startTime: Date;
+  endTime: Date;
+  startDate: Date;
+  endDate: Date;
 }
