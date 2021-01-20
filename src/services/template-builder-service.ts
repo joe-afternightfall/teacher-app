@@ -4,7 +4,7 @@ import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../configs/redux/store';
 
-export const saveTemplateBuilder = (): ThunkAction<
+export const saveTemplate = (): ThunkAction<
   void,
   State,
   void,
