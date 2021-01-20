@@ -31,9 +31,12 @@ export default {
         break;
       case actions.CLOSE_APP_DIALOG:
         newState.displayAppDialog = false;
-        // newState.dialogContent = React.createElement(React.Fragment);
-        // newState.dialogWidth = false;
-        // newState.dialogTitleColor = '';
+        newState.dialogContent = React.createElement(React.Fragment);
+        newState.dialogWidth = false;
+        newState.dialogTitleColor = '';
+        newState.dialogTitle = '';
+        newState.confirmButtonTitle = '';
+        newState.confirmClickHandler = null;
         break;
       default:
         newState = state;
