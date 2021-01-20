@@ -1,27 +1,18 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { State } from '../../../../../configs/redux/store';
 import {
-  updateAllSelectedDays,
   updateSelectedDays,
-} from '../../../../../creators/lesson-planner';
+  updateAllSelectedDays,
+} from '../../../../../../creators/lesson-planner';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import { State } from '../../../../../../configs/redux/store';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { Checkbox, FormControlLabel, Grid } from '@material-ui/core';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {},
-  })
-);
 
 const WeekdaySelectionGroup = (
   props: WeekdaySelectionGroupProps
 ): JSX.Element => {
-  const classes = useStyles();
-
   let selectedValue;
 
   if (props.allDaysSelected) {

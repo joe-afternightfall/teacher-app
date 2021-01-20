@@ -62,3 +62,25 @@ export const updateAllSelectedDays = (checked: boolean) => {
     checked: checked,
   };
 };
+
+export const updateLessonContent = (content: string) => {
+  return {
+    type: actions.UPDATE_LESSON_CONTENT,
+    content: content,
+  };
+};
+
+export const updateLessonName = (name: string) => {
+  return {
+    type: actions.UPDATE_LESSON_NAME,
+    name: name,
+  };
+};
+
+export const updateDateTime = (name: string, value: Date) => {
+  return {
+    type: actions.UPDATE_DATE_TIME,
+    name: name,
+    value: value,
+  };
+};

@@ -11,7 +11,7 @@ import {
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import LessonDialog from './dialog/LessonDialog';
+import NewLessonDialog from './dialog/LessonDialog';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import { State } from '../../../../configs/redux/store';
@@ -37,90 +37,51 @@ const PlannerControls = (props: PlannerControlsProps): JSX.Element => {
       justify={'space-between'}
       className={classes.root}
     >
-      {props.displayNavigation ? (
-        <Grid item xs={6}>
-          <Grid container alignItems={'center'} spacing={2}>
-            <Grid item>
-              <Button variant={'contained'} color={'secondary'}>
-                <ArrowBack />
-              </Button>
-            </Grid>
+      <Grid item xs={6}>
+        <Grid container alignItems={'center'} spacing={2}>
+          <Grid item>
+            <Button variant={'contained'} color={'secondary'}>
+              <ArrowBack />
+            </Button>
+          </Grid>
 
-            <Grid item xs={6}>
-              <Paper elevation={3} style={{ padding: '0 8px 8px 8px' }}>
-                <FormControl style={{ width: '100%' }}>
-                  <InputLabel id={'current-week'}>{'Current Week'}</InputLabel>
-                  <Select labelId={'current-week'} id={'current-week'}>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                  </Select>
-                </FormControl>
-              </Paper>
-            </Grid>
+          <Grid item xs={6}>
+            <Paper elevation={3} style={{ padding: '0 8px 8px 8px' }}>
+              <FormControl style={{ width: '100%' }}>
+                <InputLabel id={'current-week'}>{'Current Week'}</InputLabel>
+                <Select labelId={'current-week'} id={'current-week'}>
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </Paper>
+          </Grid>
 
-            <Grid item>
-              <Button variant={'contained'} color={'secondary'}>
-                <ArrowForward />
-              </Button>
-            </Grid>
+          <Grid item>
+            <Button variant={'contained'} color={'secondary'}>
+              <ArrowForward />
+            </Button>
           </Grid>
         </Grid>
-      ) : (
-        <Grid item>
-          <Typography variant={'h6'}>{'Template Builder'}</Typography>
-        </Grid>
-      )}
+      </Grid>
 
       <Grid item>
-        <LessonDialog
-          subjectId={props.lessonSubjectId}
-          displayAppDialogHandler={props.displayAppDialogHandler}
-          dropdownChangeHandler={props.dropdownChangeHandler}
-          displayTitleTextfield={props.displayNavigation}
-        />
+        <NewLessonDialog />
       </Grid>
     </Grid>
   );
 };
 
 export interface PlannerControlsProps {
-  displayNavigation: boolean;
-  displayAppDialogHandler: (content: JSX.Element) => void;
-  lessonSubjectId: string;
-  dropdownChangeHandler: (
-    e: React.ChangeEvent<{ name?: string; value: string }>
-  ) => void;
+  name: string;
 }
 
 const mapStateToProps = (state: State): PlannerControlsProps => {
-  return ({
-    lessonSubjectId: state.lessonPlannerState.lessonSubjectId,
-  } as unknown) as PlannerControlsProps;
+  return ({} as unknown) as PlannerControlsProps;
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  ownProps: any
-): PlannerControlsProps =>
-  (({
-    displayAppDialogHandler: (content: JSX.Element, title: JSX.Element) => {
-      dispatch(
-        displayAppDialog({
-          maxWidth: 'lg',
-          titleColor: '#3baafc',
-          content: content,
-          title: title,
-          confirmButtonTitle: 'Save',
-          confirmClickHandler: null,
-        })
-      );
-    },
-    dropdownChangeHandler: (
-      e: React.ChangeEvent<{ name?: string; value: string }>
-    ) => {
-      dispatch(updateLessonSubject(e.target.value));
-    },
-  } as unknown) as PlannerControlsProps);
+const mapDispatchToProps = (dispatch: Dispatch): PlannerControlsProps =>
+  (({} as unknown) as PlannerControlsProps);
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlannerControls);
