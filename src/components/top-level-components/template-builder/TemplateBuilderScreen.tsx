@@ -8,23 +8,27 @@ import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 import LessonPlannerComp from '../../widgets/lesson-planner/LessonPlannerConnector';
-import { getTemplateBuilder } from '../../../services/template-builder-service';
+import {
+  buildAndSaveDefaultTemplate,
+  getTemplateBuilder,
+} from '../../../services/template-builder-service';
 import { LessonPlanner } from '../../../configs/types/LessonPlanner';
-import { buildTemplate } from '../../../utils/template-builder';
 import TemplateBuilderControls from '../../widgets/lesson-planner/components/planner-controls/TemplateBuilderControls';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class TemplateBuilderScreen extends Component<TemplateBuilderScreenProps> {
   async componentDidMount() {
-    const templateBuilder = await getTemplateBuilder();
+    const templateBuilder: any = await getTemplateBuilder();
 
     if (templateBuilder === null) {
-      const template = buildTemplate();
       console.log('generating new template');
-      this.props.loadTemplateBuilderHandler(template);
+      await buildAndSaveDefaultTemplate();
+      const dataSnapshot: any = await getTemplateBuilder();
+      console.log('dataSnapshot: ' + JSON.stringify(dataSnapshot));
+      //todo: remove this call when setup index listeners
+      this.props.loadTemplateBuilderHandler(dataSnapshot);
     } else {
-      console.log('found template, inside else');
       this.props.loadTemplateBuilderHandler(templateBuilder);
     }
   }
