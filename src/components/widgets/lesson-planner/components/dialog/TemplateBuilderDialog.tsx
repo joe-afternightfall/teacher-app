@@ -7,8 +7,8 @@ import { Button } from '@material-ui/core';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
 import { ThunkDispatch } from 'redux-thunk';
 import { State } from '../../../../../configs/redux/store';
-import { saveTemplate } from '../../../../../services/template-builder-service';
 import TemplateBuilderForm from '../lesson-form/TemplateBuilderForm';
+import { editTemplate } from '../../../../../services/template-builder-service';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,8 +56,8 @@ const mapDispatchToProps = (dispatch: Dispatch): TemplateBuilderDialogProps =>
           content: content,
           title: title,
           confirmButtonTitle: 'Add Lesson',
-          confirmClickHandler: () => {
-            (dispatch as ThunkDispatch<State, void, AnyAction>)(saveTemplate());
+          confirmClickHandler: async () => {
+            (dispatch as ThunkDispatch<State, void, AnyAction>)(editTemplate());
           },
         })
       );
