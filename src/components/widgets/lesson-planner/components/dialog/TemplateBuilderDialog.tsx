@@ -3,13 +3,12 @@ import { AnyAction, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
-import LessonForm from '../lesson-form/LessonForm';
 import { Button } from '@material-ui/core';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
 import { ThunkDispatch } from 'redux-thunk';
 import { State } from '../../../../../configs/redux/store';
-import { saveSubjectInfo } from '../../../../../services/subject-list-service';
 import { saveTemplate } from '../../../../../services/template-builder-service';
+import TemplateBuilderForm from '../lesson-form/TemplateBuilderForm';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,7 +27,7 @@ const TemplateBuilderDialog = (
       variant={'contained'}
       startIcon={<AddIcon />}
       onClick={() => {
-        props.displayAppDialogHandler(<LessonForm />, 'New Lesson');
+        props.displayAppDialogHandler(<TemplateBuilderForm />, 'New Lesson');
       }}
     >
       {'Add New'}

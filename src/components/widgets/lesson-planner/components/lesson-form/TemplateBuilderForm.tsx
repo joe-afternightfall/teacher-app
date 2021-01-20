@@ -2,12 +2,13 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDropdownConnector';
 import { State } from '../../../../../configs/redux/store';
 import { updateLessonSubject } from '../../../../../creators/lesson-planner';
 import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
-import StartAndEndTime from './components/StartAndEnd';
+import TimeInput from './components/TimeInput';
+import DateInput from './components/DateInput';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,19 +22,35 @@ const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
   return (
     <Grid container>
       <Grid item xs={6}>
+        <Grid item>
+          <Typography>{'Subject'}</Typography>
+        </Grid>
+
+        <Grid item>
+          <Typography>{'Days of the week'}</Typography>
+        </Grid>
+
+        <Grid item>
+          <Typography>{'Start date'}</Typography>
+        </Grid>
+      </Grid>
+
+      <Grid item xs={6}>
         <SubjectDropdown
           value={props.lessonSubjectId}
           changeHandler={props.dropdownChangeHandler}
         />
-      </Grid>
 
-      <Grid item xs={6}>
         <Grid item>
           <WeekdaySelectionGroup />
         </Grid>
 
         <Grid item>
-          <StartAndEndTime />
+          <DateInput />
+        </Grid>
+
+        <Grid item>
+          <TimeInput />
         </Grid>
       </Grid>
     </Grid>

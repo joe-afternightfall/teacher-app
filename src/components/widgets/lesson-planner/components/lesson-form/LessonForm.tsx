@@ -22,12 +22,13 @@ import AddIcon from '@material-ui/icons/Add';
 import NewLinkCard from '../dialog/NewLinkCard';
 import ImageIcon from '@material-ui/icons/Image';
 import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
-import StartAndEndTime from './components/StartAndEnd';
+import DateInput from './components/DateInput';
 import { State } from '../../../../../configs/redux/store';
 import {
   updateLessonContent,
   updateLessonSubject,
 } from '../../../../../creators/lesson-planner';
+import TimeInput from './components/TimeInput';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -175,7 +176,11 @@ const LessonForm = (props: LessonFormProps): JSX.Element => {
         </Grid>
 
         <Grid item>
-          <StartAndEndTime />
+          <DateInput />
+        </Grid>
+
+        <Grid item>
+          <TimeInput />
         </Grid>
       </Grid>
     </Grid>
