@@ -11,7 +11,7 @@ import {
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import LessonDialog from './dialog/LessonDialog';
+import NewLessonDialog from './dialog/LessonDialog';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import { State } from '../../../../configs/redux/store';
@@ -67,7 +67,7 @@ const PlannerControls = (props: PlannerControlsProps): JSX.Element => {
       </Grid>
 
       <Grid item>
-        <LessonDialog />
+        <NewLessonDialog />
       </Grid>
     </Grid>
   );
