@@ -75,6 +75,7 @@ export default {
       case actions.LOAD_LESSON_TEMPLATE:
         newState.lessonPlanners = [action.template];
         newState.selectedLessonId = action.template.id;
+        newState.templateFirebaseId = action.template.firebaseId;
         break;
       default:
         newState = state;
@@ -98,4 +99,5 @@ export interface LessonPlannerState {
   endTime: Date;
   startDate: Date;
   endDate: Date;
+  templateFirebaseId: string;
 }
