@@ -23,7 +23,7 @@ export interface MoveLessonResult {
 }
 
 export interface LessonPlanner {
-  fireBaseId: string;
+  firebaseId: string;
   updatedAt: Date;
   id: string;
   title: string;
