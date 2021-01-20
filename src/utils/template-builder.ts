@@ -1,9 +1,10 @@
 import { LessonPlanner } from '../configs/types/LessonPlanner';
 import { v4 as uuidv4 } from 'uuid';
 
-export const buildTemplate = (): LessonPlanner => {
+export const buildDefaultTemplate = (): LessonPlanner => {
   return {
-    createdAt: new Date(),
+    fireBaseId: '',
+    updatedAt: new Date(),
     id: uuidv4(),
     title: 'Template Builder',
     weekdays: {

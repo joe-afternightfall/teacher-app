@@ -23,7 +23,8 @@ export interface MoveLessonResult {
 }
 
 export interface LessonPlanner {
-  createdAt: Date;
+  fireBaseId: string;
+  updatedAt: Date;
   id: string;
   title: string;
   weekdays: {
