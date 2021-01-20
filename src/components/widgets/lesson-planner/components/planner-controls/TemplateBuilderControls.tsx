@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
+import TemplateBuilderDialog from '../dialog/TemplateBuilderDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,11 +21,17 @@ const TemplateBuilderControls = (
       <Grid item>
         <Typography variant={'h6'}>{'Template Builder'}</Typography>
       </Grid>
+
+      <Grid item>
+        <TemplateBuilderDialog />
+      </Grid>
     </Grid>
   );
 };
 
-export interface TemplateBuilderControlsProps {}
+export interface TemplateBuilderControlsProps {
+  name: string;
+}
 
 const mapStateToProps = (state: any): TemplateBuilderControlsProps => {
   return ({} as unknown) as TemplateBuilderControlsProps;
