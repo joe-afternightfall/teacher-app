@@ -4,6 +4,7 @@ import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../configs/redux/store';
 import { buildDefaultTemplate } from '../utils/template-builder';
+import { LessonPlanner } from '../configs/models/LessonPlanner';
 
 export const editTemplate = (): ThunkAction<
   void,
@@ -21,24 +22,38 @@ export const editTemplate = (): ThunkAction<
   const lessonSubjectId = plannerState.lessonSubjectId;
   const allDaysSelected = plannerState.allDaysSelected;
   const templateFirebaseId = plannerState.templateFirebaseId;
+  const lessonPlanner = plannerState.lessonPlanners[0];
 
-  const builtLessons = selectedDays.reduce((obj: any, day: string) => {
-    obj[day] = {
-      date: '',
-      items: [
-        {
-          id: uuidv4(),
-          content: '',
-          startTime: startTime,
-          endTime: endTime,
-          startDate: startDate,
-          endDate: endDate,
-          subjectId: lessonSubjectId,
-        },
-      ],
-    };
-    return obj;
-  }, {});
+  // todo: get working
+  // const builtLessons = selectedDays.reduce((obj: any, day: string) => {
+  //   obj[day] = {
+  //     date: '',
+  //     items: [
+  //       {
+  //         id: uuidv4(),
+  //         content: '',
+  //         startTime: startTime,
+  //         endTime: endTime,
+  //         startDate: startDate,
+  //         endDate: endDate,
+  //         subjectId: lessonSubjectId,
+  //       },
+  //     ],
+  //   };
+  //   return obj;
+  // }, {});
+
+  selectedDays.map((day) => {
+    lessonPlanner.weekdays[day].items.push({
+      id: uuidv4(),
+      content: '',
+      startTime: startTime,
+      endTime: endTime,
+      startDate: startDate,
+      endDate: endDate,
+      subjectId: lessonSubjectId,
+    });
+  });
 
   return await firebase
     .database()
@@ -46,7 +61,7 @@ export const editTemplate = (): ThunkAction<
     .child(templateFirebaseId)
     .update(
       {
-        weekdays: builtLessons,
+        weekdays: lessonPlanner.weekdays,
       },
       (error) => {
         if (error) {
