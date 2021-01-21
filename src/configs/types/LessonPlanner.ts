@@ -1,8 +1,8 @@
 export interface LessonItem {
   id: string;
   content: string;
-  startTime: TimeRanges;
-  endTime: TimeRanges;
+  startTime: Date;
+  endTime: Date;
   startDate: Date;
   endDate: Date;
   subjectId: string;
