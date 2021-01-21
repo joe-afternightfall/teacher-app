@@ -67,6 +67,7 @@ class Column extends Component<ColumnProps> {
                 style={getListStyle(snapshotDroppable2.isDraggingOver)}
               >
                 {plannerDay &&
+                  plannerDay.items &&
                   plannerDay.items.map((item: LessonItem, index: number) => (
                     <Draggable
                       key={item.id}
