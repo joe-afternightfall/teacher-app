@@ -10,3 +10,14 @@ export const getSubjectName = (
 
   return found && found.subjectName;
 };
+
+export const getSubject = (
+  subjectList: Subject[],
+  subjectId: string
+): Subject | undefined => {
+  const foundSubject = subjectList.find((subject: Subject) => {
+    return subject.id === subjectId;
+  });
+
+  return foundSubject && foundSubject;
+};
