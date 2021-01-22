@@ -3,7 +3,7 @@ import { AnyAction, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
-import { Button } from '@material-ui/core';
+import { Button, Fab, Tooltip } from '@material-ui/core';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
 import { ThunkDispatch } from 'redux-thunk';
 import { State } from '../../../../../configs/redux/store';
@@ -16,25 +16,43 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+// const oldButton = () => {
+//   return (
+//     <Button
+//       color={'primary'}
+//       variant={'contained'}
+//       startIcon={<AddIcon />}
+//       onClick={() => {
+//         props.displayAppDialogHandler(
+//           <TemplateBuilderForm />,
+//           'New Lesson Template'
+//         );
+//       }}
+//     >
+//       {'Add New'}
+//     </Button>
+//   )
+// }
+
 const TemplateBuilderDialog = (
   props: TemplateBuilderDialogProps
 ): JSX.Element => {
   const classes = useStyles();
 
   return (
-    <Button
-      color={'primary'}
-      variant={'contained'}
-      startIcon={<AddIcon />}
-      onClick={() => {
-        props.displayAppDialogHandler(
-          <TemplateBuilderForm />,
-          'New Lesson Template'
-        );
-      }}
-    >
-      {'Add New'}
-    </Button>
+    <Tooltip title={'Add New'}>
+      <Fab
+        color={'primary'}
+        onClick={() => {
+          props.displayAppDialogHandler(
+            <TemplateBuilderForm />,
+            'New Lesson Template'
+          );
+        }}
+      >
+        <AddIcon />
+      </Fab>
+    </Tooltip>
   );
 };
 
