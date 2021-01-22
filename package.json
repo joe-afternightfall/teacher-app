@@ -16,6 +16,7 @@
     "firebase-redux": "0.0.5",
     "history": "^4.10.1",
     "material-table": "^1.69.2",
+    "material-ui-popup-state": "^1.7.1",
     "mui-rte": "^1.26.2",
     "react": "^17.0.1",
     "react-beautiful-dnd": "^13.0.0",
