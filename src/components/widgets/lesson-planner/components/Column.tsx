@@ -14,9 +14,18 @@ import {
 } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
-import { Card, CardContent, CardHeader, Grid } from '@material-ui/core';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Grid,
+  Typography,
+} from '@material-ui/core';
 import { WeekDay, LessonItem } from '../../../../configs/types/LessonPlanner';
 import { capitalizeFirstLetter } from '../../../../utils/string-formatter';
+import { getSubject } from '../../../../utils/subject-name';
+import { Subject } from '../../../../configs/types/Subject';
+import CardPopover from './popover/CardPopover';
 
 const getItemStyle = (
   draggableStyle: any,
@@ -45,7 +54,7 @@ const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class Column extends Component<ColumnProps> {
   render(): JSX.Element {
-    const { plannerDay, dayOfWeek, color } = this.props;
+    const { plannerDay, dayOfWeek, color, subjectList } = this.props;
 
     return (
       <Grid item style={{ width: '20%' }}>
@@ -77,20 +86,36 @@ class Column extends Component<ColumnProps> {
                       {(
                         providedDraggable2: DraggableProvided,
                         snapshotDraggable2: DraggableStateSnapshot
-                      ) => (
-                        <Card
-                          ref={providedDraggable2.innerRef}
-                          {...providedDraggable2.draggableProps}
-                          {...providedDraggable2.dragHandleProps}
-                          style={getItemStyle(
-                            providedDraggable2.draggableProps.style,
-                            snapshotDraggable2.isDragging
-                          )}
-                          elevation={snapshotDraggable2.isDragging ? 10 : 2}
-                        >
-                          <CardContent>{item.content}</CardContent>
-                        </Card>
-                      )}
+                      ) => {
+                        const subject = getSubject(subjectList, item.subjectId);
+
+                        return (
+                          <Card
+                            ref={providedDraggable2.innerRef}
+                            {...providedDraggable2.draggableProps}
+                            {...providedDraggable2.dragHandleProps}
+                            style={getItemStyle(
+                              providedDraggable2.draggableProps.style,
+                              snapshotDraggable2.isDragging
+                            )}
+                            elevation={snapshotDraggable2.isDragging ? 10 : 2}
+                          >
+                            <CardHeader
+                              style={{
+                                backgroundColor: subject?.primaryColor,
+                                color: subject?.secondaryColor,
+                              }}
+                              title={
+                                <Typography variant={'subtitle1'}>
+                                  {subject?.subjectName}
+                                </Typography>
+                              }
+                              action={<CardPopover />}
+                            />
+                            <CardContent>{item.content}</CardContent>
+                          </Card>
+                        );
+                      }}
                     </Draggable>
                   ))}
                 {providedDroppable2.placeholder}
@@ -107,6 +132,7 @@ export interface ColumnProps extends WithStyles<typeof styles> {
   plannerDay: WeekDay;
   dayOfWeek: string;
   color: string;
+  subjectList: Subject[];
 }
 
 export default withStyles(styles, { withTheme: true })(Column);
