@@ -42,7 +42,7 @@ export interface TemplateBuilderDialogProps {
   displayAppDialogHandler: (content: JSX.Element, title: string) => void;
 }
 
-const mapStateToProps = (state: any): TemplateBuilderDialogProps => {
+const mapStateToProps = (): TemplateBuilderDialogProps => {
   return ({} as unknown) as TemplateBuilderDialogProps;
 };
 
