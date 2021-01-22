@@ -4,7 +4,6 @@ import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../configs/redux/store';
 import { buildDefaultTemplate } from '../utils/template-builder';
-import { LessonPlanner } from '../configs/models/LessonPlanner';
 
 export const editTemplate = (): ThunkAction<
   void,
@@ -43,7 +42,6 @@ export const editTemplate = (): ThunkAction<
   //   return obj;
   // }, {});
 
-  // todo: handle when all days are selected
   const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
   if (allDaysSelected) {
