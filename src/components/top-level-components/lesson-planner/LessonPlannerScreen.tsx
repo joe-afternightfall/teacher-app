@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { Styles } from '@material-ui/styles';
 import {
-  StyledComponentProps,
   Theme,
   WithStyles,
   withStyles,
+  StyledComponentProps,
 } from '@material-ui/core/styles';
-import { getAllLessonPlanners } from '../../../services/lesson-planner-service';
-import { LessonPlanner } from '../../../configs/types/LessonPlanner';
+import React, { Component } from 'react';
 import { Grid } from '@material-ui/core';
-import PlannerControls from '../../widgets/lesson-planner/components/PlannerControls';
+import { Styles } from '@material-ui/styles';
+import { LessonPlanner } from '../../../configs/types/LessonPlanner';
+import { getAllLessonPlanners } from '../../../services/lesson-planner-service';
 import LessonPlannerComp from '../../widgets/lesson-planner/LessonPlannerConnector';
+import PlannerControls from '../../widgets/lesson-planner/components/planner-controls/PlannerControls';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 

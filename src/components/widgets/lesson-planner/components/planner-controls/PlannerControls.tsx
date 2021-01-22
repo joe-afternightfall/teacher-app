@@ -6,18 +6,15 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
-  Typography,
 } from '@material-ui/core';
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import NewLessonDialog from './dialog/LessonDialog';
+import NewLessonDialog from '../dialog/LessonDialog';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import ArrowForward from '@material-ui/icons/ArrowForward';
-import { State } from '../../../../configs/redux/store';
-import { updateLessonSubject } from '../../../../creators/lesson-planner';
+import { State } from '../../../../../configs/redux/store';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { displayAppDialog } from '../../../../creators/application/app-dialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
