@@ -26,12 +26,16 @@ import { capitalizeFirstLetter } from '../../../../utils/string-formatter';
 import { getSubject } from '../../../../utils/subject-name';
 import { Subject } from '../../../../configs/types/Subject';
 import CardPopover from './popover/CardPopover';
+import {
+  formatDate,
+  formatDateWithout,
+} from '../../../../utils/date-formatter';
 
 const getItemStyle = (
   draggableStyle: any,
   isDragging: boolean
 ): Record<string, unknown> => ({
-  height: 64,
+  height: 76,
   // color: '#ebebeb',
   // color: '#C8C8C8',
   // color: '#D4D4D4',
@@ -88,6 +92,8 @@ class Column extends Component<ColumnProps> {
                         snapshotDraggable2: DraggableStateSnapshot
                       ) => {
                         const subject = getSubject(subjectList, item.subjectId);
+                        const startTime = formatDateWithout(item.startTime);
+                        const endTime = formatDate(item.endTime);
 
                         return (
                           <Card
@@ -102,12 +108,14 @@ class Column extends Component<ColumnProps> {
                           >
                             <CardHeader
                               style={{
-                                backgroundColor: subject?.primaryColor,
-                                color: subject?.secondaryColor,
+                                borderLeft: `8px solid ${subject?.primaryColor}`,
                               }}
                               title={
-                                <Typography variant={'subtitle1'}>
-                                  {subject?.subjectName}
+                                <Typography>{subject?.subjectName}</Typography>
+                              }
+                              subheader={
+                                <Typography variant={'subtitle2'}>
+                                  {`${startTime} to ${endTime}`}
                                 </Typography>
                               }
                               action={<CardPopover />}
