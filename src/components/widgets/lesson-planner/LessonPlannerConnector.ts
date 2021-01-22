@@ -20,6 +20,7 @@ const mapStateToProps = (state: State): LessonPlannerProps => {
 
   return ({
     selectedPlanner: selectedPlanner,
+    subjectList: state.subjectListState.subjectList,
   } as unknown) as LessonPlannerProps;
 };
 
