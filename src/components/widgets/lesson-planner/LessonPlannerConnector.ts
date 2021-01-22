@@ -1,12 +1,11 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {
-  loadLessonPlanners,
   reorderPlannerItems,
   updatePlannerItems,
 } from '../../../creators/lesson-planner';
-import { LessonItem, LessonItems } from '../../../configs/types/LessonPlanner';
 import { State } from '../../../configs/redux/store';
+import { LessonItem, LessonItems } from '../../../configs/types/LessonPlanner';
 import LessonPlannerComp, { LessonPlannerProps } from './LessonPlanner';
 
 const mapStateToProps = (state: State): LessonPlannerProps => {
@@ -21,16 +20,20 @@ const mapStateToProps = (state: State): LessonPlannerProps => {
   return ({
     selectedPlanner: selectedPlanner,
     subjectList: state.subjectListState.subjectList,
+    templateBuilder: state.lessonPlannerState.templateBuilder,
   } as unknown) as LessonPlannerProps;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): LessonPlannerProps =>
+const mapDispatchToProps = (
+  dispatch: Dispatch,
+  ownProps: any
+): LessonPlannerProps =>
   (({
     reorderHandler: (items: LessonItem[], dayOfWeek: string) => {
-      dispatch(reorderPlannerItems(items, dayOfWeek));
+      dispatch(reorderPlannerItems(items, dayOfWeek, ownProps.isTemplate));
     },
     moveHandler: (items: LessonItems) => {
-      dispatch(updatePlannerItems(items));
+      dispatch(updatePlannerItems(items, ownProps.isTemplate));
     },
   } as unknown) as LessonPlannerProps);
 

@@ -1,4 +1,5 @@
 export interface LessonItem {
+  [key: string]: string | Date;
   id: string;
   content: string;
   startTime: Date;
@@ -34,6 +35,7 @@ export interface LessonPlanner {
 }
 
 export interface LessonItems {
+  [key: string]: string | LessonItem[] | WeekDay;
   monday: LessonItem[];
   tuesday: LessonItem[];
   wednesday: LessonItem[];

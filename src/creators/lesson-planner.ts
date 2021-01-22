@@ -8,12 +8,14 @@ import { AnyAction } from 'redux';
 
 export const reorderPlannerItems = (
   items: LessonItem[],
-  dayOfWeek: string
+  dayOfWeek: string,
+  isTemplate: boolean
 ): ReorderItemsAction => {
   return {
     type: actions.REORDER_LESSON_PLANNER,
     items: items,
     dayOfWeek: dayOfWeek,
+    isTemplate: isTemplate,
   };
 };
 
@@ -21,18 +23,24 @@ export interface ReorderItemsAction {
   type: string;
   items: LessonItem[];
   dayOfWeek: string;
+  isTemplate: boolean;
 }
 
-export const updatePlannerItems = (items: LessonItems): UpdateItemsAction => {
+export const updatePlannerItems = (
+  items: LessonItems,
+  isTemplate: boolean
+): UpdateItemsAction => {
   return {
     type: actions.MOVE_PLANNER_ITEMS,
     items: items,
+    isTemplate: isTemplate,
   };
 };
 
 export interface UpdateItemsAction {
   type: string;
   items: LessonItems;
+  isTemplate: boolean;
 }
 
 export const loadLessonPlanners = (planners: LessonPlanner[]) => {

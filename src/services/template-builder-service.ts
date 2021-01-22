@@ -21,8 +21,8 @@ export const editTemplate = (): ThunkAction<
   const selectedDays = plannerState.selectedDays;
   const lessonSubjectId = plannerState.lessonSubjectId;
   const allDaysSelected = plannerState.allDaysSelected;
-  const templateFirebaseId = plannerState.templateFirebaseId;
-  const lessonPlanner = plannerState.lessonPlanners[0];
+  const templateFirebaseId = plannerState.templateBuilder.firebaseId;
+  const lessonPlanner = plannerState.templateBuilder;
 
   // todo: get working
   // const builtLessons = selectedDays.reduce((obj: any, day: string) => {
@@ -43,17 +43,34 @@ export const editTemplate = (): ThunkAction<
   //   return obj;
   // }, {});
 
-  selectedDays.map((day) => {
-    lessonPlanner.weekdays[day].items.push({
-      id: uuidv4(),
-      content: '',
-      startTime: startTime,
-      endTime: endTime,
-      startDate: startDate,
-      endDate: endDate,
-      subjectId: lessonSubjectId,
+  // todo: handle when all days are selected
+  const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+
+  if (allDaysSelected) {
+    allWeekdays.map((day: string) => {
+      lessonPlanner.weekdays[day].items.push({
+        id: uuidv4(),
+        content: '',
+        startTime: startTime,
+        endTime: endTime,
+        startDate: startDate,
+        endDate: endDate,
+        subjectId: lessonSubjectId,
+      });
     });
-  });
+  } else {
+    selectedDays.map((day: string) => {
+      lessonPlanner.weekdays[day].items.push({
+        id: uuidv4(),
+        content: '',
+        startTime: startTime,
+        endTime: endTime,
+        startDate: startDate,
+        endDate: endDate,
+        subjectId: lessonSubjectId,
+      });
+    });
+  }
 
   return await firebase
     .database()
