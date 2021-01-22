@@ -1,8 +1,9 @@
 export interface LessonItem {
+  [key: string]: string | Date;
   id: string;
   content: string;
-  startTime: TimeRanges;
-  endTime: TimeRanges;
+  startTime: Date;
+  endTime: Date;
   startDate: Date;
   endDate: Date;
   subjectId: string;
@@ -23,7 +24,8 @@ export interface MoveLessonResult {
 }
 
 export interface LessonPlanner {
-  createdAt: Date;
+  firebaseId: string;
+  updatedAt: Date;
   id: string;
   title: string;
   weekdays: {
@@ -33,6 +35,7 @@ export interface LessonPlanner {
 }
 
 export interface LessonItems {
+  [key: string]: string | LessonItem[] | WeekDay;
   monday: LessonItem[];
   tuesday: LessonItem[];
   wednesday: LessonItem[];

@@ -7,7 +7,9 @@ import TemplateBuilderDialog from '../dialog/TemplateBuilderDialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {},
+    root: {
+      marginBottom: 12,
+    },
   })
 );
 
@@ -17,12 +19,21 @@ const TemplateBuilderControls = (
   const classes = useStyles();
 
   return (
-    <Grid container>
-      <Grid item>
-        <Typography variant={'h6'}>{'Template Builder'}</Typography>
+    <Grid container className={classes.root}>
+      <Grid item xs={3} />
+      <Grid item xs={6} container justify={'center'}>
+        <Grid item>
+          <Typography variant={'h3'}>{'Template Builder'}</Typography>
+        </Grid>
+
+        <Grid item>
+          <Typography variant={'h6'}>
+            {'build your base template for future lesson planners'}
+          </Typography>
+        </Grid>
       </Grid>
 
-      <Grid item>
+      <Grid item xs={3} container justify={'flex-end'}>
         <TemplateBuilderDialog />
       </Grid>
     </Grid>

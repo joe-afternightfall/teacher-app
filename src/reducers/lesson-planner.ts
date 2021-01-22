@@ -20,11 +20,16 @@ export default {
         newState.selectedLessonId = action.lessonPlanners[0].id;
         break;
       case actions.REORDER_LESSON_PLANNER: {
-        const selectedPlanner = newState.lessonPlanners.find(
-          (planner: LessonPlanner) => {
-            return planner.id === newState.selectedLessonId;
-          }
-        );
+        let selectedPlanner;
+        if (action.isTemplate) {
+          selectedPlanner = newState.templateBuilder;
+        } else {
+          selectedPlanner = newState.lessonPlanners.find(
+            (planner: LessonPlanner) => {
+              return planner.id === newState.selectedLessonId;
+            }
+          );
+        }
 
         if (selectedPlanner !== undefined) {
           selectedPlanner.weekdays[action.dayOfWeek].items = action.items;
@@ -32,9 +37,16 @@ export default {
         break;
       }
       case actions.MOVE_PLANNER_ITEMS: {
-        const selectedPlanner = newState.lessonPlanners.find((planner) => {
-          return planner.id === newState.selectedLessonId;
-        });
+        let selectedPlanner;
+        if (action.isTemplate) {
+          selectedPlanner = newState.templateBuilder;
+        } else {
+          selectedPlanner = newState.lessonPlanners.find(
+            (planner: LessonPlanner) => {
+              return planner.id === newState.selectedLessonId;
+            }
+          );
+        }
 
         if (selectedPlanner !== undefined) {
           selectedPlanner.weekdays.monday.items = action.items.monday;
@@ -73,8 +85,7 @@ export default {
         break;
       }
       case actions.LOAD_LESSON_TEMPLATE:
-        newState.lessonPlanners = [action.template];
-        newState.selectedLessonId = action.template.id;
+        newState.templateBuilder = action.template;
         break;
       default:
         newState = state;
@@ -85,7 +96,13 @@ export default {
 };
 
 export interface LessonPlannerState {
-  [key: string]: string | boolean | LessonPlanner[] | string[] | Date;
+  [key: string]:
+    | string
+    | boolean
+    | LessonPlanner[]
+    | string[]
+    | Date
+    | LessonPlanner;
   selectedLessonId: string;
   displayEditingForm: boolean;
   lessonPlanners: LessonPlanner[];
@@ -98,4 +115,5 @@ export interface LessonPlannerState {
   endTime: Date;
   startDate: Date;
   endDate: Date;
+  templateBuilder: LessonPlanner;
 }

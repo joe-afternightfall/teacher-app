@@ -17,6 +17,8 @@ import { loadSubjectList } from './creators/subject-list/load-subjects';
 import DashboardScreen from './components/top-level-components/dashboard/DashboardScreen';
 import LessonPlannerScreen from './components/top-level-components/lesson-planner/LessonPlannerScreenConnector';
 import TemplateBuilderScreen from './components/top-level-components/template-builder/TemplateBuilderScreenConnector';
+import { getTemplateBuilder } from './services/template-builder-service';
+import { loadTemplate } from './creators/template-builder/load-templates';
 
 const history = createHashHistory(),
   store = createStore(history);
@@ -37,6 +39,7 @@ firebase.initializeApp(firebaseConfig);
 
 const subjectsRef = firebase.database().ref('/subjects');
 const linksRef = firebase.database().ref('/links');
+const templateBuilderRef = firebase.database().ref('/template-builder');
 
 const updateSubjects = async () => {
   const subjects = await getSubjects();
@@ -81,6 +84,34 @@ const updateLinks = async () => {
   }
 };
 
+const updateTemplateBuilder = async () => {
+  const template = await getTemplateBuilder();
+  if (template !== undefined && template !== null) {
+    // todo: rip out to util
+    // todo: build lesson planner object and set on state
+    const templates = Object.keys(template).map((key) => {
+      return {
+        firebaseId: key,
+        updatedAt: template[key].updatedAt,
+        id: template[key].id,
+        title: template[key].title,
+        weekdays: {
+          monday: template[key].weekdays.monday,
+          tuesday: template[key].weekdays.tuesday,
+          wednesday: template[key].weekdays.wednesday,
+          thursday: template[key].weekdays.thursday,
+          friday: template[key].weekdays.friday,
+        },
+        notes: template[key].notes,
+      };
+    });
+
+    store.dispatch(loadTemplate(templates[0]));
+  } else {
+    store.dispatch(loadTemplate(null));
+  }
+};
+
 linksRef.on('child_added', async () => {
   await updateLinks();
 });
@@ -103,6 +134,18 @@ subjectsRef.on('child_changed', async () => {
 
 subjectsRef.on('child_removed', async () => {
   await updateSubjects();
+});
+
+templateBuilderRef.on('child_added', async () => {
+  await updateTemplateBuilder();
+});
+
+templateBuilderRef.on('child_changed', async () => {
+  await updateTemplateBuilder();
+});
+
+templateBuilderRef.on('child_removed', async () => {
+  await updateTemplateBuilder();
 });
 
 store.dispatch(initApp());

@@ -14,15 +14,28 @@ import {
 } from '@material-ui/core/styles';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
-import { Card, CardContent, CardHeader, Grid } from '@material-ui/core';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Grid,
+  Typography,
+} from '@material-ui/core';
 import { WeekDay, LessonItem } from '../../../../configs/types/LessonPlanner';
 import { capitalizeFirstLetter } from '../../../../utils/string-formatter';
+import { getSubject } from '../../../../utils/subject-name';
+import { Subject } from '../../../../configs/types/Subject';
+import CardPopover from './popover/CardPopover';
+import {
+  formatDate,
+  formatDateWithout,
+} from '../../../../utils/date-formatter';
 
 const getItemStyle = (
   draggableStyle: any,
   isDragging: boolean
 ): Record<string, unknown> => ({
-  height: 64,
+  height: 76,
   // color: '#ebebeb',
   // color: '#C8C8C8',
   // color: '#D4D4D4',
@@ -45,7 +58,7 @@ const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class Column extends Component<ColumnProps> {
   render(): JSX.Element {
-    const { plannerDay, dayOfWeek, color } = this.props;
+    const { plannerDay, dayOfWeek, color, subjectList } = this.props;
 
     return (
       <Grid item style={{ width: '20%' }}>
@@ -67,6 +80,7 @@ class Column extends Component<ColumnProps> {
                 style={getListStyle(snapshotDroppable2.isDraggingOver)}
               >
                 {plannerDay &&
+                  plannerDay.items &&
                   plannerDay.items.map((item: LessonItem, index: number) => (
                     <Draggable
                       key={item.id}
@@ -76,20 +90,40 @@ class Column extends Component<ColumnProps> {
                       {(
                         providedDraggable2: DraggableProvided,
                         snapshotDraggable2: DraggableStateSnapshot
-                      ) => (
-                        <Card
-                          ref={providedDraggable2.innerRef}
-                          {...providedDraggable2.draggableProps}
-                          {...providedDraggable2.dragHandleProps}
-                          style={getItemStyle(
-                            providedDraggable2.draggableProps.style,
-                            snapshotDraggable2.isDragging
-                          )}
-                          elevation={snapshotDraggable2.isDragging ? 10 : 2}
-                        >
-                          <CardContent>{item.content}</CardContent>
-                        </Card>
-                      )}
+                      ) => {
+                        const subject = getSubject(subjectList, item.subjectId);
+                        const startTime = formatDateWithout(item.startTime);
+                        const endTime = formatDate(item.endTime);
+
+                        return (
+                          <Card
+                            ref={providedDraggable2.innerRef}
+                            {...providedDraggable2.draggableProps}
+                            {...providedDraggable2.dragHandleProps}
+                            style={getItemStyle(
+                              providedDraggable2.draggableProps.style,
+                              snapshotDraggable2.isDragging
+                            )}
+                            elevation={snapshotDraggable2.isDragging ? 10 : 2}
+                          >
+                            <CardHeader
+                              style={{
+                                borderLeft: `8px solid ${subject?.primaryColor}`,
+                              }}
+                              title={
+                                <Typography>{subject?.subjectName}</Typography>
+                              }
+                              subheader={
+                                <Typography variant={'subtitle2'}>
+                                  {`${startTime} to ${endTime}`}
+                                </Typography>
+                              }
+                              action={<CardPopover />}
+                            />
+                            <CardContent>{item.content}</CardContent>
+                          </Card>
+                        );
+                      }}
                     </Draggable>
                   ))}
                 {providedDroppable2.placeholder}
@@ -106,6 +140,7 @@ export interface ColumnProps extends WithStyles<typeof styles> {
   plannerDay: WeekDay;
   dayOfWeek: string;
   color: string;
+  subjectList: Subject[];
 }
 
 export default withStyles(styles, { withTheme: true })(Column);

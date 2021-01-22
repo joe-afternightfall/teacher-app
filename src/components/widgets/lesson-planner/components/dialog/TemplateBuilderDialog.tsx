@@ -3,12 +3,12 @@ import { AnyAction, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
-import { Button } from '@material-ui/core';
+import { Button, Fab, Tooltip } from '@material-ui/core';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
 import { ThunkDispatch } from 'redux-thunk';
 import { State } from '../../../../../configs/redux/store';
-import { saveTemplate } from '../../../../../services/template-builder-service';
 import TemplateBuilderForm from '../lesson-form/TemplateBuilderForm';
+import { editTemplate } from '../../../../../services/template-builder-service';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,25 +16,43 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+// const oldButton = () => {
+//   return (
+//     <Button
+//       color={'primary'}
+//       variant={'contained'}
+//       startIcon={<AddIcon />}
+//       onClick={() => {
+//         props.displayAppDialogHandler(
+//           <TemplateBuilderForm />,
+//           'New Lesson Template'
+//         );
+//       }}
+//     >
+//       {'Add New'}
+//     </Button>
+//   )
+// }
+
 const TemplateBuilderDialog = (
   props: TemplateBuilderDialogProps
 ): JSX.Element => {
   const classes = useStyles();
 
   return (
-    <Button
-      color={'primary'}
-      variant={'contained'}
-      startIcon={<AddIcon />}
-      onClick={() => {
-        props.displayAppDialogHandler(
-          <TemplateBuilderForm />,
-          'New Lesson Template'
-        );
-      }}
-    >
-      {'Add New'}
-    </Button>
+    <Tooltip title={'Add New'}>
+      <Fab
+        color={'primary'}
+        onClick={() => {
+          props.displayAppDialogHandler(
+            <TemplateBuilderForm />,
+            'New Lesson Template'
+          );
+        }}
+      >
+        <AddIcon />
+      </Fab>
+    </Tooltip>
   );
 };
 
@@ -42,7 +60,7 @@ export interface TemplateBuilderDialogProps {
   displayAppDialogHandler: (content: JSX.Element, title: string) => void;
 }
 
-const mapStateToProps = (state: any): TemplateBuilderDialogProps => {
+const mapStateToProps = (): TemplateBuilderDialogProps => {
   return ({} as unknown) as TemplateBuilderDialogProps;
 };
 
@@ -56,8 +74,8 @@ const mapDispatchToProps = (dispatch: Dispatch): TemplateBuilderDialogProps =>
           content: content,
           title: title,
           confirmButtonTitle: 'Add Lesson',
-          confirmClickHandler: () => {
-            (dispatch as ThunkDispatch<State, void, AnyAction>)(saveTemplate());
+          confirmClickHandler: async () => {
+            (dispatch as ThunkDispatch<State, void, AnyAction>)(editTemplate());
           },
         })
       );
