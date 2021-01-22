@@ -10,7 +10,7 @@ export default function CardPopover() {
     <PopupState variant={'popover'} popupId={'lesson-popover'}>
       {(popupState) => (
         <div>
-          <IconButton style={{ color: '#fff' }} {...bindTrigger(popupState)}>
+          <IconButton {...bindTrigger(popupState)}>
             <MoreVertIcon />
           </IconButton>
           <Popover
