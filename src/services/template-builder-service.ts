@@ -69,7 +69,7 @@ export const saveNewTemplate = (): ThunkAction<
       if (error) {
         // dispatch error
       } else {
-        // dispatch action to clear dialog
+        // todo: dispatch action to clear dialog
       }
     }
   );
@@ -92,25 +92,6 @@ export const editTemplate = (): ThunkAction<
   const allDaysSelected = plannerState.allDaysSelected;
   const templateFirebaseId = plannerState.templateBuilder.firebaseId;
   const lessonPlanner = plannerState.templateBuilder;
-
-  // todo: get working
-  // const builtLessons = selectedDays.reduce((obj: any, day: string) => {
-  //   obj[day] = {
-  //     date: '',
-  //     items: [
-  //       {
-  //         id: uuidv4(),
-  //         content: '',
-  //         startTime: startTime,
-  //         endTime: endTime,
-  //         startDate: startDate,
-  //         endDate: endDate,
-  //         subjectId: lessonSubjectId,
-  //       },
-  //     ],
-  //   };
-  //   return obj;
-  // }, {});
 
   if (allDaysSelected) {
     allWeekdays.map((day: string) => {
@@ -164,7 +145,7 @@ export const editTemplate = (): ThunkAction<
         if (error) {
           // error
         } else {
-          // dispatch action to clear dialog
+          // todo: dispatch action to clear dialog
         }
       }
     );
