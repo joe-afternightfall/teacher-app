@@ -58,20 +58,21 @@ export const saveNewTemplate = (): ThunkAction<
     }, {});
   }
 
-  const itemToSave = {
-    updatedAt: new Date(),
-    id: uuidv4(),
-    title: 'asdfasdflkj',
-    weekdays: builtItems,
-  };
-
-  return await newTemplateRef.set(itemToSave, (error) => {
-    if (error) {
-      // dispatch error
-    } else {
-      // dispatch success
+  return await newTemplateRef.set(
+    {
+      updatedAt: new Date(),
+      id: uuidv4(),
+      title: 'Template Builder',
+      weekdays: builtItems,
+    },
+    (error) => {
+      if (error) {
+        // dispatch error
+      } else {
+        // dispatch action to clear dialog
+      }
     }
-  });
+  );
 };
 
 export const editTemplate = (): ThunkAction<
@@ -113,15 +114,29 @@ export const editTemplate = (): ThunkAction<
 
   if (allDaysSelected) {
     allWeekdays.map((day: string) => {
-      lessonPlanner.weekdays[day].items.push({
-        id: uuidv4(),
-        content: '',
-        startTime: startTime,
-        endTime: endTime,
-        startDate: startDate,
-        endDate: endDate,
-        subjectId: lessonSubjectId,
-      });
+      if (lessonPlanner.weekdays[day].items !== undefined) {
+        lessonPlanner.weekdays[day].items.push({
+          id: uuidv4(),
+          content: '',
+          startTime: startTime,
+          endTime: endTime,
+          startDate: startDate,
+          endDate: endDate,
+          subjectId: lessonSubjectId,
+        });
+      } else {
+        lessonPlanner.weekdays[day].items = [
+          {
+            id: uuidv4(),
+            content: '',
+            startTime: startTime,
+            endTime: endTime,
+            startDate: startDate,
+            endDate: endDate,
+            subjectId: lessonSubjectId,
+          },
+        ];
+      }
     });
   } else {
     selectedDays.map((day: string) => {
@@ -149,7 +164,7 @@ export const editTemplate = (): ThunkAction<
         if (error) {
           // error
         } else {
-          alert('success');
+          // dispatch action to clear dialog
         }
       }
     );
