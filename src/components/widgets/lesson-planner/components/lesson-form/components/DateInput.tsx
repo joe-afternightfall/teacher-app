@@ -25,8 +25,8 @@ const DateInput = (props: DateInputProps): JSX.Element => {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify={'space-around'}>
         <KeyboardDatePicker
-          // disableToolbar
-          // variant={'inline'}
+          disableToolbar
+          variant={'inline'}
           margin={'normal'}
           id={'start-date-picker'}
           label={'Start Date'}
@@ -39,6 +39,8 @@ const DateInput = (props: DateInputProps): JSX.Element => {
         />
 
         <KeyboardDatePicker
+          disableToolbar
+          variant={'inline'}
           margin={'normal'}
           id={'date-picker-dialog'}
           label={'End Date'}

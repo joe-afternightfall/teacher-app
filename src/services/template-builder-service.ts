@@ -5,6 +5,7 @@ import { AnyAction, Dispatch } from 'redux';
 import { State } from '../configs/redux/store';
 import { buildDefaultTemplate } from '../utils/template-builder';
 import { LessonItem } from '../configs/types/LessonPlanner';
+import { lessonSaved } from '../creators/template-builder/lesson-saved';
 
 const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
@@ -69,7 +70,7 @@ export const saveNewTemplate = (): ThunkAction<
       if (error) {
         // dispatch error
       } else {
-        // todo: dispatch action to clear dialog
+        dispatch(lessonSaved());
       }
     }
   );
@@ -145,7 +146,7 @@ export const editTemplate = (): ThunkAction<
         if (error) {
           // error
         } else {
-          // todo: dispatch action to clear dialog
+          dispatch(lessonSaved());
         }
       }
     );

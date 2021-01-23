@@ -87,6 +87,13 @@ export default {
       case actions.LOAD_LESSON_TEMPLATE:
         newState.templateBuilder = action.template;
         break;
+      case actions.TEMPLATE_LESSON_SAVED:
+        newState.lessonSubjectId = '';
+        newState.allDaysSelected = false;
+        newState.selectedDays = [];
+        newState.startTime = new Date();
+        newState.endTime = new Date();
+        break;
       default:
         newState = state;
     }
