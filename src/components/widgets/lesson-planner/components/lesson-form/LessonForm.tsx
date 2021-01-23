@@ -22,7 +22,6 @@ import AddIcon from '@material-ui/icons/Add';
 import NewLinkCard from '../dialog/NewLinkCard';
 import ImageIcon from '@material-ui/icons/Image';
 import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
-import DateInput from './components/DateInput';
 import { State } from '../../../../../configs/redux/store';
 import {
   updateLessonContent,
@@ -173,10 +172,6 @@ const LessonForm = (props: LessonFormProps): JSX.Element => {
       <Grid item xs={6}>
         <Grid item>
           <WeekdaySelectionGroup />
-        </Grid>
-
-        <Grid item>
-          <DateInput />
         </Grid>
 
         <Grid item>

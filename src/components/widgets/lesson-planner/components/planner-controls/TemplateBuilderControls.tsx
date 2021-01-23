@@ -1,9 +1,10 @@
 import React from 'react';
 import { Dispatch } from 'redux';
+import DateInput from './DateInput';
 import { connect } from 'react-redux';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import TemplateBuilderDialog from '../dialog/TemplateBuilderDialog';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -20,7 +21,10 @@ const TemplateBuilderControls = (
 
   return (
     <Grid container className={classes.root}>
-      <Grid item xs={3} />
+      <Grid item xs={3}>
+        <DateInput />
+      </Grid>
+
       <Grid item xs={6} container justify={'center'}>
         <Grid item>
           <Typography variant={'h3'}>{'Template Builder'}</Typography>
