@@ -1,9 +1,13 @@
 import { format } from 'date-fns';
 
 export const formatDate = (date: Date) => {
-  return format(new Date(date), 'h:mm a');
+  if (date !== undefined) {
+    return format(new Date(date), 'h:mm a');
+  }
 };
 
 export const formatDateWithout = (date: Date) => {
-  return format(new Date(date), 'h:mm');
+  if (date !== undefined) {
+    return format(new Date(date), 'h:mm');
+  }
 };

@@ -1,14 +1,13 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Grid, Typography } from '@material-ui/core';
-import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDropdownConnector';
-import { State } from '../../../../../configs/redux/store';
-import { updateLessonSubject } from '../../../../../creators/lesson-planner';
-import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
 import TimeInput from './components/TimeInput';
-import DateInput from './components/DateInput';
+import { Grid, Typography } from '@material-ui/core';
+import { State } from '../../../../../configs/redux/store';
+import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { updateLessonSubject } from '../../../../../creators/lesson-planner';
+import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDropdownConnector';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -43,10 +42,6 @@ const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
 
         <Grid item>
           <WeekdaySelectionGroup />
-        </Grid>
-
-        <Grid item>
-          <DateInput />
         </Grid>
 
         <Grid item>

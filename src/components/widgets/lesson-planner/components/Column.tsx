@@ -13,29 +13,22 @@ import {
   StyledComponentProps,
 } from '@material-ui/core/styles';
 import React, { Component } from 'react';
-import { Styles } from '@material-ui/styles';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Grid,
-  Typography,
-} from '@material-ui/core';
-import { WeekDay, LessonItem } from '../../../../configs/types/LessonPlanner';
-import { capitalizeFirstLetter } from '../../../../utils/string-formatter';
-import { getSubject } from '../../../../utils/subject-name';
-import { Subject } from '../../../../configs/types/Subject';
-import CardPopover from './popover/CardPopover';
 import {
   formatDate,
   formatDateWithout,
 } from '../../../../utils/date-formatter';
+import { Styles } from '@material-ui/styles';
+import CardPopover from './popover/CardPopover';
+import { getSubject } from '../../../../utils/subject-name';
+import { Subject } from '../../../../configs/types/Subject';
+import { Card, Grid, CardHeader, Typography } from '@material-ui/core';
+import { capitalizeFirstLetter } from '../../../../utils/string-formatter';
+import { WeekDay, LessonItem } from '../../../../configs/types/LessonPlanner';
 
 const getItemStyle = (
   draggableStyle: any,
   isDragging: boolean
 ): Record<string, unknown> => ({
-  height: 76,
   // color: '#ebebeb',
   // color: '#C8C8C8',
   // color: '#D4D4D4',
@@ -118,9 +111,10 @@ class Column extends Component<ColumnProps> {
                                   {`${startTime} to ${endTime}`}
                                 </Typography>
                               }
-                              action={<CardPopover />}
+                              action={
+                                <CardPopover item={item} day={dayOfWeek} />
+                              }
                             />
-                            <CardContent>{item.content}</CardContent>
                           </Card>
                         );
                       }}

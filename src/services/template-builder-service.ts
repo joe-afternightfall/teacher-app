@@ -4,6 +4,77 @@ import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../configs/redux/store';
 import { buildDefaultTemplate } from '../utils/template-builder';
+import { LessonItem } from '../configs/types/LessonPlanner';
+import { lessonSaved } from '../creators/template-builder/lesson-saved';
+
+const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+
+export const saveNewTemplate = (): ThunkAction<
+  void,
+  State,
+  void,
+  AnyAction
+> => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
+  const plannerState = getState().lessonPlannerState;
+  const templateRef = firebase.database().ref('/template-builder');
+  const newTemplateRef = templateRef.push();
+  const allDaysSelected = plannerState.allDaysSelected;
+  let builtItems;
+
+  if (allDaysSelected) {
+    builtItems = allWeekdays.reduce((obj: any, day: string) => {
+      obj[day] = {
+        date: '',
+        items: [
+          {
+            id: uuidv4(),
+            content: '',
+            startTime: plannerState.startTime.toISOString(),
+            endTime: plannerState.endTime.toISOString(),
+            startDate: plannerState.startDate.toLocaleDateString(),
+            endDate: plannerState.endDate.toLocaleDateString(),
+            subjectId: plannerState.lessonSubjectId,
+          },
+        ],
+      };
+      return obj;
+    }, {});
+  } else {
+    builtItems = plannerState.selectedDays.reduce((obj: any, day: string) => {
+      obj[day] = {
+        date: '',
+        items: [
+          {
+            id: uuidv4(),
+            content: '',
+            startTime: plannerState.startTime.toISOString(),
+            endTime: plannerState.endTime.toISOString(),
+            startDate: plannerState.startDate.toLocaleDateString(),
+            endDate: plannerState.endDate.toLocaleDateString(),
+            subjectId: plannerState.lessonSubjectId,
+          },
+        ],
+      };
+      return obj;
+    }, {});
+  }
+
+  return await newTemplateRef.set(
+    {
+      updatedAt: new Date(),
+      id: uuidv4(),
+      title: 'Template Builder',
+      weekdays: builtItems,
+    },
+    (error) => {
+      if (error) {
+        // dispatch error
+      } else {
+        dispatch(lessonSaved());
+      }
+    }
+  );
+};
 
 export const editTemplate = (): ThunkAction<
   void,
@@ -23,38 +94,31 @@ export const editTemplate = (): ThunkAction<
   const templateFirebaseId = plannerState.templateBuilder.firebaseId;
   const lessonPlanner = plannerState.templateBuilder;
 
-  // todo: get working
-  // const builtLessons = selectedDays.reduce((obj: any, day: string) => {
-  //   obj[day] = {
-  //     date: '',
-  //     items: [
-  //       {
-  //         id: uuidv4(),
-  //         content: '',
-  //         startTime: startTime,
-  //         endTime: endTime,
-  //         startDate: startDate,
-  //         endDate: endDate,
-  //         subjectId: lessonSubjectId,
-  //       },
-  //     ],
-  //   };
-  //   return obj;
-  // }, {});
-
-  const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
-
   if (allDaysSelected) {
     allWeekdays.map((day: string) => {
-      lessonPlanner.weekdays[day].items.push({
-        id: uuidv4(),
-        content: '',
-        startTime: startTime,
-        endTime: endTime,
-        startDate: startDate,
-        endDate: endDate,
-        subjectId: lessonSubjectId,
-      });
+      if (lessonPlanner.weekdays[day].items !== undefined) {
+        lessonPlanner.weekdays[day].items.push({
+          id: uuidv4(),
+          content: '',
+          startTime: startTime,
+          endTime: endTime,
+          startDate: startDate,
+          endDate: endDate,
+          subjectId: lessonSubjectId,
+        });
+      } else {
+        lessonPlanner.weekdays[day].items = [
+          {
+            id: uuidv4(),
+            content: '',
+            startTime: startTime,
+            endTime: endTime,
+            startDate: startDate,
+            endDate: endDate,
+            subjectId: lessonSubjectId,
+          },
+        ];
+      }
     });
   } else {
     selectedDays.map((day: string) => {
@@ -82,7 +146,47 @@ export const editTemplate = (): ThunkAction<
         if (error) {
           // error
         } else {
-          alert('success');
+          dispatch(lessonSaved());
+        }
+      }
+    );
+};
+
+export const deleteItem = (
+  day: string,
+  itemToDelete: LessonItem
+): ThunkAction<void, State, void, AnyAction> => async (
+  dispatch: Dispatch,
+  getState: () => State
+): Promise<void> => {
+  const plannerState = getState().lessonPlannerState;
+  const templateFirebaseId = plannerState.templateBuilder.firebaseId;
+  const weekdays = plannerState.templateBuilder.weekdays;
+  const weekdayItems = weekdays[day];
+
+  const updatedItems = weekdayItems.items.filter(
+    (item: LessonItem) => item !== itemToDelete
+  );
+
+  Object.keys(weekdays).map((key: string) => {
+    if (key === day) {
+      weekdays[key].items = updatedItems;
+    }
+  });
+
+  return await firebase
+    .database()
+    .ref('/template-builder')
+    .child(templateFirebaseId)
+    .update(
+      {
+        weekdays: weekdays,
+      },
+      (error) => {
+        if (error) {
+          // dispatch error snackbar
+        } else {
+          // dispatch success snackbar
         }
       }
     );

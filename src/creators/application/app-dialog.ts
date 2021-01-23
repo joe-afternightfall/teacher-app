@@ -27,3 +27,9 @@ export const closeAppDialog = (): AnyAction => {
     type: actions.CLOSE_APP_DIALOG,
   };
 };
+
+export const clearAppDialog = (): AnyAction => {
+  return {
+    type: actions.CLEAR_APP_DIALOG,
+  };
+};

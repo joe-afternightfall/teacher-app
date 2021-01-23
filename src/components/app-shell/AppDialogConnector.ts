@@ -2,7 +2,10 @@ import { connect } from 'react-redux';
 import AppDialog from './AppDialog';
 import { State } from '../../configs/redux/store';
 import { Dispatch } from 'redux';
-import { closeAppDialog } from '../../creators/application/app-dialog';
+import {
+  clearAppDialog,
+  closeAppDialog,
+} from '../../creators/application/app-dialog';
 
 const mapStateToProps = (state: State) => {
   return {
@@ -19,6 +22,9 @@ const mapStateToProps = (state: State) => {
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: any) => ({
   handleClose: () => {
     dispatch(closeAppDialog());
+    setTimeout(() => {
+      dispatch(clearAppDialog());
+    }, 100);
   },
 });
 
