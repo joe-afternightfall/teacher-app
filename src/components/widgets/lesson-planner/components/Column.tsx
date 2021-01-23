@@ -18,9 +18,10 @@ import {
   formatDateWithout,
 } from '../../../../utils/date-formatter';
 import { Styles } from '@material-ui/styles';
-import CardPopover from './popover/CardPopover';
-import { getSubject } from '../../../../utils/subject-name';
+import DeleteItemDialog from './DeleteItemDialog';
+import CardPopover from './card-popover/CardPopover';
 import { Subject } from '../../../../configs/types/Subject';
+import { getSubject } from '../../../../utils/subject-name';
 import { Card, Grid, CardHeader, Typography } from '@material-ui/core';
 import { capitalizeFirstLetter } from '../../../../utils/string-formatter';
 import { WeekDay, LessonItem } from '../../../../configs/types/LessonPlanner';
@@ -112,7 +113,15 @@ class Column extends Component<ColumnProps> {
                                 </Typography>
                               }
                               action={
-                                <CardPopover item={item} day={dayOfWeek} />
+                                <CardPopover
+                                  icon={'vert'}
+                                  content={
+                                    <DeleteItemDialog
+                                      item={item}
+                                      day={dayOfWeek}
+                                    />
+                                  }
+                                />
                               }
                             />
                           </Card>
