@@ -84,9 +84,14 @@ export default {
         newState.allDaysSelected = action.checked;
         break;
       }
-      case actions.LOAD_LESSON_TEMPLATE:
+      case actions.LOAD_LESSON_TEMPLATE: {
+        const endDate = action.template.endDate;
+        const startDate = action.template.startDate;
         newState.templateBuilder = action.template;
+        newState.endDate = endDate && new Date(endDate);
+        newState.startDate = startDate && new Date(startDate);
         break;
+      }
       case actions.TEMPLATE_LESSON_SAVED:
         newState.lessonSubjectId = '';
         newState.allDaysSelected = false;
