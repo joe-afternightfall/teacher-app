@@ -18,8 +18,8 @@ import {
   formatDateWithout,
 } from '../../../../utils/date-formatter';
 import { Styles } from '@material-ui/styles';
-import DeleteItemDialog from './DeleteItemDialog';
 import CardPopover from './card-popover/CardPopover';
+import DeleteItemDialog from './dialog/DeleteItemDialog';
 import { Subject } from '../../../../configs/types/Subject';
 import { getSubject } from '../../../../utils/subject-name';
 import { Card, Grid, CardHeader, Typography } from '@material-ui/core';

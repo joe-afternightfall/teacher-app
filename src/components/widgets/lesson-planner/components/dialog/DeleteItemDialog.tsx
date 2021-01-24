@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { State } from '../../../../configs/redux/store';
+import { State } from '../../../../../configs/redux/store';
 import { Grid, IconButton, Typography } from '@material-ui/core';
-import { LessonItem } from '../../../../configs/types/LessonPlanner';
-import { deleteItem } from '../../../../services/template-builder-service';
+import { LessonItem } from '../../../../../configs/types/LessonPlanner';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { displayAppDialog } from '../../../../creators/application/app-dialog';
+import { deleteItem } from '../../../../../services/template-builder-service';
+import { displayAppDialog } from '../../../../../creators/application/app-dialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
