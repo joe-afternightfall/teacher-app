@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+  Grid,
+  Checkbox,
+  Typography,
+  FormControlLabel,
+} from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -8,7 +14,6 @@ import {
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import { State } from '../../../../../../configs/redux/store';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import { Checkbox, FormControlLabel, Grid } from '@material-ui/core';
 
 const WeekdaySelectionGroup = (
   props: WeekdaySelectionGroupProps
@@ -24,12 +29,15 @@ const WeekdaySelectionGroup = (
   return (
     <Grid
       container
-      direction={'column'}
       justify={'center'}
       alignItems={'center'}
-      style={{ background: '#f5f5f5' }}
+      style={{ background: '#f5f5f5', marginTop: 24 }}
     >
-      <Grid item>
+      <Grid item xs={12} style={{ padding: '16px 0 0 16px' }}>
+        <Typography>{'Days of the week'}</Typography>
+      </Grid>
+
+      <Grid item xs={12} style={{ textAlign: 'center', margin: 24 }}>
         <ToggleButtonGroup value={selectedValue} onChange={props.changeHandler}>
           <ToggleButton value={'monday'}>{'Mon'}</ToggleButton>
           <ToggleButton value={'tuesday'}>{'Tue'}</ToggleButton>
@@ -39,7 +47,7 @@ const WeekdaySelectionGroup = (
         </ToggleButtonGroup>
       </Grid>
 
-      <Grid item>
+      <Grid item style={{ marginBottom: 16 }}>
         <FormControlLabel
           control={
             <Checkbox

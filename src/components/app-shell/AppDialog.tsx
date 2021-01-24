@@ -21,7 +21,7 @@ const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
     position: 'absolute',
     right: theme.spacing(1),
     top: theme.spacing(1),
-    // color: '#fff',
+    color: '#fff',
   },
 });
 
@@ -36,13 +36,13 @@ class AppDialog extends Component<AppDialogProps> {
 
     return (
       <Dialog
-        maxWidth={maxWidth}
-        fullWidth={true}
-        onClose={this.props.handleClose}
         open={open}
+        fullWidth={true}
+        maxWidth={maxWidth}
+        onClose={this.props.handleClose}
       >
         <DialogTitle
-          style={{ background: titleColor, minHeight: 56 }}
+          style={{ background: titleColor, minHeight: 56, color: '#fff' }}
           id={'form-dialog-title'}
         >
           {title}

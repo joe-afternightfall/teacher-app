@@ -31,7 +31,7 @@ export const move = (
   droppableDestination: DraggableLocation
 ): MoveLessonResult[] | any => {
   const sourceClone = [...source];
-  const destClone = [...destination];
+  const destClone = destination === undefined ? [] : [...destination];
   const [removed] = sourceClone.splice(droppableSource.index, 1);
 
   destClone.splice(droppableDestination.index, 0, removed);

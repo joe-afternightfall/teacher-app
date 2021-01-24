@@ -18,7 +18,9 @@ import { saveDates } from '../../../../../services/template-builder-service';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {},
+    root: {
+      width: 560,
+    },
   })
 );
 
@@ -54,7 +56,7 @@ const DateInput = (props: DateInputProps): JSX.Element => {
       <CardPopover
         icon={'calendar'}
         content={
-          <Grid container spacing={2} style={{ width: 560 }}>
+          <Grid container spacing={2} className={classes.root}>
             <Grid item xs={12} container justify={'space-between'}>
               <Grid item>
                 <Typography>{'School Year Start & End Dates'}</Typography>
