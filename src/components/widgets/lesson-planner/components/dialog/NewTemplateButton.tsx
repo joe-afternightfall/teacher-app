@@ -20,7 +20,6 @@ const NewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
         onClick={() => {
           props.displayAppDialogHandler(
             <TemplateBuilderForm />,
-            'New Lesson',
             props.isNewTemplate
           );
         }}
@@ -34,7 +33,6 @@ const NewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
 export interface NewTemplateButtonProps {
   displayAppDialogHandler: (
     content: JSX.Element,
-    title: string,
     isNewTemplate: boolean
   ) => void;
   isNewTemplate: boolean;
@@ -50,7 +48,6 @@ const mapDispatchToProps = (dispatch: Dispatch): NewTemplateButtonProps =>
   (({
     displayAppDialogHandler: (
       content: JSX.Element,
-      title: JSX.Element,
       isNewTemplate: boolean
     ) => {
       dispatch(
@@ -58,7 +55,7 @@ const mapDispatchToProps = (dispatch: Dispatch): NewTemplateButtonProps =>
           maxWidth: 'sm',
           titleColor: '#3baafc',
           content: content,
-          title: title,
+          title: 'New Lesson',
           confirmButtonTitle: 'Add Lesson',
           confirmClickHandler: async () => {
             if (isNewTemplate) {
