@@ -1,7 +1,5 @@
 import React from 'react';
-import { Dispatch } from 'redux';
 import DateInput from './DateInput';
-import { connect } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
 import SaveLessonButton from '../dialog/SaveLessonButton';
 import NewTemplateButton from '../dialog/NewTemplateButton';
@@ -15,7 +13,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const TemplateBuilderControls = (): JSX.Element => {
+export default function TemplateBuilderControls(): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -56,20 +54,4 @@ const TemplateBuilderControls = (): JSX.Element => {
       </Grid>
     </Grid>
   );
-};
-
-export interface TemplateBuilderControlsProps {
-  name: string;
 }
-
-const mapStateToProps = (state: any): TemplateBuilderControlsProps => {
-  return ({} as unknown) as TemplateBuilderControlsProps;
-};
-
-const mapDispatchToProps = (dispatch: Dispatch): TemplateBuilderControlsProps =>
-  (({} as unknown) as TemplateBuilderControlsProps);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TemplateBuilderControls);
