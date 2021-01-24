@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  deleteLink,
-  updateLink,
+  deleteBookmark,
+  updateBookmark,
   UpdateBookmarkProps,
-} from '../../../services/topic-links-service';
+} from '../../../services/bookmarks-service';
 import MaterialTable from 'material-table';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -116,7 +116,7 @@ interface BookmarksWidgetProps {
 
 const mapStateToProps = (state: State): BookmarksWidgetProps => {
   return ({
-    bookmarks: state.topicLinksState.links ? state.topicLinksState.links : [],
+    bookmarks: state.bookmarksState.bookmarks ? state.bookmarksState.bookmarks : [],
     subjectList: state.subjectListState.subjectList
       ? state.subjectListState.subjectList
       : [],
@@ -129,10 +129,10 @@ const mapDispatchToProps = (dispatch: Dispatch): BookmarksWidgetProps =>
       dispatch(openNewBookmarkDialog());
     },
     deleteClickHandler: (id: string) => {
-      (dispatch as ThunkDispatch<State, void, AnyAction>)(deleteLink(id));
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(deleteBookmark(id));
     },
     updateClickHandler: (bookmark: UpdateBookmarkProps) => {
-      (dispatch as ThunkDispatch<State, void, AnyAction>)(updateLink(bookmark));
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(updateBookmark(bookmark));
     },
   } as unknown) as BookmarksWidgetProps);
 
