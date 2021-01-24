@@ -6,6 +6,7 @@ import { State } from '../configs/redux/store';
 import { LessonItem } from '../configs/types/LessonPlanner';
 import { lessonSaved } from '../creators/template-builder/lesson-saved';
 import { displayAppSnackbar } from '../creators/application/app-snackbar';
+import { updatedLessonBoard } from '../creators/lesson-planner';
 
 const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
@@ -227,4 +228,51 @@ export const getTemplateBuilder = async () => {
     .then((snapshot) => {
       return snapshot.val();
     });
+};
+
+export const updateLessonBoardOrder = (): ThunkAction<
+  void,
+  State,
+  void,
+  AnyAction
+> => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
+  const plannerState = getState().lessonPlannerState;
+  const templateFirebaseId = plannerState.templateBuilder.firebaseId;
+  const weekdays = plannerState.templateBuilder.weekdays;
+
+  return await firebase
+    .database()
+    .ref('/template-builder')
+    .child(templateFirebaseId)
+    .update(
+      {
+        weekdays: weekdays,
+      },
+      (error) => {
+        if (error) {
+          dispatch(
+            displayAppSnackbar({
+              text: 'Error Saving',
+              severity: 'error',
+              position: {
+                vertical: 'bottom',
+                horizontal: 'right',
+              },
+            })
+          );
+        } else {
+          dispatch(
+            displayAppSnackbar({
+              text: 'Board Updated',
+              severity: 'success',
+              position: {
+                vertical: 'bottom',
+                horizontal: 'right',
+              },
+            })
+          );
+          dispatch(updatedLessonBoard());
+        }
+      }
+    );
 };

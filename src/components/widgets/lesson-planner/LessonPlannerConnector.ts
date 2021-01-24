@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import {
+  lessonBoardChanged,
   reorderPlannerItems,
   updatePlannerItems,
 } from '../../../creators/lesson-planner';
@@ -31,9 +32,11 @@ const mapDispatchToProps = (
   (({
     reorderHandler: (items: LessonItem[], dayOfWeek: string) => {
       dispatch(reorderPlannerItems(items, dayOfWeek, ownProps.isTemplate));
+      dispatch(lessonBoardChanged());
     },
     moveHandler: (items: LessonItems) => {
       dispatch(updatePlannerItems(items, ownProps.isTemplate));
+      dispatch(lessonBoardChanged());
     },
   } as unknown) as LessonPlannerProps);
 

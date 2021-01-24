@@ -60,6 +60,7 @@ export const createStore = (history: History): Store => {
     } as unknown) as SubjectListState,
     lessonPlannerState: ({
       selectedDays: [],
+      lessonBoardChanged: false,
     } as unknown) as LessonPlannerState,
   });
 };
