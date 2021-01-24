@@ -20,25 +20,13 @@ const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
 
   return (
     <Grid container>
-      <Grid item xs={6}>
-        <Grid item>
-          <Typography>{'Subject'}</Typography>
+      <Grid item xs={12}>
+        <Grid item xs={6} style={{ margin: 'auto' }}>
+          <SubjectDropdown
+            value={props.lessonSubjectId}
+            changeHandler={props.dropdownChangeHandler}
+          />
         </Grid>
-
-        <Grid item>
-          <Typography>{'Days of the week'}</Typography>
-        </Grid>
-
-        <Grid item>
-          <Typography>{'Start date'}</Typography>
-        </Grid>
-      </Grid>
-
-      <Grid item xs={6}>
-        <SubjectDropdown
-          value={props.lessonSubjectId}
-          changeHandler={props.dropdownChangeHandler}
-        />
 
         <Grid item>
           <WeekdaySelectionGroup />
