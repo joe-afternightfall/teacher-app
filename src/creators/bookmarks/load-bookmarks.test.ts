@@ -1,19 +1,11 @@
-import { loadBookmarksList } from './load-bookmarks';
-import { v4 as uuidv4 } from 'uuid';
 import actions from '../actions';
+import { loadBookmarksList } from './load-bookmarks';
+import { buildBookmarkList } from '../../configs/test-utils/test-util';
 
-describe('links creators', () => {
-  const bookmarks = [
-    {
-      firebaseId: uuidv4(),
-      id: uuidv4(),
-      bookmarkUrl: uuidv4(),
-      bookmarkTitle: uuidv4(),
-      subjectId: uuidv4(),
-      plannerItemIds: [uuidv4()],
-    },
-  ];
+describe('bookmarks creators', () => {
+
   it('should return LOAD_BOOKMARKS_LIST action', () => {
+    const bookmarks = buildBookmarkList(2);
     const loadedTopics = loadBookmarksList(bookmarks);
 
     expect(loadedTopics).toEqual({
