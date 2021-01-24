@@ -100,4 +100,4 @@ export const buildColor = (): ColorChoice => {
     primaryColor: 'primary',
     secondaryColor: 'secondary',
   };
-}
+};
