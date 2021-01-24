@@ -29,7 +29,7 @@ describe('app dialog action', () => {
 
     expect(action).toEqual({
       type: 'CLOSE_APP_DIALOG',
-    })
+    });
   });
 
   it('should return clear app dialog', () => {
@@ -37,6 +37,6 @@ describe('app dialog action', () => {
 
     expect(action).toEqual({
       type: 'CLEAR_APP_DIALOG',
-    })
+    });
   });
 });
