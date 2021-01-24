@@ -1,4 +1,4 @@
-import { move, reorder, updateAllItems } from './weekly-schedule';
+import { move, reorder, updateAllItems } from './weekly-planner';
 import {
   buildLessonItems,
   buildLessonPlanner,

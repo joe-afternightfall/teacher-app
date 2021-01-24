@@ -17,7 +17,7 @@ import {
 } from '../../../configs/types/LessonPlanner';
 import TimeColumn from './components/TimeColumn';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { move, reorder, updateAllItems } from '../../../utils/weekly-schedule';
+import { move, reorder, updateAllItems } from '../../../utils/weekly-planner';
 import { Subject } from '../../../configs/types/Subject';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
