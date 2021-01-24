@@ -1,4 +1,4 @@
-export interface Link {
+export interface Bookmark {
   firebaseId: string;
   id: string;
   linkUrl: string;
