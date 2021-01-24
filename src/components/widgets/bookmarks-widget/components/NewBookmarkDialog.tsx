@@ -17,7 +17,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import CloseIcon from '@material-ui/icons/Close';
 import { State } from '../../../../configs/redux/store';
 import { Subject } from '../../../../configs/types/Subject';
-import { saveBookmarkInfo } from '../../../../services/topic-links-service';
+import { saveBookmarkInfo } from '../../../../services/bookmarks-service';
 import { closeNewBookmarkDialog } from '../../../../creators/bookmarks/bookmarks-dialog';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
@@ -127,7 +127,7 @@ export interface NewBookmarkDialogProps {
 
 const mapStateToProps = (state: State): NewBookmarkDialogProps => {
   return ({
-    open: state.topicLinksState.displayNewLinkDialog,
+    open: state.bookmarksState.displayNewBookmarkDialog,
     subjectList: state.subjectListState.subjectList,
   } as unknown) as NewBookmarkDialogProps;
 };
