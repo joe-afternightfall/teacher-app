@@ -95,6 +95,8 @@ const updateTemplateBuilder = async () => {
         updatedAt: template[key].updatedAt,
         id: template[key].id,
         title: template[key].title,
+        startDate: template[key].startDate,
+        endDate: template[key].endDate,
         weekdays: {
           monday: template[key].weekdays.monday,
           tuesday: template[key].weekdays.tuesday,
