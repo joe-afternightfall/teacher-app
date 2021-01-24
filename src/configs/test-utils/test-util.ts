@@ -1,6 +1,7 @@
 import { LessonItem, LessonPlanner } from '../types/LessonPlanner';
 import { Subject } from '../types/Subject';
 import { v4 as uuidv4 } from 'uuid';
+import { ColorChoice } from '../theme/subject-color-choices';
 
 export const buildLessonItems = (items: number): LessonItem[] => {
   let index = 0;
@@ -91,3 +92,12 @@ export const buildSubjectList = (): Subject[] => {
     },
   ];
 };
+
+export const buildColor = (): ColorChoice => {
+  return {
+    id: 'color-id',
+    name: 'test-name',
+    primaryColor: 'primary',
+    secondaryColor: 'secondary',
+  };
+}
