@@ -1,4 +1,6 @@
 import { LessonItem, LessonPlanner } from '../types/LessonPlanner';
+import { Subject } from '../types/Subject';
+import { v4 as uuidv4 } from 'uuid';
 
 export const buildLessonItems = (items: number): LessonItem[] => {
   let index = 0;
@@ -17,7 +19,7 @@ export const buildLessonItems = (items: number): LessonItem[] => {
   }
 
   return builtList;
-}
+};
 
 export const buildLessonPlanner = (): LessonPlanner => {
   return {
@@ -56,4 +58,36 @@ export const buildLessonPlanner = (): LessonPlanner => {
       },
     ],
   };
-}
+};
+
+export const buildSubjectList = (): Subject[] => {
+  return [
+    {
+      firebaseId: '',
+      id: 'first-id',
+      subjectName: 'first-subject-name',
+      primaryColorId: uuidv4(),
+      primaryColor: uuidv4(),
+      secondaryColor: uuidv4(),
+      iconId: uuidv4(),
+    },
+    {
+      firebaseId: uuidv4(),
+      id: 'second-id',
+      subjectName: 'second-subject-name',
+      primaryColorId: uuidv4(),
+      primaryColor: uuidv4(),
+      secondaryColor: uuidv4(),
+      iconId: uuidv4(),
+    },
+    {
+      firebaseId: uuidv4(),
+      id: 'third-id',
+      subjectName: 'third-subject-name',
+      primaryColorId: uuidv4(),
+      primaryColor: uuidv4(),
+      secondaryColor: uuidv4(),
+      iconId: uuidv4(),
+    },
+  ];
+};

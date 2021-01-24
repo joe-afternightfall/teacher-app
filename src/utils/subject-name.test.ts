@@ -1,58 +1,36 @@
-import { getSubjectName } from './subject-name';
-import { v4 as uuidv4 } from 'uuid';
+import { getSubject, getSubjectName } from './subject-name';
+import { buildSubjectList } from '../configs/test-utils/test-util';
 
 describe('getting subject name', () => {
-  const firstId = uuidv4();
-  const secondId = uuidv4();
-
-  const firstSubjectName = uuidv4();
-  const secondSubjectName = uuidv4();
-
-  const subjects = [
-    {
-      firebaseId: '',
-      id: firstId,
-      subjectName: firstSubjectName,
-      primaryColorId: uuidv4(),
-      primaryColor: uuidv4(),
-      secondaryColor: uuidv4(),
-      iconId: uuidv4(),
-    },
-    {
-      firebaseId: uuidv4(),
-      id: secondId,
-      subjectName: secondSubjectName,
-      primaryColorId: uuidv4(),
-      primaryColor: uuidv4(),
-      secondaryColor: uuidv4(),
-      iconId: uuidv4(),
-    },
-    {
-      firebaseId: uuidv4(),
-      id: uuidv4(),
-      subjectName: 'subject-name',
-      primaryColorId: uuidv4(),
-      primaryColor: uuidv4(),
-      secondaryColor: uuidv4(),
-      iconId: uuidv4(),
-    },
-  ];
+  const subjectList = buildSubjectList();
 
   it('should return subject name', () => {
-    const foundSubjectName = getSubjectName(subjects, firstId);
+    const foundSubjectName = getSubjectName(subjectList, 'first-id');
 
-    expect(foundSubjectName).toEqual(firstSubjectName);
+    expect(foundSubjectName).toEqual('first-subject-name');
   });
 
   it('should return second subject', () => {
-    const foundSubjectName = getSubjectName(subjects, secondId);
+    const foundSubjectName = getSubjectName(subjectList, 'second-id');
 
-    expect(foundSubjectName).toEqual(secondSubjectName);
+    expect(foundSubjectName).toEqual('second-subject-name');
   });
 
   it('should return null', () => {
-    const subjectName = getSubjectName(subjects, 'test-id');
+    const subjectName = getSubjectName(subjectList, 'test-id');
 
     expect(subjectName).toEqual(undefined);
+  });
+
+  it('should return found subject', () => {
+    const subject = getSubject(subjectList, 'second-id');
+
+    expect(subject).toEqual(subjectList[1]);
+  });
+
+  it('should return undefined', () => {
+    const subject = getSubject(subjectList, 'dummy-id');
+
+    expect(subject).toEqual(undefined);
   });
 });

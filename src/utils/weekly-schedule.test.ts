@@ -1,5 +1,8 @@
 import { move, reorder, updateAllItems } from './weekly-schedule';
-import { buildLessonItems, buildLessonPlanner } from '../configs/test-utils/test-util';
+import {
+  buildLessonItems,
+  buildLessonPlanner,
+} from '../configs/test-utils/test-util';
 
 describe('Weekly Schedule', () => {
   it('should reorder schedule', () => {
