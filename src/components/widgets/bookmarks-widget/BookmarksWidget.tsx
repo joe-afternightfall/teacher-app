@@ -3,30 +3,30 @@ import { connect } from 'react-redux';
 import {
   deleteLink,
   updateLink,
-  UpdateLinkProps,
+  UpdateBookmarkProps,
 } from '../../../services/topic-links-service';
 import MaterialTable from 'material-table';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { Link } from '../../../configs/types/Link';
+import { Bookmark } from '../../../configs/types/Bookmark';
 import { State } from '../../../configs/redux/store';
-import NewLinkDialog from './components/NewLinkDialog';
+import NewBookmarkDialog from './components/NewBookmarkDialog';
 import { Subject } from '../../../configs/types/Subject';
-import { openNewLinkDialog } from '../../../creators/topic-links/links-dialog';
+import { openNewBookmarkDialog } from '../../../creators/bookmarks/bookmarks-dialog';
 
-const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {
+const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
   // todo: rip out to util
-  const data = props.links.map((link: Link, index: number) => {
+  const data = props.bookmarks.map((bookmark: Bookmark, index: number) => {
     index += 1;
 
     return {
       number: index,
-      firebaseId: link.firebaseId,
-      id: link.id,
-      linkUrl: link.linkUrl,
-      linkTitle: link.linkTitle,
-      subjectId: link.subjectId,
-      plannerItemIds: link.plannerItemIds,
+      firebaseId: bookmark.firebaseId,
+      id: bookmark.id,
+      bookmarkUrl: bookmark.bookmarkUrl,
+      bookmarkTitle: bookmark.bookmarkTitle,
+      subjectId: bookmark.subjectId,
+      plannerItemIds: bookmark.plannerItemIds,
     };
   });
 
@@ -37,12 +37,12 @@ const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {
 
   return (
     <React.Fragment>
-      <NewLinkDialog />
+      <NewBookmarkDialog />
 
       <MaterialTable
         data={data}
         // icons={tableIcons}
-        title={'Links List'}
+        title={'Bookmarks List'}
         options={{
           pageSize: 6,
           draggable: false,
@@ -54,8 +54,8 @@ const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {
             new Promise((resolve, reject) => {
               props.updateClickHandler({
                 firebaseId: newData.firebaseId,
-                linkUrl: newData.linkUrl,
-                linkTitle: newData.linkTitle,
+                bookmarkUrl: newData.bookmarkUrl,
+                bookmarkTitle: newData.bookmarkTitle,
                 subjectId: newData.subjectId,
               });
               setTimeout(() => {
@@ -80,12 +80,12 @@ const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {
             },
           },
           {
-            title: 'Link Title',
-            field: 'linkTitle',
+            title: 'Bookmark Title',
+            field: 'bookmarkTitle',
           },
           {
             title: 'URL',
-            field: 'linkUrl',
+            field: 'bookmarkUrl',
           },
           {
             title: 'Subject',
@@ -96,7 +96,7 @@ const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {
         actions={[
           {
             icon: 'add',
-            tooltip: 'Add Link',
+            tooltip: 'Add Bookmark',
             isFreeAction: true,
             onClick: () => props.addNewClickHandler(),
           },
@@ -106,34 +106,34 @@ const TopicLinksWidget = (props: LinksWidgetProps): JSX.Element => {
   );
 };
 
-interface LinksWidgetProps {
-  links: Link[];
+interface BookmarksWidgetProps {
+  bookmarks: Bookmark[];
   subjectList: Subject[];
   addNewClickHandler: () => void;
   deleteClickHandler: (id: string) => void;
-  updateClickHandler: (link: UpdateLinkProps) => void;
+  updateClickHandler: (bookmark: UpdateBookmarkProps) => void;
 }
 
-const mapStateToProps = (state: State): LinksWidgetProps => {
+const mapStateToProps = (state: State): BookmarksWidgetProps => {
   return ({
-    links: state.topicLinksState.links ? state.topicLinksState.links : [],
+    bookmarks: state.topicLinksState.links ? state.topicLinksState.links : [],
     subjectList: state.subjectListState.subjectList
       ? state.subjectListState.subjectList
       : [],
-  } as unknown) as LinksWidgetProps;
+  } as unknown) as BookmarksWidgetProps;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): LinksWidgetProps =>
+const mapDispatchToProps = (dispatch: Dispatch): BookmarksWidgetProps =>
   (({
     addNewClickHandler: () => {
-      dispatch(openNewLinkDialog());
+      dispatch(openNewBookmarkDialog());
     },
     deleteClickHandler: (id: string) => {
       (dispatch as ThunkDispatch<State, void, AnyAction>)(deleteLink(id));
     },
-    updateClickHandler: (link: UpdateLinkProps) => {
-      (dispatch as ThunkDispatch<State, void, AnyAction>)(updateLink(link));
+    updateClickHandler: (bookmark: UpdateBookmarkProps) => {
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(updateLink(bookmark));
     },
-  } as unknown) as LinksWidgetProps);
+  } as unknown) as BookmarksWidgetProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopicLinksWidget);
+export default connect(mapStateToProps, mapDispatchToProps)(BookmarksWidget);
