@@ -69,6 +69,12 @@ export default {
       case actions.UPDATE_DATE_TIME:
         newState[action.name] = action.value;
         break;
+      case actions.LESSON_BOARD_CHANGE:
+        newState.lessonBoardChanged = true;
+        break;
+      case actions.UPDATED_LESSON_BOARD:
+        newState.lessonBoardChanged = false;
+        break;
       case actions.UPDATE_SELECTED_DAYS: {
         const value = action.selectedDay;
         if (newState.selectedDays.indexOf(value) === -1) {
@@ -128,4 +134,5 @@ export interface LessonPlannerState {
   startDate: Date;
   endDate: Date;
   templateBuilder: LessonPlanner;
+  lessonBoardChanged: boolean;
 }

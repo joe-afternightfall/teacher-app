@@ -92,3 +92,15 @@ export const updateDateTime = (name: string, value: Date) => {
     value: value,
   };
 };
+
+export const lessonBoardChanged = () => {
+  return {
+    type: actions.LESSON_BOARD_CHANGE,
+  };
+};
+
+export const updatedLessonBoard = () => {
+  return {
+    type: actions.UPDATED_LESSON_BOARD,
+  };
+};
