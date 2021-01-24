@@ -2,7 +2,12 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import TimeInput from './components/TimeInput';
-import { Grid, Typography } from '@material-ui/core';
+import {
+  Grid,
+  Checkbox,
+  TextField,
+  FormControlLabel,
+} from '@material-ui/core';
 import { State } from '../../../../../configs/redux/store';
 import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -12,29 +17,83 @@ import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDr
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {},
+    checkboxContainer: {
+      textAlign: 'center',
+    },
   })
 );
 
 const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
   const classes = useStyles();
 
+  const [checked, setChecked] = React.useState<string>('');
+
+  const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(`${e.target.name}-${e.target.checked}`);
+  };
+
+  const isChecked = checked === 'other-true' || checked === 'subject-true';
+
   return (
-    <Grid container>
+    <Grid container style={{ minHeight: '30vh' }}>
       <Grid item xs={12}>
-        <Grid item xs={6} style={{ margin: 'auto' }}>
-          <SubjectDropdown
-            value={props.lessonSubjectId}
-            changeHandler={props.dropdownChangeHandler}
+        <Grid item xs={12} className={classes.checkboxContainer}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                name={'other'}
+                checked={checked === 'other-true'}
+                onChange={handleCheck}
+              />
+            }
+            label={'Other'}
+          />
+
+          <FormControlLabel
+            control={
+              <Checkbox
+                name={'subject'}
+                checked={checked === 'subject-true'}
+                onChange={handleCheck}
+              />
+            }
+            label={'Subject'}
           />
         </Grid>
 
-        <Grid item>
-          <WeekdaySelectionGroup />
+        <Grid item xs={6} style={{ margin: 'auto' }}>
+          {isChecked ? (
+            checked === 'other-true' ? (
+              <TextField
+                fullWidth
+                id={'activity-field'}
+                label={'Activity Name'}
+                inputProps={{
+                  name: 'activity',
+                }}
+                // value={this.state.title}
+                // onChange={handleChange}
+              />
+            ) : (
+              <SubjectDropdown
+                value={props.lessonSubjectId}
+                changeHandler={props.dropdownChangeHandler}
+              />
+            )
+          ) : undefined}
         </Grid>
 
-        <Grid item>
-          <TimeInput />
-        </Grid>
+        {isChecked ? (
+          <React.Fragment>
+            <Grid item>
+              <WeekdaySelectionGroup />
+            </Grid>
+
+            <Grid item>
+              <TimeInput />
+            </Grid>
+          </React.Fragment>
+        ) : undefined}
       </Grid>
     </Grid>
   );
