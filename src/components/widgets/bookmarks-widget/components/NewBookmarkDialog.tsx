@@ -138,7 +138,9 @@ const mapDispatchToProps = (dispatch: Dispatch): NewBookmarkDialogProps =>
       dispatch(closeNewBookmarkDialog());
     },
     saveClickHandler: (bookmark: NewBookmarkForm) => {
-      (dispatch as ThunkDispatch<State, void, AnyAction>)(saveBookmarkInfo(bookmark));
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(
+        saveBookmarkInfo(bookmark)
+      );
     },
   } as unknown) as NewBookmarkDialogProps);
 

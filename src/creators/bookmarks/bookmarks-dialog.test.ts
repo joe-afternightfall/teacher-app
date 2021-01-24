@@ -1,5 +1,8 @@
 import actions from '../actions';
-import { closeNewBookmarkDialog, openNewBookmarkDialog } from './bookmarks-dialog';
+import {
+  closeNewBookmarkDialog,
+  openNewBookmarkDialog,
+} from './bookmarks-dialog';
 
 describe('bookmarks dialog actions', () => {
   it('should return CLOSE_NEW_BOOKMARK_DIALOG', () => {

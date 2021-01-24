@@ -62,7 +62,6 @@ export const buildLessonPlanner = (): LessonPlanner => {
   };
 };
 
-
 // todo:  make dynamic by taking in number
 export const buildSubjectList = (): Subject[] => {
   return [
@@ -124,4 +123,4 @@ export const buildBookmarkList = (amount: number): Bookmark[] => {
   }
 
   return builtList;
-}
+};

@@ -116,7 +116,9 @@ interface BookmarksWidgetProps {
 
 const mapStateToProps = (state: State): BookmarksWidgetProps => {
   return ({
-    bookmarks: state.bookmarksState.bookmarks ? state.bookmarksState.bookmarks : [],
+    bookmarks: state.bookmarksState.bookmarks
+      ? state.bookmarksState.bookmarks
+      : [],
     subjectList: state.subjectListState.subjectList
       ? state.subjectListState.subjectList
       : [],
@@ -132,7 +134,9 @@ const mapDispatchToProps = (dispatch: Dispatch): BookmarksWidgetProps =>
       (dispatch as ThunkDispatch<State, void, AnyAction>)(deleteBookmark(id));
     },
     updateClickHandler: (bookmark: UpdateBookmarkProps) => {
-      (dispatch as ThunkDispatch<State, void, AnyAction>)(updateBookmark(bookmark));
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(
+        updateBookmark(bookmark)
+      );
     },
   } as unknown) as BookmarksWidgetProps);
 
