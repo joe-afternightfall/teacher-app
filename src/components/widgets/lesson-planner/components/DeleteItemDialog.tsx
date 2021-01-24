@@ -1,14 +1,14 @@
 import React from 'react';
-import { AnyAction, Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { displayAppDialog } from '../../../../../creators/application/app-dialog';
-import { Grid, IconButton, Typography } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { State } from '../../../../../configs/redux/store';
-import { deleteItem } from '../../../../../services/template-builder-service';
-import { LessonItem } from '../../../../../configs/types/LessonPlanner';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { State } from '../../../../configs/redux/store';
+import { Grid, IconButton, Typography } from '@material-ui/core';
+import { LessonItem } from '../../../../configs/types/LessonPlanner';
+import { deleteItem } from '../../../../services/template-builder-service';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { displayAppDialog } from '../../../../creators/application/app-dialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

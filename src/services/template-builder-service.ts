@@ -3,11 +3,48 @@ import { v4 as uuidv4 } from 'uuid';
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../configs/redux/store';
-import { buildDefaultTemplate } from '../utils/template-builder';
 import { LessonItem } from '../configs/types/LessonPlanner';
 import { lessonSaved } from '../creators/template-builder/lesson-saved';
+import { displayAppSnackbar } from '../creators/application/app-snackbar';
 
 const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+
+export const saveDates = (): ThunkAction<
+  void,
+  State,
+  void,
+  AnyAction
+> => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
+  const plannerState = getState().lessonPlannerState;
+  const templateFirebaseId = plannerState.templateBuilder.firebaseId;
+
+  return await firebase
+    .database()
+    .ref('/template-builder')
+    .child(templateFirebaseId)
+    .update(
+      {
+        endDate: plannerState.endDate.toLocaleDateString(),
+        startDate: plannerState.startDate.toLocaleDateString(),
+      },
+      (error) => {
+        if (error) {
+          // error
+        } else {
+          dispatch(
+            displayAppSnackbar({
+              text: 'Updated Dates',
+              severity: 'success',
+              position: {
+                vertical: 'bottom',
+                horizontal: 'right',
+              },
+            })
+          );
+        }
+      }
+    );
+};
 
 export const saveNewTemplate = (): ThunkAction<
   void,
@@ -31,8 +68,6 @@ export const saveNewTemplate = (): ThunkAction<
             content: '',
             startTime: plannerState.startTime.toISOString(),
             endTime: plannerState.endTime.toISOString(),
-            startDate: plannerState.startDate.toLocaleDateString(),
-            endDate: plannerState.endDate.toLocaleDateString(),
             subjectId: plannerState.lessonSubjectId,
           },
         ],
@@ -49,8 +84,6 @@ export const saveNewTemplate = (): ThunkAction<
             content: '',
             startTime: plannerState.startTime.toISOString(),
             endTime: plannerState.endTime.toISOString(),
-            startDate: plannerState.startDate.toLocaleDateString(),
-            endDate: plannerState.endDate.toLocaleDateString(),
             subjectId: plannerState.lessonSubjectId,
           },
         ],
@@ -64,6 +97,8 @@ export const saveNewTemplate = (): ThunkAction<
       updatedAt: new Date(),
       id: uuidv4(),
       title: 'Template Builder',
+      startDate: plannerState.startDate.toLocaleDateString(),
+      endDate: plannerState.endDate.toLocaleDateString(),
       weekdays: builtItems,
     },
     (error) => {
@@ -86,8 +121,6 @@ export const editTemplate = (): ThunkAction<
 
   const startTime = plannerState.startTime;
   const endTime = plannerState.endTime;
-  const startDate = plannerState.startDate;
-  const endDate = plannerState.endDate;
   const selectedDays = plannerState.selectedDays;
   const lessonSubjectId = plannerState.lessonSubjectId;
   const allDaysSelected = plannerState.allDaysSelected;
@@ -102,8 +135,6 @@ export const editTemplate = (): ThunkAction<
           content: '',
           startTime: startTime,
           endTime: endTime,
-          startDate: startDate,
-          endDate: endDate,
           subjectId: lessonSubjectId,
         });
       } else {
@@ -113,8 +144,6 @@ export const editTemplate = (): ThunkAction<
             content: '',
             startTime: startTime,
             endTime: endTime,
-            startDate: startDate,
-            endDate: endDate,
             subjectId: lessonSubjectId,
           },
         ];
@@ -127,8 +156,6 @@ export const editTemplate = (): ThunkAction<
         content: '',
         startTime: startTime,
         endTime: endTime,
-        startDate: startDate,
-        endDate: endDate,
         subjectId: lessonSubjectId,
       });
     });
@@ -200,18 +227,4 @@ export const getTemplateBuilder = async () => {
     .then((snapshot) => {
       return snapshot.val();
     });
-};
-
-export const buildAndSaveDefaultTemplate = async () => {
-  const template = buildDefaultTemplate();
-  const templateRef = firebase.database().ref('/template-builder');
-  const newTemplateRef = templateRef.push();
-
-  return await newTemplateRef.set(template, (error) => {
-    if (error) {
-      // error
-    } else {
-      console.log('SAVED_DEFAULT_TEMPLATE');
-    }
-  });
 };
