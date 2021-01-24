@@ -46,10 +46,7 @@ const mapStateToProps = (state: State): NewTemplateButtonProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): NewTemplateButtonProps =>
   (({
-    displayAppDialogHandler: (
-      content: JSX.Element,
-      isNewTemplate: boolean
-    ) => {
+    displayAppDialogHandler: (content: JSX.Element, isNewTemplate: boolean) => {
       dispatch(
         displayAppDialog({
           maxWidth: 'sm',

@@ -88,7 +88,7 @@ class Column extends Component<ColumnProps> {
                         const subject = getSubject(subjectList, item.subjectId);
                         const startTime = formatDateWithout(item.startTime);
                         const endTime = formatDate(item.endTime);
-
+                        // todo:  extract below card out to component
                         return (
                           <Card
                             ref={providedDraggable2.innerRef}
