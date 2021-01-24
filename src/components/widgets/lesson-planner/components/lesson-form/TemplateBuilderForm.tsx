@@ -2,12 +2,7 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import TimeInput from './components/TimeInput';
-import {
-  Grid,
-  Checkbox,
-  TextField,
-  FormControlLabel,
-} from '@material-ui/core';
+import { Grid, Checkbox, TextField, FormControlLabel } from '@material-ui/core';
 import { State } from '../../../../../configs/redux/store';
 import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
