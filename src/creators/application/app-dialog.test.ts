@@ -3,7 +3,7 @@ import React from 'react';
 
 describe('app dialog action', () => {
   it('should return DISPLAY_APP_DIALOG action', () => {
-    const confirmClickHandler = () => {};
+    const confirmClickHandler = () => alert();
     const action = displayAppDialog({
       maxWidth: 'sm',
       titleColor: 'test-color',
