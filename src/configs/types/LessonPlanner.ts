@@ -4,8 +4,6 @@ export interface LessonItem {
   content: string;
   startTime: Date;
   endTime: Date;
-  startDate: Date;
-  endDate: Date;
   subjectId: string;
 }
 
@@ -28,6 +26,8 @@ export interface LessonPlanner {
   updatedAt: Date;
   id: string;
   title: string;
+  startDate: Date;
+  endDate: Date;
   weekdays: {
     [key: string]: WeekDay;
   };

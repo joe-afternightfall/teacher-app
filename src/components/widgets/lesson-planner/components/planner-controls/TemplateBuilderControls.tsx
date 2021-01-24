@@ -22,7 +22,7 @@ const TemplateBuilderControls = (
   return (
     <Grid container className={classes.root}>
       <Grid item xs={3}>
-        {/*<DateInput />*/}
+        <DateInput />
       </Grid>
 
       <Grid item xs={6} container justify={'center'}>
