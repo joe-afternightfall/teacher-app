@@ -2,6 +2,7 @@ import { LessonItem, LessonPlanner } from '../types/LessonPlanner';
 import { Subject } from '../types/Subject';
 import { v4 as uuidv4 } from 'uuid';
 import { ColorChoice } from '../theme/subject-color-choices';
+import { Bookmark } from '../types/Bookmark';
 
 export const buildLessonItems = (items: number): LessonItem[] => {
   let index = 0;
@@ -61,6 +62,8 @@ export const buildLessonPlanner = (): LessonPlanner => {
   };
 };
 
+
+// todo:  make dynamic by taking in number
 export const buildSubjectList = (): Subject[] => {
   return [
     {
@@ -93,6 +96,7 @@ export const buildSubjectList = (): Subject[] => {
   ];
 };
 
+// todo:  make dynamic by taking in number
 export const buildColor = (): ColorChoice => {
   return {
     id: 'color-id',
@@ -101,3 +105,23 @@ export const buildColor = (): ColorChoice => {
     secondaryColor: 'secondary',
   };
 };
+
+export const buildBookmarkList = (amount: number): Bookmark[] => {
+  let index = 0;
+  const builtList = [];
+
+  while (index < amount) {
+    index += 1;
+
+    builtList.push({
+      firebaseId: uuidv4(),
+      id: uuidv4(),
+      bookmarkUrl: uuidv4(),
+      bookmarkTitle: uuidv4(),
+      subjectId: uuidv4(),
+      plannerItemIds: [uuidv4()],
+    });
+  }
+
+  return builtList;
+}
