@@ -12,8 +12,8 @@ import { State } from '../../../../../configs/redux/store';
 import TemplateBuilderForm from '../lesson-form/TemplateBuilderForm';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
 
-const TemplateBuilderDialog = (
-  props: TemplateBuilderDialogProps
+const NewTemplateButton = (
+  props: NewTemplateButtonProps
 ): JSX.Element => {
   return (
     <Tooltip title={'Add New'}>
@@ -33,7 +33,7 @@ const TemplateBuilderDialog = (
   );
 };
 
-export interface TemplateBuilderDialogProps {
+export interface NewTemplateButtonProps {
   displayAppDialogHandler: (
     content: JSX.Element,
     title: string,
@@ -42,13 +42,13 @@ export interface TemplateBuilderDialogProps {
   isNewTemplate: boolean;
 }
 
-const mapStateToProps = (state: State): TemplateBuilderDialogProps => {
+const mapStateToProps = (state: State): NewTemplateButtonProps => {
   return ({
     isNewTemplate: Boolean(!state.lessonPlannerState.templateBuilder),
-  } as unknown) as TemplateBuilderDialogProps;
+  } as unknown) as NewTemplateButtonProps;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): TemplateBuilderDialogProps =>
+const mapDispatchToProps = (dispatch: Dispatch): NewTemplateButtonProps =>
   (({
     displayAppDialogHandler: (
       content: JSX.Element,
@@ -76,9 +76,9 @@ const mapDispatchToProps = (dispatch: Dispatch): TemplateBuilderDialogProps =>
         })
       );
     },
-  } as unknown) as TemplateBuilderDialogProps);
+  } as unknown) as NewTemplateButtonProps);
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TemplateBuilderDialog);
+)(NewTemplateButton);
