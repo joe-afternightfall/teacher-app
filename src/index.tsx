@@ -14,11 +14,11 @@ import { getLinksList } from './services/topic-links-service';
 import { getSubjects } from './services/subject-list-service';
 import { loadTopicLinksList } from './creators/topic-links/links';
 import { loadSubjectList } from './creators/subject-list/load-subjects';
-import DashboardScreen from './components/top-level-components/dashboard/DashboardScreen';
-import LessonPlannerScreen from './components/top-level-components/lesson-planner/LessonPlannerScreenConnector';
-import TemplateBuilderScreen from './components/top-level-components/template-builder/TemplateBuilderScreenConnector';
 import { getTemplateBuilder } from './services/template-builder-service';
 import { loadTemplate } from './creators/template-builder/load-templates';
+import DashboardScreen from './components/top-level-components/dashboard/DashboardScreen';
+import TemplateBuilderScreen from './components/top-level-components/template-builder/TemplateBuilderScreen';
+import LessonPlannerScreen from './components/top-level-components/lesson-planner/LessonPlannerScreenConnector';
 
 const history = createHashHistory(),
   store = createStore(history);
