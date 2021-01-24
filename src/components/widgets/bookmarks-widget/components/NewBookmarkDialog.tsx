@@ -9,7 +9,7 @@ import {
   DialogActions,
   DialogContent,
 } from '@material-ui/core';
-import LinkForm from './LinkForm';
+import BookmarkForm from './BookmarkForm';
 import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
 import { AnyAction, Dispatch } from 'redux';
@@ -17,8 +17,8 @@ import { ThunkDispatch } from 'redux-thunk';
 import CloseIcon from '@material-ui/icons/Close';
 import { State } from '../../../../configs/redux/store';
 import { Subject } from '../../../../configs/types/Subject';
-import { saveLinkInfo } from '../../../../services/topic-links-service';
-import { closeNewLinkDialog } from '../../../../creators/topic-links/links-dialog';
+import { saveBookmarkInfo } from '../../../../services/topic-links-service';
+import { closeNewBookmarkDialog } from '../../../../creators/bookmarks/bookmarks-dialog';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,33 +32,33 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export interface NewLinkForm {
+export interface NewBookmarkForm {
   id: string;
-  linkUrl: string;
-  linkTitle: string;
+  bookmarkUrl: string;
+  bookmarkTitle: string;
   subjectId: string;
 }
 
-const NewLinkDialog = (props: NewLinkDialogProps): JSX.Element => {
+const NewBookmarkDialog = (props: NewBookmarkDialogProps): JSX.Element => {
   const classes = useStyles();
 
-  const [values, setValues] = React.useState<NewLinkForm>({
+  const [values, setValues] = React.useState<NewBookmarkForm>({
     id: uuidv4(),
-    linkUrl: '',
-    linkTitle: '',
+    bookmarkUrl: '',
+    bookmarkTitle: '',
     subjectId: '',
   });
 
   const dropdownChangeHandler = (
     e: React.ChangeEvent<{ name?: string; value: unknown }>
   ) => {
-    setValues((oldValues: NewLinkForm) => ({
+    setValues((oldValues: NewBookmarkForm) => ({
       ...oldValues,
       [e.target.name as string]: e.target.value,
     }));
   };
 
-  const textfieldChangeHandler = (name: keyof NewLinkForm) => (
+  const textfieldChangeHandler = (name: keyof NewBookmarkForm) => (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setValues({ ...values, [name]: e.target.value });
@@ -69,8 +69,8 @@ const NewLinkDialog = (props: NewLinkDialogProps): JSX.Element => {
     setTimeout(() => {
       setValues({
         id: uuidv4(),
-        linkUrl: '',
-        linkTitle: '',
+        bookmarkUrl: '',
+        bookmarkTitle: '',
         subjectId: '',
       });
     }, 4000);
@@ -83,8 +83,8 @@ const NewLinkDialog = (props: NewLinkDialogProps): JSX.Element => {
       open={props.open}
       onClose={props.closeDialogHandler}
     >
-      <DialogTitle id={'new-link-dialog-title'}>
-        {`Add New Link`}
+      <DialogTitle id={'new-bookmark-dialog-title'}>
+        {`Add New Bookmark`}
         <IconButton
           aria-label={'close'}
           className={classes.closeButton}
@@ -97,13 +97,13 @@ const NewLinkDialog = (props: NewLinkDialogProps): JSX.Element => {
       <DialogContent style={{ margin: '24px 0' }}>
         <Grid container justify={'center'} alignItems={'center'}>
           <Grid item>
-            <Typography variant={'h6'}>{'Link Information'}</Typography>
+            <Typography variant={'h6'}>{'Bookmark Information'}</Typography>
           </Grid>
 
-          <LinkForm
+          <BookmarkForm
             dropdownChangeHandler={dropdownChangeHandler}
             textfieldChangeHandler={textfieldChangeHandler}
-            linkValues={values}
+            bookmarkValues={values}
             subjectList={props.subjectList}
           />
         </Grid>
@@ -117,29 +117,29 @@ const NewLinkDialog = (props: NewLinkDialogProps): JSX.Element => {
   );
 };
 
-export interface NewLinkDialogProps {
+export interface NewBookmarkDialogProps {
   open: boolean;
   displayName: string;
   closeDialogHandler: () => void;
   subjectList: Subject[];
-  saveClickHandler: (link: NewLinkForm) => void;
+  saveClickHandler: (bookmark: NewBookmarkForm) => void;
 }
 
-const mapStateToProps = (state: State): NewLinkDialogProps => {
+const mapStateToProps = (state: State): NewBookmarkDialogProps => {
   return ({
     open: state.topicLinksState.displayNewLinkDialog,
     subjectList: state.subjectListState.subjectList,
-  } as unknown) as NewLinkDialogProps;
+  } as unknown) as NewBookmarkDialogProps;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): NewLinkDialogProps =>
+const mapDispatchToProps = (dispatch: Dispatch): NewBookmarkDialogProps =>
   (({
     closeDialogHandler: () => {
-      dispatch(closeNewLinkDialog());
+      dispatch(closeNewBookmarkDialog());
     },
-    saveClickHandler: (link: NewLinkForm) => {
-      (dispatch as ThunkDispatch<State, void, AnyAction>)(saveLinkInfo(link));
+    saveClickHandler: (bookmark: NewBookmarkForm) => {
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(saveBookmarkInfo(bookmark));
     },
-  } as unknown) as NewLinkDialogProps);
+  } as unknown) as NewBookmarkDialogProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewLinkDialog);
+export default connect(mapStateToProps, mapDispatchToProps)(NewBookmarkDialog);
