@@ -1,18 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import MaterialTable from 'material-table';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction, Dispatch } from 'redux';
 import {
   deleteBookmark,
   updateBookmark,
   UpdateBookmarkProps,
 } from '../../../services/bookmarks-service';
-import MaterialTable from 'material-table';
-import { AnyAction, Dispatch } from 'redux';
-import { ThunkDispatch } from 'redux-thunk';
-import { Bookmark } from '../../../configs/types/Bookmark';
+import AppLink from '../../app-shell/AppLink';
+import { Grid, Typography } from '@material-ui/core';
 import { State } from '../../../configs/redux/store';
-import NewBookmarkDialog from './components/NewBookmarkDialog';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 import { Subject } from '../../../configs/types/Subject';
+import { Bookmark } from '../../../configs/types/Bookmark';
+import NewBookmarkDialog from './components/NewBookmarkDialog';
 import { openNewBookmarkDialog } from '../../../creators/bookmarks/bookmarks-dialog';
+
+const getLink = (rowData: any) => (
+  <AppLink title={rowData.bookmarkUrl} url={rowData.bookmarkUrl} />
+);
 
 const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
   // todo: rip out to util
@@ -42,7 +49,17 @@ const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
       <MaterialTable
         data={data}
         // icons={tableIcons}
-        title={'Bookmarks List'}
+        title={
+          <Grid container spacing={2}>
+            <Grid item>
+              <BookmarkIcon />
+            </Grid>
+
+            <Grid item>
+              <Typography>{'Bookmarks List'}</Typography>
+            </Grid>
+          </Grid>
+        }
         options={{
           pageSize: 6,
           draggable: false,
@@ -80,12 +97,13 @@ const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
             },
           },
           {
-            title: 'Bookmark Title',
+            title: 'Title',
             field: 'bookmarkTitle',
           },
           {
             title: 'URL',
             field: 'bookmarkUrl',
+            render: getLink,
           },
           {
             title: 'Subject',
