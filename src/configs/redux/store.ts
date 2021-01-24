@@ -15,7 +15,7 @@ import lessonPlannerState, {
 import subjectListState, {
   SubjectListState,
 } from '../../reducers/subject-list';
-import topicLinksState, { TopicLinksState } from '../../reducers/topic-links';
+import bookmarksState, { BookmarksState } from '../../reducers/bookmarks';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 export const createStore = (history: History): Store => {
@@ -27,7 +27,7 @@ export const createStore = (history: History): Store => {
       applicationState: application.reducer,
       lessonPlannerState: lessonPlannerState.reducer,
       subjectListState: subjectListState.reducer,
-      topicLinksState: topicLinksState.reducer,
+      bookmarksState: bookmarksState.reducer,
       router: connectRouter(history),
       routing: routerReducer,
     });
@@ -69,5 +69,5 @@ export interface State {
   applicationState: ApplicationState;
   lessonPlannerState: LessonPlannerState;
   subjectListState: SubjectListState;
-  topicLinksState: TopicLinksState;
+  bookmarksState: BookmarksState;
 }
