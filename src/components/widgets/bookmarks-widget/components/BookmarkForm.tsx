@@ -1,6 +1,6 @@
 import React from 'react';
 import Select from '@material-ui/core/Select';
-import { NewLinkForm } from './NewLinkDialog';
+import { NewBookmarkForm } from './NewBookmarkDialog';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Grid, TextField } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -19,7 +19,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function LinkForm(props: LinkFormProps): JSX.Element {
+export default function BookmarkForm(props: BookmarkFormProps): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -29,12 +29,12 @@ export default function LinkForm(props: LinkFormProps): JSX.Element {
           <Grid container alignItems={'center'} justify={'space-between'}>
             <Grid item xs={7}>
               <TextField
-                id={'link-title'}
+                id={'bookmark-title'}
                 label={'Title'}
                 style={{ width: '100%' }}
                 className={classes.textfield}
-                value={props.linkValues.linkTitle}
-                onChange={props.textfieldChangeHandler('linkTitle')}
+                value={props.bookmarkValues.bookmarkTitle}
+                onChange={props.textfieldChangeHandler('bookmarkTitle')}
                 margin={'normal'}
               />
             </Grid>
@@ -44,9 +44,11 @@ export default function LinkForm(props: LinkFormProps): JSX.Element {
                 <InputLabel htmlFor={'subject-dropdown'}>
                   {'Subject'}
                 </InputLabel>
+
+                {/*// todo:  rip select out and use subject name dropdown}*/}
                 <Select
                   style={{ width: '100%' }}
-                  value={props.linkValues.subjectId}
+                  value={props.bookmarkValues.subjectId}
                   onChange={props.dropdownChangeHandler}
                   inputProps={{
                     name: 'subjectId',
@@ -72,11 +74,11 @@ export default function LinkForm(props: LinkFormProps): JSX.Element {
 
         <Grid item xs={12}>
           <TextField
-            id={'link-url'}
+            id={'bookmark-url'}
             label={'URL'}
             className={classes.textfield}
-            value={props.linkValues.linkUrl}
-            onChange={props.textfieldChangeHandler('linkUrl')}
+            value={props.bookmarkValues.bookmarkUrl}
+            onChange={props.textfieldChangeHandler('bookmarkUrl')}
             margin={'normal'}
           />
         </Grid>
@@ -85,13 +87,13 @@ export default function LinkForm(props: LinkFormProps): JSX.Element {
   );
 }
 
-export interface LinkFormProps {
-  linkValues: NewLinkForm;
+export interface BookmarkFormProps {
+  bookmarkValues: NewBookmarkForm;
   subjectList: Subject[];
   dropdownChangeHandler: (
     e: React.ChangeEvent<{ name?: string; value: unknown }>
   ) => void;
   textfieldChangeHandler: (
-    name: keyof NewLinkForm
+    name: keyof NewBookmarkForm
   ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
 }

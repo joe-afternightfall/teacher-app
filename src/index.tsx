@@ -10,9 +10,9 @@ import routes from './configs/constants/routes';
 import { createStore } from './configs/redux/store';
 import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './configs/service-worker';
-import { getLinksList } from './services/topic-links-service';
+import { getBookmarksList } from './services/bookmarks-service';
 import { getSubjects } from './services/subject-list-service';
-import { loadTopicLinksList } from './creators/topic-links/links';
+import { loadBookmarksList } from './creators/bookmarks/load-bookmarks';
 import { loadSubjectList } from './creators/subject-list/load-subjects';
 import { getTemplateBuilder } from './services/template-builder-service';
 import { loadTemplate } from './creators/template-builder/load-templates';
@@ -38,7 +38,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const subjectsRef = firebase.database().ref('/subjects');
-const linksRef = firebase.database().ref('/links');
+const bookmarksRef = firebase.database().ref('/bookmarks');
 const templateBuilderRef = firebase.database().ref('/template-builder');
 
 const updateSubjects = async () => {
@@ -63,24 +63,24 @@ const updateSubjects = async () => {
   }
 };
 
-const updateLinks = async () => {
-  const linksList = await getLinksList();
-  if (linksList !== undefined && linksList !== null) {
+const updateBookmarks = async () => {
+  const bookmarksList = await getBookmarksList();
+  if (bookmarksList !== undefined && bookmarksList !== null) {
     // todo: rip out to util
-    const links = Object.keys(linksList).map((key) => {
+    const bookmarks = Object.keys(bookmarksList).map((key) => {
       return {
         firebaseId: key,
-        id: linksList[key].id,
-        linkUrl: linksList[key].linkUrl,
-        linkTitle: linksList[key].linkTitle,
-        subjectId: linksList[key].subjectId,
-        plannerItemIds: linksList[key].plannerItemIds,
+        id: bookmarksList[key].id,
+        bookmarkUrl: bookmarksList[key].bookmarkUrl,
+        bookmarkTitle: bookmarksList[key].bookmarkTitle,
+        subjectId: bookmarksList[key].subjectId,
+        plannerItemIds: bookmarksList[key].plannerItemIds,
       };
     });
 
-    store.dispatch(loadTopicLinksList(links));
+    store.dispatch(loadBookmarksList(bookmarks));
   } else {
-    store.dispatch(loadTopicLinksList([]));
+    store.dispatch(loadBookmarksList([]));
   }
 };
 
@@ -114,16 +114,16 @@ const updateTemplateBuilder = async () => {
   }
 };
 
-linksRef.on('child_added', async () => {
-  await updateLinks();
+bookmarksRef.on('child_added', async () => {
+  await updateBookmarks();
 });
 
-linksRef.on('child_changed', async () => {
-  await updateLinks();
+bookmarksRef.on('child_changed', async () => {
+  await updateBookmarks();
 });
 
-linksRef.on('child_removed', async () => {
-  await updateLinks();
+bookmarksRef.on('child_removed', async () => {
+  await updateBookmarks();
 });
 
 subjectsRef.on('child_added', async () => {

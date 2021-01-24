@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { Grid } from '@material-ui/core';
 import { Styles } from '@material-ui/styles';
 import LessonPlannerCard from './lesson-planner-card/LessonPlannerCard';
-import TopicLinksWidget from '../../widgets/topic-links/TopicLinksWidget';
+import BookmarksWidget from '../../widgets/bookmarks-widget/BookmarksWidget';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
@@ -17,7 +17,7 @@ class DashboardScreen extends Component<DashboardScreenProps> {
     return (
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <TopicLinksWidget />
+          <BookmarksWidget />
         </Grid>
 
         <Grid item xs={6}>
