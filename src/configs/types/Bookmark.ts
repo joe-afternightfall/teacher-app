@@ -1,8 +1,8 @@
 export interface Bookmark {
   firebaseId: string;
   id: string;
-  linkUrl: string;
-  linkTitle: string;
+  bookmarkUrl: string;
+  bookmarkTitle: string;
   subjectId: string;
   plannerItemIds: string[];
 }
