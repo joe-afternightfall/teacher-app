@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 import DateInput from './DateInput';
 import { connect } from 'react-redux';
 import { Grid, Typography } from '@material-ui/core';
-import TemplateBuilderDialog from '../dialog/TemplateBuilderDialog';
+import NewTemplateButton from '../dialog/NewTemplateButton';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -38,7 +38,7 @@ const TemplateBuilderControls = (
       </Grid>
 
       <Grid item xs={3} container justify={'flex-end'}>
-        <TemplateBuilderDialog />
+        <NewTemplateButton />
       </Grid>
     </Grid>
   );

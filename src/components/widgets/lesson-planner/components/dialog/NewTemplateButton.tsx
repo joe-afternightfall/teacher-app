@@ -12,9 +12,7 @@ import { State } from '../../../../../configs/redux/store';
 import TemplateBuilderForm from '../lesson-form/TemplateBuilderForm';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
 
-const TemplateBuilderDialog = (
-  props: TemplateBuilderDialogProps
-): JSX.Element => {
+const NewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
   return (
     <Tooltip title={'Add New'}>
       <Fab
@@ -22,7 +20,6 @@ const TemplateBuilderDialog = (
         onClick={() => {
           props.displayAppDialogHandler(
             <TemplateBuilderForm />,
-            'New Lesson',
             props.isNewTemplate
           );
         }}
@@ -33,34 +30,29 @@ const TemplateBuilderDialog = (
   );
 };
 
-export interface TemplateBuilderDialogProps {
+export interface NewTemplateButtonProps {
   displayAppDialogHandler: (
     content: JSX.Element,
-    title: string,
     isNewTemplate: boolean
   ) => void;
   isNewTemplate: boolean;
 }
 
-const mapStateToProps = (state: State): TemplateBuilderDialogProps => {
+const mapStateToProps = (state: State): NewTemplateButtonProps => {
   return ({
     isNewTemplate: Boolean(!state.lessonPlannerState.templateBuilder),
-  } as unknown) as TemplateBuilderDialogProps;
+  } as unknown) as NewTemplateButtonProps;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): TemplateBuilderDialogProps =>
+const mapDispatchToProps = (dispatch: Dispatch): NewTemplateButtonProps =>
   (({
-    displayAppDialogHandler: (
-      content: JSX.Element,
-      title: JSX.Element,
-      isNewTemplate: boolean
-    ) => {
+    displayAppDialogHandler: (content: JSX.Element, isNewTemplate: boolean) => {
       dispatch(
         displayAppDialog({
           maxWidth: 'sm',
           titleColor: '#3baafc',
           content: content,
-          title: title,
+          title: 'New Lesson',
           confirmButtonTitle: 'Add Lesson',
           confirmClickHandler: async () => {
             if (isNewTemplate) {
@@ -76,9 +68,6 @@ const mapDispatchToProps = (dispatch: Dispatch): TemplateBuilderDialogProps =>
         })
       );
     },
-  } as unknown) as TemplateBuilderDialogProps);
+  } as unknown) as NewTemplateButtonProps);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TemplateBuilderDialog);
+export default connect(mapStateToProps, mapDispatchToProps)(NewTemplateButton);

@@ -8,7 +8,7 @@ import { displayAppDialog } from '../../../../../creators/application/app-dialog
 import { State } from '../../../../../configs/redux/store';
 import LessonName from '../lesson-form/components/LessonName';
 
-const LessonDialog = (props: LessonDialogProps): JSX.Element => {
+const NewLessonButton = (props: NewLessonButtonProps): JSX.Element => {
   return (
     <Button
       color={'primary'}
@@ -23,15 +23,15 @@ const LessonDialog = (props: LessonDialogProps): JSX.Element => {
   );
 };
 
-export interface LessonDialogProps {
+export interface NewLessonButtonProps {
   displayAppDialogHandler: (content: JSX.Element, title: JSX.Element) => void;
 }
 
-const mapStateToProps = (state: State): LessonDialogProps => {
-  return ({} as unknown) as LessonDialogProps;
+const mapStateToProps = (state: State): NewLessonButtonProps => {
+  return ({} as unknown) as NewLessonButtonProps;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): LessonDialogProps =>
+const mapDispatchToProps = (dispatch: Dispatch): NewLessonButtonProps =>
   (({
     displayAppDialogHandler: (content: JSX.Element, title: JSX.Element) => {
       dispatch(
@@ -45,6 +45,6 @@ const mapDispatchToProps = (dispatch: Dispatch): LessonDialogProps =>
         })
       );
     },
-  } as unknown) as LessonDialogProps);
+  } as unknown) as NewLessonButtonProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(LessonDialog);
+export default connect(mapStateToProps, mapDispatchToProps)(NewLessonButton);

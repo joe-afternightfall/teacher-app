@@ -18,8 +18,8 @@ import {
   formatDateWithout,
 } from '../../../../utils/date-formatter';
 import { Styles } from '@material-ui/styles';
-import DeleteItemDialog from './DeleteItemDialog';
 import CardPopover from './card-popover/CardPopover';
+import DeleteItemDialog from './dialog/DeleteItemDialog';
 import { Subject } from '../../../../configs/types/Subject';
 import { getSubject } from '../../../../utils/subject-name';
 import { Card, Grid, CardHeader, Typography } from '@material-ui/core';
@@ -88,7 +88,7 @@ class Column extends Component<ColumnProps> {
                         const subject = getSubject(subjectList, item.subjectId);
                         const startTime = formatDateWithout(item.startTime);
                         const endTime = formatDate(item.endTime);
-
+                        // todo:  extract below card out to component
                         return (
                           <Card
                             ref={providedDraggable2.innerRef}
