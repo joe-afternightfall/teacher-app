@@ -11,7 +11,6 @@ import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDr
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {},
     checkboxContainer: {
       textAlign: 'center',
     },
@@ -27,7 +26,7 @@ const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
     setChecked(`${e.target.name}-${e.target.checked}`);
   };
 
-  const isChecked = checked === 'other-true' || checked === 'subject-true';
+  const isChecked = checked === 'activity-true' || checked === 'subject-true';
 
   return (
     <Grid container style={{ minHeight: '30vh' }}>
@@ -36,12 +35,12 @@ const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
           <FormControlLabel
             control={
               <Checkbox
-                name={'other'}
-                checked={checked === 'other-true'}
+                name={'activity'}
+                checked={checked === 'activity-true'}
                 onChange={handleCheck}
               />
             }
-            label={'Other'}
+            label={'Activity'}
           />
 
           <FormControlLabel
