@@ -12,9 +12,7 @@ import { State } from '../../../../../configs/redux/store';
 import TemplateBuilderForm from '../lesson-form/TemplateBuilderForm';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
 
-const NewTemplateButton = (
-  props: NewTemplateButtonProps
-): JSX.Element => {
+const NewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
   return (
     <Tooltip title={'Add New'}>
       <Fab
@@ -78,7 +76,4 @@ const mapDispatchToProps = (dispatch: Dispatch): NewTemplateButtonProps =>
     },
   } as unknown) as NewTemplateButtonProps);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewTemplateButton);
+export default connect(mapStateToProps, mapDispatchToProps)(NewTemplateButton);
