@@ -1,13 +1,11 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import {
-  lessonBoardChanged,
-  reorderPlannerItems,
-  updatePlannerItems,
-} from '../../../creators/lesson-planner';
 import { State } from '../../../configs/redux/store';
 import { LessonItem, LessonItems } from '../../../configs/types/LessonPlanner';
 import LessonPlannerComp, { LessonPlannerProps } from './LessonPlanner';
+import { reorderPlannerItems } from '../../../creators/lesson-planner/reorder-items';
+import { movePlannerItems } from '../../../creators/lesson-planner/move-items';
+import { lessonBoardChanged } from '../../../creators/lesson-planner/lesson-board-changed';
 
 const mapStateToProps = (state: State): LessonPlannerProps => {
   const lessons = state.lessonPlannerState.lessonPlanners;
@@ -35,7 +33,7 @@ const mapDispatchToProps = (
       dispatch(lessonBoardChanged());
     },
     moveHandler: (items: LessonItems) => {
-      dispatch(updatePlannerItems(items, ownProps.isTemplate));
+      dispatch(movePlannerItems(items, ownProps.isTemplate));
       dispatch(lessonBoardChanged());
     },
   } as unknown) as LessonPlannerProps);

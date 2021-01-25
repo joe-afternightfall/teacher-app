@@ -3,9 +3,9 @@ import LessonPlannerScreen, {
   LessonPlannerScreenProps,
 } from './LessonPlannerScreen';
 import { LessonPlanner } from '../../../configs/types/LessonPlanner';
-import { loadLessonPlanners } from '../../../creators/lesson-planner';
 import { Dispatch } from 'redux';
 import { State } from '../../../configs/redux/store';
+import { loadLessonPlanners } from '../../../creators/lesson-planner/load-lesson-planners';
 
 const mapStateToProps = (state: State): LessonPlannerScreenProps => {
   return ({} as unknown) as LessonPlannerScreenProps;

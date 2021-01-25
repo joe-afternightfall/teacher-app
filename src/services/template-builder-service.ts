@@ -6,7 +6,7 @@ import { State } from '../configs/redux/store';
 import { LessonItem } from '../configs/types/LessonPlanner';
 import { lessonSaved } from '../creators/template-builder/lesson-saved';
 import { displayAppSnackbar } from '../creators/application/app-snackbar';
-import { updatedLessonBoard } from '../creators/lesson-planner';
+import { updatedLessonBoard } from '../creators/lesson-planner/update-items';
 
 const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
