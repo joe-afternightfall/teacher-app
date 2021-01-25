@@ -18,11 +18,7 @@ import { State } from '../../../../configs/redux/store';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { routerActions } from 'connected-react-router';
 import routes from '../../../../configs/constants/routes';
-import {
-  clearSubjectInfoDialog,
-  closeSubjectInfoDialog,
-  openSubjectInfoDialog,
-} from '../../../../creators/subject-list/subject-info-dialog';
+import { clearSubjectInfoDialog } from '../../../../creators/subject-list/subject-info-dialog';
 import { clearEditing } from '../../../../creators/subject-list/editing-subject';
 import plannerBackground from '../../../../configs/images/lovely-planning.jpg';
 
@@ -61,14 +57,7 @@ const LessonPlannerCard = (props: PlannerWidgetProps): JSX.Element => {
               onClose={handleClose}
               open={Boolean(anchorEl)}
             >
-              <SubjectListDialog
-                isEditing={props.isEditing}
-                displayLoader={props.displayLoader}
-                closeMenuClickHandler={handleClose}
-                openSubjectInfoHandler={props.openSubjectInfoHandler}
-                closeSubjectInfoHandler={props.closeSubjectInfoHandler}
-                shouldDisplaySubjectInfo={props.shouldDisplaySubjectInfo}
-              />
+              <SubjectListDialog closeMenuClickHandler={handleClose} />
               <MenuItem
                 onClick={() => {
                   props.routeToTemplateBuilderHandler();
@@ -88,14 +77,14 @@ const LessonPlannerCard = (props: PlannerWidgetProps): JSX.Element => {
           }}
           image={plannerBackground}
           title={'Weekly Planner'}
-          onClick={props.routeToWidgetClickHandler}
+          onClick={props.routeToLessonPlannerClickHandler}
         />
       </CardActionArea>
 
       <CardActions>
         <Grid container align-items={'center'} justify={'flex-end'}>
           <Grid item>
-            <Button onClick={props.routeToWidgetClickHandler}>
+            <Button onClick={props.routeToLessonPlannerClickHandler}>
               {'View Planner'}
             </Button>
           </Grid>
@@ -107,14 +96,10 @@ const LessonPlannerCard = (props: PlannerWidgetProps): JSX.Element => {
 
 interface PlannerWidgetProps {
   isEditing: boolean;
-  displayLoader: boolean;
   subheaderMessage: string;
-  shouldDisplaySubjectInfo: boolean;
-  openSubjectInfoHandler: () => void;
-  routeToWidgetClickHandler: () => void;
-  closeSubjectInfoHandler: () => void;
   clearDialogHandler: () => void;
   routeToTemplateBuilderHandler: () => void;
+  routeToLessonPlannerClickHandler: () => void;
 }
 
 const mapStateToProps = (state: State): PlannerWidgetProps => {
@@ -133,8 +118,6 @@ const mapStateToProps = (state: State): PlannerWidgetProps => {
   return ({
     isEditing: state.subjectListState.editingForm,
     subheaderMessage: subheaderMessage,
-    shouldDisplaySubjectInfo: state.subjectListState.displaySubjectInfo,
-    displayLoader: state.subjectListState.displayLoader,
   } as unknown) as PlannerWidgetProps;
 };
 
@@ -144,14 +127,8 @@ const mapDispatchToProps = (dispatch: Dispatch): PlannerWidgetProps =>
       dispatch(clearSubjectInfoDialog());
       dispatch(clearEditing());
     },
-    routeToWidgetClickHandler: () => {
+    routeToLessonPlannerClickHandler: () => {
       dispatch(routerActions.push(routes.LESSON_PLANNER));
-    },
-    openSubjectInfoHandler: () => {
-      dispatch(openSubjectInfoDialog());
-    },
-    closeSubjectInfoHandler: () => {
-      dispatch(closeSubjectInfoDialog());
     },
     routeToTemplateBuilderHandler: () => {
       dispatch(routerActions.push(routes.TEMPLATE_BUILDER));

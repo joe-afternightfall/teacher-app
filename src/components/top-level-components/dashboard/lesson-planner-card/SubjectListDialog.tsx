@@ -22,6 +22,11 @@ import { connect } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { v4 as uuidv4 } from 'uuid';
 import { NewBookmarkForm } from '../../../widgets/bookmarks-widget/components/NewBookmarkDialog';
+import { State } from '../../../../configs/redux/store';
+import {
+  closeSubjectInfoDialog,
+  openSubjectInfoDialog,
+} from '../../../../creators/subject-list/subject-info-dialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -151,13 +156,25 @@ export interface SubjectListDialogProps {
   closeSubjectInfoHandler: () => void;
 }
 
-const mapStateToProps = (state: any): SubjectListDialogProps => {
-  return ({} as unknown) as SubjectListDialogProps;
+const mapStateToProps = (state: State): SubjectListDialogProps => {
+  return ({
+    isEditing: state.subjectListState.editingForm,
+    displayLoader: state.subjectListState.displayLoader,
+    shouldDisplaySubjectInfo: state.subjectListState.displaySubjectInfo,
+  } as unknown) as SubjectListDialogProps;
 };
 
 const mapDispatchToProps = (
   dispatch: Dispatch,
   ownProps: any
-): SubjectListDialogProps => (({} as unknown) as SubjectListDialogProps);
+): SubjectListDialogProps =>
+  (({
+    openSubjectInfoHandler: () => {
+      dispatch(openSubjectInfoDialog());
+    },
+    closeSubjectInfoHandler: () => {
+      dispatch(closeSubjectInfoDialog());
+    },
+  } as unknown) as SubjectListDialogProps);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubjectListDialog);
