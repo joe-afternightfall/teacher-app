@@ -52,6 +52,7 @@ const AppDialog = (props: AppDialogProps): JSX.Element => {
           aria-label={'close'}
           className={classes.closeButton}
           onClick={props.handleClose}
+          data-testid={'app-dialog-close-button'}
         >
           <CloseIcon />
         </IconButton>
@@ -63,7 +64,11 @@ const AppDialog = (props: AppDialogProps): JSX.Element => {
         <Button onClick={props.handleClose} color={'secondary'}>
           {'Cancel'}
         </Button>
-        <Button onClick={handleConfirmClick} color={'primary'}>
+        <Button
+          data-testid={'app-dialog-confirm-button'}
+          onClick={handleConfirmClick}
+          color={'primary'}
+        >
           {props.confirmButtonTitle}
         </Button>
       </DialogActions>
