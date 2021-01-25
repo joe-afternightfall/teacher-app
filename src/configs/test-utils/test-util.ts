@@ -77,7 +77,7 @@ export const buildSubjectList = (amount: number): Subject[] => {
       primaryColor: uuidv4(),
       secondaryColor: uuidv4(),
       iconId: uuidv4(),
-    },)
+    });
   }
 
   return builtList;
