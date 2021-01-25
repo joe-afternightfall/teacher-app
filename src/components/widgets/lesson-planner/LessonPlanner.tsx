@@ -11,9 +11,9 @@ import { Styles } from '@material-ui/styles';
 import {
   LessonPlanner,
   LessonItem,
-  LessonItems,
+  LessonWeekdays,
   MoveLessonResult,
-  WeekDay,
+  Weekday,
 } from '../../../configs/types/LessonPlanner';
 import TimeColumn from './components/TimeColumn';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
@@ -32,7 +32,7 @@ class LessonPlannerComp extends Component<LessonPlannerProps> {
     } = this.props;
 
     let currentPlanner: LessonPlanner;
-    let plannerItems: { [key: string]: WeekDay };
+    let plannerItems: { [key: string]: Weekday };
 
     if (isTemplate) {
       currentPlanner = templateBuilder;
@@ -70,12 +70,12 @@ class LessonPlannerComp extends Component<LessonPlannerProps> {
           destination
         );
 
-        const updatedItems: LessonItems = updateAllItems(
+        const updatedDays: LessonWeekdays = updateAllItems(
           resultFromMove,
           currentPlanner
         );
 
-        this.props.moveHandler(updatedItems);
+        this.props.moveHandler(updatedDays);
       }
     };
 
@@ -122,7 +122,7 @@ class LessonPlannerComp extends Component<LessonPlannerProps> {
 export interface LessonPlannerProps extends WithStyles<typeof styles> {
   selectedPlanner: LessonPlanner;
   reorderHandler: (items: LessonItem[], sourceId: string) => void;
-  moveHandler: (items: LessonItems) => void;
+  moveHandler: (days: LessonWeekdays) => void;
   subjectList: Subject[];
   isTemplate: boolean;
   templateBuilder: LessonPlanner;

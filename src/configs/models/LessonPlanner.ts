@@ -1,4 +1,4 @@
-import { LessonNote, WeekDay } from '../types/LessonPlanner';
+import { LessonNote, Weekday } from '../types/LessonPlanner';
 
 export class LessonPlanner {
   firebaseId: string;
@@ -6,7 +6,7 @@ export class LessonPlanner {
   id: string;
   title: string;
   weekdays: {
-    [key: string]: WeekDay;
+    [key: string]: Weekday;
   };
   notes: LessonNote[];
 
@@ -16,7 +16,7 @@ export class LessonPlanner {
     id: string,
     title: string,
     weekdays: {
-      [key: string]: WeekDay;
+      [key: string]: Weekday;
     },
     notes: LessonNote[]
   ) {

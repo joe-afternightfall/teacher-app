@@ -45,11 +45,11 @@ export default {
         }
 
         if (selectedPlanner !== undefined) {
-          selectedPlanner.weekdays.monday.items = action.items.monday;
-          selectedPlanner.weekdays.tuesday.items = action.items.tuesday;
-          selectedPlanner.weekdays.wednesday.items = action.items.wednesday;
-          selectedPlanner.weekdays.thursday.items = action.items.thursday;
-          selectedPlanner.weekdays.friday.items = action.items.friday;
+          selectedPlanner.weekdays.monday.items = action.days.monday;
+          selectedPlanner.weekdays.tuesday.items = action.days.tuesday;
+          selectedPlanner.weekdays.wednesday.items = action.days.wednesday;
+          selectedPlanner.weekdays.thursday.items = action.days.thursday;
+          selectedPlanner.weekdays.friday.items = action.days.friday;
         }
         break;
       }

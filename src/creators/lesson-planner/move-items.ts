@@ -1,19 +1,14 @@
 import actions from '../actions';
-import { LessonItems } from '../../configs/types/LessonPlanner';
+import { LessonWeekdays } from '../../configs/types/LessonPlanner';
+import { AnyAction } from 'redux';
 
 export const movePlannerItems = (
-  items: LessonItems,
+  days: LessonWeekdays,
   isTemplate: boolean
-): UpdateItemsAction => {
+): AnyAction => {
   return {
     type: actions.MOVE_PLANNER_ITEMS,
-    items: items,
+    days: days,
     isTemplate: isTemplate,
   };
 };
-
-export interface UpdateItemsAction {
-  type: string;
-  items: LessonItems;
-  isTemplate: boolean;
-}
