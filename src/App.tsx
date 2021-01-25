@@ -9,9 +9,9 @@ import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import AppBar from './components/app-shell/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import AppDialog from './components/app-shell/AppDialog';
 import { getLightTheme } from './configs/theme/light-theme';
 import AppSnackbar from './components/app-shell/AppSnackbar';
-import AppDialog from './components/app-shell/AppDialogConnector';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   root: {
