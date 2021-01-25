@@ -1,13 +1,13 @@
-import { ThunkAction } from 'redux-thunk';
-import { State } from '../configs/redux/store';
-import { AnyAction, Dispatch } from 'redux';
 import firebase from 'firebase';
+import { v4 as uuidv4 } from 'uuid';
+import { ThunkAction } from 'redux-thunk';
+import { AnyAction, Dispatch } from 'redux';
+import { State } from '../configs/redux/store';
 import {
-  subjectSaveComplete,
   subjectSaveFailed,
   updatingSubjectInfo,
-} from '../creators/loading-data';
-import { v4 as uuidv4 } from 'uuid';
+  subjectSaveComplete,
+} from '../creators/subject-list/loading-subject';
 import {
   clearSubjectInfoDialog,
   closeSubjectInfoDialog,

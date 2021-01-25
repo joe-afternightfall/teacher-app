@@ -10,6 +10,6 @@ describe('update subject name action', () => {
     expect(action).toEqual({
       type: actions.UPDATE_SUBJECT_NAME,
       subjectName: name,
-    })
+    });
   });
 });
