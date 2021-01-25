@@ -27,10 +27,7 @@ export async function renderAsyncWithRedux(ui: JSX.Element, store: any) {
 const lessonPlanners = [buildLessonPlanner()];
 
 export const initialState = {
-  applicationState: {
-    lessonPlanners: lessonPlanners,
-    selectedPlannerId: lessonPlanners[0].id,
-  },
+  applicationState: {},
 };
 
 export function getStore(state: any, dispatchMock: any): MockStore {
