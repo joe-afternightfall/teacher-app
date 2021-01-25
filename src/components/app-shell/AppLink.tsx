@@ -29,6 +29,7 @@ export default function AppLink(props: AppLinkProps): JSX.Element {
       rel={'noopener noreferrer'}
       className={classes.root}
       target={'_blank'}
+      data-testid={'app-link'}
     >
       {props.title}
     </Link>
