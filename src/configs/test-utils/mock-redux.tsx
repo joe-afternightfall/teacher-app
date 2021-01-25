@@ -1,11 +1,12 @@
 import React from 'react';
 import { Store } from 'redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { render } from '@testing-library/react';
+import { buildLessonPlanner } from './test-util';
+import { createHashHistory, History } from 'history';
 import createStore, { MockStore } from 'redux-mock-store';
 import { createStore as createRealStore } from '../../configs/redux/store';
-import { createHashHistory, History } from 'history';
-import thunk from 'redux-thunk';
 
 const middleware = [thunk];
 
@@ -73,60 +74,4 @@ export function getStore(state: any, dispatchMock: any): MockStore {
 export function getRealStore() {
   const history: History = createHashHistory();
   return createRealStore(history);
-}
-
-export function buildPlannerItem(items: number) {
-  let index = 0;
-  const builtList = [];
-
-  while (index < items) {
-    index += 1;
-
-    builtList.push({
-      id: `test-id-${index}`,
-      content: `test-content-${index}`,
-    });
-  }
-
-  return builtList;
-}
-
-export function buildLessonPlanner() {
-  return {
-    createdAt: '123456789',
-    id: 'planner-id',
-    title: 'planner-title',
-    items: {
-      monday: {
-        date: '01/01/2021',
-        items: buildPlannerItem(3),
-      },
-      tuesday: {
-        date: '01/02/2021',
-        items: buildPlannerItem(1),
-      },
-      wednesday: {
-        date: '01/03/2021',
-        items: buildPlannerItem(2),
-      },
-      thursday: {
-        date: '01/04/2021',
-        items: buildPlannerItem(1),
-      },
-      friday: {
-        date: '01/05/2021',
-        items: buildPlannerItem(2),
-      },
-    },
-    notes: [
-      {
-        id: 'note-id-one',
-        content: 'note-content-one',
-      },
-      {
-        id: 'note-id-two',
-        content: 'note-content-two',
-      },
-    ],
-  };
 }
