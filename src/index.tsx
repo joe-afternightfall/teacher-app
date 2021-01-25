@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import firebase from 'firebase/app';
 import { Route } from 'react-router';
 import { Provider } from 'react-redux';
-import { initApp } from './creators/init';
 import { createHashHistory } from 'history';
 import routes from './configs/constants/routes';
 import { createStore } from './configs/redux/store';
@@ -149,8 +148,6 @@ templateBuilderRef.on('child_changed', async () => {
 templateBuilderRef.on('child_removed', async () => {
   await updateTemplateBuilder();
 });
-
-store.dispatch(initApp());
 
 ReactDOM.render(
   <React.StrictMode>
