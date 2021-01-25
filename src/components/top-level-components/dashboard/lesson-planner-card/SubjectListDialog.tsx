@@ -12,21 +12,19 @@ import {
   CircularProgress,
   Typography,
 } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import CloseIcon from '@material-ui/icons/Close';
-import SubjectInfoActionButtons from '../../../widgets/subject-related/subject-info/SubjectInfoActionButtons';
-import SubjectInfo from '../../../widgets/subject-related/subject-info/SubjectInfo';
-import SubjectList from '../../../widgets/subject-related/subject-list/SubjectList';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { v4 as uuidv4 } from 'uuid';
-import { NewBookmarkForm } from '../../../widgets/bookmarks-widget/components/NewBookmarkDialog';
+import AddIcon from '@material-ui/icons/Add';
+import CloseIcon from '@material-ui/icons/Close';
 import { State } from '../../../../configs/redux/store';
 import {
   closeSubjectInfoDialog,
   openSubjectInfoDialog,
 } from '../../../../creators/subject-list/subject-info-dialog';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import SubjectInfo from '../../../widgets/subject-related/subject-info/SubjectInfo';
+import SubjectList from '../../../widgets/subject-related/subject-list/SubjectList';
+import SubjectInfoActionButtons from '../../../widgets/subject-related/subject-info/SubjectInfoActionButtons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,16 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SubjectListDialog = (props: SubjectListDialogProps): JSX.Element => {
   const classes = useStyles();
-
   const [open, setOpen] = React.useState<boolean>(false);
-
-  // const {
-  //   isEditing,
-  //   displayLoader,
-  //   openSubjectInfoHandler,
-  //   closeSubjectInfoHandler,
-  //   shouldDisplaySubjectInfo,
-  // } = this.props;
 
   const toggleDialog = () => {
     props.closeMenuClickHandler();
