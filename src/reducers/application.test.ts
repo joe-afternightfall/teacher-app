@@ -39,7 +39,7 @@ describe('Application Reducer', () => {
       content: React.createElement('p'),
       title: 'Testing title',
       buttonTitle: 'Test Button',
-      clickHandler: Function
+      clickHandler: Function,
     });
 
     expect(state.displayAppDialog).toEqual(true);
