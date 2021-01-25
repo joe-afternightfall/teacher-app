@@ -24,7 +24,7 @@ import { Subject } from '../../../../configs/types/Subject';
 import { getSubject } from '../../../../utils/subject-name';
 import { Card, Grid, CardHeader, Typography } from '@material-ui/core';
 import { capitalizeFirstLetter } from '../../../../utils/string-formatter';
-import { WeekDay, LessonItem } from '../../../../configs/types/LessonPlanner';
+import { Weekday, LessonItem } from '../../../../configs/types/LessonPlanner';
 
 const getItemStyle = (
   draggableStyle: any,
@@ -140,7 +140,7 @@ class Column extends Component<ColumnProps> {
 }
 
 export interface ColumnProps extends WithStyles<typeof styles> {
-  plannerDay: WeekDay;
+  plannerDay: Weekday;
   dayOfWeek: string;
   color: string;
   subjectList: Subject[];

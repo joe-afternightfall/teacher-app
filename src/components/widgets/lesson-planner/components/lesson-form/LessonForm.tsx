@@ -23,11 +23,11 @@ import NewLinkCard from '../dialog/NewLinkCard';
 import ImageIcon from '@material-ui/icons/Image';
 import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
 import { State } from '../../../../../configs/redux/store';
+import TimeInput from './components/TimeInput';
 import {
   updateLessonContent,
   updateLessonSubject,
-} from '../../../../../creators/lesson-planner';
-import TimeInput from './components/TimeInput';
+} from '../../../../../creators/lesson-planner/update-items';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

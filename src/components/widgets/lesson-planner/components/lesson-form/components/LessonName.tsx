@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { TextField } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { State } from '../../../../../../configs/redux/store';
-import { updateLessonName } from '../../../../../../creators/lesson-planner';
+import { updateLessonName } from '../../../../../../creators/lesson-planner/update-items';
 
 const CustomTextfield = withStyles({
   root: {

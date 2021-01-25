@@ -11,8 +11,6 @@ export default {
     let newState = Object.assign({}, state);
 
     switch (action.type) {
-      case actions.INITIALIZE:
-        break;
       case actions.DISPLAY_APP_SNACKBAR:
         newState.displayAppSnackbar = true;
         newState.snackbarProps = action.snackbarProps;

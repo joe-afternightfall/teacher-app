@@ -2,7 +2,7 @@ import {
   LessonItem,
   MoveLessonResult,
   LessonPlanner,
-  LessonItems,
+  LessonWeekdays,
 } from '../configs/types/LessonPlanner';
 import { DraggableLocation } from 'react-beautiful-dnd';
 
@@ -46,7 +46,7 @@ export const move = (
 export const updateAllItems = (
   resultFromMove: MoveLessonResult,
   planner: LessonPlanner
-): LessonItems => {
+): LessonWeekdays => {
   return {
     monday: resultFromMove.monday
       ? resultFromMove.monday

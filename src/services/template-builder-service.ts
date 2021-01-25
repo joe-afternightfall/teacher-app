@@ -6,7 +6,7 @@ import { State } from '../configs/redux/store';
 import { LessonItem } from '../configs/types/LessonPlanner';
 import { lessonSaved } from '../creators/template-builder/lesson-saved';
 import { displayAppSnackbar } from '../creators/application/app-snackbar';
-import { updatedLessonBoard } from '../creators/lesson-planner';
+import { updatedLessonBoard } from '../creators/lesson-planner/update-items';
 
 const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
@@ -246,7 +246,28 @@ export const updateLessonBoardOrder = (): ThunkAction<
     .child(templateFirebaseId)
     .update(
       {
-        weekdays: weekdays,
+        weekdays: {
+          monday: {
+            date: '',
+            items: weekdays.monday.items ? weekdays.monday.items : [],
+          },
+          tuesday: {
+            date: '',
+            items: weekdays.tuesday.items ? weekdays.tuesday.items : [],
+          },
+          wednesday: {
+            date: '',
+            items: weekdays.wednesday.items ? weekdays.wednesday.items : [],
+          },
+          thursday: {
+            date: '',
+            items: weekdays.thursday.items ? weekdays.thursday.items : [],
+          },
+          friday: {
+            date: '',
+            items: weekdays.friday.items ? weekdays.friday.items : [],
+          },
+        },
       },
       (error) => {
         if (error) {

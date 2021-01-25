@@ -12,7 +12,7 @@ export interface LessonNote {
   content: string;
 }
 
-export interface WeekDay {
+export interface Weekday {
   date: string;
   items: LessonItem[];
 }
@@ -29,13 +29,13 @@ export interface LessonPlanner {
   startDate: Date;
   endDate: Date;
   weekdays: {
-    [key: string]: WeekDay;
+    [key: string]: Weekday;
   };
   notes: LessonNote[];
 }
 
-export interface LessonItems {
-  [key: string]: string | LessonItem[] | WeekDay;
+export interface LessonWeekdays {
+  [key: string]: string | LessonItem[] | Weekday;
   monday: LessonItem[];
   tuesday: LessonItem[];
   wednesday: LessonItem[];

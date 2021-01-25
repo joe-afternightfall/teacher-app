@@ -62,37 +62,25 @@ export const buildLessonPlanner = (): LessonPlanner => {
   };
 };
 
-// todo:  make dynamic by taking in number
-export const buildSubjectList = (): Subject[] => {
-  return [
-    {
-      firebaseId: '',
-      id: 'first-id',
-      subjectName: 'first-subject-name',
-      primaryColorId: uuidv4(),
-      primaryColor: uuidv4(),
-      secondaryColor: uuidv4(),
-      iconId: uuidv4(),
-    },
-    {
+export const buildSubjectList = (amount: number): Subject[] => {
+  let index = 0;
+  const builtList = [];
+
+  while (index < amount) {
+    index += 1;
+
+    builtList.push({
       firebaseId: uuidv4(),
-      id: 'second-id',
-      subjectName: 'second-subject-name',
+      id: `id-${index}`,
+      subjectName: `subject-name-${index}`,
       primaryColorId: uuidv4(),
       primaryColor: uuidv4(),
       secondaryColor: uuidv4(),
       iconId: uuidv4(),
-    },
-    {
-      firebaseId: uuidv4(),
-      id: 'third-id',
-      subjectName: 'third-subject-name',
-      primaryColorId: uuidv4(),
-      primaryColor: uuidv4(),
-      secondaryColor: uuidv4(),
-      iconId: uuidv4(),
-    },
-  ];
+    });
+  }
+
+  return builtList;
 };
 
 // todo:  make dynamic by taking in number

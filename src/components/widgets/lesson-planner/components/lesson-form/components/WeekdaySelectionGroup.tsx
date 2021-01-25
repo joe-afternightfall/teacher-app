@@ -7,13 +7,13 @@ import {
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import {
-  updateSelectedDays,
-  updateAllSelectedDays,
-} from '../../../../../../creators/lesson-planner';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import { State } from '../../../../../../configs/redux/store';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import {
+  updateAllSelectedDays,
+  updateSelectedDays,
+} from '../../../../../../creators/lesson-planner/update-items';
 
 const WeekdaySelectionGroup = (
   props: WeekdaySelectionGroupProps
