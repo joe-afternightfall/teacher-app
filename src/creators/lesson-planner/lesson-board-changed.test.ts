@@ -7,6 +7,6 @@ describe('lesson board changed creator', () => {
 
     expect(action).toEqual({
       type: actions.LESSON_BOARD_CHANGE,
-    })
+    });
   });
 });

@@ -10,8 +10,8 @@ describe('move items creator', () => {
       tuesday: items,
       wednesday: items,
       thursday: items,
-      friday: items
-    }
+      friday: items,
+    };
 
     const action = movePlannerItems(planner, true);
 

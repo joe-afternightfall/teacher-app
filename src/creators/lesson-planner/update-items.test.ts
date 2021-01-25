@@ -7,7 +7,7 @@ import {
   updatedLessonBoard,
   updateLessonContent,
   updateLessonSubject,
-  updateAllSelectedDays
+  updateAllSelectedDays,
 } from './update-items';
 
 describe('update items creator', () => {
@@ -28,7 +28,7 @@ describe('update items creator', () => {
     expect(action).toEqual({
       type: actions.UPDATE_SELECTED_DAYS,
       selectedDay: day,
-    })
+    });
   });
 
   it('should return UPDATE_ALL_SELECTED_DAYS action', () => {

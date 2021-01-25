@@ -1,7 +1,10 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { State } from '../../../configs/redux/store';
-import { LessonItem, LessonWeekdays } from '../../../configs/types/LessonPlanner';
+import {
+  LessonItem,
+  LessonWeekdays,
+} from '../../../configs/types/LessonPlanner';
 import LessonPlannerComp, { LessonPlannerProps } from './LessonPlanner';
 import { reorderPlannerItems } from '../../../creators/lesson-planner/reorder-items';
 import { movePlannerItems } from '../../../creators/lesson-planner/move-items';

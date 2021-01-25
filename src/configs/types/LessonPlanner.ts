@@ -35,7 +35,7 @@ export interface LessonPlanner {
 }
 
 export interface LessonWeekdays {
-  [key: string]: string | LessonItem[] |  Weekday;
+  [key: string]: string | LessonItem[] | Weekday;
   monday: LessonItem[];
   tuesday: LessonItem[];
   wednesday: LessonItem[];

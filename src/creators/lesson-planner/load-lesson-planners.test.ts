@@ -9,7 +9,7 @@ describe('load lesson planner creator', () => {
 
     expect(action).toEqual({
       type: actions.LOAD_LESSON_PLANNERS,
-      lessonPlanners: [planner]
+      lessonPlanners: [planner],
     });
   });
 });

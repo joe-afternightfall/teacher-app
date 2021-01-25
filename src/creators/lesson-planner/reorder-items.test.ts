@@ -12,6 +12,6 @@ describe('reorder items creator', () => {
       items: items,
       dayOfWeek: 'wednesday',
       isTemplate: true,
-    })
+    });
   });
 });
