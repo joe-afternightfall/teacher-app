@@ -246,7 +246,28 @@ export const updateLessonBoardOrder = (): ThunkAction<
     .child(templateFirebaseId)
     .update(
       {
-        weekdays: weekdays,
+        weekdays: {
+          monday: {
+            date: '',
+            items: weekdays.monday.items ? weekdays.monday.items : [],
+          },
+          tuesday: {
+            date: '',
+            items: weekdays.tuesday.items ? weekdays.tuesday.items : [],
+          },
+          wednesday: {
+            date: '',
+            items: weekdays.wednesday.items ? weekdays.wednesday.items : [],
+          },
+          thursday: {
+            date: '',
+            items: weekdays.thursday.items ? weekdays.thursday.items : [],
+          },
+          friday: {
+            date: '',
+            items: weekdays.friday.items ? weekdays.friday.items : [],
+          },
+        },
       },
       (error) => {
         if (error) {
