@@ -10,10 +10,6 @@ export default {
     let newState = Object.assign({}, state);
 
     switch (action.type) {
-      case actions.INITIALIZE:
-        // newState.lessonPlanners = action.lessonPlanners;
-        // newState.selectedLessonId = action.lessonPlanners[0].id;
-        break;
       case actions.LOAD_LESSON_PLANNERS:
         // todo:  rewrite load lesson planners logic below
         newState.lessonPlanners = action.lessonPlanners;
