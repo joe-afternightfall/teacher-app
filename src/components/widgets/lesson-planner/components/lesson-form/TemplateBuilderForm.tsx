@@ -57,7 +57,7 @@ const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
 
         <Grid item xs={6} style={{ margin: 'auto' }}>
           {isChecked ? (
-            checked === 'other-true' ? (
+            checked === 'activity-true' ? (
               <TextField
                 fullWidth
                 id={'activity-field'}
