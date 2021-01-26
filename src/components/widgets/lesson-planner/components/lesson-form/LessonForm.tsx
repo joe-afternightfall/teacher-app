@@ -1,56 +1,17 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import {
-  Avatar,
-  Card,
-  CardContent,
-  CardHeader,
-  Grid,
-  IconButton,
-  Link,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  TextField,
-} from '@material-ui/core';
-import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDropdown';
-import CancelIcon from '@material-ui/icons/Cancel';
-import AddIcon from '@material-ui/icons/Add';
-import NewLinkCard from '../dialog/NewLinkCard';
-import ImageIcon from '@material-ui/icons/Image';
-import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
-import { State } from '../../../../../configs/redux/store';
 import TimeInput from './components/TimeInput';
+import { Grid, TextField } from '@material-ui/core';
+import { State } from '../../../../../configs/redux/store';
 import {
   updateLessonContent,
   updateLessonSubject,
 } from '../../../../../creators/lesson-planner/update-items';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    linkUrl: {
-      '&:hover': {
-        cursor: 'pointer',
-      },
-    },
-  })
-);
+import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
+import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDropdown';
 
 const LessonForm = (props: LessonFormProps): JSX.Element => {
-  const classes = useStyles();
-
-  // todo:  extract out to util
-  const cleanupLink = (url: string): string => {
-    if (url.startsWith('http://') || url.startsWith('https://')) {
-      return url;
-    } else {
-      return `https://${url}`;
-    }
-  };
-
   // const addNewLinkClickHandler = () => {
   //   this.setState({
   //     addNewLink: true,

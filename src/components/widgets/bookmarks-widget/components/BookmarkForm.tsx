@@ -1,12 +1,9 @@
 import React from 'react';
-import Select from '@material-ui/core/Select';
 import { NewBookmarkForm } from './NewBookmarkDialog';
-import MenuItem from '@material-ui/core/MenuItem';
 import { Grid, TextField } from '@material-ui/core';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
 import { Subject } from '../../../../configs/types/Subject';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import SubjectDropdown from '../../subject-related/subject-dropdown/SubjectDropdown';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -40,34 +37,10 @@ export default function BookmarkForm(props: BookmarkFormProps): JSX.Element {
             </Grid>
 
             <Grid item xs={4}>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor={'subject-dropdown'}>
-                  {'Subject'}
-                </InputLabel>
-
-                {/*// todo:  rip select out and use subject name dropdown}*/}
-                <Select
-                  style={{ width: '100%' }}
-                  value={props.bookmarkValues.subjectId}
-                  onChange={props.dropdownChangeHandler}
-                  inputProps={{
-                    name: 'subjectId',
-                    id: 'subject-dropdown',
-                  }}
-                >
-                  <MenuItem value={''}>
-                    <em>{'None'}</em>
-                  </MenuItem>
-                  {props.subjectList &&
-                    props.subjectList.map((subject: Subject, index: number) => {
-                      return (
-                        <MenuItem key={index} value={subject.id}>
-                          {subject.subjectName}
-                        </MenuItem>
-                      );
-                    })}
-                </Select>
-              </FormControl>
+              <SubjectDropdown
+                value={props.bookmarkValues.subjectId}
+                changeHandler={props.dropdownChangeHandler}
+              />
             </Grid>
           </Grid>
         </Grid>
@@ -89,7 +62,6 @@ export default function BookmarkForm(props: BookmarkFormProps): JSX.Element {
 
 export interface BookmarkFormProps {
   bookmarkValues: NewBookmarkForm;
-  subjectList: Subject[];
   dropdownChangeHandler: (
     e: React.ChangeEvent<{ name?: string; value: unknown }>
   ) => void;
