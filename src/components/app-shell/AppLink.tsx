@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from '@material-ui/core/Link';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       '&:hover': {
@@ -29,6 +29,7 @@ export default function AppLink(props: AppLinkProps): JSX.Element {
       rel={'noopener noreferrer'}
       className={classes.root}
       target={'_blank'}
+      data-testid={'app-link'}
     >
       {props.title}
     </Link>

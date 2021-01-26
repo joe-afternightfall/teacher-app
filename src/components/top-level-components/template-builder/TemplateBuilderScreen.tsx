@@ -14,8 +14,6 @@ const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class TemplateBuilderScreen extends Component<TemplateBuilderScreenProps> {
   render(): JSX.Element {
-    const { classes } = this.props;
-
     return (
       <Grid>
         <TemplateBuilderControls />

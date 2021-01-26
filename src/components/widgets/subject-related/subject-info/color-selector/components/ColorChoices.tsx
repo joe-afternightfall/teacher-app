@@ -3,7 +3,7 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import CheckIcon from '@material-ui/icons/Check';
-import { Grid, Tooltip } from '@material-ui/core';
+import { Grid, Tooltip, Typography } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import {
   ColorChoice,
@@ -11,6 +11,7 @@ import {
 } from '../../../../../../configs/theme/subject-color-choices';
 import { State } from '../../../../../../configs/redux/store';
 import { selectColor } from '../../../../../../creators/subject-list/select-color';
+import { Subject } from '../../../../../../configs/types/Subject';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -24,6 +25,10 @@ const useStyles = makeStyles(() =>
     },
     selected: {
       border: '1px solid #fff',
+    },
+    chosen: {
+      border: '1px solid #000',
+      opacity: 0.5,
     },
   })
 );
@@ -40,31 +45,50 @@ const ColorChoices = (props: ColorChoicesProps) => {
       >
         {subjectColorChoices.map((choice: ColorChoice, index: number) => {
           const selectedColorName = props.selectedColorName;
+          const found = props.chosenColors.some((colorId) => {
+            return colorId === choice.id;
+          });
 
           return (
-            <Tooltip title={choice.name} placement={'right'} key={index}>
+            <Tooltip
+              key={index}
+              placement={'right'}
+              title={found ? 'Taken' : choice.name}
+            >
               <Grid
                 item
                 xs={3}
                 className={clsx(classes.colorChoice, {
                   [classes.selected]: selectedColorName === choice.name,
+                  [classes.chosen]: found,
                 })}
                 style={{
                   backgroundColor: choice.primaryColor,
                 }}
-                onClick={() => {
-                  props.selectColorClickHandler(choice);
-                }}
+                onClick={() =>
+                  found ? undefined : props.selectColorClickHandler(choice)
+                }
               >
-                {selectedColorName === choice.name && (
+                {found ? (
                   <Grid
                     container
                     alignItems={'center'}
                     justify={'center'}
                     style={{ height: '100%' }}
                   >
-                    <CheckIcon style={{ margin: 'auto', color: '#fff' }} />
+                    <CheckIcon style={{ margin: 'auto', color: '#000' }} />
                   </Grid>
+                ) : (
+                  selectedColorName === choice.name && (
+                    <Grid
+                      container
+                      alignItems={'center'}
+                      justify={'center'}
+                      style={{ height: '100%' }}
+                    >
+                      <CheckIcon style={{ margin: 'auto', color: '#fff' }} />
+                    </Grid>
+                  )
                 )}
               </Grid>
             </Tooltip>
@@ -76,12 +100,19 @@ const ColorChoices = (props: ColorChoicesProps) => {
 };
 
 export interface ColorChoicesProps {
+  chosenColors: string[];
   selectedColorName: string;
   selectColorClickHandler: (choice: ColorChoice) => void;
 }
 
 const mapStateToProps = (state: State): ColorChoicesProps => {
+  const subjectList = state.subjectListState.subjectList;
+  const chosenColors = subjectList.map((subject: Subject) => {
+    return subject.primaryColorId;
+  });
+
   return ({
+    chosenColors: chosenColors,
     selectedColorName: state.subjectListState.selectedColor.name,
   } as unknown) as ColorChoicesProps;
 };

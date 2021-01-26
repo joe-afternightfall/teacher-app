@@ -1,7 +1,7 @@
 import React from 'react';
 import DateInput from './DateInput';
+import SaveLessonButton from './SaveLessonButton';
 import { Grid, Typography } from '@material-ui/core';
-import SaveLessonButton from '../dialog/SaveLessonButton';
 import NewTemplateButton from '../dialog/NewTemplateButton';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
@@ -31,7 +31,9 @@ export default function TemplateBuilderControls(): JSX.Element {
 
         <Grid item>
           <Typography variant={'h6'}>
-            {'build your base template for future lesson planners'}
+            {
+              'build your class schedule to use as a template for lesson planning'
+            }
           </Typography>
         </Grid>
       </Grid>

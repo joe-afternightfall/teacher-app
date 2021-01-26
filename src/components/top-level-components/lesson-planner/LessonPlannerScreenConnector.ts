@@ -2,12 +2,11 @@ import { connect } from 'react-redux';
 import LessonPlannerScreen, {
   LessonPlannerScreenProps,
 } from './LessonPlannerScreen';
-import { LessonPlanner } from '../../../configs/types/LessonPlanner';
 import { Dispatch } from 'redux';
-import { State } from '../../../configs/redux/store';
+import { LessonPlanner } from '../../../configs/types/LessonPlanner';
 import { loadLessonPlanners } from '../../../creators/lesson-planner/load-lesson-planners';
 
-const mapStateToProps = (state: State): LessonPlannerScreenProps => {
+const mapStateToProps = (): LessonPlannerScreenProps => {
   return ({} as unknown) as LessonPlannerScreenProps;
 };
 

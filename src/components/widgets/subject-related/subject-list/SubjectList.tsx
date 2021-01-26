@@ -12,22 +12,21 @@ import {
 import DeleteSubjectDialog, {
   DeleteSubjectDialogProps,
 } from './DeleteSubjectDialog';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { ThunkDispatch } from 'redux-thunk';
-import { AnyAction, Dispatch } from 'redux';
 import EditIcon from '@material-ui/icons/Edit';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Subject } from '../../../../configs/types/Subject';
 import { getIcon } from '../../../../utils/get-icon';
 import { State } from '../../../../configs/redux/store';
-import { deleteSubject } from '../../../../services/subject-list-service';
-import { openSubjectInfoDialog } from '../../../../creators/subject-list/subject-info-dialog';
+import { Subject } from '../../../../configs/types/Subject';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { editingSubject } from '../../../../creators/subject-list/editing-subject';
+import { openSubjectInfoDialog } from '../../../../creators/subject-list/subject-info-dialog';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      marginBottom: theme.spacing(3),
+      width: '100%',
+      marginBottom: theme.spacing(4),
     },
     title: {
       flexGrow: 1,
@@ -42,7 +41,7 @@ const SubjectList = (props: SubjectListProps) => {
     <List
       component={'nav'}
       aria-labelledby={'nested-list-subheader'}
-      style={{ width: '100%', marginBottom: 32 }}
+      className={classes.root}
     >
       {props.isEmpty ? (
         <ListItem style={{ textAlign: 'center' }}>

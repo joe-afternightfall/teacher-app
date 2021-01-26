@@ -104,7 +104,6 @@ const NewBookmarkDialog = (props: NewBookmarkDialogProps): JSX.Element => {
             dropdownChangeHandler={dropdownChangeHandler}
             textfieldChangeHandler={textfieldChangeHandler}
             bookmarkValues={values}
-            subjectList={props.subjectList}
           />
         </Grid>
       </DialogContent>

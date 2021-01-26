@@ -2,14 +2,14 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import TimeInput from './components/TimeInput';
-import { Grid, Checkbox, TextField, FormControlLabel } from '@material-ui/core';
 import { State } from '../../../../../configs/redux/store';
 import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDropdownConnector';
+import { Grid, Checkbox, TextField, FormControlLabel } from '@material-ui/core';
+import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDropdown';
 import { updateLessonSubject } from '../../../../../creators/lesson-planner/update-items';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     checkboxContainer: {
       textAlign: 'center',
@@ -57,7 +57,7 @@ const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
 
         <Grid item xs={6} style={{ margin: 'auto' }}>
           {isChecked ? (
-            checked === 'other-true' ? (
+            checked === 'activity-true' ? (
               <TextField
                 fullWidth
                 id={'activity-field'}
