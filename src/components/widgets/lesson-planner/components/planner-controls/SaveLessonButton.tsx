@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import SaveIcon from '@material-ui/icons/Save';
-import { Button, Fab, IconButton, Tooltip } from '@material-ui/core';
+import { Button, Tooltip } from '@material-ui/core';
 import { State } from '../../../../../configs/redux/store';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { updateLessonBoardOrder } from '../../../../../services/template-builder-service';
