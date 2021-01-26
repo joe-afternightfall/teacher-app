@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { Grid, Paper, Typography } from '@material-ui/core';
+import { Grid, Paper, Tooltip, Typography } from '@material-ui/core';
 import {
   SubjectIcon,
   subjectIcons,
@@ -23,6 +23,10 @@ const IconSelector = (props: IconSelectorProps) => {
       </Grid>
       <Grid item xs={12} container>
         {subjectIcons.map((icon: SubjectIcon, index) => {
+          const found = props.iconIds.some((id) => {
+            return id === icon.id;
+          });
+
           return (
             <Grid
               item
@@ -41,16 +45,28 @@ const IconSelector = (props: IconSelectorProps) => {
                     width: '100%',
                     cursor: 'pointer',
                   }}
-                  onClick={() => {
-                    props.selectIconHandler(icon.id);
-                  }}
+                  onClick={() =>
+                    found ? undefined : props.selectIconHandler(icon.id)
+                  }
                 >
-                  <Grid container alignItems={'center'} justify={'center'}>
-                    <Grid item>{React.createElement(icon.icon)}</Grid>
-                  </Grid>
+                  {found ? (
+                    <Tooltip title={'Taken'} placement={'top'}>
+                      <Grid container alignItems={'center'} justify={'center'}>
+                        <Grid item>{React.createElement(icon.icon)}</Grid>
+                      </Grid>
+                    </Tooltip>
+                  ) : (
+                    <Grid container alignItems={'center'} justify={'center'}>
+                      <Grid item>{React.createElement(icon.icon)}</Grid>
+                    </Grid>
+                  )}
                 </Paper>
               ) : props.selectedIconId === icon.id ? (
                 <Paper elevation={3}>{React.createElement(icon.icon)}</Paper>
+              ) : found ? (
+                <Paper style={{ opacity: 0.5 }} elevation={3}>
+                  {React.createElement(icon.icon)}
+                </Paper>
               ) : (
                 React.createElement(icon.icon)
               )}
@@ -63,12 +79,18 @@ const IconSelector = (props: IconSelectorProps) => {
 };
 
 export interface IconSelectorProps {
+  iconIds: string[];
   selectedIconId: string;
   selectIconHandler: (iconId: string) => void;
 }
 
 const mapStateToProps = (state: State): IconSelectorProps => {
+  const iconIds = state.subjectListState.subjectList.map((subject) => {
+    return subject.iconId;
+  });
+
   return ({
+    iconIds: iconIds,
     selectedIconId: state.subjectListState.selectedIconId,
   } as unknown) as IconSelectorProps;
 };
