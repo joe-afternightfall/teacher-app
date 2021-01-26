@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Grid,
   Paper,
@@ -7,13 +8,9 @@ import {
   InputLabel,
   FormControl,
 } from '@material-ui/core';
-import React from 'react';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import NewLessonButton from '../dialog/NewLessonButton';
 import ArrowForward from '@material-ui/icons/ArrowForward';
-import { State } from '../../../../../configs/redux/store';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const PlannerControls = (props: PlannerControlsProps): JSX.Element => {
+export default function PlannerControls(): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -69,16 +66,3 @@ const PlannerControls = (props: PlannerControlsProps): JSX.Element => {
     </Grid>
   );
 };
-
-export interface PlannerControlsProps {
-  name: string;
-}
-
-const mapStateToProps = (state: State): PlannerControlsProps => {
-  return ({} as unknown) as PlannerControlsProps;
-};
-
-const mapDispatchToProps = (dispatch: Dispatch): PlannerControlsProps =>
-  (({} as unknown) as PlannerControlsProps);
-
-export default connect(mapStateToProps, mapDispatchToProps)(PlannerControls);
