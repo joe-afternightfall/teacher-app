@@ -2,7 +2,7 @@ import React from 'react';
 import { Store } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { render } from '@testing-library/react';
+import { render, RenderResult } from '@testing-library/react';
 import { buildLessonPlanner } from './test-util';
 import { createHashHistory, History } from 'history';
 import createStore, { MockStore } from 'redux-mock-store';
@@ -10,7 +10,7 @@ import { createStore as createRealStore } from '../../configs/redux/store';
 
 const middleware = [thunk];
 
-export function renderWithRedux(ui: JSX.Element, store: Store) {
+export function renderWithRedux(ui: JSX.Element, store: Store): RenderResult {
   return render(<Provider store={store}>{ui}</Provider>);
 }
 

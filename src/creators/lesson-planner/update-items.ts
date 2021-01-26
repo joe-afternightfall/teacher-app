@@ -8,35 +8,35 @@ export const updateLessonSubject = (subjectId: string): AnyAction => {
   };
 };
 
-export const updateSelectedDays = (selectedDay: string) => {
+export const updateSelectedDays = (selectedDay: string): AnyAction => {
   return {
     type: actions.UPDATE_SELECTED_DAYS,
     selectedDay: selectedDay,
   };
 };
 
-export const updateAllSelectedDays = (checked: boolean) => {
+export const updateAllSelectedDays = (checked: boolean): AnyAction => {
   return {
     type: actions.UPDATE_ALL_SELECTED_DAYS,
     checked: checked,
   };
 };
 
-export const updateLessonContent = (content: string) => {
+export const updateLessonContent = (content: string): AnyAction => {
   return {
     type: actions.UPDATE_LESSON_CONTENT,
     content: content,
   };
 };
 
-export const updateLessonName = (name: string) => {
+export const updateLessonName = (name: string): AnyAction => {
   return {
     type: actions.UPDATE_LESSON_NAME,
     name: name,
   };
 };
 
-export const updateDateTime = (name: string, value: Date) => {
+export const updateDateTime = (name: string, value: Date): AnyAction => {
   return {
     type: actions.UPDATE_DATE_TIME,
     name: name,
@@ -44,7 +44,7 @@ export const updateDateTime = (name: string, value: Date) => {
   };
 };
 
-export const updatedLessonBoard = () => {
+export const updatedLessonBoard = (): AnyAction => {
   return {
     type: actions.UPDATED_LESSON_BOARD,
   };

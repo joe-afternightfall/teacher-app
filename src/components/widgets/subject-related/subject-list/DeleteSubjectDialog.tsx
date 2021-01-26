@@ -5,11 +5,11 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { State } from '../../../../configs/redux/store';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { displayAppDialog } from '../../../../creators/application/app-dialog';
 import { deleteSubject } from '../../../../services/subject-list-service';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     deleteButton: {
       marginLeft: 12,
@@ -64,7 +64,7 @@ export interface DeleteSubjectDialogProps {
   ) => void;
 }
 
-const mapStateToProps = (state: any): DeleteSubjectDialogProps => {
+const mapStateToProps = (): DeleteSubjectDialogProps => {
   return ({} as unknown) as DeleteSubjectDialogProps;
 };
 

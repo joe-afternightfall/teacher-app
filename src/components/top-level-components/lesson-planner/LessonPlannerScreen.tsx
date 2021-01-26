@@ -22,8 +22,6 @@ class LessonPlannerScreen extends Component<LessonPlannerScreenProps> {
   }
 
   render(): JSX.Element {
-    const { classes } = this.props;
-
     return (
       <Grid>
         <PlannerControls />

@@ -1,7 +1,6 @@
 import React from 'react';
 import { NewBookmarkForm } from './NewBookmarkDialog';
 import { Grid, TextField } from '@material-ui/core';
-import { Subject } from '../../../../configs/types/Subject';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import SubjectDropdown from '../../subject-related/subject-dropdown/SubjectDropdown';
 

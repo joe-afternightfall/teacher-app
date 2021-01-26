@@ -1,30 +1,23 @@
-import AudiotrackIcon from '@material-ui/icons/Audiotrack';
-import BallotIcon from '@material-ui/icons/Ballot';
-import BeachAccessIcon from '@material-ui/icons/BeachAccess';
-import BorderColorIcon from '@material-ui/icons/BorderColor';
-import HeadsetIcon from '@material-ui/icons/Headset';
 import BrushIcon from '@material-ui/icons/Brush';
-import BubbleChartIcon from '@material-ui/icons/BubbleChart';
-import CategoryIcon from '@material-ui/icons/Category';
-import ColorLensIcon from '@material-ui/icons/ColorLens';
+import BallotIcon from '@material-ui/icons/Ballot';
 import CreateIcon from '@material-ui/icons/Create';
-import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard';
-import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
-import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
-import FunctionsIcon from '@material-ui/icons/Functions';
-import LanguageIcon from '@material-ui/icons/Language';
-import MusicNoteIcon from '@material-ui/icons/MusicNote';
-import PaletteIcon from '@material-ui/icons/Palette';
 import PublicIcon from '@material-ui/icons/Public';
 import SchoolIcon from '@material-ui/icons/School';
-import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
-import SportsFootballIcon from '@material-ui/icons/SportsFootball';
-import SportsMotorsportsIcon from '@material-ui/icons/SportsMotorsports';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
-import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { SvgIconTypeMap } from '@material-ui/core';
+import HeadsetIcon from '@material-ui/icons/Headset';
+import PaletteIcon from '@material-ui/icons/Palette';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import CategoryIcon from '@material-ui/icons/Category';
+import LanguageIcon from '@material-ui/icons/Language';
+import ColorLensIcon from '@material-ui/icons/ColorLens';
+import FunctionsIcon from '@material-ui/icons/Functions';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import BeachAccessIcon from '@material-ui/icons/BeachAccess';
+import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
+import SportsFootballIcon from '@material-ui/icons/SportsFootball';
+import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
+import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 
 export interface SubjectIcon {
   id: string;
@@ -123,9 +116,4 @@ export const subjectIcons = [
     name: 'Category',
     icon: CategoryIcon,
   },
-  // 9df4cbe7-dcb5-4c22-9c6b-c38a9ce94992
-  // e37468ae-e2ff-4980-b3a9-f99ba6236df9
-  // 3d0a2b80-16bc-438a-ac01-e8228e5131a2
-  // bfe18985-9fe6-4b47-bce8-899fda20b8ce
-  // 8ba4ed09-7a15-4faa-b9ed-722a2f4a981d
 ];
