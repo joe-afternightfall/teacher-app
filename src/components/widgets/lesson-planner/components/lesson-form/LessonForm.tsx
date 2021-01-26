@@ -16,7 +16,7 @@ import {
   ListItemText,
   TextField,
 } from '@material-ui/core';
-import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDropdownConnector';
+import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDropdown';
 import CancelIcon from '@material-ui/icons/Cancel';
 import AddIcon from '@material-ui/icons/Add';
 import NewLinkCard from '../dialog/NewLinkCard';

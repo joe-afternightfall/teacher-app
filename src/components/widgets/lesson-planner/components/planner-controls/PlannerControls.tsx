@@ -65,4 +65,4 @@ export default function PlannerControls(): JSX.Element {
       </Grid>
     </Grid>
   );
-};
+}
