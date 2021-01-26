@@ -14,7 +14,10 @@ export function renderWithRedux(ui: JSX.Element, store: Store): RenderResult {
   return render(<Provider store={store}>{ui}</Provider>);
 }
 
-export async function renderAsyncWithRedux(ui: JSX.Element, store: any) {
+export async function renderAsyncWithRedux(
+  ui: JSX.Element,
+  store: any
+): Promise<RenderResult> {
   // eslint-disable-next-line no-undef
   return new Promise((resolve, reject) => {
     const result = render(<Provider store={store}>{ui}</Provider>);
@@ -68,7 +71,7 @@ export function getStore(state: any, dispatchMock: any): MockStore {
 //   }
 // }
 
-export function getRealStore() {
+export function getRealStore(): Store {
   const history: History = createHashHistory();
   return createRealStore(history);
 }
