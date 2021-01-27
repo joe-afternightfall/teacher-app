@@ -61,6 +61,7 @@ export const saveNewTemplate = (): ThunkAction<
   let builtItems;
 
   // todo:  plannerState.startTime.toISOString() or toLocaleDateString() is the visual format we want
+  // todo:  how to default values in object rather than having to do everywhere
   if (allDaysSelected) {
     builtItems = allWeekdays.reduce((obj: any, day: string) => {
       const newLessonItem = new LessonItem(
@@ -68,7 +69,7 @@ export const saveNewTemplate = (): ThunkAction<
         '',
         plannerState.startTime,
         plannerState.endTime,
-        plannerState.lessonSubjectId,
+        plannerState.lessonSubjectId ? plannerState.lessonSubjectId : '',
         plannerState.lessonType,
         plannerState.otherLessonTypeName
       );
@@ -141,18 +142,18 @@ export const editTemplate = (): ThunkAction<
   const templateFirebaseId = plannerState.templateBuilder.firebaseId;
   const lessonPlanner = plannerState.templateBuilder;
 
-  const newLessonItem = new LessonItem(
-    uuidv4(),
-    '',
-    plannerState.startTime,
-    plannerState.endTime,
-    plannerState.lessonSubjectId,
-    plannerState.lessonType,
-    plannerState.otherLessonTypeName
-  );
-
   if (allDaysSelected) {
     allWeekdays.map((day: string) => {
+      const newLessonItem = new LessonItem(
+        uuidv4(),
+        '',
+        plannerState.startTime,
+        plannerState.endTime,
+        plannerState.lessonSubjectId,
+        plannerState.lessonType,
+        plannerState.otherLessonTypeName
+      );
+
       if (lessonPlanner.weekdays[day].items !== undefined) {
         lessonPlanner.weekdays[day].items.push(newLessonItem);
       } else {
@@ -161,6 +162,15 @@ export const editTemplate = (): ThunkAction<
     });
   } else {
     selectedDays.map((day: string) => {
+      const newLessonItem = new LessonItem(
+        uuidv4(),
+        '',
+        plannerState.startTime,
+        plannerState.endTime,
+        plannerState.lessonSubjectId,
+        plannerState.lessonType,
+        plannerState.otherLessonTypeName
+      );
       lessonPlanner.weekdays[day].items.push(newLessonItem);
     });
   }
@@ -242,7 +252,6 @@ export const updateLessonBoardOrder = (): ThunkAction<
   const plannerState = getState().lessonPlannerState;
   const templateFirebaseId = plannerState.templateBuilder.firebaseId;
   const weekdays = plannerState.templateBuilder.weekdays;
-
 
   // todo:  try defaulting the items values in model object
   return await firebase

@@ -90,6 +90,9 @@ class Column extends Component<ColumnProps> {
                         const startTime = formatDateWithout(item.startTime);
                         const endTime = formatDate(item.endTime);
                         // todo:  extract below card out to component
+
+                        const isOther = item.type === 'other';
+
                         return (
                           <Card
                             ref={providedDraggable2.innerRef}
@@ -106,7 +109,11 @@ class Column extends Component<ColumnProps> {
                                 borderLeft: `8px solid ${subject?.primaryColor}`,
                               }}
                               title={
-                                <Typography>{subject?.subjectName}</Typography>
+                                <Typography>
+                                  {isOther
+                                    ? item.otherLessonTypeName
+                                    : subject?.subjectName}
+                                </Typography>
                               }
                               subheader={
                                 <Typography variant={'subtitle2'}>
