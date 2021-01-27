@@ -3,10 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../configs/redux/store';
-import { LessonItem } from '../configs/types/LessonPlanner';
 import { lessonSaved } from '../creators/template-builder/lesson-saved';
 import { displayAppSnackbar } from '../creators/application/app-snackbar';
 import { updatedLessonBoard } from '../creators/lesson-planner/update-items';
+import { LessonItem } from '../configs/models/LessonItem';
 
 const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
@@ -119,46 +119,33 @@ export const editTemplate = (): ThunkAction<
   AnyAction
 > => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
   const plannerState = getState().lessonPlannerState;
-
-  const startTime = plannerState.startTime;
-  const endTime = plannerState.endTime;
   const selectedDays = plannerState.selectedDays;
-  const lessonSubjectId = plannerState.lessonSubjectId;
   const allDaysSelected = plannerState.allDaysSelected;
+
   const templateFirebaseId = plannerState.templateBuilder.firebaseId;
   const lessonPlanner = plannerState.templateBuilder;
+
+  const newLessonItem = new LessonItem(
+    uuidv4(),
+    '',
+    plannerState.startTime,
+    plannerState.endTime,
+    plannerState.lessonSubjectId,
+    plannerState.lessonType,
+    plannerState.otherLessonTypeName
+  );
 
   if (allDaysSelected) {
     allWeekdays.map((day: string) => {
       if (lessonPlanner.weekdays[day].items !== undefined) {
-        lessonPlanner.weekdays[day].items.push({
-          id: uuidv4(),
-          content: '',
-          startTime: startTime,
-          endTime: endTime,
-          subjectId: lessonSubjectId,
-        });
+        lessonPlanner.weekdays[day].items.push(newLessonItem);
       } else {
-        lessonPlanner.weekdays[day].items = [
-          {
-            id: uuidv4(),
-            content: '',
-            startTime: startTime,
-            endTime: endTime,
-            subjectId: lessonSubjectId,
-          },
-        ];
+        lessonPlanner.weekdays[day].items = [newLessonItem];
       }
     });
   } else {
     selectedDays.map((day: string) => {
-      lessonPlanner.weekdays[day].items.push({
-        id: uuidv4(),
-        content: '',
-        startTime: startTime,
-        endTime: endTime,
-        subjectId: lessonSubjectId,
-      });
+      lessonPlanner.weekdays[day].items.push(newLessonItem);
     });
   }
 
