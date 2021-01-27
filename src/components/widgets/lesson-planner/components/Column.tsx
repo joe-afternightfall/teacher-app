@@ -106,7 +106,9 @@ class Column extends Component<ColumnProps> {
                           >
                             <CardHeader
                               style={{
-                                borderLeft: `8px solid ${subject?.primaryColor}`,
+                                borderLeft: `8px solid ${
+                                  isOther ? '#000' : subject?.primaryColor
+                                }`,
                               }}
                               title={
                                 <Typography>
