@@ -19,7 +19,7 @@ export const buildLessonItems = (items: number): LessonItem[] => {
       new Date(),
       `subject-id-${index}`,
       `type-${index}`,
-      `lesson-name-${index}`,
+      `lesson-name-${index}`
     );
 
     builtList.push(newLesson);
