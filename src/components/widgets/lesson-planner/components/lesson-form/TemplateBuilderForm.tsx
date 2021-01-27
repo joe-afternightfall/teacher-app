@@ -8,6 +8,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Grid, Checkbox, TextField, FormControlLabel } from '@material-ui/core';
 import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDropdown';
 import { updateLessonSubject } from '../../../../../creators/lesson-planner/update-items';
+import TypeCheckboxes from './components/TypeCheckboxes';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -20,48 +21,23 @@ const useStyles = makeStyles(() =>
 const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
   const classes = useStyles();
 
-  const [checked, setChecked] = React.useState<string>('');
-
-  const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(`${e.target.name}-${e.target.checked}`);
-  };
-
-  const isChecked = checked === 'activity-true' || checked === 'subject-true';
+  const isChecked =
+    props.lessonType === 'other' || props.lessonType === 'subject';
 
   return (
     <Grid container style={{ minHeight: '30vh' }}>
       <Grid item xs={12}>
         <Grid item xs={12} className={classes.checkboxContainer}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                name={'activity'}
-                checked={checked === 'activity-true'}
-                onChange={handleCheck}
-              />
-            }
-            label={'Activity'}
-          />
-
-          <FormControlLabel
-            control={
-              <Checkbox
-                name={'subject'}
-                checked={checked === 'subject-true'}
-                onChange={handleCheck}
-              />
-            }
-            label={'Subject'}
-          />
+          <TypeCheckboxes />
         </Grid>
 
         <Grid item xs={6} style={{ margin: 'auto' }}>
           {isChecked ? (
-            checked === 'activity-true' ? (
+            props.lessonType === 'other' ? (
               <TextField
                 fullWidth
                 id={'activity-field'}
-                label={'Activity Name'}
+                label={'Other'}
                 inputProps={{
                   name: 'activity',
                 }}
@@ -94,6 +70,7 @@ const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
 };
 
 export interface TemplateBuilderFormProps {
+  lessonType: string;
   lessonSubjectId: string;
   dropdownChangeHandler: (
     e: React.ChangeEvent<{ name?: string; value: string }>
@@ -102,6 +79,7 @@ export interface TemplateBuilderFormProps {
 
 const mapStateToProps = (state: State): TemplateBuilderFormProps => {
   return ({
+    lessonType: state.lessonPlannerState.lessonType,
     lessonSubjectId: state.lessonPlannerState.lessonSubjectId,
   } as unknown) as TemplateBuilderFormProps;
 };
