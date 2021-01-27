@@ -2,12 +2,15 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import TimeInput from './components/TimeInput';
+import { Grid, TextField } from '@material-ui/core';
 import { State } from '../../../../../configs/redux/store';
 import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Grid, Checkbox, TextField, FormControlLabel } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDropdown';
-import { updateLessonSubject } from '../../../../../creators/lesson-planner/update-items';
+import {
+  updateLessonSubject,
+  updateOtherLessonTypeName,
+} from '../../../../../creators/lesson-planner/update-items';
 import TypeCheckboxes from './components/TypeCheckboxes';
 
 const useStyles = makeStyles(() =>
@@ -23,6 +26,10 @@ const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
 
   const isChecked =
     props.lessonType === 'other' || props.lessonType === 'subject';
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    props.changeHandler(event.target.value);
+  };
 
   return (
     <Grid container style={{ minHeight: '30vh' }}>
@@ -41,8 +48,8 @@ const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
                 inputProps={{
                   name: 'activity',
                 }}
-                // value={this.state.title}
-                // onChange={handleChange}
+                value={props.otherLessonTypeName}
+                onChange={handleChange}
               />
             ) : (
               <SubjectDropdown
@@ -72,6 +79,8 @@ const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
 export interface TemplateBuilderFormProps {
   lessonType: string;
   lessonSubjectId: string;
+  otherLessonTypeName: string;
+  changeHandler: (value: string) => void;
   dropdownChangeHandler: (
     e: React.ChangeEvent<{ name?: string; value: string }>
   ) => void;
@@ -81,6 +90,7 @@ const mapStateToProps = (state: State): TemplateBuilderFormProps => {
   return ({
     lessonType: state.lessonPlannerState.lessonType,
     lessonSubjectId: state.lessonPlannerState.lessonSubjectId,
+    otherLessonTypeName: state.lessonPlannerState.otherLessonTypeName,
   } as unknown) as TemplateBuilderFormProps;
 };
 
@@ -90,6 +100,9 @@ const mapDispatchToProps = (dispatch: Dispatch): TemplateBuilderFormProps =>
       e: React.ChangeEvent<{ name?: string; value: string }>
     ) => {
       dispatch(updateLessonSubject(e.target.value));
+    },
+    changeHandler: (value: string) => {
+      dispatch(updateOtherLessonTypeName(value));
     },
   } as unknown) as TemplateBuilderFormProps);
 

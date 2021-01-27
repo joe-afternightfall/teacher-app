@@ -49,3 +49,10 @@ export const updatedLessonBoard = (): AnyAction => {
     type: actions.UPDATED_LESSON_BOARD,
   };
 };
+
+export const updateOtherLessonTypeName = (value: string) => {
+  return {
+    type: actions.UPDATE_OTHER_LESSON_TYPE_NAME,
+    value: value,
+  };
+};
