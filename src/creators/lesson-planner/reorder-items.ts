@@ -1,5 +1,5 @@
 import actions from '../actions';
-import { LessonItem } from '../../configs/types/LessonPlanner';
+import { LessonItem } from '../../configs/models/LessonItem';
 
 export const reorderPlannerItems = (
   items: LessonItem[],

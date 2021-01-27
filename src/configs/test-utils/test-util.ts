@@ -1,8 +1,9 @@
-import { LessonItem, LessonPlanner } from '../types/LessonPlanner';
+import { LessonPlanner } from '../types/LessonPlanner';
 import { Subject } from '../types/Subject';
 import { v4 as uuidv4 } from 'uuid';
 import { ColorChoice } from '../theme/subject-color-choices';
 import { Bookmark } from '../types/Bookmark';
+import { LessonItem } from '../models/LessonItem';
 
 export const buildLessonItems = (items: number): LessonItem[] => {
   let index = 0;
@@ -11,13 +12,17 @@ export const buildLessonItems = (items: number): LessonItem[] => {
   while (index < items) {
     index += 1;
 
-    builtList.push({
-      id: `test-id-${index}`,
-      content: `test-content-${index}`,
-      startTime: new Date(),
-      endTime: new Date(),
-      subjectId: `subject-id-${index}`,
-    });
+    const newLesson = new LessonItem(
+      `test-id-${index}`,
+      `test-content-${index}`,
+      new Date(),
+      new Date(),
+      `subject-id-${index}`,
+      `type-${index}`,
+      `lesson-name-${index}`,
+    );
+
+    builtList.push(newLesson);
   }
 
   return builtList;

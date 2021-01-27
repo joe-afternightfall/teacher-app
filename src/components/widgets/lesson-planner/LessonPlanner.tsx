@@ -10,7 +10,6 @@ import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import {
   LessonPlanner,
-  LessonItem,
   LessonWeekdays,
   MoveLessonResult,
   Weekday,
@@ -18,6 +17,7 @@ import {
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { move, reorder, updateAllItems } from '../../../utils/weekly-planner';
 import { Subject } from '../../../configs/types/Subject';
+import { LessonItem } from '../../../configs/models/LessonItem';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 

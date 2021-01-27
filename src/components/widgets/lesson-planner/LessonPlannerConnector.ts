@@ -1,14 +1,12 @@
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { State } from '../../../configs/redux/store';
-import {
-  LessonItem,
-  LessonWeekdays,
-} from '../../../configs/types/LessonPlanner';
+import { LessonWeekdays } from '../../../configs/types/LessonPlanner';
 import LessonPlannerComp, { LessonPlannerProps } from './LessonPlanner';
 import { reorderPlannerItems } from '../../../creators/lesson-planner/reorder-items';
 import { movePlannerItems } from '../../../creators/lesson-planner/move-items';
 import { lessonBoardChanged } from '../../../creators/lesson-planner/lesson-board-changed';
+import { LessonItem } from '../../../configs/models/LessonItem';
 
 const mapStateToProps = (state: State): LessonPlannerProps => {
   const lessons = state.lessonPlannerState.lessonPlanners;

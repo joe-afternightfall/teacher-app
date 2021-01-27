@@ -24,7 +24,8 @@ import { Subject } from '../../../../configs/types/Subject';
 import { getSubject } from '../../../../utils/subject-name';
 import { Card, Grid, CardHeader, Typography } from '@material-ui/core';
 import { capitalizeFirstLetter } from '../../../../utils/string-formatter';
-import { Weekday, LessonItem } from '../../../../configs/types/LessonPlanner';
+import { Weekday } from '../../../../configs/types/LessonPlanner';
+import { LessonItem } from '../../../../configs/models/LessonItem';
 
 const getItemStyle = (
   draggableStyle: any,
