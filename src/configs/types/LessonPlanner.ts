@@ -1,11 +1,4 @@
-export interface LessonItem {
-  [key: string]: string | Date;
-  id: string;
-  content: string;
-  startTime: Date;
-  endTime: Date;
-  subjectId: string;
-}
+import { LessonItem } from '../models/LessonItem';
 
 export interface LessonNote {
   id: string;

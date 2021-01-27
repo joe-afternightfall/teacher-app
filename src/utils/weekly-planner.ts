@@ -1,10 +1,10 @@
 import {
-  LessonItem,
   MoveLessonResult,
   LessonPlanner,
   LessonWeekdays,
 } from '../configs/types/LessonPlanner';
 import { DraggableLocation } from 'react-beautiful-dnd';
+import { LessonItem } from '../configs/models/LessonItem';
 
 /**
  * Reorder items in list

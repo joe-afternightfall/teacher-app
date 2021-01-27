@@ -24,7 +24,8 @@ import { Subject } from '../../../../configs/types/Subject';
 import { getSubject } from '../../../../utils/subject-name';
 import { Card, Grid, CardHeader, Typography } from '@material-ui/core';
 import { capitalizeFirstLetter } from '../../../../utils/string-formatter';
-import { Weekday, LessonItem } from '../../../../configs/types/LessonPlanner';
+import { Weekday } from '../../../../configs/types/LessonPlanner';
+import { LessonItem } from '../../../../configs/models/LessonItem';
 
 const getItemStyle = (
   draggableStyle: any,
@@ -89,6 +90,9 @@ class Column extends Component<ColumnProps> {
                         const startTime = formatDateWithout(item.startTime);
                         const endTime = formatDate(item.endTime);
                         // todo:  extract below card out to component
+
+                        const isOther = item.type === 'other';
+
                         return (
                           <Card
                             ref={providedDraggable2.innerRef}
@@ -102,10 +106,16 @@ class Column extends Component<ColumnProps> {
                           >
                             <CardHeader
                               style={{
-                                borderLeft: `8px solid ${subject?.primaryColor}`,
+                                borderLeft: `8px solid ${
+                                  isOther ? '#000' : subject?.primaryColor
+                                }`,
                               }}
                               title={
-                                <Typography>{subject?.subjectName}</Typography>
+                                <Typography>
+                                  {isOther
+                                    ? item.otherLessonTypeName
+                                    : subject?.subjectName}
+                                </Typography>
                               }
                               subheader={
                                 <Typography variant={'subtitle2'}>

@@ -65,6 +65,12 @@ export default {
       case actions.UPDATE_DATE_TIME:
         newState[action.name] = action.value;
         break;
+      case actions.UPDATE_ITEM_TYPE:
+        newState.lessonType = action.lessonType;
+        break;
+      case actions.UPDATE_OTHER_LESSON_TYPE_NAME:
+        newState.otherLessonTypeName = action.value;
+        break;
       case actions.LESSON_BOARD_CHANGE:
         newState.lessonBoardChanged = true;
         break;
@@ -116,7 +122,8 @@ export interface LessonPlannerState {
     | LessonPlanner[]
     | string[]
     | Date
-    | LessonPlanner;
+    | LessonPlanner
+    | undefined;
   selectedLessonId: string;
   displayEditingForm: boolean;
   lessonPlanners: LessonPlanner[];
@@ -131,4 +138,6 @@ export interface LessonPlannerState {
   endDate: Date;
   templateBuilder: LessonPlanner;
   lessonBoardChanged: boolean;
+  lessonType: string | undefined;
+  otherLessonTypeName: string;
 }

@@ -3,10 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../configs/redux/store';
-import { LessonItem } from '../configs/types/LessonPlanner';
 import { lessonSaved } from '../creators/template-builder/lesson-saved';
 import { displayAppSnackbar } from '../creators/application/app-snackbar';
 import { updatedLessonBoard } from '../creators/lesson-planner/update-items';
+import { LessonItem } from '../configs/models/LessonItem';
+import { LessonPlannerDAO } from '../configs/models/LessonPlannerDAO';
 
 const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
@@ -59,57 +60,73 @@ export const saveNewTemplate = (): ThunkAction<
   const allDaysSelected = plannerState.allDaysSelected;
   let builtItems;
 
+  // todo:  plannerState.startTime.toISOString() or toLocaleDateString() is the visual format we want
+  // todo:  how to default values in object rather than having to do everywhere
   if (allDaysSelected) {
     builtItems = allWeekdays.reduce((obj: any, day: string) => {
+      const newLessonItem = new LessonItem(
+        uuidv4(),
+        '',
+        plannerState.startTime,
+        plannerState.endTime,
+        plannerState.lessonSubjectId ? plannerState.lessonSubjectId : '',
+        plannerState.lessonType,
+        plannerState.otherLessonTypeName
+      );
+
       obj[day] = {
         date: '',
-        items: [
-          {
-            id: uuidv4(),
-            content: '',
-            startTime: plannerState.startTime.toISOString(),
-            endTime: plannerState.endTime.toISOString(),
-            subjectId: plannerState.lessonSubjectId,
-          },
-        ],
+        items: [newLessonItem],
       };
       return obj;
     }, {});
   } else {
     builtItems = plannerState.selectedDays.reduce((obj: any, day: string) => {
+      const newLessonItem = new LessonItem(
+        uuidv4(),
+        '',
+        plannerState.startTime,
+        plannerState.endTime,
+        plannerState.lessonSubjectId,
+        plannerState.lessonType,
+        plannerState.otherLessonTypeName
+      );
+
       obj[day] = {
         date: '',
-        items: [
-          {
-            id: uuidv4(),
-            content: '',
-            startTime: plannerState.startTime.toISOString(),
-            endTime: plannerState.endTime.toISOString(),
-            subjectId: plannerState.lessonSubjectId,
-          },
-        ],
+        items: [newLessonItem],
       };
       return obj;
     }, {});
   }
 
-  return await newTemplateRef.set(
-    {
-      updatedAt: new Date(),
-      id: uuidv4(),
-      title: 'Template Builder',
-      startDate: plannerState.startDate.toLocaleDateString(),
-      endDate: plannerState.endDate.toLocaleDateString(),
-      weekdays: builtItems,
-    },
-    (error) => {
-      if (error) {
-        // dispatch error
-      } else {
-        dispatch(lessonSaved());
-      }
-    }
+  // todo:  remove "startDate" and "endDate" from lesson planner object and create its only endpoint
+  const lessonPlannerDAO = new LessonPlannerDAO(
+    new Date(),
+    uuidv4(),
+    'Template Builder',
+    plannerState.startDate ? plannerState.startDate : new Date(),
+    plannerState.endDate ? plannerState.endDate : new Date(),
+    builtItems,
+    []
   );
+
+  return await newTemplateRef.set(JSON.stringify(lessonPlannerDAO), (error) => {
+    if (error) {
+      dispatch(
+        displayAppSnackbar({
+          text: 'Failed to update',
+          severity: 'error',
+          position: {
+            vertical: 'bottom',
+            horizontal: 'right',
+          },
+        })
+      );
+    } else {
+      dispatch(lessonSaved());
+    }
+  });
 };
 
 export const editTemplate = (): ThunkAction<
@@ -119,46 +136,42 @@ export const editTemplate = (): ThunkAction<
   AnyAction
 > => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
   const plannerState = getState().lessonPlannerState;
-
-  const startTime = plannerState.startTime;
-  const endTime = plannerState.endTime;
   const selectedDays = plannerState.selectedDays;
-  const lessonSubjectId = plannerState.lessonSubjectId;
   const allDaysSelected = plannerState.allDaysSelected;
+
   const templateFirebaseId = plannerState.templateBuilder.firebaseId;
   const lessonPlanner = plannerState.templateBuilder;
 
   if (allDaysSelected) {
     allWeekdays.map((day: string) => {
+      const newLessonItem = new LessonItem(
+        uuidv4(),
+        '',
+        plannerState.startTime,
+        plannerState.endTime,
+        plannerState.lessonSubjectId,
+        plannerState.lessonType,
+        plannerState.otherLessonTypeName
+      );
+
       if (lessonPlanner.weekdays[day].items !== undefined) {
-        lessonPlanner.weekdays[day].items.push({
-          id: uuidv4(),
-          content: '',
-          startTime: startTime,
-          endTime: endTime,
-          subjectId: lessonSubjectId,
-        });
+        lessonPlanner.weekdays[day].items.push(newLessonItem);
       } else {
-        lessonPlanner.weekdays[day].items = [
-          {
-            id: uuidv4(),
-            content: '',
-            startTime: startTime,
-            endTime: endTime,
-            subjectId: lessonSubjectId,
-          },
-        ];
+        lessonPlanner.weekdays[day].items = [newLessonItem];
       }
     });
   } else {
     selectedDays.map((day: string) => {
-      lessonPlanner.weekdays[day].items.push({
-        id: uuidv4(),
-        content: '',
-        startTime: startTime,
-        endTime: endTime,
-        subjectId: lessonSubjectId,
-      });
+      const newLessonItem = new LessonItem(
+        uuidv4(),
+        '',
+        plannerState.startTime,
+        plannerState.endTime,
+        plannerState.lessonSubjectId,
+        plannerState.lessonType,
+        plannerState.otherLessonTypeName
+      );
+      lessonPlanner.weekdays[day].items.push(newLessonItem);
     });
   }
 
@@ -240,6 +253,7 @@ export const updateLessonBoardOrder = (): ThunkAction<
   const templateFirebaseId = plannerState.templateBuilder.firebaseId;
   const weekdays = plannerState.templateBuilder.weekdays;
 
+  // todo:  try defaulting the items values in model object
   return await firebase
     .database()
     .ref('/template-builder')

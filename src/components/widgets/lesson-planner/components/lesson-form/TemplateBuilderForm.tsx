@@ -2,12 +2,16 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import TimeInput from './components/TimeInput';
+import { Grid, TextField } from '@material-ui/core';
 import { State } from '../../../../../configs/redux/store';
 import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Grid, Checkbox, TextField, FormControlLabel } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDropdown';
-import { updateLessonSubject } from '../../../../../creators/lesson-planner/update-items';
+import {
+  updateLessonSubject,
+  updateOtherLessonTypeName,
+} from '../../../../../creators/lesson-planner/update-items';
+import TypeCheckboxes from './components/TypeCheckboxes';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -20,53 +24,32 @@ const useStyles = makeStyles(() =>
 const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
   const classes = useStyles();
 
-  const [checked, setChecked] = React.useState<string>('');
+  const isChecked =
+    props.lessonType === 'other' || props.lessonType === 'subject';
 
-  const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(`${e.target.name}-${e.target.checked}`);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    props.changeHandler(event.target.value);
   };
-
-  const isChecked = checked === 'activity-true' || checked === 'subject-true';
 
   return (
     <Grid container style={{ minHeight: '30vh' }}>
       <Grid item xs={12}>
         <Grid item xs={12} className={classes.checkboxContainer}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                name={'activity'}
-                checked={checked === 'activity-true'}
-                onChange={handleCheck}
-              />
-            }
-            label={'Activity'}
-          />
-
-          <FormControlLabel
-            control={
-              <Checkbox
-                name={'subject'}
-                checked={checked === 'subject-true'}
-                onChange={handleCheck}
-              />
-            }
-            label={'Subject'}
-          />
+          <TypeCheckboxes />
         </Grid>
 
         <Grid item xs={6} style={{ margin: 'auto' }}>
           {isChecked ? (
-            checked === 'activity-true' ? (
+            props.lessonType === 'other' ? (
               <TextField
                 fullWidth
                 id={'activity-field'}
-                label={'Activity Name'}
+                label={'Other'}
                 inputProps={{
                   name: 'activity',
                 }}
-                // value={this.state.title}
-                // onChange={handleChange}
+                value={props.otherLessonTypeName}
+                onChange={handleChange}
               />
             ) : (
               <SubjectDropdown
@@ -94,7 +77,10 @@ const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
 };
 
 export interface TemplateBuilderFormProps {
+  lessonType: string;
   lessonSubjectId: string;
+  otherLessonTypeName: string;
+  changeHandler: (value: string) => void;
   dropdownChangeHandler: (
     e: React.ChangeEvent<{ name?: string; value: string }>
   ) => void;
@@ -102,7 +88,9 @@ export interface TemplateBuilderFormProps {
 
 const mapStateToProps = (state: State): TemplateBuilderFormProps => {
   return ({
+    lessonType: state.lessonPlannerState.lessonType,
     lessonSubjectId: state.lessonPlannerState.lessonSubjectId,
+    otherLessonTypeName: state.lessonPlannerState.otherLessonTypeName,
   } as unknown) as TemplateBuilderFormProps;
 };
 
@@ -112,6 +100,9 @@ const mapDispatchToProps = (dispatch: Dispatch): TemplateBuilderFormProps =>
       e: React.ChangeEvent<{ name?: string; value: string }>
     ) => {
       dispatch(updateLessonSubject(e.target.value));
+    },
+    changeHandler: (value: string) => {
+      dispatch(updateOtherLessonTypeName(value));
     },
   } as unknown) as TemplateBuilderFormProps);
 
