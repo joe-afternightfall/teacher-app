@@ -23,29 +23,29 @@ export const editSubject = (): ThunkAction<
 
   const listState = getState().subjectListState;
 
-  const subjectDAO = new SubjectDAO(
-    uuidv4(),
-    listState.subjectName,
-    listState.selectedColor.id,
-    listState.selectedColor.primaryColor,
-    listState.selectedColor.secondaryColor,
-    listState.selectedIconId
-  );
-
   return await firebase
     .database()
     .ref('/subjects')
     .child(listState.editingFormFirebaseId)
-    .update(subjectDAO, (error) => {
-      if (error) {
-        // dispatch error
-        alert('error');
-      } else {
-        dispatch(clearSubjectInfoDialog());
-        setTimeout(() => {
-          dispatch(closeSubjectInfoDialog());
-          dispatch(subjectSaveComplete());
-        }, 1000);
+    .update(
+      {
+        subjectName: listState.subjectName,
+        primaryColorId: listState.selectedColor.id,
+        primaryColor: listState.selectedColor.primaryColor,
+        secondaryColor: listState.selectedColor.secondaryColor,
+        iconId: listState.selectedIconId,
+      },
+      (error) => {
+        if (error) {
+          // dispatch error
+          alert('error');
+        } else {
+          dispatch(clearSubjectInfoDialog());
+          setTimeout(() => {
+            dispatch(closeSubjectInfoDialog());
+            dispatch(subjectSaveComplete());
+          }, 1000);
+        }
       }
-    });
+    );
 };
