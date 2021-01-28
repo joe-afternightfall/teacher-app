@@ -13,8 +13,8 @@ import CardPopover from '../card-popover/CardPopover';
 import { Button, Typography } from '@material-ui/core';
 import { State } from '../../../../../configs/redux/store';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { saveDates } from '../../../../../services/template-builder-service';
 import { updateDateTime } from '../../../../../creators/lesson-planner/update-items';
+import { saveDates } from '../../../../../services/template-builder/save-dates';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

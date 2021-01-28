@@ -4,13 +4,11 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import AddIcon from '@material-ui/icons/Add';
 import { Fab, Tooltip } from '@material-ui/core';
-import {
-  editTemplate,
-  saveNewTemplate,
-} from '../../../../../services/template-builder-service';
 import { State } from '../../../../../configs/redux/store';
 import TemplateBuilderForm from '../lesson-form/TemplateBuilderForm';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
+import { editTemplate } from '../../../../../services/template-builder/edit-template';
+import { saveNewTemplate } from '../../../../../services/template-builder/save-new-template';
 
 const NewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
   return (

@@ -5,7 +5,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import SaveIcon from '@material-ui/icons/Save';
 import { Button, Tooltip } from '@material-ui/core';
 import { State } from '../../../../../configs/redux/store';
-import { updateLessonBoardOrder } from '../../../../../services/template-builder-service';
+import { updateLessonBoardOrder } from '../../../../../services/template-builder/update-board-order';
 
 const SaveLessonButton = (props: SaveLessonButtonProps): JSX.Element => {
   return (
