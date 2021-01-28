@@ -3,11 +3,6 @@ import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
-import {
-  deleteBookmark,
-  updateBookmark,
-  UpdateBookmarkProps,
-} from '../../../services/bookmarks-service';
 import AppLink from '../../app-shell/AppLink';
 import { Grid, Typography } from '@material-ui/core';
 import { State } from '../../../configs/redux/store';
@@ -16,6 +11,11 @@ import { Subject } from '../../../configs/types/Subject';
 import { Bookmark } from '../../../configs/types/Bookmark';
 import NewBookmarkDialog from './components/NewBookmarkDialog';
 import { openNewBookmarkDialog } from '../../../creators/bookmarks/bookmarks-dialog';
+import {
+  updateBookmark,
+  UpdateBookmarkProps,
+} from '../../../services/bookmarks/update-bookmark';
+import { deleteBookmark } from '../../../services/bookmarks/delete-bookmark';
 
 const getLink = (rowData: any) => (
   <AppLink title={rowData.bookmarkUrl} url={rowData.bookmarkUrl} />
