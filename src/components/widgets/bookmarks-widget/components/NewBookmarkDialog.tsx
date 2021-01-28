@@ -9,17 +9,17 @@ import {
   DialogActions,
   DialogContent,
 } from '@material-ui/core';
-import BookmarkForm from './BookmarkForm';
 import { v4 as uuidv4 } from 'uuid';
 import { connect } from 'react-redux';
+import BookmarkForm from './BookmarkForm';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import CloseIcon from '@material-ui/icons/Close';
 import { State } from '../../../../configs/redux/store';
 import { Subject } from '../../../../configs/types/Subject';
-import { saveBookmarkInfo } from '../../../../services/bookmarks-service';
-import { closeNewBookmarkDialog } from '../../../../creators/bookmarks/bookmarks-dialog';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { closeNewBookmarkDialog } from '../../../../creators/bookmarks/bookmarks-dialog';
+import { saveBookmarkInfo } from '../../../../services/bookmarks/save-bookmark';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

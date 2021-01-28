@@ -7,8 +7,8 @@ import { State } from '../../../../../configs/redux/store';
 import { Grid, IconButton, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { LessonItem } from '../../../../../configs/models/LessonItem';
-import { deleteItem } from '../../../../../services/template-builder-service';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
+import { deleteItem } from '../../../../../services/template-builder/delete-item';
 
 const useStyles = makeStyles(() =>
   createStyles({

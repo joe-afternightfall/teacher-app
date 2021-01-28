@@ -9,15 +9,15 @@ import routes from './configs/constants/routes';
 import { createStore } from './configs/redux/store';
 import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './configs/service-worker';
-import { getBookmarksList } from './services/bookmarks-service';
-import { getSubjects } from './services/subject-list-service';
 import { loadBookmarksList } from './creators/bookmarks/load-bookmarks';
 import { loadSubjectList } from './creators/subject-list/load-subjects';
-import { getTemplateBuilder } from './services/template-builder-service';
 import { loadTemplate } from './creators/template-builder/load-templates';
 import DashboardScreen from './components/top-level-components/dashboard/DashboardScreen';
 import TemplateBuilderScreen from './components/top-level-components/template-builder/TemplateBuilderScreen';
 import LessonPlannerScreen from './components/top-level-components/lesson-planner/LessonPlannerScreenConnector';
+import { getSubjects } from './services/subject-list/get-subjects';
+import { getTemplateBuilder } from './services/template-builder/get-template-builder';
+import { getBookmarksList } from './services/bookmarks/get-bookmarks';
 
 const history = createHashHistory(),
   store = createStore(history);
