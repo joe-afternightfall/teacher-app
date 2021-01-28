@@ -7,7 +7,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { State } from '../../../../configs/redux/store';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { displayAppDialog } from '../../../../creators/application/app-dialog';
-import { deleteSubject } from '../../../../services/subject-list-service';
+import { deleteSubject } from '../../../../services/subject-list/delete-subject';
 
 const useStyles = makeStyles(() =>
   createStyles({

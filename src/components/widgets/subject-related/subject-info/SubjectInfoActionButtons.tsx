@@ -5,14 +5,12 @@ import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { State } from '../../../../configs/redux/store';
 import {
-  editSubject,
-  saveSubjectInfo,
-} from '../../../../services/subject-list-service';
-import {
   clearSubjectInfoDialog,
   closeSubjectInfoDialog,
 } from '../../../../creators/subject-list/subject-info-dialog';
 import { clearEditing } from '../../../../creators/subject-list/editing-subject';
+import { saveSubjectInfo } from '../../../../services/subject-list/save-subject';
+import { editSubject } from '../../../../services/subject-list/edit-subject';
 
 const SubjectInfoActionButtons = (
   props: SubjectInfoActionButtonsProps
