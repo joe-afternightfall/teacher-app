@@ -11,6 +11,9 @@ export default {
     let newState = Object.assign({}, state);
 
     switch (action.type) {
+      case actions.TOGGLE_SIDE_DRAWER:
+        newState.openSideDrawer = !newState.openSideDrawer;
+        break;
       case actions.DISPLAY_APP_SNACKBAR:
         newState.displayAppSnackbar = true;
         newState.snackbarProps = action.snackbarProps;
@@ -47,6 +50,7 @@ export default {
 };
 
 export interface ApplicationState {
+  openSideDrawer: boolean;
   dialogTitleColor: string;
   displayAppDialog: boolean;
   dialogContent: JSX.Element;
