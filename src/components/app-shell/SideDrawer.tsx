@@ -1,96 +1,114 @@
+import React from 'react';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import clsx from 'clsx';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import {
-  Theme,
-  WithStyles,
-  withStyles,
-  StyledComponentProps,
-} from '@material-ui/core/styles';
-import React, { Component } from 'react';
-import List from '@material-ui/core/List';
-import { Styles } from '@material-ui/styles';
-import Drawer from '@material-ui/core/Drawer';
-import MailIcon from '@material-ui/icons/Mail';
-import MenuIcon from '@material-ui/icons/Menu';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+  Drawer,
+  AppBar,
+  IconButton,
+  Toolbar,
+  Typography,
+} from '@material-ui/core';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { toggleSideDrawer } from '../../creators/application/side-drawer';
+import { DRAWER_SIZE } from '../../configs/constants/drawer-size';
 
-const styles: Styles<Theme, StyledComponentProps> = () => ({
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
-  menuButton: {
-    marginRight: 16,
-  },
-});
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    drawer: {
+      width: DRAWER_SIZE,
+      flexShrink: 0,
+      whiteSpace: 'nowrap',
+    },
+    drawerOpen: {
+      width: DRAWER_SIZE,
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    drawerClose: {
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      overflowX: 'hidden',
+      width: 0,
+      [theme.breakpoints.up('sm')]: {
+        width: 0,
+      },
+    },
 
-class SideDrawer extends Component<SideDrawerProps> {
-  state = {
-    open: false,
-  };
+    // Todo:  below is for app bar
+    title: {
+      flex: 1,
+    },
+    toolbar: {
+      width: DRAWER_SIZE,
+      // color: theme.palette.primary.contrastText,
+      // background: theme.palette.secondary.light,
+    },
+    iconButton: {
+      color: theme.palette.primary.contrastText,
+    },
+  })
+);
 
-  render(): JSX.Element {
-    const { classes } = this.props;
+const SideDrawer = (props: SideDrawerProps): JSX.Element => {
+  const classes = useStyles();
 
-    const toggleDrawer = () => {
-      this.setState({
-        open: !this.state.open,
-      });
-    };
+  const open = props.open;
 
-    return (
-      <React.Fragment>
-        <IconButton
-          edge={'start'}
-          color={'inherit'}
-          aria-label={'menu'}
-          className={classes.menuButton}
-          onClick={toggleDrawer}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Drawer open={this.state.open} onClose={toggleDrawer}>
-          <div
-            className={classes.list}
-            role={'presentation'}
-            onClick={toggleDrawer}
-            onKeyDown={toggleDrawer}
+  return (
+    <Drawer
+      variant={'permanent'}
+      className={clsx(classes.drawer, {
+        [classes.drawerOpen]: open,
+        [classes.drawerClose]: !open,
+      })}
+      classes={{
+        paper: clsx({
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        }),
+      }}
+    >
+      <AppBar position={'static'}>
+        <Toolbar color={'primary'} className={classes.toolbar}>
+          <Typography variant={'h6'} className={classes.title}>
+            {'Drawer Title'}
+          </Typography>
+
+          <IconButton
+            className={classes.iconButton}
+            onClick={props.toggleSideDrawerHandler}
+            data-testid={'chevron-left-toggle-button'}
           >
-            <List>
-              {['Inbox', 'Starred', 'Send email', 'Drafts'].map(
-                (text, index) => (
-                  <ListItem button key={text}>
-                    <ListItemIcon>
-                      {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItem>
-                )
-              )}
-            </List>
-            <Divider />
-            <List>
-              {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                <ListItem button key={text}>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
-            </List>
-          </div>
-        </Drawer>
-      </React.Fragment>
-    );
-  }
+            <ChevronLeftIcon data-testid={'chevron-left'} />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+    </Drawer>
+  );
+};
+
+export interface SideDrawerProps {
+  open: boolean;
+  toggleSideDrawerHandler: () => void;
 }
 
-export type SideDrawerProps = WithStyles<typeof styles>;
+const mapStateToProps = (state: any): SideDrawerProps => {
+  return ({
+    open: state.applicationState.openSideDrawer,
+  } as unknown) as SideDrawerProps;
+};
 
-export default withStyles(styles, { withTheme: true })(SideDrawer);
+const mapDispatchToProps = (dispatch: Dispatch): SideDrawerProps =>
+  (({
+    toggleSideDrawerHandler: (): void => {
+      dispatch(toggleSideDrawer());
+    },
+  } as unknown) as SideDrawerProps);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideDrawer);

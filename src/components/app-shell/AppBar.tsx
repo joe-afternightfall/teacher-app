@@ -11,8 +11,7 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { State } from '../../configs/redux/store';
 import { toggleSideDrawer } from '../../creators/application/side-drawer';
-
-export const DRAWER_SIZE = '45vw';
+import { DRAWER_SIZE } from '../../configs/constants/drawer-size';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
