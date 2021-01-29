@@ -50,8 +50,8 @@ const mapDispatchToProps = (dispatch: Dispatch): NewTemplateButtonProps =>
           maxWidth: 'sm',
           titleColor: '#3baafc',
           content: content,
-          title: 'Add Class to Template',
-          confirmButtonTitle: 'Add Class',
+          title: 'Add Item to Template',
+          confirmButtonTitle: 'Save',
           confirmClickHandler: async () => {
             if (isNewTemplate) {
               (dispatch as ThunkDispatch<State, void, AnyAction>)(
