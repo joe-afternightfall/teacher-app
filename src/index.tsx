@@ -1,5 +1,5 @@
 import React from 'react';
-import App from './App';
+import App from './AppConnector';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase/app';
 import { Route } from 'react-router';
