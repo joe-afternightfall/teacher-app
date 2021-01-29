@@ -4,7 +4,7 @@ import { State } from './configs/redux/store';
 
 const mapStateToProps = (state: State, ownProps: any): AppProps => {
   return ({
-    openSideDrawer: state.applicationState.openSideDrawer,
+    open: state.applicationState.openSideDrawer,
   } as unknown) as AppProps;
 };
 
