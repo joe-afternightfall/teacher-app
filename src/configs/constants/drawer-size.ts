@@ -1,1 +1,1 @@
-export const DRAWER_SIZE = '25vw';
+export const DRAWER_SIZE = '240px';
