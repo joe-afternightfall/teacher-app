@@ -12,11 +12,19 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import AppDialog from './components/app-shell/AppDialog';
 import { getLightTheme } from './configs/theme/light-theme';
 import AppSnackbar from './components/app-shell/AppSnackbar';
+import ResponsiveSideDrawer from './components/app-shell/side-drawer/ResponsiveSideDrawer';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   root: {
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
+    display: 'flex',
+    // marginLeft: theme.spacing(2),
+    // marginRight: theme.spacing(2),
+  },
+  // necessary for content to be below app bar
+  toolbar: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
   },
 });
 
@@ -26,11 +34,20 @@ class App extends Component<AppProps> {
 
     return (
       <MuiThemeProvider theme={getLightTheme()}>
-        <AppDialog />
-        <CssBaseline />
-        <AppBar />
-        <AppSnackbar />
-        <div className={classes.root}>{this.props.children}</div>
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppDialog />
+          <AppSnackbar />
+
+          <AppBar />
+          <ResponsiveSideDrawer />
+
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+
+            <div>{this.props.children}</div>
+          </main>
+        </div>
       </MuiThemeProvider>
     );
   }

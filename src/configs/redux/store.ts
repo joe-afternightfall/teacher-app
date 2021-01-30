@@ -34,7 +34,7 @@ export const createStore = (history: History): Store => {
 
   return createStoreFunc(allReducers, {
     applicationState: ({
-      openSideDrawer: false,
+      sideDrawerIsOpen: false,
       displayAppSnackbar: false,
       snackbarProps: {
         text: '',

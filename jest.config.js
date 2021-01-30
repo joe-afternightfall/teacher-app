@@ -15,23 +15,19 @@ module.exports = {
     },
     coverageDirectory: "coverage",
     coveragePathIgnorePatterns: [
-        "/dist/",
         "/coverage/",
         "/src/configs",
         "/src/App.tsx",
         "/src/index.tsx",
         "/node_modules/",
-        "/src/react-app-env.d.ts",
-        "/src/__tests__/test-utils",
+        "/src/react-app-env.d.ts"
     ],
     moduleFileExtensions: ["ts", "tsx", "js", "json", "jsx"],
     rootDir: ".",
     testEnvironment: "jsdom",
     testMatch: [
-        "**/*.spec.[jt]s",
         "**/*.test.tsx",
-        "**/*.test.ts",
-        "!**/dist/**/*"
+        "**/*.test.ts"
     ],
     transform: {
         "\\.ts$": "ts-jest",

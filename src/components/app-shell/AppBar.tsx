@@ -1,38 +1,80 @@
 import React from 'react';
-import SideDrawer from './SideDrawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { toggleSideDrawer } from '../../creators/application/side-drawer';
+import { DRAWER_SIZE } from '../../configs/constants/drawer-size';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      marginBottom: theme.spacing(3),
+    appBar: {
+      color: '#fff',
+      background: theme.palette.primary.main,
+      [theme.breakpoints.up('md')]: {
+        width: `calc(100% - ${DRAWER_SIZE})`,
+        marginLeft: DRAWER_SIZE,
+      },
+      zIndex: theme.zIndex.drawer + 1,
+      // color: theme.palette.text.primary,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
     },
-    title: {
-      flexGrow: 1,
+    menuButton: {
+      marginRight: theme.spacing(2),
+      [theme.breakpoints.up('md')]: {
+        display: 'none',
+      },
+    },
+    toolbar: {
+      // color: theme.palette.primary.contrastText,
+      background: theme.palette.primary.main,
     },
   })
 );
 
-export default function TopAppBar(): JSX.Element {
+function TopAppBar(props: AppBarProps): JSX.Element {
   const classes = useStyles();
 
   return (
-    <AppBar position={'static'} className={classes.root}>
-      <Toolbar>
-        <SideDrawer />
-        <Typography
-          variant={'h6'}
-          className={classes.title}
-          data-testid={'app-bar-title'}
+    <AppBar position={'fixed'} className={classes.appBar}>
+      <Toolbar className={classes.toolbar}>
+        <IconButton
+          // edge={'start'}
+          color={'inherit'}
+          className={classes.menuButton}
+          data-testid={'toggle-app-drawer-button'}
+          onClick={props.toggleSideDrawerHandler}
         >
-          {"Jamie's Teacher App"}
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" noWrap>
+          {'NEW Responsive drawer'}
         </Typography>
-        <AccountCircle />
       </Toolbar>
     </AppBar>
   );
 }
+
+export interface AppBarProps {
+  toggleSideDrawerHandler: () => void;
+}
+
+const mapStateToProps = (): AppBarProps => {
+  return ({} as unknown) as AppBarProps;
+};
+
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: any): AppBarProps =>
+  (({
+    toggleSideDrawerHandler: (): void => {
+      dispatch(toggleSideDrawer());
+    },
+  } as unknown) as AppBarProps);
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopAppBar);
