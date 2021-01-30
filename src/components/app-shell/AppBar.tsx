@@ -54,7 +54,7 @@ function TopAppBar(props: AppBarProps): JSX.Element {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap>
+        <Typography variant="h6" noWrap data-testid={'app-bar-title'}>
           {'NEW Responsive drawer'}
         </Typography>
       </Toolbar>
