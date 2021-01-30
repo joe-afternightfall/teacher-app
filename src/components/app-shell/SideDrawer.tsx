@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
     toolbar: {
       width: DRAWER_SIZE,
       // color: theme.palette.primary.contrastText,
-      // background: theme.palette.secondary.light,
+      background: theme.palette.secondary.main,
     },
     iconButton: {
       color: theme.palette.primary.contrastText,
@@ -75,7 +75,7 @@ const SideDrawer = (props: SideDrawerProps): JSX.Element => {
       }}
     >
       <AppBar position={'static'}>
-        <Toolbar color={'primary'} className={classes.toolbar}>
+        <Toolbar className={classes.toolbar}>
           <Typography variant={'h6'} className={classes.title}>
             {'Drawer Title'}
           </Typography>
