@@ -1,15 +1,12 @@
-import clsx from 'clsx';
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { State } from '../../configs/redux/store';
 import { toggleSideDrawer } from '../../creators/application/side-drawer';
 import { DRAWER_SIZE } from '../../configs/constants/drawer-size';
 
@@ -53,7 +50,7 @@ function TopAppBar(props: AppBarProps): JSX.Element {
           color={'inherit'}
           className={classes.menuButton}
           data-testid={'toggle-app-drawer-button'}
-          onClick={props.tempToggleSideDrawerHandler}
+          onClick={props.toggleSideDrawerHandler}
         >
           <MenuIcon />
         </IconButton>
@@ -66,14 +63,11 @@ function TopAppBar(props: AppBarProps): JSX.Element {
 }
 
 export interface AppBarProps {
-  // tempOpen: boolean;
-  tempToggleSideDrawerHandler: () => void;
+  toggleSideDrawerHandler: () => void;
 }
 
-const mapStateToProps = (state: State): AppBarProps => {
-  return ({
-    open: state.applicationState.sideDrawerIsOpen,
-  } as unknown) as AppBarProps;
+const mapStateToProps = (): AppBarProps => {
+  return ({} as unknown) as AppBarProps;
 };
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: any): AppBarProps =>

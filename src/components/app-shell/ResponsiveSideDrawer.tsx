@@ -11,6 +11,8 @@ import NestedList from '../../NestedList';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import { DRAWER_SIZE } from '../../configs/constants/drawer-size';
+import { toggleSideDrawer } from '../../creators/application/side-drawer';
+import { State } from '../../configs/redux/store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const ResponsiveSideDrawer = (
   props: ResponsiveSideDrawerProps
 ): JSX.Element => {
-  const { window, handleDrawerToggle, open } = props;
+  const { window, open } = props;
   const classes = useStyles();
   const theme = useTheme();
 
@@ -44,7 +46,7 @@ const ResponsiveSideDrawer = (
           variant={'temporary'}
           anchor={theme.direction === 'rtl' ? 'right' : 'left'}
           open={open}
-          onClose={handleDrawerToggle}
+          onClose={props.toggleSideDrawerHandler}
           classes={{
             paper: classes.drawerPaper,
           }}
@@ -73,19 +75,22 @@ const ResponsiveSideDrawer = (
 
 export interface ResponsiveSideDrawerProps {
   window?: () => Window;
-  handleDrawerToggle: () => void;
+  toggleSideDrawerHandler: () => void;
   open: boolean;
 }
 
-const mapStateToProps = (
-  state: any,
-  ownProps: any
-): ResponsiveSideDrawerProps => {
-  return ({} as unknown) as ResponsiveSideDrawerProps;
+const mapStateToProps = (state: State): ResponsiveSideDrawerProps => {
+  return ({
+    open: state.applicationState.sideDrawerIsOpen,
+  } as unknown) as ResponsiveSideDrawerProps;
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): ResponsiveSideDrawerProps =>
-  (({} as unknown) as ResponsiveSideDrawerProps);
+  (({
+    toggleSideDrawerHandler: (): void => {
+      dispatch(toggleSideDrawer());
+    },
+  } as unknown) as ResponsiveSideDrawerProps);
 
 export default connect(
   mapStateToProps,
