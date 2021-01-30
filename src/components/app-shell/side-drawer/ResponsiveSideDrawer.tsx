@@ -7,12 +7,12 @@ import {
   createStyles,
 } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import NestedList from '../../NestedList';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
-import { DRAWER_SIZE } from '../../configs/constants/drawer-size';
-import { toggleSideDrawer } from '../../creators/application/side-drawer';
-import { State } from '../../configs/redux/store';
+import { State } from '../../../configs/redux/store';
+import Navigation from './../side-drawer/Navigation';
+import { DRAWER_SIZE } from '../../../configs/constants/drawer-size';
+import { toggleSideDrawer } from '../../../creators/application/side-drawer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,7 +54,7 @@ const ResponsiveSideDrawer = (
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          {<NestedList />}
+          {<Navigation />}
         </Drawer>
       </Hidden>
 
@@ -66,7 +66,7 @@ const ResponsiveSideDrawer = (
           variant={'permanent'}
           open
         >
-          {<NestedList />}
+          {<Navigation />}
         </Drawer>
       </Hidden>
     </nav>

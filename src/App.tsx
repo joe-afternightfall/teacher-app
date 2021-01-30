@@ -12,7 +12,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import AppDialog from './components/app-shell/AppDialog';
 import { getLightTheme } from './configs/theme/light-theme';
 import AppSnackbar from './components/app-shell/AppSnackbar';
-import ResponsiveSideDrawer from './components/app-shell/ResponsiveSideDrawer';
+import ResponsiveSideDrawer from './components/app-shell/side-drawer/ResponsiveSideDrawer';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
   root: {

@@ -11,8 +11,8 @@ import {
   Typography,
 } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { toggleSideDrawer } from '../../creators/application/side-drawer';
-import { DRAWER_SIZE } from '../../configs/constants/drawer-size';
+import { toggleSideDrawer } from '../../../creators/application/side-drawer';
+import { DRAWER_SIZE } from '../../../configs/constants/drawer-size';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
