@@ -8,6 +8,6 @@ describe('App Bar Test', () => {
     const appBar = renderWithRedux(<AppBar />, getStore({}, null));
 
     expect(appBar.getByTestId('app-bar-title')).toBeInTheDocument();
-    expect(appBar.getByText("NEW Responsive drawer")).toBeInTheDocument();
+    expect(appBar.getByText('NEW Responsive drawer')).toBeInTheDocument();
   });
 });
