@@ -76,6 +76,8 @@ const NewBookmarkDialog = (props: NewBookmarkDialogProps): JSX.Element => {
     }, 4000);
   };
 
+  // todo:  rip dialog out to use application dialog
+
   return (
     <Dialog
       maxWidth={'sm'}
