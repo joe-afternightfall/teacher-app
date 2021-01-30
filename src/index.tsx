@@ -12,6 +12,7 @@ import * as serviceWorker from './configs/service-worker';
 import { loadBookmarksList } from './creators/bookmarks/load-bookmarks';
 import { loadSubjectList } from './creators/subject-list/load-subjects';
 import { loadTemplate } from './creators/template-builder/load-templates';
+import BookmarksScreen from './components/top-level-components/BookmarksScreen';
 import DashboardScreen from './components/top-level-components/dashboard/DashboardScreen';
 import TemplateBuilderScreen from './components/top-level-components/template-builder/TemplateBuilderScreen';
 import LessonPlannerScreen from './components/top-level-components/lesson-planner/LessonPlannerScreenConnector';
@@ -166,6 +167,7 @@ ReactDOM.render(
               exact
               path={routes.TEMPLATE_BUILDER}
             />
+            <Route component={BookmarksScreen} exact path={routes.BOOKMARKS} />
           </div>
         </App>
       </ConnectedRouter>
