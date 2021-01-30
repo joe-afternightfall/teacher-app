@@ -72,7 +72,7 @@ export interface AppBarProps {
 
 const mapStateToProps = (state: State): AppBarProps => {
   return ({
-    open: state.applicationState.openSideDrawer,
+    open: state.applicationState.sideDrawerIsOpen,
   } as unknown) as AppBarProps;
 };
 

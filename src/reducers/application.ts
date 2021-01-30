@@ -12,7 +12,7 @@ export default {
 
     switch (action.type) {
       case actions.TOGGLE_SIDE_DRAWER:
-        newState.openSideDrawer = !newState.openSideDrawer;
+        newState.sideDrawerIsOpen = !newState.sideDrawerIsOpen;
         break;
       case actions.DISPLAY_APP_SNACKBAR:
         newState.displayAppSnackbar = true;
@@ -50,7 +50,7 @@ export default {
 };
 
 export interface ApplicationState {
-  openSideDrawer: boolean;
+  sideDrawerIsOpen: boolean;
   dialogTitleColor: string;
   displayAppDialog: boolean;
   dialogContent: JSX.Element;

@@ -100,7 +100,7 @@ export interface SideDrawerProps {
 
 const mapStateToProps = (state: any): SideDrawerProps => {
   return ({
-    open: state.applicationState.openSideDrawer,
+    open: state.applicationState.sideDrawerIsOpen,
   } as unknown) as SideDrawerProps;
 };
 

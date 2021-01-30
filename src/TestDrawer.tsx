@@ -30,15 +30,15 @@ export default function ResponsiveDrawer() {
     <div className={classes.root}>
       <CssBaseline />
 
-      <AppBar tempToggleSideDrawerHandler={handleDrawerToggle} />
-
       <ResponsiveSideDrawer
         open={open}
         handleDrawerToggle={handleDrawerToggle}
       />
 
       <main className={classes.content}>
-        <div className={classes.toolbar} />
+        <AppBar tempToggleSideDrawerHandler={handleDrawerToggle} />
+
+        {/*<div className={classes.toolbar} />*/}
       </main>
     </div>
   );
