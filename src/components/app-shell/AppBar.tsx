@@ -17,6 +17,11 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appBar: {
       color: '#fff',
+      background: theme.palette.primary.main,
+      [theme.breakpoints.up('md')]: {
+        width: `calc(100% - ${DRAWER_SIZE})`,
+        marginLeft: DRAWER_SIZE,
+      },
       zIndex: theme.zIndex.drawer + 1,
       // color: theme.palette.text.primary,
       transition: theme.transitions.create(['width', 'margin'], {
@@ -24,19 +29,15 @@ const useStyles = makeStyles((theme: Theme) =>
         duration: theme.transitions.duration.leavingScreen,
       }),
     },
-    appBarShift: {
-      marginLeft: DRAWER_SIZE,
-      width: `calc(100% - ${DRAWER_SIZE})`,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
+    menuButton: {
+      marginRight: theme.spacing(2),
+      [theme.breakpoints.up('md')]: {
+        display: 'none',
+      },
     },
-    hide: {
-      display: 'none',
-    },
-    logoWrapper: {
-      flexGrow: 1,
+    toolbar: {
+      // color: theme.palette.primary.contrastText,
+      background: theme.palette.primary.main,
     },
   })
 );
@@ -44,39 +45,29 @@ const useStyles = makeStyles((theme: Theme) =>
 function TopAppBar(props: AppBarProps): JSX.Element {
   const classes = useStyles();
 
-  const open = props.open;
-
   return (
-    <AppBar
-      position={'fixed'}
-      className={clsx(classes.appBar, {
-        [classes.appBarShift]: open,
-      })}
-    >
-      <Toolbar>
+    <AppBar position={'fixed'} className={classes.appBar}>
+      <Toolbar className={classes.toolbar}>
         <IconButton
-          edge={'start'}
+          // edge={'start'}
           color={'inherit'}
-          onClick={props.toggleSideDrawerHandler}
+          className={classes.menuButton}
           data-testid={'toggle-app-drawer-button'}
-          aria-label={'open drawer'}
-          className={clsx({
-            [classes.hide]: open,
-          })}
+          onClick={props.tempToggleSideDrawerHandler}
         >
           <MenuIcon />
         </IconButton>
-        {/*<div className={classes.logoWrapper}>*/}
-        {/*  */}
-        {/*</div>*/}
+        <Typography variant="h6" noWrap>
+          {'NEW Responsive drawer'}
+        </Typography>
       </Toolbar>
     </AppBar>
   );
 }
 
 export interface AppBarProps {
-  open: boolean;
-  toggleSideDrawerHandler: () => void;
+  // tempOpen: boolean;
+  tempToggleSideDrawerHandler: () => void;
 }
 
 const mapStateToProps = (state: State): AppBarProps => {
@@ -85,7 +76,7 @@ const mapStateToProps = (state: State): AppBarProps => {
   } as unknown) as AppBarProps;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): AppBarProps =>
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: any): AppBarProps =>
   (({
     toggleSideDrawerHandler: (): void => {
       dispatch(toggleSideDrawer());
