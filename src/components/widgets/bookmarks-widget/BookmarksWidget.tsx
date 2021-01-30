@@ -8,32 +8,26 @@ import { Grid, Typography } from '@material-ui/core';
 import { State } from '../../../configs/redux/store';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import { Subject } from '../../../configs/types/Subject';
-import { Bookmark } from '../../../configs/types/Bookmark';
 import NewBookmarkDialog from './components/NewBookmarkDialog';
 import { openNewBookmarkDialog } from '../../../creators/bookmarks/bookmarks-dialog';
-import {
-  updateBookmark,
-  UpdateBookmarkProps,
-} from '../../../services/bookmarks/update-bookmark';
+import { updateBookmark } from '../../../services/bookmarks/update-bookmark';
 import { deleteBookmark } from '../../../services/bookmarks/delete-bookmark';
+import { Bookmark } from '../../../configs/models/Bookmark';
 
 const getLink = (rowData: any) => (
-  <AppLink title={rowData.bookmarkUrl} url={rowData.bookmarkUrl} />
+  <AppLink
+    title={rowData.bookmark.bookmarkUrl}
+    url={rowData.bookmark.bookmarkUrl}
+  />
 );
 
 const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
-  // todo: rip out to util
   const data = props.bookmarks.map((bookmark: Bookmark, index: number) => {
     index += 1;
 
     return {
       number: index,
-      firebaseId: bookmark.firebaseId,
-      id: bookmark.id,
-      bookmarkUrl: bookmark.bookmarkUrl,
-      bookmarkTitle: bookmark.bookmarkTitle,
-      subjectId: bookmark.subjectId,
-      plannerItemIds: bookmark.plannerItemIds,
+      bookmark: bookmark,
     };
   });
 
@@ -69,19 +63,14 @@ const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
         editable={{
           onRowUpdate: (newData, oldData): Promise<void> =>
             new Promise((resolve, reject) => {
-              props.updateClickHandler({
-                firebaseId: newData.firebaseId,
-                bookmarkUrl: newData.bookmarkUrl,
-                bookmarkTitle: newData.bookmarkTitle,
-                subjectId: newData.subjectId,
-              });
+              props.updateClickHandler(newData.bookmark);
               setTimeout(() => {
                 resolve();
               }, 1000);
             }),
           onRowDelete: (newData): Promise<void> =>
             new Promise((resolve, reject) => {
-              props.deleteClickHandler(newData.firebaseId);
+              props.deleteClickHandler(newData.bookmark.firebaseId);
               setTimeout(() => {
                 resolve();
               }, 1500);
@@ -98,17 +87,22 @@ const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
           },
           {
             title: 'Title',
-            field: 'bookmarkTitle',
+            field: 'bookmark.bookmarkTitle',
+            cellStyle: {
+              width: '20%',
+            },
           },
           {
             title: 'URL',
-            field: 'bookmarkUrl',
             render: getLink,
           },
           {
             title: 'Subject',
-            field: 'subjectId',
+            field: 'bookmark.subjectId',
             lookup: subjects,
+            cellStyle: {
+              width: '20%',
+            },
           },
         ]}
         actions={[
@@ -129,7 +123,7 @@ interface BookmarksWidgetProps {
   subjectList: Subject[];
   addNewClickHandler: () => void;
   deleteClickHandler: (id: string) => void;
-  updateClickHandler: (bookmark: UpdateBookmarkProps) => void;
+  updateClickHandler: (bookmark: Bookmark) => void;
 }
 
 const mapStateToProps = (state: State): BookmarksWidgetProps => {
@@ -151,7 +145,7 @@ const mapDispatchToProps = (dispatch: Dispatch): BookmarksWidgetProps =>
     deleteClickHandler: (id: string) => {
       (dispatch as ThunkDispatch<State, void, AnyAction>)(deleteBookmark(id));
     },
-    updateClickHandler: (bookmark: UpdateBookmarkProps) => {
+    updateClickHandler: (bookmark: Bookmark) => {
       (dispatch as ThunkDispatch<State, void, AnyAction>)(
         updateBookmark(bookmark)
       );
