@@ -1,28 +1,27 @@
 import React from 'react';
 import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
 import {
-  createStyles,
-  makeStyles,
   Theme,
   useTheme,
+  makeStyles,
+  createStyles,
 } from '@material-ui/core/styles';
-import Hidden from '@material-ui/core/Hidden';
-import Drawer from '@material-ui/core/Drawer';
+import { connect } from 'react-redux';
 import NestedList from '../../NestedList';
-
-const drawerWidth = 240;
+import Drawer from '@material-ui/core/Drawer';
+import Hidden from '@material-ui/core/Hidden';
+import { DRAWER_SIZE } from '../../configs/constants/drawer-size';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     drawer: {
       [theme.breakpoints.up('md')]: {
-        width: drawerWidth,
+        width: DRAWER_SIZE,
         flexShrink: 0,
       },
     },
     drawerPaper: {
-      width: drawerWidth,
+      width: DRAWER_SIZE,
     },
   })
 );
@@ -42,7 +41,7 @@ const ResponsiveSideDrawer = (
       <Hidden mdUp>
         <Drawer
           container={container}
-          variant="temporary"
+          variant={'temporary'}
           anchor={theme.direction === 'rtl' ? 'right' : 'left'}
           open={mobileOpen}
           onClose={handleDrawerToggle}
@@ -62,7 +61,7 @@ const ResponsiveSideDrawer = (
           classes={{
             paper: classes.drawerPaper,
           }}
-          variant="permanent"
+          variant={'permanent'}
           open
         >
           {<NestedList />}
@@ -73,10 +72,6 @@ const ResponsiveSideDrawer = (
 };
 
 export interface ResponsiveSideDrawerProps {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window?: () => Window;
   handleDrawerToggle: () => void;
   mobileOpen: boolean;

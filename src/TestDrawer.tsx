@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  Theme,
-  makeStyles,
-  createStyles,
-} from '@material-ui/core/styles';
+import { Theme, makeStyles, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,8 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ResponsiveSideDrawer from './components/app-shell/ResponsiveSideDrawer';
-
-const drawerWidth = 240;
+import { DRAWER_SIZE } from './configs/constants/drawer-size';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,8 +16,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     appBar: {
       [theme.breakpoints.up('md')]: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
+        width: `calc(100% - ${DRAWER_SIZE})`,
+        marginLeft: DRAWER_SIZE,
       },
     },
     menuButton: {
