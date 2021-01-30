@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const ResponsiveSideDrawer = (
   props: ResponsiveSideDrawerProps
 ): JSX.Element => {
-  const { window, handleDrawerToggle, mobileOpen } = props;
+  const { window, handleDrawerToggle, open } = props;
   const classes = useStyles();
   const theme = useTheme();
 
@@ -43,7 +43,7 @@ const ResponsiveSideDrawer = (
           container={container}
           variant={'temporary'}
           anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-          open={mobileOpen}
+          open={open}
           onClose={handleDrawerToggle}
           classes={{
             paper: classes.drawerPaper,
@@ -74,7 +74,7 @@ const ResponsiveSideDrawer = (
 export interface ResponsiveSideDrawerProps {
   window?: () => Window;
   handleDrawerToggle: () => void;
-  mobileOpen: boolean;
+  open: boolean;
 }
 
 const mapStateToProps = (
