@@ -4,6 +4,19 @@ import application from './application';
 import actions from '../creators/actions';
 
 describe('Application Reducer', () => {
+  it('should update current location', () => {
+    const state = application.reducer(undefined, {
+      type: '@@router/LOCATION_CHANGE',
+      payload: {
+        location: {
+          pathname: '/testing-pathname',
+        },
+      },
+    });
+
+    expect(state.currentLocation).toBe('/testing-pathname');
+  });
+
   it('should return DISPLAY_APP_SNACKBAR action', () => {
     const snackbarProps = {
       text: uuidv4(),

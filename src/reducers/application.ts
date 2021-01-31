@@ -2,6 +2,7 @@ import { AnyAction } from 'redux';
 import actions from '../creators/actions';
 import { SnackbarCreatorProps } from '../creators/application/app-snackbar';
 import React from 'react';
+import { LOCATION_CHANGE } from 'connected-react-router';
 
 export default {
   reducer(
@@ -11,6 +12,9 @@ export default {
     let newState = Object.assign({}, state);
 
     switch (action.type) {
+      case LOCATION_CHANGE:
+        newState.currentLocation = action.payload.location.pathname;
+        break;
       case actions.TOGGLE_SIDE_DRAWER:
         newState.sideDrawerIsOpen = !newState.sideDrawerIsOpen;
         break;
@@ -50,6 +54,7 @@ export default {
 };
 
 export interface ApplicationState {
+  currentLocation: string;
   sideDrawerIsOpen: boolean;
   dialogTitleColor: string;
   displayAppDialog: boolean;
