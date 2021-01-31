@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Route } from 'react-router';
 import { Provider } from 'react-redux';
 import { createHashHistory } from 'history';
-import routes from './configs/constants/routes';
+import { routes } from './configs/constants/routes';
 import { createStore } from './configs/redux/store';
 import { Initializer } from './firebase/Initializer';
 import { ConnectedRouter } from 'connected-react-router';
@@ -40,18 +40,26 @@ ReactDOM.render(
       <ConnectedRouter history={history}>
         <App>
           <div className={'route'}>
-            <Route component={DashboardScreen} exact path={routes.DASHBOARD} />
+            <Route
+              component={DashboardScreen}
+              exact
+              path={routes.DASHBOARD.path}
+            />
             <Route
               component={LessonPlannerScreen}
               exact
-              path={routes.LESSON_PLANNER}
+              path={routes.LESSON_PLANNER.path}
             />
             <Route
               component={TemplateBuilderScreen}
               exact
-              path={routes.TEMPLATE_BUILDER}
+              path={routes.TEMPLATE_BUILDER.path}
             />
-            <Route component={BookmarksScreen} exact path={routes.BOOKMARKS} />
+            <Route
+              component={BookmarksScreen}
+              exact
+              path={routes.BOOKMARKS.path}
+            />
           </div>
         </App>
       </ConnectedRouter>

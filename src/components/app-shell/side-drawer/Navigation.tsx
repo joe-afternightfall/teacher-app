@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { createElement } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import routes from '../../../configs/constants/routes';
+import { routes } from '../../../configs/constants/routes';
 import { routerActions } from 'connected-react-router';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { ExpandLess, ExpandMore, StarBorder } from '@material-ui/icons';
@@ -95,18 +95,18 @@ const Navigation = (props: NavigationProps): JSX.Element => {
         }
       >
         <NavListItem
-          title={'Dashboard'}
-          icon={<DashboardIcon />}
+          title={routes.DASHBOARD.drawerTitle}
+          icon={React.createElement(routes.DASHBOARD.icon)}
           clickHandler={() => {
-            closeAndRoute(routes.DASHBOARD);
+            closeAndRoute(routes.DASHBOARD.path);
           }}
         />
 
         <NavListItem
-          title={'Bookmarks List'}
-          icon={<BookmarkIcon />}
+          title={routes.BOOKMARKS.drawerTitle}
+          icon={React.createElement(routes.BOOKMARKS.icon)}
           clickHandler={() => {
-            closeAndRoute(routes.BOOKMARKS);
+            closeAndRoute(routes.BOOKMARKS.path);
           }}
         />
 
@@ -123,7 +123,7 @@ const Navigation = (props: NavigationProps): JSX.Element => {
               title={'Lesson Planner'}
               icon={<StarBorder />}
               clickHandler={() => {
-                closeAndRoute(routes.LESSON_PLANNER);
+                closeAndRoute(routes.LESSON_PLANNER.path);
               }}
               nested={true}
             />
@@ -132,7 +132,7 @@ const Navigation = (props: NavigationProps): JSX.Element => {
               title={'Template Builder'}
               icon={<EditIcon />}
               clickHandler={() => {
-                closeAndRoute(routes.TEMPLATE_BUILDER);
+                closeAndRoute(routes.TEMPLATE_BUILDER.path);
               }}
               nested={true}
             />
