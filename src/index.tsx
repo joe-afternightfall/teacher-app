@@ -1,5 +1,5 @@
-import React from 'react';
 import App from './App';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route } from 'react-router';
 import { Provider } from 'react-redux';
@@ -13,6 +13,20 @@ import BookmarksScreen from './components/top-level-components/BookmarksScreen';
 import DashboardScreen from './components/top-level-components/dashboard/DashboardScreen';
 import TemplateBuilderScreen from './components/top-level-components/template-builder/TemplateBuilderScreen';
 import LessonPlannerScreen from './components/top-level-components/lesson-planner/LessonPlannerScreenConnector';
+import LogRocket from 'logrocket';
+import setupLogRocketReact from 'logrocket-react';
+
+LogRocket.init('be9sx9/teacher-app');
+setupLogRocketReact(LogRocket);
+
+// This is an example script - don't forget to change it!
+// LogRocket.identify('THE_USER_ID_IN_YOUR_APP', {
+//   name: 'James Morrison',
+//   email: 'jamesmorrison@example.com',
+
+// Add your own custom user variables here, ie:
+// subscriptionType: 'pro'
+// });
 
 const history = createHashHistory(),
   store = createStore(history);
