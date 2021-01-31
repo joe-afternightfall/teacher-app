@@ -13,32 +13,23 @@ import { DRAWER_SIZE } from '../../configs/constants/drawer-size';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appBar: {
-      color: '#fff',
-      background: theme.palette.primary.main,
+      background: '#fff',
       [theme.breakpoints.up('md')]: {
         width: `calc(100% - ${DRAWER_SIZE})`,
         marginLeft: DRAWER_SIZE,
       },
       zIndex: theme.zIndex.drawer + 1,
-      // color: theme.palette.text.primary,
       transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
     },
     menuButton: {
-      // color: '#708C9B',
-      // todo: extract text color out to theme
-      color: '#6b8e9b',
+      color: theme.palette.text.primary,
       marginRight: theme.spacing(2),
       [theme.breakpoints.up('md')]: {
         display: 'none',
       },
-    },
-    toolbar: {
-      // color: theme.palette.primary.contrastText,
-      // background: theme.palette.primary.main,
-      background: '#fff',
     },
   })
 );
@@ -48,9 +39,9 @@ function TopAppBar(props: AppBarProps): JSX.Element {
 
   return (
     <AppBar position={'fixed'} className={classes.appBar}>
-      <Toolbar className={classes.toolbar}>
+      <Toolbar>
         <IconButton
-          // edge={'start'}
+          edge={'start'}
           color={'inherit'}
           className={classes.menuButton}
           data-testid={'toggle-app-drawer-button'}
@@ -61,12 +52,12 @@ function TopAppBar(props: AppBarProps): JSX.Element {
         <Typography
           // todo:  extract out purple colors to theme
           style={{
-            color: '#6F55F2',
+            // color: '#6F55F2',
             // color: '#887af5',
-            // color: '#674bf2',
+            color: '#674bf2',
             // color: '#8b78f5',
           }}
-          variant="h6"
+          variant={'h6'}
           noWrap
           data-testid={'app-bar-title'}
         >
