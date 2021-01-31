@@ -3,16 +3,10 @@ import { State } from '../../configs/redux/store';
 import { AnyAction, Dispatch } from 'redux';
 import firebase from 'firebase';
 import { displayAppSnackbar } from '../../creators/application/app-snackbar';
-
-export interface UpdateBookmarkProps {
-  firebaseId: string;
-  bookmarkUrl: string;
-  bookmarkTitle: string;
-  subjectId: string;
-}
+import { Bookmark } from '../../configs/models/Bookmark';
 
 export const updateBookmark = (
-  bookmark: UpdateBookmarkProps
+  bookmark: Bookmark
 ): ThunkAction<void, State, void, AnyAction> => async (
   dispatch: Dispatch,
   getState: () => State

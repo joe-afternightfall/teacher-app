@@ -70,7 +70,12 @@ const Navigation = (props: NavigationProps): JSX.Element => {
           </ListItemIcon>
           <ListItemText primary={'Dashboard'} />
         </ListItem>
-        <ListItem button>
+        <ListItem
+          button
+          onClick={() => {
+            props.clickHandler(routes.BOOKMARKS);
+          }}
+        >
           <ListItemIcon>
             <BookmarkIcon />
           </ListItemIcon>

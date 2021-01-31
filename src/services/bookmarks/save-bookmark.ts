@@ -27,7 +27,16 @@ export const saveBookmarkInfo = (
 
   return await newBookmarkRef.set(bookmarkDAO, (error) => {
     if (error) {
-      // todo: dispatch error snackbar
+      dispatch(
+        displayAppSnackbar({
+          text: 'Error saving Bookmark',
+          severity: 'error',
+          position: {
+            vertical: 'bottom',
+            horizontal: 'right',
+          },
+        })
+      );
     } else {
       dispatch(
         displayAppSnackbar({
@@ -35,7 +44,7 @@ export const saveBookmarkInfo = (
           severity: 'success',
           position: {
             vertical: 'bottom',
-            horizontal: 'left',
+            horizontal: 'right',
           },
         })
       );
