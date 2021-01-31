@@ -1,8 +1,10 @@
+import React from 'react';
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
-import { SnackbarCreatorProps } from '../creators/application/app-snackbar';
-import React from 'react';
+import { RouteProp } from '../configs/constants/routes';
 import { LOCATION_CHANGE } from 'connected-react-router';
+import { getPageInfo } from '../utils/get-current-page-info';
+import { SnackbarCreatorProps } from '../creators/application/app-snackbar';
 
 export default {
   reducer(
@@ -14,6 +16,7 @@ export default {
     switch (action.type) {
       case LOCATION_CHANGE:
         newState.currentLocation = action.payload.location.pathname;
+        newState.pageInfo = getPageInfo(newState.currentLocation);
         break;
       case actions.TOGGLE_SIDE_DRAWER:
         newState.sideDrawerIsOpen = !newState.sideDrawerIsOpen;
@@ -55,14 +58,15 @@ export default {
 
 export interface ApplicationState {
   currentLocation: string;
-  sideDrawerIsOpen: boolean;
   dialogTitleColor: string;
+  confirmClickHandler: any;
+  sideDrawerIsOpen: boolean;
   displayAppDialog: boolean;
   dialogContent: JSX.Element;
+  confirmButtonTitle: string;
   displayAppSnackbar: boolean;
+  pageInfo: RouteProp | undefined;
   dialogTitle: string | JSX.Element;
   snackbarProps: SnackbarCreatorProps;
   dialogWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
-  confirmClickHandler: any;
-  confirmButtonTitle: string;
 }

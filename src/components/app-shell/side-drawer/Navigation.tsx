@@ -1,30 +1,26 @@
-import React, { createElement } from 'react';
+import React from 'react';
+import {
+  List,
+  AppBar,
+  Toolbar,
+  Divider,
+  ListItem,
+  Collapse,
+  Typography,
+  ListItemText,
+  ListItemIcon,
+  ListSubheader,
+} from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { routes } from '../../../configs/constants/routes';
 import { routerActions } from 'connected-react-router';
+import { ExpandLess, ExpandMore } from '@material-ui/icons';
+import { RouteProp, routes } from '../../../configs/constants/routes';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { ExpandLess, ExpandMore, StarBorder } from '@material-ui/icons';
-import {
-  Divider,
-  Collapse,
-  ListItemIcon,
-  ListItemText,
-  ListItem,
-  List,
-  ListSubheader,
-  Toolbar,
-  Typography,
-  AppBar,
-} from '@material-ui/core';
-import {
-  Bookmark as BookmarkIcon,
-  DashboardRounded as DashboardIcon,
-  AssignmentRounded as AssignmentIcon,
-  Edit as EditIcon,
-} from '@material-ui/icons';
-import { toggleSideDrawer } from '../../../creators/application/side-drawer';
+import { State } from '../../../configs/redux/store';
 import { NavListItem } from './navigation/NavListItem';
+import { AssignmentRounded as AssignmentIcon } from '@material-ui/icons';
+import { toggleSideDrawer } from '../../../creators/application/side-drawer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -120,8 +116,8 @@ const Navigation = (props: NavigationProps): JSX.Element => {
         <Collapse in={open} timeout={'auto'} unmountOnExit>
           <List component={'div'} disablePadding>
             <NavListItem
-              title={'Lesson Planner'}
-              icon={<StarBorder />}
+              title={routes.LESSON_PLANNER.drawerTitle}
+              icon={React.createElement(routes.LESSON_PLANNER.icon)}
               clickHandler={() => {
                 closeAndRoute(routes.LESSON_PLANNER.path);
               }}
@@ -129,8 +125,8 @@ const Navigation = (props: NavigationProps): JSX.Element => {
             />
 
             <NavListItem
-              title={'Template Builder'}
-              icon={<EditIcon />}
+              title={routes.TEMPLATE_BUILDER.drawerTitle}
+              icon={React.createElement(routes.TEMPLATE_BUILDER.icon)}
               clickHandler={() => {
                 closeAndRoute(routes.TEMPLATE_BUILDER.path);
               }}
@@ -146,10 +142,13 @@ const Navigation = (props: NavigationProps): JSX.Element => {
 export interface NavigationProps {
   clickHandler: (route: string) => void;
   toggleSideDrawerHandler: () => void;
+  pageInfo: RouteProp;
 }
 
-const mapStateToProps = (state: any): NavigationProps => {
-  return ({} as unknown) as NavigationProps;
+const mapStateToProps = (state: State): NavigationProps => {
+  return ({
+    pageInfo: state.applicationState.pageInfo,
+  } as unknown) as NavigationProps;
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): NavigationProps =>

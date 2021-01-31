@@ -8,15 +8,18 @@ import {
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { SvgIconTypeMap } from '@material-ui/core';
 
-export interface RouteProps {
-  [key: string]: {
-    path: string;
-    drawerTitle: string;
-    headerTitle: string;
-    icon: OverridableComponent<SvgIconTypeMap>;
-  };
+export interface RouteProp {
+  path: string;
+  drawerTitle: string;
+  headerTitle: string;
+  icon: OverridableComponent<SvgIconTypeMap>;
 }
-export const routes: RouteProps = {
+
+// export type Route = 'DASHBOARD' | 'LESSON_PLANNER' | 'TEMPLATE_BUILDER' | 'BOOKMARKS';
+
+export type RoutesMap = { [key: string]: RouteProp };
+
+export const routes: RoutesMap = {
   DASHBOARD: {
     path: '/',
     drawerTitle: 'Dashboard',

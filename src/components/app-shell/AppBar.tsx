@@ -1,14 +1,16 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { toggleSideDrawer } from '../../creators/application/side-drawer';
+import AppBar from '@material-ui/core/AppBar';
+import MenuIcon from '@material-ui/icons/Menu';
+import Toolbar from '@material-ui/core/Toolbar';
+import { State } from '../../configs/redux/store';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import { RouteProp } from '../../configs/constants/routes';
 import { DRAWER_SIZE } from '../../configs/constants/drawer-size';
+import { toggleSideDrawer } from '../../creators/application/side-drawer';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,11 +59,11 @@ function TopAppBar(props: AppBarProps): JSX.Element {
             color: '#674bf2',
             // color: '#8b78f5',
           }}
-          variant={'h6'}
           noWrap
+          variant={'h6'}
           data-testid={'app-bar-title'}
         >
-          {'NEW Responsive drawer'}
+          {props.pageInfo.headerTitle}
         </Typography>
       </Toolbar>
     </AppBar>
@@ -70,10 +72,13 @@ function TopAppBar(props: AppBarProps): JSX.Element {
 
 export interface AppBarProps {
   toggleSideDrawerHandler: () => void;
+  pageInfo: RouteProp;
 }
 
-const mapStateToProps = (): AppBarProps => {
-  return ({} as unknown) as AppBarProps;
+const mapStateToProps = (state: State): AppBarProps => {
+  return ({
+    pageInfo: state.applicationState.pageInfo,
+  } as unknown) as AppBarProps;
 };
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: any): AppBarProps =>
