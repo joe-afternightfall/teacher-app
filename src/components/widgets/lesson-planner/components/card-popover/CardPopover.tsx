@@ -6,6 +6,8 @@ import { Card, CardContent, IconButton } from '@material-ui/core';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 
 export default function CardPopover(props: CardPopoverProps): JSX.Element {
+  // todo:  rip out to app-shell
+  // todo:  take in icon as prop
   return (
     <PopupState variant={'popover'} popupId={'lesson-popover'}>
       {(popupState) => (

@@ -26,7 +26,18 @@ export default function TemplateBuilderControls(): JSX.Element {
 
       <Grid item xs={6} container justify={'center'}>
         <Grid item>
-          <Typography variant={'h3'}>{'Template Builder'}</Typography>
+          {/*todo:  extract out purple colors to theme*/}
+          <Typography
+            style={{
+              color: '#6F55F2',
+              // color: '#887af5',
+              // color: '#674bf2',
+              // color: '#8b78f5',
+            }}
+            variant={'h6'}
+          >
+            {'Template Builder'}
+          </Typography>
         </Grid>
 
         <Grid item>

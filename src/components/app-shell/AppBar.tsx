@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
       }),
     },
     menuButton: {
+      // color: '#708C9B',
+      // todo: extract text color out to theme
+      color: '#6b8e9b',
       marginRight: theme.spacing(2),
       [theme.breakpoints.up('md')]: {
         display: 'none',
@@ -34,7 +37,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     toolbar: {
       // color: theme.palette.primary.contrastText,
-      background: theme.palette.primary.main,
+      // background: theme.palette.primary.main,
+      background: '#fff',
     },
   })
 );
@@ -54,7 +58,18 @@ function TopAppBar(props: AppBarProps): JSX.Element {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap data-testid={'app-bar-title'}>
+        <Typography
+          // todo:  extract out purple colors to theme
+          style={{
+            color: '#6F55F2',
+            // color: '#887af5',
+            // color: '#674bf2',
+            // color: '#8b78f5',
+          }}
+          variant="h6"
+          noWrap
+          data-testid={'app-bar-title'}
+        >
           {'NEW Responsive drawer'}
         </Typography>
       </Toolbar>
