@@ -23,6 +23,8 @@ import {
   AssignmentRounded as AssignmentIcon,
   Edit as EditIcon,
 } from '@material-ui/icons';
+import { toggleSideDrawer } from '../../../creators/application/side-drawer';
+import { NavListItem } from './navigation/NavListItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,20 +36,12 @@ const useStyles = makeStyles((theme: Theme) =>
     nested: {
       paddingLeft: theme.spacing(4),
     },
-    // necessary for content to be below app bar
-    // toolbar: theme.mixins.toolbar,
     title: {
       flex: 1,
     },
     toolbar: {
-      // width: DRAWER_SIZE,
       // color: theme.palette.primary.contrastText,
-      // background: theme.palette.primary.main,
-      // background: '#7450f5',
-      // todo:  extract out blue color to theme
-      background: '#0aa3f5',
-      // color: '#6b8e9b', // text and icon colors
-      // color: '#708c9b', // text and icon colors
+      background: theme.palette.primary.main,
     },
     iconButton: {
       color: theme.palette.primary.contrastText,
@@ -61,6 +55,13 @@ const Navigation = (props: NavigationProps): JSX.Element => {
 
   const handleClick = () => {
     setOpen(!open);
+  };
+
+  const closeAndRoute = (route: string) => {
+    props.clickHandler(route);
+    setTimeout(() => {
+      props.toggleSideDrawerHandler();
+    }, 300);
   };
 
   return (
@@ -85,36 +86,30 @@ const Navigation = (props: NavigationProps): JSX.Element => {
 
       <List
         component={'nav'}
+        className={classes.root}
         aria-labelledby={'nested-list-subheader'}
         subheader={
           <ListSubheader component={'div'} id={'nested-list-subheader'}>
             {'Nested List Items'}
           </ListSubheader>
         }
-        className={classes.root}
       >
-        <ListItem
-          button
-          onClick={() => {
-            props.clickHandler(routes.DASHBOARD);
+        <NavListItem
+          title={'Dashboard'}
+          icon={<DashboardIcon />}
+          clickHandler={() => {
+            closeAndRoute(routes.DASHBOARD);
           }}
-        >
-          <ListItemIcon>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary={'Dashboard'} />
-        </ListItem>
-        <ListItem
-          button
-          onClick={() => {
-            props.clickHandler(routes.BOOKMARKS);
+        />
+
+        <NavListItem
+          title={'Bookmarks List'}
+          icon={<BookmarkIcon />}
+          clickHandler={() => {
+            closeAndRoute(routes.BOOKMARKS);
           }}
-        >
-          <ListItemIcon>
-            <BookmarkIcon />
-          </ListItemIcon>
-          <ListItemText primary={'Bookmarks List'} />
-        </ListItem>
+        />
+
         <ListItem button onClick={handleClick}>
           <ListItemIcon>
             <AssignmentIcon />
@@ -122,32 +117,25 @@ const Navigation = (props: NavigationProps): JSX.Element => {
           <ListItemText primary={'My Planner'} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem
-              button
-              className={classes.nested}
-              onClick={() => {
-                props.clickHandler(routes.LESSON_PLANNER);
+        <Collapse in={open} timeout={'auto'} unmountOnExit>
+          <List component={'div'} disablePadding>
+            <NavListItem
+              title={'Lesson Planner'}
+              icon={<StarBorder />}
+              clickHandler={() => {
+                closeAndRoute(routes.LESSON_PLANNER);
               }}
-            >
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary={'Lesson Planner'} />
-            </ListItem>
-            <ListItem
-              button
-              className={classes.nested}
-              onClick={() => {
-                props.clickHandler(routes.TEMPLATE_BUILDER);
+              nested={true}
+            />
+
+            <NavListItem
+              title={'Template Builder'}
+              icon={<EditIcon />}
+              clickHandler={() => {
+                closeAndRoute(routes.TEMPLATE_BUILDER);
               }}
-            >
-              <ListItemIcon>
-                <EditIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Template Builder'} />
-            </ListItem>
+              nested={true}
+            />
           </List>
         </Collapse>
       </List>
@@ -157,6 +145,7 @@ const Navigation = (props: NavigationProps): JSX.Element => {
 
 export interface NavigationProps {
   clickHandler: (route: string) => void;
+  toggleSideDrawerHandler: () => void;
 }
 
 const mapStateToProps = (state: any): NavigationProps => {
@@ -167,6 +156,9 @@ const mapDispatchToProps = (dispatch: Dispatch): NavigationProps =>
   (({
     clickHandler: (route: string) => {
       dispatch(routerActions.push(route));
+    },
+    toggleSideDrawerHandler: (): void => {
+      dispatch(toggleSideDrawer());
     },
   } as unknown) as NavigationProps);
 
