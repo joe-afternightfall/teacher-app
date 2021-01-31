@@ -16,7 +16,16 @@ export const deleteBookmark = (
     .child(id)
     .remove((error) => {
       if (error) {
-        // todo: dispatch error snackbar
+        dispatch(
+          displayAppSnackbar({
+            text: 'Error Deleting Bookmark',
+            severity: 'error',
+            position: {
+              vertical: 'bottom',
+              horizontal: 'right',
+            },
+          })
+        );
       } else {
         dispatch(
           displayAppSnackbar({
@@ -24,7 +33,7 @@ export const deleteBookmark = (
             severity: 'success',
             position: {
               vertical: 'bottom',
-              horizontal: 'left',
+              horizontal: 'right',
             },
           })
         );

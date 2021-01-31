@@ -23,7 +23,16 @@ export const updateBookmark = (
       },
       (error) => {
         if (error) {
-          // todo: dispatch error snackbar
+          dispatch(
+            displayAppSnackbar({
+              text: `Error Updating`,
+              severity: 'error',
+              position: {
+                vertical: 'bottom',
+                horizontal: 'right',
+              },
+            })
+          );
         } else {
           dispatch(
             displayAppSnackbar({
@@ -31,7 +40,7 @@ export const updateBookmark = (
               severity: 'success',
               position: {
                 vertical: 'bottom',
-                horizontal: 'left',
+                horizontal: 'right',
               },
             })
           );
