@@ -9,7 +9,9 @@ interface CustomPalette extends Palette {
     active: {
       highlight: string;
       hover: string;
+      contrastColor: string;
     };
+    offWhite: string;
   };
 }
 
@@ -25,19 +27,21 @@ export function getLightTheme(): Theme {
   return createMuiTheme(({
     palette: {
       colors: {
+        // background: '#f3f4f2',
+        offWhite: '#F5F5F5',
         // headerHighlight: '#502df1',
         active: {
           // highlight: '#5532f1',
           highlight: '#674bf2',
           hover: '#E8E5F4',
+          contrastColor: '#6B8E9B',
+          // contrastColor: '#708C9B', // text and icon colors
           // background: '#b5aaf5', // left border highlight
         },
       },
       text: {
         primary: '#686868',
         secondary: '#686868',
-        // color: '#6B8E9B', // text and icon colors
-        // color: '#708C9B', // text and icon colors
       },
       type: 'light',
       primary: {
