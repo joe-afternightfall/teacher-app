@@ -56,10 +56,6 @@ function TopAppBar(props: AppBarProps): JSX.Element {
           <MenuIcon />
         </IconButton>
         <Typography
-          // todo:  extract out purple colors to theme
-          style={{
-            color: '#674bf2',
-          }}
           noWrap
           variant={'h6'}
           data-testid={'app-bar-title'}
