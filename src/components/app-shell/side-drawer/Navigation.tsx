@@ -1,24 +1,26 @@
 import React from 'react';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import routes from '../../../configs/constants/routes';
-import { routerActions } from 'connected-react-router';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { ExpandLess, ExpandMore, StarBorder } from '@material-ui/icons';
 import {
-  Divider,
-  Collapse,
-  ListItemIcon,
-  ListItemText,
-  ListItem,
   List,
+  AppBar,
+  Toolbar,
+  Divider,
+  ListItem,
+  Collapse,
+  Typography,
+  ListItemText,
+  ListItemIcon,
   ListSubheader,
 } from '@material-ui/core';
-import {
-  Bookmark as BookmarkIcon,
-  DashboardRounded as DashboardIcon,
-  AssignmentRounded as AssignmentIcon,
-} from '@material-ui/icons';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { routerActions } from 'connected-react-router';
+import { ExpandLess, ExpandMore } from '@material-ui/icons';
+import { RouteProp, routes } from '../../../configs/constants/routes';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { State } from '../../../configs/redux/store';
+import { NavListItem } from './navigation/NavListItem';
+import { AssignmentRounded as AssignmentIcon } from '@material-ui/icons';
+import { closeSideDrawer } from '../../../creators/application/side-drawer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,8 +32,16 @@ const useStyles = makeStyles((theme: Theme) =>
     nested: {
       paddingLeft: theme.spacing(4),
     },
-    // necessary for content to be below app bar
-    toolbar: theme.mixins.toolbar,
+    title: {
+      flex: 1,
+    },
+    toolbar: {
+      // color: theme.palette.primary.contrastText,
+      background: theme.palette.primary.main,
+    },
+    iconButton: {
+      color: theme.palette.primary.contrastText,
+    },
   })
 );
 
@@ -43,59 +53,88 @@ const Navigation = (props: NavigationProps): JSX.Element => {
     setOpen(!open);
   };
 
+  const closeAndRoute = (route: string) => {
+    props.clickHandler(route);
+
+    if (props.isDrawerOpen) {
+      setTimeout(() => {
+        props.closeSideDrawerHandler();
+      }, 300);
+    }
+  };
+
   return (
     <div>
-      <div className={classes.toolbar} />
+      <AppBar position={'static'}>
+        <Toolbar className={classes.toolbar}>
+          <Typography variant={'h6'} className={classes.title}>
+            {'Drawer Title'}
+          </Typography>
+
+          {/*<IconButton*/}
+          {/*  className={classes.iconButton}*/}
+          {/*  onClick={props.toggleSideDrawerHandler}*/}
+          {/*  data-testid={'chevron-left-toggle-button'}*/}
+          {/*>*/}
+          {/*  <ChevronLeftIcon data-testid={'chevron-left'} />*/}
+          {/*</IconButton>*/}
+        </Toolbar>
+      </AppBar>
 
       <Divider />
 
       <List
         component={'nav'}
+        className={classes.root}
         aria-labelledby={'nested-list-subheader'}
         subheader={
           <ListSubheader component={'div'} id={'nested-list-subheader'}>
             {'Nested List Items'}
           </ListSubheader>
         }
-        className={classes.root}
       >
-        <ListItem
-          button
-          onClick={() => {
-            props.clickHandler(routes.DASHBOARD);
+        <NavListItem
+          pageInfo={routes.DASHBOARD}
+          activePath={props.activePage.path}
+          clickHandler={() => {
+            closeAndRoute(routes.DASHBOARD.path);
           }}
-        >
-          <ListItemIcon>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary={'Dashboard'} />
-        </ListItem>
-        <ListItem
-          button
-          onClick={() => {
-            props.clickHandler(routes.BOOKMARKS);
+        />
+
+        <NavListItem
+          pageInfo={routes.BOOKMARKS}
+          activePath={props.activePage.path}
+          clickHandler={() => {
+            closeAndRoute(routes.BOOKMARKS.path);
           }}
-        >
-          <ListItemIcon>
-            <BookmarkIcon />
-          </ListItemIcon>
-          <ListItemText primary={'Bookmarks List'} />
-        </ListItem>
+        />
+
         <ListItem button onClick={handleClick}>
           <ListItemIcon>
             <AssignmentIcon />
           </ListItemIcon>
-          <ListItemText primary={'Lesson Planner'} />
+          <ListItemText primary={'My Planner'} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button className={classes.nested}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary="Starred" />
-            </ListItem>
+        <Collapse in={open} timeout={'auto'} unmountOnExit>
+          <List component={'div'} disablePadding>
+            <NavListItem
+              nested={true}
+              activePath={props.activePage.path}
+              pageInfo={routes.LESSON_PLANNER}
+              clickHandler={() => {
+                closeAndRoute(routes.LESSON_PLANNER.path);
+              }}
+            />
+
+            <NavListItem
+              nested={true}
+              activePath={props.activePage.path}
+              pageInfo={routes.TEMPLATE_BUILDER}
+              clickHandler={() => {
+                closeAndRoute(routes.TEMPLATE_BUILDER.path);
+              }}
+            />
           </List>
         </Collapse>
       </List>
@@ -104,17 +143,26 @@ const Navigation = (props: NavigationProps): JSX.Element => {
 };
 
 export interface NavigationProps {
+  activePage: RouteProp;
+  isDrawerOpen: boolean;
+  closeSideDrawerHandler: () => void;
   clickHandler: (route: string) => void;
 }
 
-const mapStateToProps = (state: any): NavigationProps => {
-  return ({} as unknown) as NavigationProps;
+const mapStateToProps = (state: State): NavigationProps => {
+  return ({
+    activePage: state.applicationState.activePage,
+    isDrawerOpen: state.applicationState.sideDrawerIsOpen,
+  } as unknown) as NavigationProps;
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): NavigationProps =>
   (({
     clickHandler: (route: string) => {
       dispatch(routerActions.push(route));
+    },
+    closeSideDrawerHandler: (): void => {
+      dispatch(closeSideDrawer());
     },
   } as unknown) as NavigationProps);
 

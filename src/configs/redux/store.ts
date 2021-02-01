@@ -17,11 +17,13 @@ import subjectListState, {
 } from '../../reducers/subject-list';
 import bookmarksState, { BookmarksState } from '../../reducers/bookmarks';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import LogRocket from 'logrocket';
 
 export const createStore = (history: History): Store => {
   const createStoreFunc = applyMiddleware(
       thunkMiddleware,
-      routerMiddleware(history)
+      routerMiddleware(history),
+      LogRocket.reduxMiddleware()
     )(originalCreateStore),
     allReducers = combineReducers({
       applicationState: application.reducer,

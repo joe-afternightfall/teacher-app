@@ -1,40 +1,41 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { toggleSideDrawer } from '../../creators/application/side-drawer';
+import AppBar from '@material-ui/core/AppBar';
+import MenuIcon from '@material-ui/icons/Menu';
+import Toolbar from '@material-ui/core/Toolbar';
+import { State } from '../../configs/redux/store';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import { RouteProp } from '../../configs/constants/routes';
 import { DRAWER_SIZE } from '../../configs/constants/drawer-size';
+import { openSideDrawer } from '../../creators/application/side-drawer';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { AppTheme } from '../../configs/theme/light-theme';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme: AppTheme) =>
   createStyles({
     appBar: {
-      color: '#fff',
-      background: theme.palette.primary.main,
+      background: '#fff',
       [theme.breakpoints.up('md')]: {
         width: `calc(100% - ${DRAWER_SIZE})`,
         marginLeft: DRAWER_SIZE,
       },
       zIndex: theme.zIndex.drawer + 1,
-      // color: theme.palette.text.primary,
       transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
     },
     menuButton: {
+      color: theme.palette.text.primary,
       marginRight: theme.spacing(2),
       [theme.breakpoints.up('md')]: {
         display: 'none',
       },
     },
-    toolbar: {
-      // color: theme.palette.primary.contrastText,
-      background: theme.palette.primary.main,
+    title: {
+      color: theme.palette.colors.active.highlight,
     },
   })
 );
@@ -44,18 +45,23 @@ function TopAppBar(props: AppBarProps): JSX.Element {
 
   return (
     <AppBar position={'fixed'} className={classes.appBar}>
-      <Toolbar className={classes.toolbar}>
+      <Toolbar>
         <IconButton
-          // edge={'start'}
+          edge={'start'}
           color={'inherit'}
           className={classes.menuButton}
           data-testid={'toggle-app-drawer-button'}
-          onClick={props.toggleSideDrawerHandler}
+          onClick={props.openSideDrawerHandler}
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap data-testid={'app-bar-title'}>
-          {'NEW Responsive drawer'}
+        <Typography
+          noWrap
+          variant={'h6'}
+          data-testid={'app-bar-title'}
+          className={classes.title}
+        >
+          {props.activePage.headerTitle}
         </Typography>
       </Toolbar>
     </AppBar>
@@ -63,17 +69,20 @@ function TopAppBar(props: AppBarProps): JSX.Element {
 }
 
 export interface AppBarProps {
-  toggleSideDrawerHandler: () => void;
+  openSideDrawerHandler: () => void;
+  activePage: RouteProp;
 }
 
-const mapStateToProps = (): AppBarProps => {
-  return ({} as unknown) as AppBarProps;
+const mapStateToProps = (state: State): AppBarProps => {
+  return ({
+    activePage: state.applicationState.activePage,
+  } as unknown) as AppBarProps;
 };
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: any): AppBarProps =>
   (({
-    toggleSideDrawerHandler: (): void => {
-      dispatch(toggleSideDrawer());
+    openSideDrawerHandler: (): void => {
+      dispatch(openSideDrawer());
     },
   } as unknown) as AppBarProps);
 

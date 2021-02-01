@@ -1,8 +1,14 @@
 import { AnyAction } from 'redux';
 import actions from '../actions';
 
-export const toggleSideDrawer = (): AnyAction => {
+export const closeSideDrawer = (): AnyAction => {
   return {
-    type: actions.TOGGLE_SIDE_DRAWER,
+    type: actions.CLOSE_SIDE_DRAWER,
+  };
+};
+
+export const openSideDrawer = (): AnyAction => {
+  return {
+    type: actions.OPEN_SIDE_DRAWER,
   };
 };

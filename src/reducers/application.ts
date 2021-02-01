@@ -1,7 +1,10 @@
+import React from 'react';
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
+import { RouteProp } from '../configs/constants/routes';
+import { LOCATION_CHANGE } from 'connected-react-router';
+import { getPageInfo } from '../utils/get-current-page-info';
 import { SnackbarCreatorProps } from '../creators/application/app-snackbar';
-import React from 'react';
 
 export default {
   reducer(
@@ -11,8 +14,15 @@ export default {
     let newState = Object.assign({}, state);
 
     switch (action.type) {
-      case actions.TOGGLE_SIDE_DRAWER:
-        newState.sideDrawerIsOpen = !newState.sideDrawerIsOpen;
+      case LOCATION_CHANGE:
+        newState.currentLocation = action.payload.location.pathname;
+        newState.activePage = getPageInfo(newState.currentLocation);
+        break;
+      case actions.CLOSE_SIDE_DRAWER:
+        newState.sideDrawerIsOpen = false;
+        break;
+      case actions.OPEN_SIDE_DRAWER:
+        newState.sideDrawerIsOpen = true;
         break;
       case actions.DISPLAY_APP_SNACKBAR:
         newState.displayAppSnackbar = true;
@@ -50,14 +60,16 @@ export default {
 };
 
 export interface ApplicationState {
-  sideDrawerIsOpen: boolean;
+  currentLocation: string;
   dialogTitleColor: string;
+  confirmClickHandler: any;
+  sideDrawerIsOpen: boolean;
   displayAppDialog: boolean;
   dialogContent: JSX.Element;
+  confirmButtonTitle: string;
   displayAppSnackbar: boolean;
+  activePage: RouteProp | undefined;
   dialogTitle: string | JSX.Element;
   snackbarProps: SnackbarCreatorProps;
   dialogWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
-  confirmClickHandler: any;
-  confirmButtonTitle: string;
 }

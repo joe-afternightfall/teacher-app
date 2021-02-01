@@ -17,7 +17,7 @@ import SubjectListDialog from './SubjectListDialog';
 import { State } from '../../../../configs/redux/store';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { routerActions } from 'connected-react-router';
-import routes from '../../../../configs/constants/routes';
+import { routes } from '../../../../configs/constants/routes';
 import { clearSubjectInfoDialog } from '../../../../creators/subject-list/subject-info-dialog';
 import { clearEditing } from '../../../../creators/subject-list/editing-subject';
 import plannerBackground from '../../../../configs/images/lovely-planning.jpg';
@@ -128,10 +128,10 @@ const mapDispatchToProps = (dispatch: Dispatch): PlannerWidgetProps =>
       dispatch(clearEditing());
     },
     routeToLessonPlannerClickHandler: () => {
-      dispatch(routerActions.push(routes.LESSON_PLANNER));
+      dispatch(routerActions.push(routes.LESSON_PLANNER.path));
     },
     routeToTemplateBuilderHandler: () => {
-      dispatch(routerActions.push(routes.TEMPLATE_BUILDER));
+      dispatch(routerActions.push(routes.TEMPLATE_BUILDER.path));
     },
   } as unknown) as PlannerWidgetProps);
 

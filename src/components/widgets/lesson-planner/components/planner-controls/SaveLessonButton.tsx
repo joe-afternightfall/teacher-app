@@ -2,25 +2,34 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
+import { Tooltip } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
-import { Button, Tooltip } from '@material-ui/core';
 import { State } from '../../../../../configs/redux/store';
 import { updateLessonBoardOrder } from '../../../../../services/template-builder/update-board-order';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import SquareIconButton from '../../../../shared/SquareIconButton';
+import { AppTheme } from '../../../../../configs/theme/light-theme';
+
+const useStyles = makeStyles((theme: AppTheme) =>
+  createStyles({
+    root: {
+      background: theme.palette.secondary.main,
+      color: theme.palette.colors.offWhite,
+    },
+  })
+);
 
 const SaveLessonButton = (props: SaveLessonButtonProps): JSX.Element => {
+  const classes = useStyles();
+
   return (
     <Tooltip title={'Save Lesson'}>
-      <Button
-        color={'secondary'}
-        variant={'contained'}
-        onClick={() => {
-          props.saveHandler();
-        }}
-        startIcon={<SaveIcon />}
+      <SquareIconButton
         disabled={props.isDisabled}
-      >
-        {'Save'}
-      </Button>
+        icon={<SaveIcon />}
+        clickHandler={props.saveHandler}
+        customStyle={classes.root}
+      />
     </Tooltip>
   );
 };

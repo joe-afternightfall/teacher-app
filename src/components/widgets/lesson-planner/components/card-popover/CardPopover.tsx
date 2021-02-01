@@ -2,17 +2,40 @@ import React from 'react';
 import Popover from '@material-ui/core/Popover';
 import EventIcon from '@material-ui/icons/Event';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { Card, CardContent, IconButton } from '@material-ui/core';
+import { Button, Card, CardContent, IconButton } from '@material-ui/core';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { AppTheme } from '../../../../../configs/theme/light-theme';
+
+const useStyles = makeStyles((theme: AppTheme) =>
+  createStyles({
+    button: {
+      background: theme.palette.colors.offWhite,
+    },
+  })
+);
 
 export default function CardPopover(props: CardPopoverProps): JSX.Element {
+  const classes = useStyles();
+  // todo:  rip out to app-shell
+  // todo:  take in icon as prop
   return (
     <PopupState variant={'popover'} popupId={'lesson-popover'}>
       {(popupState) => (
         <div>
-          <IconButton {...bindTrigger(popupState)}>
-            {props.icon === 'vert' ? <MoreVertIcon /> : <EventIcon />}
-          </IconButton>
+          {props.icon === 'vert' ? (
+            <IconButton {...bindTrigger(popupState)}>
+              <MoreVertIcon />
+            </IconButton>
+          ) : (
+            <Button
+              variant={'contained'}
+              className={classes.button}
+              {...bindTrigger(popupState)}
+            >
+              <EventIcon />
+            </Button>
+          )}
           <Popover
             {...bindPopover(popupState)}
             anchorOrigin={{
