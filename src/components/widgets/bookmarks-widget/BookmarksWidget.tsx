@@ -4,9 +4,7 @@ import MaterialTable from 'material-table';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import AppLink from '../../app-shell/AppLink';
-import { Grid, Typography } from '@material-ui/core';
 import { State } from '../../../configs/redux/store';
-import BookmarkIcon from '@material-ui/icons/Bookmark';
 import { Subject } from '../../../configs/types/Subject';
 import NewBookmarkDialog from './components/NewBookmarkDialog';
 import { openNewBookmarkDialog } from '../../../creators/bookmarks/bookmarks-dialog';
@@ -42,18 +40,7 @@ const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
 
       <MaterialTable
         data={data}
-        // icons={tableIcons}
-        title={
-          <Grid container spacing={2}>
-            <Grid item>
-              <BookmarkIcon />
-            </Grid>
-
-            <Grid item>
-              <Typography>{'Bookmarks List'}</Typography>
-            </Grid>
-          </Grid>
-        }
+        title={''}
         options={{
           pageSize: 6,
           draggable: false,
