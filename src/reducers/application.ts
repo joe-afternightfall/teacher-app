@@ -16,7 +16,7 @@ export default {
     switch (action.type) {
       case LOCATION_CHANGE:
         newState.currentLocation = action.payload.location.pathname;
-        newState.pageInfo = getPageInfo(newState.currentLocation);
+        newState.activePage = getPageInfo(newState.currentLocation);
         break;
       case actions.TOGGLE_SIDE_DRAWER:
         newState.sideDrawerIsOpen = !newState.sideDrawerIsOpen;
@@ -65,7 +65,7 @@ export interface ApplicationState {
   dialogContent: JSX.Element;
   confirmButtonTitle: string;
   displayAppSnackbar: boolean;
-  pageInfo: RouteProp | undefined;
+  activePage: RouteProp | undefined;
   dialogTitle: string | JSX.Element;
   snackbarProps: SnackbarCreatorProps;
   dialogWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
