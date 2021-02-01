@@ -12,7 +12,7 @@ import Hidden from '@material-ui/core/Hidden';
 import { State } from '../../../configs/redux/store';
 import Navigation from './../side-drawer/Navigation';
 import { DRAWER_SIZE } from '../../../configs/constants/drawer-size';
-import { toggleSideDrawer } from '../../../creators/application/side-drawer';
+import { closeSideDrawer } from '../../../creators/application/side-drawer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,7 +46,7 @@ const ResponsiveSideDrawer = (
           variant={'temporary'}
           anchor={theme.direction === 'rtl' ? 'right' : 'left'}
           open={open}
-          onClose={props.toggleSideDrawerHandler}
+          onClose={props.closeSideDrawerHandler}
           classes={{
             paper: classes.drawerPaper,
           }}
@@ -75,7 +75,7 @@ const ResponsiveSideDrawer = (
 
 export interface ResponsiveSideDrawerProps {
   window?: () => Window;
-  toggleSideDrawerHandler: () => void;
+  closeSideDrawerHandler: () => void;
   open: boolean;
 }
 
@@ -87,8 +87,8 @@ const mapStateToProps = (state: State): ResponsiveSideDrawerProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): ResponsiveSideDrawerProps =>
   (({
-    toggleSideDrawerHandler: (): void => {
-      dispatch(toggleSideDrawer());
+    closeSideDrawerHandler: (): void => {
+      dispatch(closeSideDrawer());
     },
   } as unknown) as ResponsiveSideDrawerProps);
 

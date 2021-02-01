@@ -20,7 +20,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { State } from '../../../configs/redux/store';
 import { NavListItem } from './navigation/NavListItem';
 import { AssignmentRounded as AssignmentIcon } from '@material-ui/icons';
-import { toggleSideDrawer } from '../../../creators/application/side-drawer';
+import { closeSideDrawer } from '../../../creators/application/side-drawer';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,9 +55,12 @@ const Navigation = (props: NavigationProps): JSX.Element => {
 
   const closeAndRoute = (route: string) => {
     props.clickHandler(route);
-    setTimeout(() => {
-      props.toggleSideDrawerHandler();
-    }, 300);
+
+    if (props.isDrawerOpen) {
+      setTimeout(() => {
+        props.closeSideDrawerHandler();
+      }, 300);
+    }
   };
 
   return (
@@ -140,14 +143,16 @@ const Navigation = (props: NavigationProps): JSX.Element => {
 };
 
 export interface NavigationProps {
-  clickHandler: (route: string) => void;
-  toggleSideDrawerHandler: () => void;
   activePage: RouteProp;
+  isDrawerOpen: boolean;
+  closeSideDrawerHandler: () => void;
+  clickHandler: (route: string) => void;
 }
 
 const mapStateToProps = (state: State): NavigationProps => {
   return ({
     activePage: state.applicationState.activePage,
+    isDrawerOpen: state.applicationState.sideDrawerIsOpen,
   } as unknown) as NavigationProps;
 };
 
@@ -156,8 +161,8 @@ const mapDispatchToProps = (dispatch: Dispatch): NavigationProps =>
     clickHandler: (route: string) => {
       dispatch(routerActions.push(route));
     },
-    toggleSideDrawerHandler: (): void => {
-      dispatch(toggleSideDrawer());
+    closeSideDrawerHandler: (): void => {
+      dispatch(closeSideDrawer());
     },
   } as unknown) as NavigationProps);
 

@@ -9,8 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { RouteProp } from '../../configs/constants/routes';
 import { DRAWER_SIZE } from '../../configs/constants/drawer-size';
-import { toggleSideDrawer } from '../../creators/application/side-drawer';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { openSideDrawer } from '../../creators/application/side-drawer';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { AppTheme } from '../../configs/theme/light-theme';
 
 const useStyles = makeStyles((theme: AppTheme) =>
@@ -51,7 +51,7 @@ function TopAppBar(props: AppBarProps): JSX.Element {
           color={'inherit'}
           className={classes.menuButton}
           data-testid={'toggle-app-drawer-button'}
-          onClick={props.toggleSideDrawerHandler}
+          onClick={props.openSideDrawerHandler}
         >
           <MenuIcon />
         </IconButton>
@@ -69,7 +69,7 @@ function TopAppBar(props: AppBarProps): JSX.Element {
 }
 
 export interface AppBarProps {
-  toggleSideDrawerHandler: () => void;
+  openSideDrawerHandler: () => void;
   activePage: RouteProp;
 }
 
@@ -81,8 +81,8 @@ const mapStateToProps = (state: State): AppBarProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: any): AppBarProps =>
   (({
-    toggleSideDrawerHandler: (): void => {
-      dispatch(toggleSideDrawer());
+    openSideDrawerHandler: (): void => {
+      dispatch(openSideDrawer());
     },
   } as unknown) as AppBarProps);
 

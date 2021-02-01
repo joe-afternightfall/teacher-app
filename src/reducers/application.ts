@@ -18,8 +18,11 @@ export default {
         newState.currentLocation = action.payload.location.pathname;
         newState.activePage = getPageInfo(newState.currentLocation);
         break;
-      case actions.TOGGLE_SIDE_DRAWER:
-        newState.sideDrawerIsOpen = !newState.sideDrawerIsOpen;
+      case actions.CLOSE_SIDE_DRAWER:
+        newState.sideDrawerIsOpen = false;
+        break;
+      case actions.OPEN_SIDE_DRAWER:
+        newState.sideDrawerIsOpen = true;
         break;
       case actions.DISPLAY_APP_SNACKBAR:
         newState.displayAppSnackbar = true;
