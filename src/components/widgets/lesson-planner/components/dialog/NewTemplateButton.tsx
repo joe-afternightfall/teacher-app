@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import AddIcon from '@material-ui/icons/Add';
-import { Fab, Tooltip } from '@material-ui/core';
+import { Button, Fab, Tooltip } from '@material-ui/core';
 import { State } from '../../../../../configs/redux/store';
 import TemplateBuilderForm from '../lesson-form/TemplateBuilderForm';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
 import { editTemplate } from '../../../../../services/template-builder/edit-template';
 import { saveNewTemplate } from '../../../../../services/template-builder/save-new-template';
 
-const NewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
+const FABNewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
   return (
     <Tooltip title={'Add New'}>
       <Fab
@@ -25,6 +25,24 @@ const NewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
         <AddIcon />
       </Fab>
     </Tooltip>
+  );
+};
+
+const NewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
+  return (
+    <Button
+      color={'primary'}
+      variant={'contained'}
+      startIcon={<AddIcon />}
+      onClick={() => {
+        props.displayAppDialogHandler(
+          <TemplateBuilderForm />,
+          props.isNewTemplate
+        );
+      }}
+    >
+      {'Add New'}
+    </Button>
   );
 };
 
