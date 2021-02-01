@@ -91,16 +91,16 @@ const Navigation = (props: NavigationProps): JSX.Element => {
         }
       >
         <NavListItem
-          title={routes.DASHBOARD.drawerTitle}
-          icon={React.createElement(routes.DASHBOARD.icon)}
+          pageInfo={routes.DASHBOARD}
+          activePath={props.activePage.path}
           clickHandler={() => {
             closeAndRoute(routes.DASHBOARD.path);
           }}
         />
 
         <NavListItem
-          title={routes.BOOKMARKS.drawerTitle}
-          icon={React.createElement(routes.BOOKMARKS.icon)}
+          pageInfo={routes.BOOKMARKS}
+          activePath={props.activePage.path}
           clickHandler={() => {
             closeAndRoute(routes.BOOKMARKS.path);
           }}
@@ -116,21 +116,21 @@ const Navigation = (props: NavigationProps): JSX.Element => {
         <Collapse in={open} timeout={'auto'} unmountOnExit>
           <List component={'div'} disablePadding>
             <NavListItem
-              title={routes.LESSON_PLANNER.drawerTitle}
-              icon={React.createElement(routes.LESSON_PLANNER.icon)}
+              nested={true}
+              activePath={props.activePage.path}
+              pageInfo={routes.LESSON_PLANNER}
               clickHandler={() => {
                 closeAndRoute(routes.LESSON_PLANNER.path);
               }}
-              nested={true}
             />
 
             <NavListItem
-              title={routes.TEMPLATE_BUILDER.drawerTitle}
-              icon={React.createElement(routes.TEMPLATE_BUILDER.icon)}
+              nested={true}
+              activePath={props.activePage.path}
+              pageInfo={routes.TEMPLATE_BUILDER}
               clickHandler={() => {
                 closeAndRoute(routes.TEMPLATE_BUILDER.path);
               }}
-              nested={true}
             />
           </List>
         </Collapse>
@@ -142,12 +142,12 @@ const Navigation = (props: NavigationProps): JSX.Element => {
 export interface NavigationProps {
   clickHandler: (route: string) => void;
   toggleSideDrawerHandler: () => void;
-  pageInfo: RouteProp;
+  activePage: RouteProp;
 }
 
 const mapStateToProps = (state: State): NavigationProps => {
   return ({
-    pageInfo: state.applicationState.pageInfo,
+    activePage: state.applicationState.activePage,
   } as unknown) as NavigationProps;
 };
 
