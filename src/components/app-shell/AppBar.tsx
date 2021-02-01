@@ -11,8 +11,9 @@ import { RouteProp } from '../../configs/constants/routes';
 import { DRAWER_SIZE } from '../../configs/constants/drawer-size';
 import { toggleSideDrawer } from '../../creators/application/side-drawer';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { AppTheme } from '../../configs/theme/light-theme';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme: AppTheme) =>
   createStyles({
     appBar: {
       background: '#fff',
@@ -32,6 +33,9 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up('md')]: {
         display: 'none',
       },
+    },
+    title: {
+      color: theme.palette.colors.active.highlight,
     },
   })
 );
@@ -54,16 +58,14 @@ function TopAppBar(props: AppBarProps): JSX.Element {
         <Typography
           // todo:  extract out purple colors to theme
           style={{
-            // color: '#6F55F2',
-            // color: '#887af5',
             color: '#674bf2',
-            // color: '#8b78f5',
           }}
           noWrap
           variant={'h6'}
           data-testid={'app-bar-title'}
+          className={classes.title}
         >
-          {props.pageInfo.headerTitle}
+          {props.activePage.headerTitle}
         </Typography>
       </Toolbar>
     </AppBar>
@@ -72,12 +74,12 @@ function TopAppBar(props: AppBarProps): JSX.Element {
 
 export interface AppBarProps {
   toggleSideDrawerHandler: () => void;
-  pageInfo: RouteProp;
+  activePage: RouteProp;
 }
 
 const mapStateToProps = (state: State): AppBarProps => {
   return ({
-    pageInfo: state.applicationState.pageInfo,
+    activePage: state.applicationState.activePage,
   } as unknown) as AppBarProps;
 };
 
