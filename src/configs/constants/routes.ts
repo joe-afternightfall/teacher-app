@@ -40,8 +40,8 @@ export const routes: RoutesMap = {
   },
   BOOKMARKS: {
     path: '/bookmarks',
-    drawerTitle: 'Bookmarks List',
-    headerTitle: 'Bookmarks',
+    drawerTitle: 'Bookmarks',
+    headerTitle: 'My Bookmarks List',
     icon: BookmarkIcon,
   },
 };
