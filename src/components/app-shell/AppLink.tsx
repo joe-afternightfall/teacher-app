@@ -1,10 +1,12 @@
 import React from 'react';
 import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { AppTheme } from '../../configs/theme/light-theme';
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: AppTheme) =>
   createStyles({
     root: {
+      color: theme.palette.primary.main,
       '&:hover': {
         cursor: 'pointer',
       },
