@@ -8,18 +8,19 @@ import { State } from '../../configs/redux/store';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { RouteProp } from '../../configs/constants/routes';
-import { DRAWER_SIZE } from '../../configs/constants/drawer-size';
 import { openSideDrawer } from '../../creators/application/side-drawer';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { AppTheme } from '../../configs/theme/light-theme';
+
+const drawerSize = (props: any) => props.size;
 
 const useStyles = makeStyles((theme: AppTheme) =>
   createStyles({
     appBar: {
       background: '#fff',
       [theme.breakpoints.up('md')]: {
-        width: `calc(100% - ${DRAWER_SIZE})`,
-        marginLeft: DRAWER_SIZE,
+        width: drawerSize,
+        // marginLeft: DRAWER_SIZE,
       },
       zIndex: theme.zIndex.drawer + 1,
       transition: theme.transitions.create(['width', 'margin'], {
@@ -41,7 +42,10 @@ const useStyles = makeStyles((theme: AppTheme) =>
 );
 
 function TopAppBar(props: AppBarProps): JSX.Element {
-  const classes = useStyles();
+  const width = `calc(100% - ${props.drawerSize})`;
+  const classes = useStyles({
+    size: width,
+  });
 
   return (
     <AppBar position={'fixed'} className={classes.appBar}>
@@ -69,13 +73,15 @@ function TopAppBar(props: AppBarProps): JSX.Element {
 }
 
 export interface AppBarProps {
-  openSideDrawerHandler: () => void;
+  drawerSize: string;
   activePage: RouteProp;
+  openSideDrawerHandler: () => void;
 }
 
 const mapStateToProps = (state: State): AppBarProps => {
   return ({
     activePage: state.applicationState.activePage,
+    drawerSize: state.applicationState.drawerSize,
   } as unknown) as AppBarProps;
 };
 

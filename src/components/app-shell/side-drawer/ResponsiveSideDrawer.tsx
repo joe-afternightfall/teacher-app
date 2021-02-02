@@ -11,19 +11,20 @@ import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import { State } from '../../../configs/redux/store';
 import Navigation from './../side-drawer/Navigation';
-import { DRAWER_SIZE } from '../../../configs/constants/drawer-size';
 import { closeSideDrawer } from '../../../creators/application/side-drawer';
+
+const drawerSize = (props: any) => props.size;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     drawer: {
       [theme.breakpoints.up('md')]: {
-        width: DRAWER_SIZE,
+        width: drawerSize,
         flexShrink: 0,
       },
     },
     drawerPaper: {
-      width: DRAWER_SIZE,
+      width: drawerSize,
     },
   })
 );
@@ -32,7 +33,9 @@ const ResponsiveSideDrawer = (
   props: ResponsiveSideDrawerProps
 ): JSX.Element => {
   const { window, open } = props;
-  const classes = useStyles();
+  const classes = useStyles({
+    size: props.drawerSize,
+  });
   const theme = useTheme();
 
   const container =
@@ -74,14 +77,16 @@ const ResponsiveSideDrawer = (
 };
 
 export interface ResponsiveSideDrawerProps {
+  open: boolean;
+  drawerSize: string;
   window?: () => Window;
   closeSideDrawerHandler: () => void;
-  open: boolean;
 }
 
 const mapStateToProps = (state: State): ResponsiveSideDrawerProps => {
   return ({
     open: state.applicationState.sideDrawerIsOpen,
+    drawerSize: state.applicationState.drawerSize,
   } as unknown) as ResponsiveSideDrawerProps;
 };
 
