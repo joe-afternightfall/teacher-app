@@ -1,10 +1,6 @@
 import React from 'react';
 import { Dispatch } from 'redux';
-import {
-  useTheme,
-  makeStyles,
-  createStyles,
-} from '@material-ui/core/styles';
+import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import Navigation from '../Navigation';
 import Drawer from '@material-ui/core/Drawer';
