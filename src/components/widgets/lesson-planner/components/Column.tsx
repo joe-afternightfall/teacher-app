@@ -31,20 +31,23 @@ const getItemStyle = (
   draggableStyle: any,
   isDragging: boolean
 ): Record<string, unknown> => ({
-  // color: '#ebebeb',
-  // color: '#C8C8C8',
-  // color: '#D4D4D4',
-  // color: '#E1E1E2',
-  // background: '#F5F5F5',
+  // color: '#ECF0F1', // main background
+  // color: '#E0ECF2', // highlighted card
+  // color: '#D6E7F1', // more vert action button color
+  // color: '#2286EC', // dark blue vert dots
+  // color: '#30A4F0', // add contact button
+  // background: '#F6F6F6',
+  // background: '#ecf0f1',
+  // background: '#f5f5f5',
   // borderBottom: '1px solid black',
   marginTop: 8,
   // borderLeft: '1px solid blue',
-  background: isDragging ? '#F2F2F2' : '#FFF',
+  background: isDragging ? '#ECF0F1' : '#FEFEFE',
   ...draggableStyle,
 });
 
 const getListStyle = (isDraggingOver: boolean): Record<string, unknown> => ({
-  background: isDraggingOver ? '#D0D0D0' : '#EBEBEB',
+  background: isDraggingOver ? '#D6E7F1' : '#FFF',
   minHeight: '100vh',
   padding: 4,
 });
