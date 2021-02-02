@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: AppTheme) =>
   createStyles({
     appBar: {
       background: '#fff',
-      [theme.breakpoints.up('md')]: {
+      [theme.breakpoints.up('sm')]: {
         width: drawerSize,
         // marginLeft: DRAWER_SIZE,
       },
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: AppTheme) =>
     menuButton: {
       color: theme.palette.text.primary,
       marginRight: theme.spacing(2),
-      [theme.breakpoints.up('md')]: {
+      [theme.breakpoints.up('sm')]: {
         display: 'none',
       },
     },
