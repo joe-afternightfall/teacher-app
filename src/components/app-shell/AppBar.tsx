@@ -11,6 +11,7 @@ import { RouteProp } from '../../configs/constants/routes';
 import { openSideDrawer } from '../../creators/application/side-drawer';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { AppTheme } from '../../configs/theme/light-theme';
+import icon from '../../configs/icons/rainbow-shades.svg';
 
 const drawerSize = (props: any) => props.size;
 
@@ -36,7 +37,11 @@ const useStyles = makeStyles((theme: AppTheme) =>
       },
     },
     title: {
+      flex: 1,
       color: theme.palette.colors.active.highlight,
+    },
+    icon: {
+      height: '40px',
     },
   })
 );
@@ -67,6 +72,8 @@ function TopAppBar(props: AppBarProps): JSX.Element {
         >
           {props.activePage.headerTitle}
         </Typography>
+
+        <img className={classes.icon} src={icon} />
       </Toolbar>
     </AppBar>
   );
@@ -85,7 +92,7 @@ const mapStateToProps = (state: State): AppBarProps => {
   } as unknown) as AppBarProps;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch, ownProps: any): AppBarProps =>
+const mapDispatchToProps = (dispatch: Dispatch): AppBarProps =>
   (({
     openSideDrawerHandler: (): void => {
       dispatch(openSideDrawer());

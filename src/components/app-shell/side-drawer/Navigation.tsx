@@ -66,9 +66,9 @@ const Navigation = (props: NavigationProps): JSX.Element => {
     <div>
       <AppBar position={'relative'}>
         <Toolbar className={classes.toolbar}>
-          <Typography variant={'h6'} className={classes.title}>
-            {'Drawer Title'}
-          </Typography>
+          {/*<Typography variant={'h6'} className={classes.title}>*/}
+          {/*  {'Drawer Title'}*/}
+          {/*</Typography>*/}
 
           {/*<IconButton*/}
           {/*  className={classes.iconButton}*/}
@@ -86,11 +86,11 @@ const Navigation = (props: NavigationProps): JSX.Element => {
         component={'nav'}
         className={classes.root}
         aria-labelledby={'nested-list-subheader'}
-        subheader={
-          <ListSubheader component={'div'} id={'nested-list-subheader'}>
-            {'Nested List Items'}
-          </ListSubheader>
-        }
+        // subheader={
+        //   <ListSubheader component={'div'} id={'nested-list-subheader'}>
+        //     {'Nested List Items'}
+        //   </ListSubheader>
+        // }
       >
         <NavListItem
           pageInfo={routes.DASHBOARD}
@@ -118,7 +118,7 @@ const Navigation = (props: NavigationProps): JSX.Element => {
         <Collapse in={open} timeout={'auto'} unmountOnExit>
           <List component={'div'} disablePadding>
             <NavListItem
-              nested={true}
+              nested={false}
               activePath={props.activePage.path}
               pageInfo={routes.LESSON_PLANNER}
               clickHandler={() => {
@@ -127,7 +127,8 @@ const Navigation = (props: NavigationProps): JSX.Element => {
             />
 
             <NavListItem
-              nested={true}
+              //  todo:  delete "nested" prop
+              nested={false}
               activePath={props.activePage.path}
               pageInfo={routes.TEMPLATE_BUILDER}
               clickHandler={() => {
