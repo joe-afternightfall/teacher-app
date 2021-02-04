@@ -20,6 +20,7 @@ import { RouteProp, routes } from '../../../configs/constants/routes';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { AssignmentRounded as AssignmentIcon } from '@material-ui/icons';
 import { closeSideDrawer } from '../../../creators/application/side-drawer';
+import icon from '../../../configs/icons/fox-runner.svg';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,6 +41,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     iconButton: {
       color: theme.palette.primary.contrastText,
+    },
+    icon: {
+      position: 'absolute',
+      left: 8,
+      height: '32px',
     },
   })
 );
@@ -69,6 +75,8 @@ const Navigation = (props: NavigationProps): JSX.Element => {
           {/*<Typography variant={'h6'} className={classes.title}>*/}
           {/*  {'Drawer Title'}*/}
           {/*</Typography>*/}
+
+          <img className={classes.icon} src={icon} />
 
           {/*<IconButton*/}
           {/*  className={classes.iconButton}*/}
