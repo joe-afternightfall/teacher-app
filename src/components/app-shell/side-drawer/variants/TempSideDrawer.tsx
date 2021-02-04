@@ -10,16 +10,14 @@ import { closeSideDrawer } from '../../../../creators/application/side-drawer';
 const useStyles = makeStyles(() =>
   createStyles({
     drawerPaper: {
-      width: (props: any) => props.size,
+      width: 240,
     },
   })
 );
 
 const TempSideDrawer = (props: TempSideDrawerProps): JSX.Element => {
   const { window, open } = props;
-  const classes = useStyles({
-    size: props.drawerSize,
-  });
+  const classes = useStyles();
   const theme = useTheme();
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -45,7 +43,6 @@ const TempSideDrawer = (props: TempSideDrawerProps): JSX.Element => {
 
 export interface TempSideDrawerProps {
   open: boolean;
-  drawerSize: string;
   window?: () => Window;
   closeSideDrawerHandler: () => void;
 }
@@ -53,7 +50,6 @@ export interface TempSideDrawerProps {
 const mapStateToProps = (state: State): TempSideDrawerProps => {
   return ({
     open: state.applicationState.sideDrawerIsOpen,
-    drawerSize: state.applicationState.drawerSize,
   } as unknown) as TempSideDrawerProps;
 };
 
