@@ -51,6 +51,9 @@ export default {
         newState.confirmButtonTitle = '';
         newState.confirmClickHandler = null;
         break;
+      case actions.SET_DRAWER_SIZE:
+        newState.drawerSize = action.size;
+        break;
       default:
         newState = state;
     }
@@ -60,6 +63,7 @@ export default {
 };
 
 export interface ApplicationState {
+  drawerSize: string;
   currentLocation: string;
   dialogTitleColor: string;
   confirmClickHandler: any;

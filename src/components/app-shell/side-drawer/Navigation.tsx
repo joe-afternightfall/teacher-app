@@ -3,7 +3,6 @@ import {
   List,
   AppBar,
   Toolbar,
-  Divider,
   ListItem,
   Collapse,
   Typography,
@@ -13,14 +12,15 @@ import {
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { State } from '../../../configs/redux/store';
 import { routerActions } from 'connected-react-router';
+import { NavListItem } from './navigation/NavListItem';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import { RouteProp, routes } from '../../../configs/constants/routes';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { State } from '../../../configs/redux/store';
-import { NavListItem } from './navigation/NavListItem';
 import { AssignmentRounded as AssignmentIcon } from '@material-ui/icons';
 import { closeSideDrawer } from '../../../creators/application/side-drawer';
+import icon from '../../../configs/icons/fox-runner.svg';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,6 +41,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     iconButton: {
       color: theme.palette.primary.contrastText,
+    },
+    icon: {
+      position: 'absolute',
+      left: 8,
+      height: '32px',
     },
   })
 );
@@ -65,11 +70,13 @@ const Navigation = (props: NavigationProps): JSX.Element => {
 
   return (
     <div>
-      <AppBar position={'static'}>
+      <AppBar position={'relative'}>
         <Toolbar className={classes.toolbar}>
-          <Typography variant={'h6'} className={classes.title}>
-            {'Drawer Title'}
-          </Typography>
+          {/*<Typography variant={'h6'} className={classes.title}>*/}
+          {/*  {'Drawer Title'}*/}
+          {/*</Typography>*/}
+
+          <img className={classes.icon} src={icon} />
 
           {/*<IconButton*/}
           {/*  className={classes.iconButton}*/}
@@ -81,17 +88,17 @@ const Navigation = (props: NavigationProps): JSX.Element => {
         </Toolbar>
       </AppBar>
 
-      <Divider />
+      {/*<Divider />*/}
 
       <List
         component={'nav'}
         className={classes.root}
         aria-labelledby={'nested-list-subheader'}
-        subheader={
-          <ListSubheader component={'div'} id={'nested-list-subheader'}>
-            {'Nested List Items'}
-          </ListSubheader>
-        }
+        // subheader={
+        //   <ListSubheader component={'div'} id={'nested-list-subheader'}>
+        //     {'Nested List Items'}
+        //   </ListSubheader>
+        // }
       >
         <NavListItem
           pageInfo={routes.DASHBOARD}
@@ -119,7 +126,7 @@ const Navigation = (props: NavigationProps): JSX.Element => {
         <Collapse in={open} timeout={'auto'} unmountOnExit>
           <List component={'div'} disablePadding>
             <NavListItem
-              nested={true}
+              nested={false}
               activePath={props.activePage.path}
               pageInfo={routes.LESSON_PLANNER}
               clickHandler={() => {
@@ -128,7 +135,8 @@ const Navigation = (props: NavigationProps): JSX.Element => {
             />
 
             <NavListItem
-              nested={true}
+              //  todo:  delete "nested" prop
+              nested={false}
               activePath={props.activePage.path}
               pageInfo={routes.TEMPLATE_BUILDER}
               clickHandler={() => {

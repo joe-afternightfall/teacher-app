@@ -36,6 +36,7 @@ export const createStore = (history: History): Store => {
 
   return createStoreFunc(allReducers, {
     applicationState: ({
+      drawerSize: '240px',
       sideDrawerIsOpen: false,
       displayAppSnackbar: false,
       snackbarProps: {

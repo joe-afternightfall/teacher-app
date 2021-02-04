@@ -12,3 +12,10 @@ export const openSideDrawer = (): AnyAction => {
     type: actions.OPEN_SIDE_DRAWER,
   };
 };
+
+export const setDrawerSize = (size: string): AnyAction => {
+  return {
+    type: actions.SET_DRAWER_SIZE,
+    size: size,
+  };
+};
