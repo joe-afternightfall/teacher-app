@@ -10,6 +10,7 @@ import {
   IconButton,
   CardActions,
   CardActionArea,
+  CardContent,
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
@@ -70,16 +71,7 @@ const LessonPlannerCard = (props: PlannerWidgetProps): JSX.Element => {
         }
       />
 
-      <CardActionArea>
-        <CardMedia
-          style={{
-            height: 200,
-          }}
-          image={plannerBackground}
-          title={'Weekly Planner'}
-          onClick={props.routeToLessonPlannerClickHandler}
-        />
-      </CardActionArea>
+      <CardContent style={{ minHeight: 80 }} />
 
       <CardActions>
         <Grid container align-items={'center'} justify={'flex-end'}>
