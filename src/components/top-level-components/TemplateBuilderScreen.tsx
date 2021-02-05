@@ -7,8 +7,8 @@ import {
 import React, { Component } from 'react';
 import { Grid } from '@material-ui/core';
 import { Styles } from '@material-ui/styles';
-import LessonPlannerComp from '../../widgets/lesson-planner/LessonPlannerConnector';
-import TemplateBuilderControls from '../../widgets/lesson-planner/components/planner-controls/TemplateBuilderControls';
+import LessonPlannerComp from '../widgets/lesson-planner/LessonPlannerConnector';
+import TemplateBuilderControls from '../widgets/lesson-planner/components/planner-controls/TemplateBuilderControls';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
