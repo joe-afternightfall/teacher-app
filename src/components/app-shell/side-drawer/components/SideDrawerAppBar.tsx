@@ -1,0 +1,87 @@
+import React from 'react';
+import icon from '../../../../configs/icons/fox-runner.svg';
+import { ChevronLeft as ChevronLeftIcon } from '@material-ui/icons';
+import { AppBar, Grid, IconButton, Toolbar } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { MIN_DRAWER_WIDTH } from '../../../../configs/constants/drawer-size';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    toolbar: {
+      paddingLeft: 10,
+      background: theme.palette.primary.main,
+    },
+    iconButton: {
+      color: theme.palette.primary.contrastText,
+    },
+    icon: {
+      height: 32,
+    },
+  })
+);
+
+export default function SideDrawerAppBar(
+  props: SideDrawerAppBarProps
+): JSX.Element {
+  const classes = useStyles();
+
+  return (
+    <AppBar position={'relative'}>
+      {props.logoClickHandler ? (
+        <Toolbar className={classes.toolbar}>
+          {props.drawerSize && props.drawerSize !== MIN_DRAWER_WIDTH ? (
+            <Grid container alignItems={'center'} justify={'space-between'}>
+              <Grid item>
+                <img
+                  src={icon}
+                  alt={'planner-logo'}
+                  className={classes.icon}
+                />
+              </Grid>
+
+              <Grid item>
+                <IconButton
+                  edge={'end'}
+                  className={classes.iconButton}
+                  onClick={props.closeHandler}
+                  data-testid={'chevron-left-toggle-button'}
+                >
+                  <ChevronLeftIcon data-testid={'chevron-left'} />
+                </IconButton>
+              </Grid>
+            </Grid>
+          ) : (
+            <Grid container alignItems={'center'} justify={'space-between'}>
+              <Grid item>
+                <IconButton
+                  edge={'start'}
+                  onClick={() => {
+                    if (props.logoClickHandler) {
+                      props.logoClickHandler();
+                    }
+                  }}
+                >
+                  <img
+                    alt={'planner-logo'}
+                    src={icon}
+                    className={classes.icon}
+                  />
+                </IconButton>
+              </Grid>
+            </Grid>
+          )}
+        </Toolbar>
+      ) : (
+        <Toolbar className={classes.toolbar}>
+          <img alt={'planner-logo'} className={classes.icon} src={icon} />
+        </Toolbar>
+      )}
+    </AppBar>
+  );
+}
+
+export interface SideDrawerAppBarProps {
+  closeHandler: () => void;
+  logoClickHandler?: () => void;
+  drawerSize?: string;
+}
