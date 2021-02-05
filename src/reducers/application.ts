@@ -54,6 +54,12 @@ export default {
       case actions.SET_DRAWER_SIZE:
         newState.drawerSize = action.size;
         break;
+      case actions.USER_CLICKED_CLOSE_DRAWER:
+        newState.userClickedCloseDrawer = true;
+        break;
+      case actions.USER_CLICKED_OPEN_DRAWER:
+        newState.userClickedCloseDrawer = false;
+        break;
       default:
         newState = state;
     }
@@ -75,5 +81,6 @@ export interface ApplicationState {
   activePage: RouteProp | undefined;
   dialogTitle: string | JSX.Element;
   snackbarProps: SnackbarCreatorProps;
+  userClickedCloseDrawer: boolean;
   dialogWidth: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
 }

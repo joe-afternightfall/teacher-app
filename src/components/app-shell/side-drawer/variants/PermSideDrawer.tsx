@@ -1,11 +1,20 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import Navigation from '../Navigation';
 import Drawer from '@material-ui/core/Drawer';
 import { useMediaQuery } from '@material-ui/core';
+import Navigation from '../components/Navigation';
+import {
+  FULL_DRAWER_WIDTH,
+  MIN_DRAWER_WIDTH,
+} from '../../../../configs/constants/drawer-size';
+import {
+  setDrawerSize,
+  userClickedCloseDrawer,
+  userClickedOpenDrawer,
+} from '../../../../creators/application/side-drawer';
+import SideDrawerAppBar from '../components/SideDrawerAppBar';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { setDrawerSize } from '../../../../creators/application/side-drawer';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -28,10 +37,15 @@ const PermSideDrawer = (props: PermSideDrawerProps): JSX.Element => {
   );
 
   if (isSmall) {
-    props.updateSizeHandler('56px');
-  } else if (isMedium) {
-    props.updateSizeHandler('240px');
+    props.updateSizeHandler(MIN_DRAWER_WIDTH);
+  } else if (isMedium && !props.userClickedCloseDrawer) {
+    props.updateSizeHandler(FULL_DRAWER_WIDTH);
   }
+
+  const closeDrawerClickHandler = () => {
+    props.userClickedCloseHandler();
+    props.updateSizeHandler(MIN_DRAWER_WIDTH);
+  };
 
   return (
     <Drawer
@@ -41,19 +55,28 @@ const PermSideDrawer = (props: PermSideDrawerProps): JSX.Element => {
         paper: classes.drawerPaper,
       }}
     >
-      {<Navigation />}
+      <SideDrawerAppBar
+        drawerSize={props.drawerSize}
+        closeHandler={closeDrawerClickHandler}
+        logoClickHandler={props.logoClickHandler}
+      />
+      <Navigation tempDrawer={false} />
     </Drawer>
   );
 };
 
 export interface PermSideDrawerProps {
+  userClickedCloseDrawer: boolean;
   drawerSize: string;
   updateSizeHandler: (size: string) => void;
+  userClickedCloseHandler: () => void;
+  logoClickHandler: () => void;
 }
 
 const mapStateToProps = (state: any): PermSideDrawerProps => {
   return ({
     drawerSize: state.applicationState.drawerSize,
+    userClickedCloseDrawer: state.applicationState.userClickedCloseDrawer,
   } as unknown) as PermSideDrawerProps;
 };
 
@@ -61,6 +84,12 @@ const mapDispatchToProps = (dispatch: Dispatch): PermSideDrawerProps =>
   (({
     updateSizeHandler: (size: string) => {
       dispatch(setDrawerSize(size));
+    },
+    userClickedCloseHandler: () => {
+      dispatch(userClickedCloseDrawer());
+    },
+    logoClickHandler: () => {
+      dispatch(userClickedOpenDrawer());
     },
   } as unknown) as PermSideDrawerProps);
 

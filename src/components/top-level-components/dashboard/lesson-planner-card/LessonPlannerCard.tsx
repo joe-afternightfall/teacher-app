@@ -5,11 +5,9 @@ import {
   Grid,
   Button,
   MenuItem,
-  CardMedia,
   CardHeader,
   IconButton,
   CardActions,
-  CardActionArea,
   CardContent,
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
@@ -21,7 +19,6 @@ import { routerActions } from 'connected-react-router';
 import { routes } from '../../../../configs/constants/routes';
 import { clearSubjectInfoDialog } from '../../../../creators/subject-list/subject-info-dialog';
 import { clearEditing } from '../../../../creators/subject-list/editing-subject';
-import plannerBackground from '../../../../configs/images/lovely-planning.jpg';
 
 const LessonPlannerCard = (props: PlannerWidgetProps): JSX.Element => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
