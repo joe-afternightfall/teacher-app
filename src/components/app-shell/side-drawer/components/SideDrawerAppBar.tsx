@@ -32,11 +32,7 @@ export default function SideDrawerAppBar(
           {props.drawerSize && props.drawerSize !== MIN_DRAWER_WIDTH ? (
             <Grid container alignItems={'center'} justify={'space-between'}>
               <Grid item>
-                <img
-                  src={icon}
-                  alt={'planner-logo'}
-                  className={classes.icon}
-                />
+                <img src={icon} alt={'planner-logo'} className={classes.icon} />
               </Grid>
 
               <Grid item>
