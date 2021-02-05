@@ -7,9 +7,6 @@ import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: AppTheme) =>
   createStyles({
-    nested: {
-      paddingLeft: theme.spacing(4),
-    },
     activeIcon: {
       color: theme.palette.colors.active.highlight,
       background: theme.palette.colors.active.hover,
@@ -32,7 +29,6 @@ export function NavListItem(props: NavListItemProps): JSX.Element {
       button
       onClick={props.clickHandler}
       className={clsx(classes.listItem, {
-        [classes.nested]: props.nested,
         [classes.activeIcon]: isActive,
       })}
     >
@@ -43,14 +39,16 @@ export function NavListItem(props: NavListItemProps): JSX.Element {
       >
         {React.createElement(props.pageInfo.icon)}
       </ListItemIcon>
-      <ListItemText primary={props.pageInfo.drawerTitle} />
+      {props.displayText ? (
+        <ListItemText primary={props.pageInfo.drawerTitle} />
+      ) : undefined}
     </ListItem>
   );
 }
 
 export interface NavListItemProps {
-  clickHandler: () => void;
-  nested?: boolean;
   pageInfo: RouteProp;
   activePath: string;
+  clickHandler: () => void;
+  displayText: boolean;
 }
