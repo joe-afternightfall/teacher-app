@@ -12,7 +12,7 @@ import * as serviceWorker from './configs/service-worker';
 import BookmarksScreen from './components/top-level-components/BookmarksScreen';
 import DashboardScreen from './components/top-level-components/dashboard/DashboardScreen';
 import TemplateBuilderScreen from './components/top-level-components/template-builder/TemplateBuilderScreen';
-import LessonPlannerScreen from './components/top-level-components/lesson-planner/LessonPlannerScreenConnector';
+import LessonPlannerScreen from './components/top-level-components/lesson-planner/LessonPlannerScreen';
 import LogRocket from 'logrocket';
 import setupLogRocketReact from 'logrocket-react';
 
