@@ -18,6 +18,7 @@ import subjectListState, {
 import bookmarksState, { BookmarksState } from '../../reducers/bookmarks';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LogRocket from 'logrocket';
+import { FULL_DRAWER_WIDTH } from '../constants/drawer-size';
 
 export const createStore = (history: History): Store => {
   const createStoreFunc = applyMiddleware(
@@ -36,7 +37,8 @@ export const createStore = (history: History): Store => {
 
   return createStoreFunc(allReducers, {
     applicationState: ({
-      drawerSize: '240px',
+      userClickedCloseDrawer: false,
+      drawerSize: FULL_DRAWER_WIDTH,
       sideDrawerIsOpen: false,
       displayAppSnackbar: false,
       snackbarProps: {
