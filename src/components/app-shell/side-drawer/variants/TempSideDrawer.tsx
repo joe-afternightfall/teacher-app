@@ -1,10 +1,11 @@
 import React from 'react';
 import { Dispatch } from 'redux';
-import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import Navigation from '../Navigation';
 import Drawer from '@material-ui/core/Drawer';
+import Navigation from '../components/Navigation';
 import { State } from '../../../../configs/redux/store';
+import SideDrawerAppBar from '../components/SideDrawerAppBar';
+import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 import { closeSideDrawer } from '../../../../creators/application/side-drawer';
 
 const useStyles = makeStyles(() =>
@@ -36,7 +37,9 @@ const TempSideDrawer = (props: TempSideDrawerProps): JSX.Element => {
         keepMounted: true, // Better open performance on mobile.
       }}
     >
-      {<Navigation />}
+      <SideDrawerAppBar closeHandler={props.closeSideDrawerHandler} />
+
+      <Navigation tempDrawer={true} />
     </Drawer>
   );
 };
