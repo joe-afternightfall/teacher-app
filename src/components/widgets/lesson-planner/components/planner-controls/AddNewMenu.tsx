@@ -1,21 +1,20 @@
 import React from 'react';
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { AnyAction, Dispatch } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 import AddIcon from '@material-ui/icons/Add';
+import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
 import LessonForm from '../lesson-form/LessonForm';
+import { State } from '../../../../../configs/redux/store';
 import LessonName from '../lesson-form/components/LessonName';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
+import { addNewFromTemplate } from '../../../../../services/lesson-planner/add-new';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {},
-  })
-);
+const useStyles = makeStyles(() => createStyles({}));
 
 const AddNewMenu = (props: AddNewMenuProps): JSX.Element => {
   const classes = useStyles();
@@ -33,7 +32,14 @@ const AddNewMenu = (props: AddNewMenuProps): JSX.Element => {
             {'Add New'}
           </Button>
           <Menu {...bindMenu(popupState)}>
-            <MenuItem onClick={popupState.close}>{'Weekly Planner'}</MenuItem>
+            <MenuItem
+              onClick={() => {
+                popupState.close();
+                props.newPlannerClickHandler();
+              }}
+            >
+              {'Weekly Planner'}
+            </MenuItem>
             <MenuItem
               onClick={() => {
                 popupState.close();
@@ -51,9 +57,10 @@ const AddNewMenu = (props: AddNewMenuProps): JSX.Element => {
 
 export interface AddNewMenuProps {
   newItemClickHandler: (content: JSX.Element, title: JSX.Element) => void;
+  newPlannerClickHandler: () => void;
 }
 
-const mapStateToProps = (state: any): AddNewMenuProps => {
+const mapStateToProps = (): AddNewMenuProps => {
   return ({} as unknown) as AddNewMenuProps;
 };
 
@@ -70,6 +77,9 @@ const mapDispatchToProps = (dispatch: Dispatch): AddNewMenuProps =>
           confirmClickHandler: null,
         })
       );
+    },
+    newPlannerClickHandler: () => {
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(addNewFromTemplate());
     },
   } as unknown) as AddNewMenuProps);
 
