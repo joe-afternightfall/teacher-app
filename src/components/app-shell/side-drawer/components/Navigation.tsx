@@ -80,8 +80,12 @@ const Navigation = (props: NavigationProps): JSX.Element => {
         <ListItemIcon>
           <AssignmentIcon />
         </ListItemIcon>
-        <ListItemText primary={'My Planner'} />
-        {open ? <ExpandLess /> : <ExpandMore />}
+        {shouldDisplayText ? (
+          <React.Fragment>
+            <ListItemText primary={'My Planner'} />
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </React.Fragment>
+        ) : undefined}
       </ListItem>
 
       <Collapse in={open} timeout={'auto'} unmountOnExit>
