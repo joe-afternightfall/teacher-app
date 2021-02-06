@@ -40,7 +40,7 @@ const PlannerNameAndDate = (props: PlannerNameAndDateProps): JSX.Element => {
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid container justify={'center'}>
+      <Grid container justify={'center'} spacing={2}>
         <Grid item xs={12} container alignItems={'center'} spacing={2}>
           <Grid item xs={6} container justify={'flex-end'}>
             <Grid item>
@@ -50,6 +50,7 @@ const PlannerNameAndDate = (props: PlannerNameAndDateProps): JSX.Element => {
           <Grid item xs={6} container justify={'flex-start'}>
             <Grid item>
               <TextField
+                style={{ width: 96 }}
                 id={'week-number'}
                 label={''}
                 fullWidth
@@ -63,36 +64,54 @@ const PlannerNameAndDate = (props: PlannerNameAndDateProps): JSX.Element => {
           </Grid>
         </Grid>
 
-        <Grid item xs={6}>
-          <KeyboardDatePicker
-            disableToolbar
-            variant={'inline'}
-            margin={'normal'}
-            id={'planner-start-date-picker'}
-            label={'Start Date'}
-            format={'MM/dd'}
-            value={props.startDate}
-            KeyboardButtonProps={{
-              'aria-label': 'change date',
-            }}
-            onChange={(date) => handleDateChange('startDate', date)}
-          />
+        <Grid item xs={12} container alignItems={'center'} spacing={2}>
+          <Grid item xs={6} container justify={'flex-end'}>
+            <Grid item>
+              <Typography>{'Start Date'}</Typography>
+            </Grid>
+          </Grid>
+          <Grid item xs={6} container justify={'flex-start'}>
+            <Grid item style={{ width: 96 }}>
+              <KeyboardDatePicker
+                disableToolbar
+                variant={'inline'}
+                margin={'normal'}
+                id={'planner-start-date-picker'}
+                label={''}
+                format={'MM/dd'}
+                value={props.startDate}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+                onChange={(date) => handleDateChange('startDate', date)}
+              />
+            </Grid>
+          </Grid>
         </Grid>
 
-        <Grid item xs={6}>
-          <KeyboardDatePicker
-            disableToolbar
-            variant={'inline'}
-            margin={'normal'}
-            id={'planner-end-date-picker'}
-            label={'End Date'}
-            format={'MM/dd'}
-            value={props.endDate}
-            KeyboardButtonProps={{
-              'aria-label': 'change date',
-            }}
-            onChange={(date) => handleDateChange('endDate', date)}
-          />
+        <Grid item xs={12} container alignItems={'center'} spacing={2}>
+          <Grid item xs={6} container justify={'flex-end'}>
+            <Grid item>
+              <Typography>{'End Date'}</Typography>
+            </Grid>
+          </Grid>
+          <Grid item xs={6} container justify={'flex-start'}>
+            <Grid item style={{ width: 96 }}>
+              <KeyboardDatePicker
+                disableToolbar
+                variant={'inline'}
+                margin={'normal'}
+                id={'planner-end-date-picker'}
+                label={''}
+                format={'MM/dd'}
+                value={props.endDate}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+                onChange={(date) => handleDateChange('endDate', date)}
+              />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </MuiPickersUtilsProvider>
