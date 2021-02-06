@@ -16,10 +16,10 @@ import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import CloseIcon from '@material-ui/icons/Close';
 import { State } from '../../../../configs/redux/store';
-import { Subject } from '../../../../configs/types/Subject';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { closeNewBookmarkDialog } from '../../../../creators/bookmarks/bookmarks-dialog';
 import { saveBookmarkInfo } from '../../../../services/bookmarks/save-bookmark';
+import { Subject } from '../../../../configs/models/Subject';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

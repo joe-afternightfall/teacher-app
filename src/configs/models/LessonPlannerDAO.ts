@@ -1,22 +1,18 @@
 import { LessonNote, Weekday } from '../types/LessonPlanner';
 
 export class LessonPlannerDAO {
-  updatedAt: Date;
+  updatedAt: string;
   id: string;
   title: string;
-  startDate: Date;
-  endDate: Date;
   weekdays: {
     [key: string]: Weekday;
   };
   notes: LessonNote[];
 
   constructor(
-    updatedAt: Date,
+    updatedAt: string,
     id: string,
     title: string,
-    startDate: Date,
-    endDate: Date,
     weekdays: {
       [key: string]: Weekday;
     },
@@ -25,8 +21,6 @@ export class LessonPlannerDAO {
     this.updatedAt = updatedAt;
     this.id = id;
     this.title = title;
-    this.startDate = startDate;
-    this.endDate = endDate;
     this.weekdays = weekdays;
     this.notes = notes;
   }

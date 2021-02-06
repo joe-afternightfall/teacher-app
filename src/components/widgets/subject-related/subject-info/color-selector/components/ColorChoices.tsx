@@ -11,7 +11,7 @@ import {
 } from '../../../../../../configs/theme/subject-color-choices';
 import { State } from '../../../../../../configs/redux/store';
 import { selectColor } from '../../../../../../creators/subject-list/select-color';
-import { Subject } from '../../../../../../configs/types/Subject';
+import { Subject } from '../../../../../../configs/models/Subject';
 
 const useStyles = makeStyles(() =>
   createStyles({

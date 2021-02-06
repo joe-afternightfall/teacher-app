@@ -17,10 +17,10 @@ import { connect } from 'react-redux';
 import EditIcon from '@material-ui/icons/Edit';
 import { getIcon } from '../../../../utils/get-icon';
 import { State } from '../../../../configs/redux/store';
-import { Subject } from '../../../../configs/types/Subject';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { editingSubject } from '../../../../creators/subject-list/editing-subject';
 import { openSubjectInfoDialog } from '../../../../creators/subject-list/subject-info-dialog';
+import { Subject } from '../../../../configs/models/Subject';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

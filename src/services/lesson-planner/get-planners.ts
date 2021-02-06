@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-export const getAllLessonPlanners = async () => {
+export const getLessonPlanners = async () => {
   return await firebase
     .database()
     .ref('/lesson-planners')

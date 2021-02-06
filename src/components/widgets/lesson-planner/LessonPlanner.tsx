@@ -9,15 +9,15 @@ import { Grid } from '@material-ui/core';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import {
-  LessonPlanner,
   LessonWeekdays,
   MoveLessonResult,
   Weekday,
 } from '../../../configs/types/LessonPlanner';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { move, reorder, updateAllItems } from '../../../utils/weekly-planner';
-import { Subject } from '../../../configs/types/Subject';
 import { LessonItem } from '../../../configs/models/LessonItem';
+import { LessonPlanner } from '../../../configs/models/LessonPlanner';
+import { Subject } from '../../../configs/models/Subject';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 

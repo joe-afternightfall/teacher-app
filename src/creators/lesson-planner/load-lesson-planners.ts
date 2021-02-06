@@ -1,8 +1,10 @@
 import actions from '../actions';
-import { LessonPlanner } from '../../configs/types/LessonPlanner';
 import { AnyAction } from 'redux';
+import { LessonPlanner } from '../../configs/models/LessonPlanner';
 
-export const loadLessonPlanners = (planners: LessonPlanner[]): AnyAction => {
+export const loadLessonPlanners = (
+  planners: LessonPlanner[] | null
+): AnyAction => {
   return {
     type: actions.LOAD_LESSON_PLANNERS,
     lessonPlanners: planners,

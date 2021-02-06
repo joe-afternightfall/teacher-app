@@ -1,6 +1,6 @@
 import actions from '../actions';
-import { Bookmark } from '../../configs/types/Bookmark';
 import { AnyAction } from 'redux';
+import { Bookmark } from '../../configs/models/Bookmark';
 
 export const loadBookmarksList = (bookmarks: Bookmark[]): AnyAction => {
   return {

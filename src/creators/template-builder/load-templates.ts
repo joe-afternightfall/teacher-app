@@ -1,6 +1,6 @@
 import actions from '../actions';
-import { LessonPlanner } from '../../configs/types/LessonPlanner';
 import { AnyAction } from 'redux';
+import { LessonPlanner } from '../../configs/models/LessonPlanner';
 
 export const loadTemplate = (template: LessonPlanner | null): AnyAction => {
   return {

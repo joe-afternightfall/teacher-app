@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import { State } from '../../../../configs/redux/store';
 import FormControl from '@material-ui/core/FormControl';
-import { Subject } from '../../../../configs/types/Subject';
+import { Subject } from '../../../../configs/models/Subject';
 
 const SubjectDropdown = (props: SubjectDropdownProps): JSX.Element => {
   return (

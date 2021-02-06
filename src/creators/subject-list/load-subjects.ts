@@ -1,6 +1,6 @@
 import actions from '../actions';
 import { AnyAction } from 'redux';
-import { Subject } from '../../configs/types/Subject';
+import { Subject } from '../../configs/models/Subject';
 
 export const loadSubjectList = (subjectList: Subject[]): AnyAction => {
   return {

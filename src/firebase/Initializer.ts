@@ -2,7 +2,10 @@ import { Store } from 'redux';
 import firebase from 'firebase';
 import { updateBookmarks } from './update-methods/bookmarks';
 import { updateSubjects } from './update-methods/subjects';
-import { updateTemplateBuilder } from './update-methods/template-builder';
+import {
+  updateLessonPlanners,
+  updateTemplateBuilder,
+} from './update-methods/lesson-planner';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -29,6 +32,7 @@ export class Initializer {
     const subjectsRef = firebase.database().ref('/subjects');
     const bookmarksRef = firebase.database().ref('/bookmarks');
     const templateBuilderRef = firebase.database().ref('/template-builder');
+    const plannerRef = firebase.database().ref('/lesson-planners');
 
     bookmarksRef.on('child_added', async () => {
       await updateBookmarks(this.store);
@@ -64,6 +68,18 @@ export class Initializer {
 
     templateBuilderRef.on('child_removed', async () => {
       await updateTemplateBuilder(this.store);
+    });
+
+    plannerRef.on('child_added', async () => {
+      await updateLessonPlanners(this.store);
+    });
+
+    plannerRef.on('child_changed', async () => {
+      await updateLessonPlanners(this.store);
+    });
+
+    plannerRef.on('child_removed', async () => {
+      await updateLessonPlanners(this.store);
     });
   }
 }

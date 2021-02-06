@@ -1,20 +1,20 @@
 import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import LogRocket from 'logrocket';
 import { Route } from 'react-router';
 import { Provider } from 'react-redux';
 import { createHashHistory } from 'history';
+import setupLogRocketReact from 'logrocket-react';
 import { routes } from './configs/constants/routes';
 import { createStore } from './configs/redux/store';
 import { Initializer } from './firebase/Initializer';
 import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './configs/service-worker';
 import BookmarksScreen from './components/top-level-components/BookmarksScreen';
+import LessonPlannerScreen from './components/top-level-components/LessonPlannerScreen';
 import DashboardScreen from './components/top-level-components/dashboard/DashboardScreen';
-import TemplateBuilderScreen from './components/top-level-components/template-builder/TemplateBuilderScreen';
-import LessonPlannerScreen from './components/top-level-components/lesson-planner/LessonPlannerScreenConnector';
-import LogRocket from 'logrocket';
-import setupLogRocketReact from 'logrocket-react';
+import TemplateBuilderScreen from './components/top-level-components/TemplateBuilderScreen';
 
 LogRocket.init('be9sx9/teacher-app');
 setupLogRocketReact(LogRocket);
