@@ -36,7 +36,7 @@ const AddNewMenu = (props: AddNewMenuProps): JSX.Element => {
             <MenuItem
               onClick={() => {
                 popupState.close();
-                props.addNewClickHandler(<PlannerNameAndDate />);
+                props.newPlannerClickHandler(<PlannerNameAndDate />);
               }}
             >
               {'Weekly Planner'}
@@ -58,7 +58,7 @@ const AddNewMenu = (props: AddNewMenuProps): JSX.Element => {
 
 export interface AddNewMenuProps {
   newItemClickHandler: (content: JSX.Element, title: JSX.Element) => void;
-  addNewClickHandler: (content: JSX.Element) => void;
+  newPlannerClickHandler: (content: JSX.Element) => void;
 }
 
 const mapStateToProps = (): AddNewMenuProps => {
@@ -79,7 +79,7 @@ const mapDispatchToProps = (dispatch: Dispatch): AddNewMenuProps =>
         })
       );
     },
-    addNewClickHandler: (content: JSX.Element) => {
+    newPlannerClickHandler: (content: JSX.Element) => {
       dispatch(
         displayAppDialog({
           maxWidth: 'sm',

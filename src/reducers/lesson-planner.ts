@@ -110,6 +110,12 @@ export default {
       case actions.UPDATE_WEEK_NUMBER:
         newState.weekNumber = action.weekNumber;
         break;
+      case actions.UPDATE_PLANNER_START_DATE:
+        newState.plannerStartDate = action.startDate;
+        break;
+      case actions.UPDATE_PLANNER_END_DATE:
+        newState.plannerEndDate = action.endDate;
+        break;
       default:
         newState = state;
     }
@@ -144,4 +150,6 @@ export interface LessonPlannerState {
   lessonType: string | undefined;
   otherLessonTypeName: string;
   weekNumber: string;
+  plannerStartDate: string;
+  plannerEndDate: string;
 }
