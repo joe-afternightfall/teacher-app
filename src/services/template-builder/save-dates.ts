@@ -19,8 +19,8 @@ export const saveDates = (): ThunkAction<
     .child(templateFirebaseId)
     .update(
       {
-        endDate: plannerState.endDate.toLocaleDateString(),
-        startDate: plannerState.startDate.toLocaleDateString(),
+        endDate: plannerState.endDate,
+        startDate: plannerState.startDate,
       },
       (error) => {
         if (error) {

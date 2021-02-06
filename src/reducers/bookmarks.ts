@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
-import { Bookmark } from '../configs/types/Bookmark';
+import { Bookmark } from '../configs/models/Bookmark';
 
 export default {
   reducer(

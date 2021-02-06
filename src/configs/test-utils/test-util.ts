@@ -1,9 +1,9 @@
-import { LessonPlanner } from '../types/LessonPlanner';
-import { Subject } from '../types/Subject';
 import { v4 as uuidv4 } from 'uuid';
-import { ColorChoice } from '../theme/subject-color-choices';
-import { Bookmark } from '../types/Bookmark';
 import { LessonItem } from '../models/LessonItem';
+import { ColorChoice } from '../theme/subject-color-choices';
+import { LessonPlanner } from '../models/LessonPlanner';
+import { Subject } from '../models/Subject';
+import { Bookmark } from '../models/Bookmark';
 
 export const buildLessonItems = (items: number): LessonItem[] => {
   let index = 0;
@@ -31,10 +31,8 @@ export const buildLessonItems = (items: number): LessonItem[] => {
 export const buildLessonPlanner = (): LessonPlanner => {
   return {
     firebaseId: 'firebase-planner',
-    updatedAt: new Date(),
+    updatedAt: new Date().toLocaleDateString(),
     id: 'planner-id',
-    startDate: new Date(),
-    endDate: new Date(),
     title: 'planner-title',
     weekdays: {
       monday: {

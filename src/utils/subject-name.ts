@@ -1,4 +1,4 @@
-import { Subject } from '../configs/types/Subject';
+import { Subject } from '../configs/models/Subject';
 
 export const getSubjectName = (
   subjectList: Subject[],

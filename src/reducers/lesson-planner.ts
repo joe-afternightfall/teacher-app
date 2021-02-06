@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
-import { LessonPlanner } from '../configs/types/LessonPlanner';
+import { LessonPlanner } from '../configs/models/LessonPlanner';
 
 export default {
   reducer(
@@ -116,6 +116,11 @@ export default {
       case actions.UPDATE_PLANNER_END_DATE:
         newState.plannerEndDate = action.endDate;
         break;
+      case actions.CLEAR_NEW_PLANNER_INFO:
+        newState.weekNumber = '';
+        newState.plannerStartDate = new Date().toLocaleDateString();
+        newState.plannerEndDate = new Date().toLocaleDateString();
+        break;
       default:
         newState = state;
     }
@@ -143,8 +148,6 @@ export interface LessonPlannerState {
   lessonName: string;
   startTime: Date;
   endTime: Date;
-  startDate: Date;
-  endDate: Date;
   templateBuilder: LessonPlanner;
   lessonBoardChanged: boolean;
   lessonType: string | undefined;

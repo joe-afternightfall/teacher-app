@@ -6,17 +6,15 @@ export class LessonPlanner extends LessonPlannerDAO {
 
   constructor(
     firebaseId: string,
-    updatedAt: Date,
+    updatedAt: string,
     id: string,
     title: string,
-    startDate: Date,
-    endDate: Date,
     weekdays: {
       [key: string]: Weekday;
     },
     notes: LessonNote[]
   ) {
-    super(updatedAt, id, title, startDate, endDate, weekdays, notes);
+    super(updatedAt, id, title, weekdays, notes);
 
     this.firebaseId = firebaseId;
   }

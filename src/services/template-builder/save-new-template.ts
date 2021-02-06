@@ -64,11 +64,9 @@ export const saveNewTemplate = (): ThunkAction<
 
   // todo:  remove "startDate" and "endDate" from lesson planner object and create its only endpoint
   const lessonPlannerDAO = new LessonPlannerDAO(
-    new Date(),
+    new Date().toISOString(),
     uuidv4(),
     'Template Builder',
-    plannerState.startDate ? plannerState.startDate : new Date(),
-    plannerState.endDate ? plannerState.endDate : new Date(),
     builtItems,
     []
   );

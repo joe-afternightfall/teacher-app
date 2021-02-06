@@ -14,19 +14,6 @@ export interface MoveLessonResult {
   [key: string]: LessonItem[];
 }
 
-export interface LessonPlanner {
-  firebaseId: string;
-  updatedAt: Date;
-  id: string;
-  title: string;
-  startDate: Date;
-  endDate: Date;
-  weekdays: {
-    [key: string]: Weekday;
-  };
-  notes: LessonNote[];
-}
-
 export interface LessonWeekdays {
   [key: string]: string | LessonItem[] | Weekday;
   monday: LessonItem[];

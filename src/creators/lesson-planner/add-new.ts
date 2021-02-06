@@ -26,3 +26,9 @@ export const updatePlannerEndDate = (date: string) => {
     endDate: date,
   };
 };
+
+export const clearNewPlannerInfo = () => {
+  return {
+    type: actions.CLEAR_NEW_PLANNER_INFO,
+  };
+};

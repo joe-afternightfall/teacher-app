@@ -20,12 +20,12 @@ import {
 import { Styles } from '@material-ui/styles';
 import CardPopover from './card-popover/CardPopover';
 import DeleteItemDialog from './dialog/DeleteItemDialog';
-import { Subject } from '../../../../configs/types/Subject';
 import { getSubject } from '../../../../utils/subject-name';
 import { Card, Grid, CardHeader, Typography } from '@material-ui/core';
 import { capitalizeFirstLetter } from '../../../../utils/string-formatter';
 import { Weekday } from '../../../../configs/types/LessonPlanner';
 import { LessonItem } from '../../../../configs/models/LessonItem';
+import { Subject } from '../../../../configs/models/Subject';
 
 const getItemStyle = (
   draggableStyle: any,

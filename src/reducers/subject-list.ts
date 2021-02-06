@@ -1,11 +1,11 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
-import { Subject } from '../configs/types/Subject';
 import {
   ColorChoice,
   subjectColorChoices,
 } from '../configs/theme/subject-color-choices';
 import { checkForDuplicates } from '../utils/validate-name';
+import { Subject } from '../configs/models/Subject';
 
 export default {
   reducer(
