@@ -13,6 +13,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
 import { addNewFromTemplate } from '../../../../../services/lesson-planner/add-new';
+import PlannerNameAndDate from './PlannerNameAndDate';
 
 const useStyles = makeStyles(() => createStyles({}));
 
@@ -35,7 +36,7 @@ const AddNewMenu = (props: AddNewMenuProps): JSX.Element => {
             <MenuItem
               onClick={() => {
                 popupState.close();
-                props.newPlannerClickHandler();
+                props.addNewClickHandler(<PlannerNameAndDate />);
               }}
             >
               {'Weekly Planner'}
@@ -57,7 +58,7 @@ const AddNewMenu = (props: AddNewMenuProps): JSX.Element => {
 
 export interface AddNewMenuProps {
   newItemClickHandler: (content: JSX.Element, title: JSX.Element) => void;
-  newPlannerClickHandler: () => void;
+  addNewClickHandler: (content: JSX.Element) => void;
 }
 
 const mapStateToProps = (): AddNewMenuProps => {
@@ -78,8 +79,21 @@ const mapDispatchToProps = (dispatch: Dispatch): AddNewMenuProps =>
         })
       );
     },
-    newPlannerClickHandler: () => {
-      (dispatch as ThunkDispatch<State, void, AnyAction>)(addNewFromTemplate());
+    addNewClickHandler: (content: JSX.Element) => {
+      dispatch(
+        displayAppDialog({
+          maxWidth: 'sm',
+          titleColor: '#3baafc',
+          content: content,
+          title: 'New Weekly Planner',
+          confirmButtonTitle: 'Create Planner',
+          confirmClickHandler: () => {
+            (dispatch as ThunkDispatch<State, void, AnyAction>)(
+              addNewFromTemplate()
+            );
+          },
+        })
+      );
     },
   } as unknown) as AddNewMenuProps);
 
