@@ -16,11 +16,10 @@ export const addNewFromTemplate = (): ThunkAction<
   const plannerRef = firebase.database().ref('/lesson-planners');
   const newPlannerRef = plannerRef.push();
 
-  // todo:  get planner title from redux
   const lessonPlannerDAO = new LessonPlannerDAO(
     new Date(),
     uuidv4(),
-    'Week #',
+    `Week #${plannerState.weekNumber}`,
     plannerState.startDate ? plannerState.startDate : new Date(),
     plannerState.endDate ? plannerState.endDate : new Date(),
     plannerState.templateBuilder.weekdays,
