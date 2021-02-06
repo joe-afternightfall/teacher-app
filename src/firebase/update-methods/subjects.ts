@@ -3,7 +3,7 @@ import { getSubjects } from '../../services/subject-list/get-subjects';
 import { loadSubjectList } from '../../creators/subject-list/load-subjects';
 import { Subject } from '../../configs/models/Subject';
 
-export const updateSubjects = async (store: Store) => {
+export const updateSubjects = async (store: Store): Promise<void> => {
   const subjects = await getSubjects();
   if (subjects !== null) {
     const output = Object.keys(subjects).map(

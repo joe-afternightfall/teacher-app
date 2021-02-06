@@ -3,7 +3,7 @@ import { getBookmarksList } from '../../services/bookmarks/get-bookmarks';
 import { loadBookmarksList } from '../../creators/bookmarks/load-bookmarks';
 import { Bookmark } from '../../configs/models/Bookmark';
 
-export const updateBookmarks = async (store: Store) => {
+export const updateBookmarks = async (store: Store): Promise<void> => {
   const bookmarksList = await getBookmarksList();
   if (bookmarksList !== undefined && bookmarksList !== null) {
     const bookmarks = Object.keys(bookmarksList).map(

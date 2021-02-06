@@ -2,8 +2,10 @@ import { Store } from 'redux';
 import firebase from 'firebase';
 import { updateBookmarks } from './update-methods/bookmarks';
 import { updateSubjects } from './update-methods/subjects';
-import { updateTemplateBuilder } from './update-methods/template-builder';
-import { updateLessonPlanners } from './update-methods/lesson-planner';
+import {
+  updateLessonPlanners,
+  updateTemplateBuilder,
+} from './update-methods/lesson-planner';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
