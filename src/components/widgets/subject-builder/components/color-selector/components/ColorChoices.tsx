@@ -3,7 +3,7 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import CheckIcon from '@material-ui/icons/Check';
-import { Grid, Tooltip, Typography } from '@material-ui/core';
+import { Grid, Tooltip } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import {
   ColorChoice,

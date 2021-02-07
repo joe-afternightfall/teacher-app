@@ -22,9 +22,9 @@ import {
   openSubjectInfoDialog,
 } from '../../../../creators/subject-list/subject-info-dialog';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import SubjectInfo from '../../../widgets/subject-related/subject-info/SubjectInfo';
 import SubjectList from '../../../widgets/subject-related/subject-list/SubjectList';
-import SubjectInfoActionButtons from '../../../widgets/subject-related/subject-info/SubjectInfoActionButtons';
+import SubjectInfoActionButtons from '../../../widgets/subject-builder/components/SubjectInfoActionButtons';
+import SubjectBuilder from '../../../widgets/subject-builder/SubjectBuilder';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,7 +42,6 @@ const SubjectListDialog = (props: SubjectListDialogProps): JSX.Element => {
   const [open, setOpen] = React.useState<boolean>(false);
 
   const toggleDialog = () => {
-    props.closeMenuClickHandler();
     setOpen(!open);
     props.closeSubjectInfoHandler();
   };
@@ -59,7 +58,9 @@ const SubjectListDialog = (props: SubjectListDialogProps): JSX.Element => {
 
   return (
     <div>
-      <MenuItem onClick={toggleDialog}>{'Subject List'}</MenuItem>
+      <IconButton onClick={toggleDialog}>
+        <AddIcon />
+      </IconButton>
 
       <Dialog
         fullWidth={true}
@@ -103,7 +104,7 @@ const SubjectListDialog = (props: SubjectListDialogProps): JSX.Element => {
             <DialogContent>
               <Grid container spacing={2}>
                 {props.shouldDisplaySubjectInfo ? (
-                  <SubjectInfo />
+                  <SubjectBuilder />
                 ) : (
                   <Grid item xs={12}>
                     <SubjectList />
@@ -139,7 +140,6 @@ const SubjectListDialog = (props: SubjectListDialogProps): JSX.Element => {
 export interface SubjectListDialogProps {
   displayLoader: boolean;
   isEditing: boolean;
-  closeMenuClickHandler: () => void;
   shouldDisplaySubjectInfo: boolean;
   openSubjectInfoHandler: () => void;
   closeSubjectInfoHandler: () => void;
