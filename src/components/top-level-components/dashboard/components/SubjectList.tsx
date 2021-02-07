@@ -11,6 +11,7 @@ import {
   ListSubheader,
   Grid,
   Card,
+  Tooltip,
 } from '@material-ui/core';
 import DeleteSubjectDialog, {
   DeleteSubjectDialogProps,
@@ -65,9 +66,11 @@ const SubjectList = (props: SubjectListProps) => {
               <Grid item>{'Subject List'}</Grid>
 
               <Grid item>
-                <IconButton onClick={props.newSubjectHandler}>
-                  <AddIcon />
-                </IconButton>
+                <Tooltip title={'Add New'} placement={'top'}>
+                  <IconButton onClick={props.newSubjectHandler}>
+                    <AddIcon style={{ color: '#fff' }} />
+                  </IconButton>
+                </Tooltip>
               </Grid>
             </Grid>
           </ListSubheader>
