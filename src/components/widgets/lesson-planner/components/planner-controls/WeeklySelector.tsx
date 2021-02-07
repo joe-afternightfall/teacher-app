@@ -1,13 +1,4 @@
 import clsx from 'clsx';
-import React, { Component } from 'react';
-import { Styles } from '@material-ui/styles';
-import {
-  StyledComponentProps,
-  Theme,
-  WithStyles,
-  withStyles,
-} from '@material-ui/core/styles';
-import { DatePicker } from '@material-ui/pickers';
 import {
   isValid,
   format,
@@ -16,28 +7,25 @@ import {
   endOfWeek,
   isWithinInterval,
 } from 'date-fns';
-import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
+import {
+  Theme,
+  WithStyles,
+  withStyles,
+  StyledComponentProps,
+} from '@material-ui/core/styles';
+import React, { Component } from 'react';
+import { Styles } from '@material-ui/styles';
 import { IconButton } from '@material-ui/core';
+import { KeyboardDatePicker } from '@material-ui/pickers';
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
-  dayWrapper: {
-    position: 'relative',
-  },
   day: {
     width: 36,
     height: 36,
     fontSize: theme.typography.caption.fontSize,
     margin: '0 2px',
     color: 'inherit',
-  },
-  customDayHighlight: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: '2px',
-    right: '2px',
-    border: `1px solid ${theme.palette.secondary.main}`,
-    borderRadius: '50%',
   },
   nonCurrentMonthDay: {
     color: theme.palette.text.disabled,
@@ -67,7 +55,10 @@ class WeeklySelector extends Component<WeeklySelectorProps> {
   };
 
   handleWeekChange = (date: any) => {
-    this.setState({ selectedDate: startOfWeek(date) });
+    this.setState({
+      selectedDate: startOfWeek(date),
+    });
+    this.props.updateHandler(date);
   };
 
   formatWeekSelectLabel = (
@@ -119,7 +110,7 @@ class WeeklySelector extends Component<WeeklySelectorProps> {
     const { selectedDate } = this.state;
 
     return (
-      <DatePicker
+      <KeyboardDatePicker
         disableToolbar
         variant={'inline'}
         label={'Week of'}
@@ -132,6 +123,8 @@ class WeeklySelector extends Component<WeeklySelectorProps> {
   }
 }
 
-export type WeeklySelectorProps = WithStyles<typeof styles>;
+export interface WeeklySelectorProps extends WithStyles<typeof styles> {
+  updateHandler: (date: string) => void;
+}
 
 export default withStyles(styles, { withTheme: true })(WeeklySelector);
