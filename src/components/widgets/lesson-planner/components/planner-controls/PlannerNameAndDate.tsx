@@ -6,7 +6,6 @@ import DateFnsUtils from '@date-io/date-fns';
 import WeeklySelector from './WeeklySelector';
 import {
   updateWeekNumber,
-  updatePlannerEndDate,
   updatePlannerStartDate,
 } from '../../../../../creators/lesson-planner/add-new';
 import { State } from '../../../../../configs/redux/store';
