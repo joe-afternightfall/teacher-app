@@ -25,13 +25,13 @@ export default function BookmarkForm(props: BookmarkFormProps): JSX.Element {
           <Grid container alignItems={'center'} justify={'space-between'}>
             <Grid item xs={7}>
               <TextField
-                id={'bookmark-title'}
                 label={'Title'}
+                margin={'normal'}
                 style={{ width: '100%' }}
                 className={classes.textfield}
+                data-testId={'bookmark-title'}
                 value={props.bookmarkValues.bookmarkTitle}
                 onChange={props.textfieldChangeHandler('bookmarkTitle')}
-                margin={'normal'}
               />
             </Grid>
 

@@ -9,7 +9,7 @@ import { Subject } from '../../../../configs/models/Subject';
 
 const SubjectDropdown = (props: SubjectDropdownProps): JSX.Element => {
   return (
-    <FormControl style={{ width: '100%' }}>
+    <FormControl style={{ width: '100%' }} data-testId={'subject-dropdown'}>
       <InputLabel htmlFor={'subject-dropdown'}>{'Subject'}</InputLabel>
       <Select
         value={props.value}

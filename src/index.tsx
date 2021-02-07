@@ -11,6 +11,7 @@ import { createStore } from './configs/redux/store';
 import { Initializer } from './firebase/Initializer';
 import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './configs/service-worker';
+import MyPlannerScreen from './components/top-level-components/MyPlannerScreen';
 import BookmarksScreen from './components/top-level-components/BookmarksScreen';
 import LessonPlannerScreen from './components/top-level-components/LessonPlannerScreen';
 import DashboardScreen from './components/top-level-components/dashboard/DashboardScreen';
@@ -59,6 +60,11 @@ ReactDOM.render(
               component={BookmarksScreen}
               exact
               path={routes.BOOKMARKS.path}
+            />
+            <Route
+              component={MyPlannerScreen}
+              exact
+              path={routes.MY_PLANNER.path}
             />
           </div>
         </App>

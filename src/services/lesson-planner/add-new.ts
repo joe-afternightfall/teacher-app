@@ -6,9 +6,10 @@ import { LessonPlannerDAO } from '../../configs/models/LessonPlannerDAO';
 import { v4 as uuidv4 } from 'uuid';
 import { displayAppSnackbar } from '../../creators/application/app-snackbar';
 import { clearNewPlannerInfo } from '../../creators/lesson-planner/add-new';
+import { startOfWeek } from 'date-fns';
 
 function addDays(startDate: string, days: number): string {
-  const date = new Date(startDate);
+  const date = startOfWeek(new Date(startDate));
   date.setDate(date.getDate() + days);
   return date.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' });
 }
@@ -26,11 +27,11 @@ export const addNewFromTemplate = (): ThunkAction<
   const weekdays = plannerState.templateBuilder.weekdays;
   const plannerStartDate = plannerState.plannerStartDate;
 
-  weekdays.monday.date = addDays(plannerStartDate, 0);
-  weekdays.tuesday.date = addDays(plannerStartDate, 1);
-  weekdays.wednesday.date = addDays(plannerStartDate, 2);
-  weekdays.thursday.date = addDays(plannerStartDate, 3);
-  weekdays.friday.date = addDays(plannerStartDate, 4);
+  weekdays.monday.date = addDays(plannerStartDate, 1);
+  weekdays.tuesday.date = addDays(plannerStartDate, 2);
+  weekdays.wednesday.date = addDays(plannerStartDate, 3);
+  weekdays.thursday.date = addDays(plannerStartDate, 4);
+  weekdays.friday.date = addDays(plannerStartDate, 5);
 
   const lessonPlannerDAO = new LessonPlannerDAO(
     new Date().toISOString(),
