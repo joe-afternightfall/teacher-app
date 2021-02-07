@@ -86,32 +86,32 @@ class LessonPlannerComp extends Component<LessonPlannerProps> {
             subjectList={subjectList}
             dayOfWeek={'monday'}
             plannerDay={plannerItems && plannerItems.monday}
-            color={'#e43f78'}
+            color={'#E43F78'}
           />
           <Column
             subjectList={subjectList}
             dayOfWeek={'tuesday'}
             plannerDay={plannerItems && plannerItems.tuesday}
             // color={'#f2b645'}
-            color={'#ef8c0a'}
+            color={'#EF8C0A'}
           />
           <Column
             subjectList={subjectList}
             dayOfWeek={'wednesday'}
             plannerDay={plannerItems && plannerItems.wednesday}
-            color={'#77c74b'}
+            color={'#77C74B'}
           />
           <Column
             subjectList={subjectList}
             dayOfWeek={'thursday'}
             plannerDay={plannerItems && plannerItems.thursday}
-            color={'#2c9df0'}
+            color={'#2C9DF0'}
           />
           <Column
             subjectList={subjectList}
             dayOfWeek={'friday'}
             plannerDay={plannerItems && plannerItems.friday}
-            color={'#725fe7'}
+            color={'#725FE7'}
           />
         </Grid>
       </DragDropContext>
