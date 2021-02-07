@@ -48,59 +48,57 @@ const SubjectListDialog = (props: SubjectListDialogProps): JSX.Element => {
   }
 
   return (
-    <div>
-      <Dialog
-        open={props.open}
-        maxWidth={'md'}
-        fullWidth={true}
-        onClose={toggleDialog}
-      >
-        <DialogTitle id={'subject-list-dialog-title'}>
-          {dialogMessage}
-          <IconButton
-            aria-label={'close'}
-            className={classes.closeButton}
-            onClick={toggleDialog}
-          >
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
+    <Dialog
+      open={props.open}
+      maxWidth={'md'}
+      fullWidth={true}
+      onClose={toggleDialog}
+    >
+      <DialogTitle id={'subject-list-dialog-title'}>
+        {dialogMessage}
+        <IconButton
+          aria-label={'close'}
+          className={classes.closeButton}
+          onClick={toggleDialog}
+        >
+          <CloseIcon />
+        </IconButton>
+      </DialogTitle>
 
-        {props.displayLoader ? (
+      {props.displayLoader ? (
+        <DialogContent>
+          <Grid
+            container
+            spacing={2}
+            justify={'center'}
+            direction={'column'}
+            style={{
+              minHeight: '30vh',
+            }}
+            alignItems={'center'}
+          >
+            <Grid item>
+              <CircularProgress />
+            </Grid>
+            <Grid item>
+              <Typography>{'Saving Subject Info'}</Typography>
+            </Grid>
+          </Grid>
+        </DialogContent>
+      ) : (
+        <React.Fragment>
           <DialogContent>
-            <Grid
-              container
-              spacing={2}
-              justify={'center'}
-              direction={'column'}
-              style={{
-                minHeight: '30vh',
-              }}
-              alignItems={'center'}
-            >
-              <Grid item>
-                <CircularProgress />
-              </Grid>
-              <Grid item>
-                <Typography>{'Saving Subject Info'}</Typography>
-              </Grid>
+            <Grid container spacing={2}>
+              <SubjectBuilder />
             </Grid>
           </DialogContent>
-        ) : (
-          <React.Fragment>
-            <DialogContent>
-              <Grid container spacing={2}>
-                <SubjectBuilder />
-              </Grid>
-            </DialogContent>
 
-            <DialogActions>
-              <SubjectInfoActionButtons />
-            </DialogActions>
-          </React.Fragment>
-        )}
-      </Dialog>
-    </div>
+          <DialogActions>
+            <SubjectInfoActionButtons />
+          </DialogActions>
+        </React.Fragment>
+      )}
+    </Dialog>
   );
 };
 
