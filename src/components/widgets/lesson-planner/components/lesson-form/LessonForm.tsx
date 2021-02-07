@@ -9,7 +9,7 @@ import {
   updateLessonSubject,
 } from '../../../../../creators/lesson-planner/update-items';
 import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
-import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDropdown';
+import SubjectDropdown from '../../../../shared/SubjectDropdown';
 
 const LessonForm = (props: LessonFormProps): JSX.Element => {
   // const addNewLinkClickHandler = () => {

@@ -8,6 +8,7 @@ import {
   ListItemText,
   ListItemAvatar,
   ListItemSecondaryAction,
+  ListSubheader,
 } from '@material-ui/core';
 import DeleteSubjectDialog, {
   DeleteSubjectDialogProps,
@@ -17,12 +18,13 @@ import { connect } from 'react-redux';
 import EditIcon from '@material-ui/icons/Edit';
 import { getIcon } from '../../../../utils/get-icon';
 import { State } from '../../../../configs/redux/store';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Subject } from '../../../../configs/models/Subject';
+import { AppTheme } from '../../../../configs/theme/light-theme';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { editingSubject } from '../../../../creators/subject-list/editing-subject';
 import { openSubjectInfoDialog } from '../../../../creators/subject-list/subject-info-dialog';
-import { Subject } from '../../../../configs/models/Subject';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme: AppTheme) =>
   createStyles({
     root: {
       width: '100%',
@@ -30,6 +32,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       flexGrow: 1,
+    },
+    subheader: {
+      color: theme.palette.primary.contrastText,
+      background: theme.palette.colors.accents.pink,
     },
   })
 );
@@ -42,6 +48,11 @@ const SubjectList = (props: SubjectListProps) => {
       component={'nav'}
       aria-labelledby={'nested-list-subheader'}
       className={classes.root}
+      subheader={
+        <ListSubheader component={'div'} className={classes.subheader}>
+          {'Subject List'}
+        </ListSubheader>
+      }
     >
       {props.isEmpty ? (
         <ListItem style={{ textAlign: 'center' }}>

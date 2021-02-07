@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import { State } from '../../configs/redux/store';
 import InputLabel from '@material-ui/core/InputLabel';
-import { State } from '../../../../configs/redux/store';
+import { Subject } from '../../configs/models/Subject';
 import FormControl from '@material-ui/core/FormControl';
-import { Subject } from '../../../../configs/models/Subject';
 
 const SubjectDropdown = (props: SubjectDropdownProps): JSX.Element => {
   return (

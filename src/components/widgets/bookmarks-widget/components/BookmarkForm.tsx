@@ -2,7 +2,7 @@ import React from 'react';
 import { NewBookmarkForm } from './NewBookmarkDialog';
 import { Grid, TextField } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import SubjectDropdown from '../../subject-related/subject-dropdown/SubjectDropdown';
+import SubjectDropdown from '../../../shared/SubjectDropdown';
 
 const useStyles = makeStyles(() =>
   createStyles({
