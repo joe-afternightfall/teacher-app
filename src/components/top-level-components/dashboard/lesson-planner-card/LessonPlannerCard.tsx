@@ -12,7 +12,6 @@ import {
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import SubjectListDialog from './SubjectListDialog';
 import { State } from '../../../../configs/redux/store';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { routerActions } from 'connected-react-router';
@@ -55,7 +54,6 @@ const LessonPlannerCard = (props: PlannerWidgetProps): JSX.Element => {
               onClose={handleClose}
               open={Boolean(anchorEl)}
             >
-              <SubjectListDialog closeMenuClickHandler={handleClose} />
               <MenuItem
                 onClick={() => {
                   props.routeToTemplateBuilderHandler();
