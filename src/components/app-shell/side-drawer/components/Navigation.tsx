@@ -33,10 +33,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Navigation = (props: NavigationProps): JSX.Element => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
     setOpen(!open);
+    closeAndRoute(routes.MY_PLANNER.path);
   };
 
   const closeAndRoute = (route: string) => {
@@ -78,11 +79,11 @@ const Navigation = (props: NavigationProps): JSX.Element => {
 
       <ListItem button onClick={handleClick}>
         <ListItemIcon>
-          <AssignmentIcon />
+          {React.createElement(routes.MY_PLANNER.icon)}
         </ListItemIcon>
         {shouldDisplayText ? (
           <React.Fragment>
-            <ListItemText primary={'My Planner'} />
+            <ListItemText primary={routes.MY_PLANNER.drawerTitle} />
             {open ? <ExpandLess /> : <ExpandMore />}
           </React.Fragment>
         ) : undefined}
