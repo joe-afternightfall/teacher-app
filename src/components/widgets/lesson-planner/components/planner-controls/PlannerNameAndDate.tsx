@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  MuiPickersUtilsProvider,
-} from '@material-ui/pickers';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import DateFnsUtils from '@date-io/date-fns';
