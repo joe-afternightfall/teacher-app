@@ -38,10 +38,10 @@ export default {
         break;
       }
       case actions.OPEN_SUBJECT_INFO_DIALOG:
-        newState.displaySubjectInfo = true;
+        newState.displaySubjectBuilder = true;
         break;
       case actions.CLOSE_SUBJECT_INFO_DIALOG:
-        newState.displaySubjectInfo = false;
+        newState.displaySubjectBuilder = false;
         break;
       case actions.UPDATING_SUBJECT_INFO:
         newState.displayLoader = true;
@@ -97,7 +97,7 @@ export interface SubjectListState {
   selectedIconId: string;
   subjectList: Subject[];
   selectedColor: ColorChoice;
-  displaySubjectInfo: boolean;
+  displaySubjectBuilder: boolean;
   displayLoader: boolean;
   editingFormFirebaseId: string;
   editingFormId: string;
