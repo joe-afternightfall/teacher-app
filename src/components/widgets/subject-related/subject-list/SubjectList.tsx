@@ -9,6 +9,7 @@ import {
   ListItemAvatar,
   ListItemSecondaryAction,
   ListSubheader,
+  Grid,
 } from '@material-ui/core';
 import DeleteSubjectDialog, {
   DeleteSubjectDialogProps,
@@ -23,6 +24,7 @@ import { AppTheme } from '../../../../configs/theme/light-theme';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { editingSubject } from '../../../../creators/subject-list/editing-subject';
 import { openSubjectInfoDialog } from '../../../../creators/subject-list/subject-info-dialog';
+import SubjectListDialog from '../../../top-level-components/my-planner/components/SubjectListDialog';
 
 const useStyles = makeStyles((theme: AppTheme) =>
   createStyles({
@@ -50,7 +52,13 @@ const SubjectList = (props: SubjectListProps) => {
       className={classes.root}
       subheader={
         <ListSubheader component={'div'} className={classes.subheader}>
-          {'Subject List'}
+          <Grid container justify={'space-between'} alignItems={'center'}>
+            <Grid item>{'Subject List'}</Grid>
+
+            <Grid item>
+              <SubjectListDialog />
+            </Grid>
+          </Grid>
         </ListSubheader>
       }
     >
