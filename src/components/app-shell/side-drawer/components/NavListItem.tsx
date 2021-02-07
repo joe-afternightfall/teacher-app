@@ -31,6 +31,7 @@ export function NavListItem(props: NavListItemProps): JSX.Element {
       className={clsx(classes.listItem, {
         [classes.activeIcon]: isActive,
       })}
+      data-testid={props.pageInfo.testId}
     >
       <ListItemIcon
         className={clsx({
