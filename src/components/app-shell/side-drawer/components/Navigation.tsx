@@ -1,18 +1,10 @@
 import React from 'react';
-import {
-  List,
-  ListItem,
-  Collapse,
-  ListItemText,
-  ListItemIcon,
-} from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { List } from '@material-ui/core';
 import { NavListItem } from './NavListItem';
 import { routerActions } from 'connected-react-router';
 import { State } from '../../../../configs/redux/store';
-import { ExpandLess, ExpandMore } from '@material-ui/icons';
-import { AssignmentRounded as AssignmentIcon } from '@material-ui/icons';
 import { RouteProp, routes } from '../../../../configs/constants/routes';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { MIN_DRAWER_WIDTH } from '../../../../configs/constants/drawer-size';
@@ -33,12 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Navigation = (props: NavigationProps): JSX.Element => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(!open);
-    closeAndRoute(routes.MY_PLANNER.path);
-  };
 
   const closeAndRoute = (route: string) => {
     props.clickHandler(route);
