@@ -77,39 +77,23 @@ const Navigation = (props: NavigationProps): JSX.Element => {
         }}
       />
 
-      <ListItem button onClick={handleClick}>
-        <ListItemIcon>
-          {React.createElement(routes.MY_PLANNER.icon)}
-        </ListItemIcon>
-        {shouldDisplayText ? (
-          <React.Fragment>
-            <ListItemText primary={routes.MY_PLANNER.drawerTitle} />
-            {open ? <ExpandLess /> : <ExpandMore />}
-          </React.Fragment>
-        ) : undefined}
-      </ListItem>
+      <NavListItem
+        displayText={shouldDisplayText}
+        activePath={props.activePage.path}
+        pageInfo={routes.LESSON_PLANNER}
+        clickHandler={() => {
+          closeAndRoute(routes.LESSON_PLANNER.path);
+        }}
+      />
 
-      <Collapse in={open} timeout={'auto'} unmountOnExit>
-        <List component={'div'} disablePadding>
-          <NavListItem
-            displayText={shouldDisplayText}
-            activePath={props.activePage.path}
-            pageInfo={routes.LESSON_PLANNER}
-            clickHandler={() => {
-              closeAndRoute(routes.LESSON_PLANNER.path);
-            }}
-          />
-
-          <NavListItem
-            displayText={shouldDisplayText}
-            activePath={props.activePage.path}
-            pageInfo={routes.TEMPLATE_BUILDER}
-            clickHandler={() => {
-              closeAndRoute(routes.TEMPLATE_BUILDER.path);
-            }}
-          />
-        </List>
-      </Collapse>
+      <NavListItem
+        displayText={shouldDisplayText}
+        activePath={props.activePage.path}
+        pageInfo={routes.TEMPLATE_BUILDER}
+        clickHandler={() => {
+          closeAndRoute(routes.TEMPLATE_BUILDER.path);
+        }}
+      />
     </List>
   );
 };
