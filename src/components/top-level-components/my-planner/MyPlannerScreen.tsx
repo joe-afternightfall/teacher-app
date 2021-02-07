@@ -6,19 +6,23 @@ import {
   WithStyles,
   withStyles,
 } from '@material-ui/core/styles';
-import { Card, CardHeader, CardMedia, Grid } from '@material-ui/core';
+import { Card, Grid } from '@material-ui/core';
+import HotKeys from './components/HotKeys';
+import SubjectList from '../../widgets/subject-related/subject-list/SubjectList';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
-class MyPlannerScreen extends Component<MyPlannerProps> {
+class MyPlannerScreen extends Component<MyPlannerScreenProps> {
   render(): JSX.Element {
     const { classes } = this.props;
 
     return (
       <Grid container>
+        <HotKeys />
+
         <Grid item xs={4}>
           <Card>
-            <CardMedia>{'subjects'}</CardMedia>
+            <SubjectList />
           </Card>
         </Grid>
       </Grid>
@@ -26,6 +30,6 @@ class MyPlannerScreen extends Component<MyPlannerProps> {
   }
 }
 
-export type MyPlannerProps = WithStyles<typeof styles>;
+export type MyPlannerScreenProps = WithStyles<typeof styles>;
 
 export default withStyles(styles, { withTheme: true })(MyPlannerScreen);
