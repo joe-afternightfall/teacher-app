@@ -1,30 +1,25 @@
 import React from 'react';
 import {
-  Fab,
   Grid,
   Dialog,
-  Tooltip,
-  MenuItem,
   IconButton,
+  Typography,
   DialogTitle,
   DialogContent,
   DialogActions,
   CircularProgress,
-  Typography,
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
-import { State } from '../../../../configs/redux/store';
+import { State } from '../../configs/redux/store';
 import {
-  closeSubjectInfoDialog,
   openSubjectInfoDialog,
-} from '../../../../creators/subject-list/subject-info-dialog';
+  closeSubjectInfoDialog,
+} from '../../creators/subject-list/subject-info-dialog';
+import SubjectBuilder from '../widgets/subject-builder/SubjectBuilder';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import SubjectList from '../../../widgets/subject-related/subject-list/SubjectList';
-import SubjectInfoActionButtons from '../../../widgets/subject-builder/components/SubjectInfoActionButtons';
-import SubjectBuilder from '../../../widgets/subject-builder/SubjectBuilder';
+import SubjectInfoActionButtons from '../widgets/subject-builder/components/SubjectInfoActionButtons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,27 +41,19 @@ const SubjectListDialog = (props: SubjectListDialogProps): JSX.Element => {
     props.closeSubjectInfoHandler();
   };
 
-  let dialogMessage;
+  let dialogMessage = 'Add New Subject';
 
-  if (props.isEditing && props.shouldDisplaySubjectInfo) {
+  if (props.isEditing && props.open) {
     dialogMessage = 'Edit Subject Info';
-  } else if (props.shouldDisplaySubjectInfo) {
-    dialogMessage = 'Add New Subject';
-  } else {
-    dialogMessage = 'Subject List';
   }
 
   return (
     <div>
-      <IconButton onClick={toggleDialog}>
-        <AddIcon />
-      </IconButton>
-
       <Dialog
+        open={props.open}
+        maxWidth={'md'}
         fullWidth={true}
-        open={open}
         onClose={toggleDialog}
-        maxWidth={props.shouldDisplaySubjectInfo ? 'md' : 'xs'}
       >
         <DialogTitle id={'subject-list-dialog-title'}>
           {dialogMessage}
@@ -103,32 +90,12 @@ const SubjectListDialog = (props: SubjectListDialogProps): JSX.Element => {
           <React.Fragment>
             <DialogContent>
               <Grid container spacing={2}>
-                {props.shouldDisplaySubjectInfo ? (
-                  <SubjectBuilder />
-                ) : (
-                  <Grid item xs={12}>
-                    <SubjectList />
-                  </Grid>
-                )}
+                <SubjectBuilder />
               </Grid>
             </DialogContent>
 
             <DialogActions>
-              {props.shouldDisplaySubjectInfo ? (
-                <SubjectInfoActionButtons />
-              ) : (
-                <Tooltip title={'Add New'} placement={'top'}>
-                  <Fab
-                    color={'primary'}
-                    aria-label={'add'}
-                    onClick={() => {
-                      props.openSubjectInfoHandler();
-                    }}
-                  >
-                    <AddIcon />
-                  </Fab>
-                </Tooltip>
-              )}
+              <SubjectInfoActionButtons />
             </DialogActions>
           </React.Fragment>
         )}
@@ -140,7 +107,7 @@ const SubjectListDialog = (props: SubjectListDialogProps): JSX.Element => {
 export interface SubjectListDialogProps {
   displayLoader: boolean;
   isEditing: boolean;
-  shouldDisplaySubjectInfo: boolean;
+  open: boolean;
   openSubjectInfoHandler: () => void;
   closeSubjectInfoHandler: () => void;
 }
@@ -149,14 +116,11 @@ const mapStateToProps = (state: State): SubjectListDialogProps => {
   return ({
     isEditing: state.subjectListState.editingForm,
     displayLoader: state.subjectListState.displayLoader,
-    shouldDisplaySubjectInfo: state.subjectListState.displaySubjectInfo,
+    open: state.subjectListState.displaySubjectBuilder,
   } as unknown) as SubjectListDialogProps;
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  ownProps: any
-): SubjectListDialogProps =>
+const mapDispatchToProps = (dispatch: Dispatch): SubjectListDialogProps =>
   (({
     openSubjectInfoHandler: () => {
       dispatch(openSubjectInfoDialog());
