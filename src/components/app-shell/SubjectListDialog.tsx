@@ -14,9 +14,9 @@ import { connect } from 'react-redux';
 import CloseIcon from '@material-ui/icons/Close';
 import { State } from '../../configs/redux/store';
 import {
-  openSubjectInfoDialog,
-  closeSubjectInfoDialog,
-} from '../../creators/subject-list/subject-info-dialog';
+  openSubjectBuilderDialog,
+  closeSubjectBuilderDialog,
+} from '../../creators/subject-list/subject-builder-dialog';
 import SubjectBuilder from '../widgets/subject-builder/SubjectBuilder';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SubjectInfoActionButtons from '../widgets/subject-builder/components/SubjectInfoActionButtons';
@@ -121,10 +121,10 @@ const mapStateToProps = (state: State): SubjectListDialogProps => {
 const mapDispatchToProps = (dispatch: Dispatch): SubjectListDialogProps =>
   (({
     openSubjectInfoHandler: () => {
-      dispatch(openSubjectInfoDialog());
+      dispatch(openSubjectBuilderDialog());
     },
     closeSubjectInfoHandler: () => {
-      dispatch(closeSubjectInfoDialog());
+      dispatch(closeSubjectBuilderDialog());
     },
   } as unknown) as SubjectListDialogProps);
 

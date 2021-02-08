@@ -1,17 +1,15 @@
 import firebase from 'firebase';
-import { v4 as uuidv4 } from 'uuid';
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../configs/redux/store';
-import { SubjectDAO } from '../../configs/models/SubjectDAO';
 import {
   subjectSaveComplete,
   updatingSubjectInfo,
 } from '../../creators/subject-list/loading-subject';
 import {
-  clearSubjectInfoDialog,
-  closeSubjectInfoDialog,
-} from '../../creators/subject-list/subject-info-dialog';
+  clearSubjectBuilderDialog,
+  closeSubjectBuilderDialog,
+} from '../../creators/subject-list/subject-builder-dialog';
 
 export const editSubject = (): ThunkAction<
   void,
@@ -40,9 +38,9 @@ export const editSubject = (): ThunkAction<
           // dispatch error
           alert('error');
         } else {
-          dispatch(clearSubjectInfoDialog());
+          dispatch(clearSubjectBuilderDialog());
           setTimeout(() => {
-            dispatch(closeSubjectInfoDialog());
+            dispatch(closeSubjectBuilderDialog());
             dispatch(subjectSaveComplete());
           }, 1000);
         }

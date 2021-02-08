@@ -10,9 +10,9 @@ import {
 } from '../../creators/subject-list/loading-subject';
 import { SubjectDAO } from '../../configs/models/SubjectDAO';
 import {
-  clearSubjectInfoDialog,
-  closeSubjectInfoDialog,
-} from '../../creators/subject-list/subject-info-dialog';
+  clearSubjectBuilderDialog,
+  closeSubjectBuilderDialog,
+} from '../../creators/subject-list/subject-builder-dialog';
 
 export const saveSubjectInfo = (): ThunkAction<
   void,
@@ -39,10 +39,11 @@ export const saveSubjectInfo = (): ThunkAction<
     if (error) {
       dispatch(subjectSaveFailed());
     } else {
+      // todo: dispatch app snack bar on save complete
       // todo:  rip out to common method
-      dispatch(clearSubjectInfoDialog());
+      dispatch(clearSubjectBuilderDialog());
       setTimeout(() => {
-        dispatch(closeSubjectInfoDialog());
+        dispatch(closeSubjectBuilderDialog());
         dispatch(subjectSaveComplete());
       }, 1000);
     }

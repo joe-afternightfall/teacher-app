@@ -49,7 +49,7 @@ describe('subject list reducer', () => {
 
   it('should return CLEAR_SUBJECT_INFO_DIALOG action', () => {
     const state = subjectList.reducer(undefined, {
-      type: actions.CLEAR_SUBJECT_INFO_DIALOG,
+      type: actions.CLEAR_SUBJECT_BUILDER_DIALOG,
     });
 
     expect(state.subjectName).toEqual('');
@@ -64,18 +64,18 @@ describe('subject list reducer', () => {
 
   it('should return true for display subject info', () => {
     const state = subjectList.reducer(undefined, {
-      type: actions.OPEN_SUBJECT_INFO_DIALOG,
+      type: actions.OPEN_SUBJECT_BUILDER_DIALOG,
     });
 
-    expect(state.displaySubjectInfo).toEqual(true);
+    expect(state.displaySubjectBuilder).toEqual(true);
   });
 
   it('should return false for display subject info', () => {
     const state = subjectList.reducer(undefined, {
-      type: actions.CLOSE_SUBJECT_INFO_DIALOG,
+      type: actions.CLOSE_SUBJECT_BUILDER_DIALOG,
     });
 
-    expect(state.displaySubjectInfo).toEqual(false);
+    expect(state.displaySubjectBuilder).toEqual(false);
   });
 
   it('should return true for display loader', () => {

@@ -2,7 +2,7 @@ import firebase from 'firebase';
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../configs/redux/store';
-import { closeSubjectInfoDialog } from '../../creators/subject-list/subject-info-dialog';
+import { closeSubjectBuilderDialog } from '../../creators/subject-list/subject-builder-dialog';
 import {
   subjectSaveComplete,
   updatingSubjectInfo,
@@ -26,7 +26,7 @@ export const deleteSubject = (
         alert('error');
       } else {
         setTimeout(() => {
-          dispatch(closeSubjectInfoDialog());
+          dispatch(closeSubjectBuilderDialog());
           dispatch(subjectSaveComplete());
         }, 1000);
       }

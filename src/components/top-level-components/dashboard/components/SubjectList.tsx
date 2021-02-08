@@ -28,9 +28,9 @@ import {
 } from '../../../../creators/subject-list/editing-subject';
 import { Subject } from '../../../../configs/models/Subject';
 import {
-  clearSubjectInfoDialog,
-  openSubjectInfoDialog,
-} from '../../../../creators/subject-list/subject-info-dialog';
+  clearSubjectBuilderDialog,
+  openSubjectBuilderDialog,
+} from '../../../../creators/subject-list/subject-builder-dialog';
 import { AppTheme } from '../../../../configs/theme/light-theme';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
@@ -151,12 +151,12 @@ const mapDispatchToProps = (dispatch: Dispatch): DeleteSubjectDialogProps =>
   (({
     editClickHandler: (id: string) => {
       dispatch(editingSubject(id));
-      dispatch(openSubjectInfoDialog());
+      dispatch(openSubjectBuilderDialog());
     },
     newSubjectHandler: () => {
       dispatch(clearEditing());
-      dispatch(clearSubjectInfoDialog());
-      dispatch(openSubjectInfoDialog());
+      dispatch(clearSubjectBuilderDialog());
+      dispatch(openSubjectBuilderDialog());
     },
   } as unknown) as DeleteSubjectDialogProps);
 
