@@ -25,6 +25,7 @@ const DeleteSubjectDialog = (props: DeleteSubjectDialogProps): JSX.Element => {
       className={classes.deleteButton}
       edge={'end'}
       aria-label={'delete'}
+      data-testid={`delete-${props.subjectName}`}
       onClick={() => {
         props.displayAppDialogHandler(
           <Grid

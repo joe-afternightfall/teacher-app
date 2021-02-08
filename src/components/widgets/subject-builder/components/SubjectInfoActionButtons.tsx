@@ -12,6 +12,7 @@ import { clearEditing } from '../../../../creators/subject-list/editing-subject'
 import { saveSubjectInfo } from '../../../../services/subject-list/save-subject';
 import { editSubject } from '../../../../services/subject-list/edit-subject';
 
+// todo: rename to SubjectBuilderActionButtons
 const SubjectInfoActionButtons = (
   props: SubjectInfoActionButtonsProps
 ): JSX.Element => {
