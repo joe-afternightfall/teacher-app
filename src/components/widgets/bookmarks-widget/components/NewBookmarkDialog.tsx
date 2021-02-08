@@ -112,7 +112,9 @@ const NewBookmarkDialog = (props: NewBookmarkDialogProps): JSX.Element => {
 
       <DialogActions>
         <Button onClick={props.closeDialogHandler}>{'Cancel'}</Button>
-        <Button onClick={save}>{'Save'}</Button>
+        <Button data-testid={'save-bookmark-button'} onClick={save}>
+          {'Save'}
+        </Button>
       </DialogActions>
     </Dialog>
   );
