@@ -6,10 +6,9 @@
     "openMode": 1
   },
   "env": {
-    "apiUrl": "http://localhost:3001",
     "coverage": true,
     "codeCoverage": {
-      "url": "http://localhost:3001/__coverage__"
+      "url": "http://localhost:3000/__coverage__"
     }
   }
 }

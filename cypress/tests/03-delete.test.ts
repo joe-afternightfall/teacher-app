@@ -5,9 +5,12 @@ describe('Deleting subject', () => {
 
   it('should delete bookmark', () => {
     cy.visit(localBaseUrl);
-    cy.get('[data-testid="bookmarks-nav"]').click();
-    cy.findByText("Editing Test Bookmark").should("exist");
-
+    cy.findByTestId('bookmarks-nav').click();
+    cy.findByText('Editing Test Bookmark').should("exist");
+    cy.findByText('Editing Test Bookmark').closest('tr').find('[title="Delete"]').click();
+    cy.findByText('Are you sure you want to delete this row?').should('be.visible');
+    cy.findByText('check').click();
+    cy.contains('Deleted Bookmark').should('be.visible');
     // cy.findAllByText("Jackie Chan").click();
     // cy.findByLabelText("Label text", { timeout: 7000 }).should("exist");
     // cy.get("form").within(() => {
