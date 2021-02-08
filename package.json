@@ -35,10 +35,13 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.9.2",
+    "@cypress/instrument-cra": "^1.4.0",
     "@firebase/auth-types": "^0.10.1",
     "@stryker-mutator/core": "^4.4.1",
     "@stryker-mutator/jest-runner": "^4.4.1",
     "@stryker-mutator/typescript-checker": "^4.4.1",
+    "@testing-library/cypress": "^7.0.3",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
@@ -75,6 +78,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-dev": "react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
     "test": "react-scripts test -- --config jest.config.js",
     "test:ci": "CI=true npm test",

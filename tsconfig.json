@@ -20,11 +20,12 @@
     "sourceMap": true,
     "strict": true,
     "isolatedModules": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": ["cypress", "@testing-library/cypress"]
   },
   "exclude": [
-    "**/*.spec.ts",
-    "**/*.test.tsx"
+    "**/*.test.tsx",
+    "**/*.test.ts",
   ],
   "include": [
     "src"

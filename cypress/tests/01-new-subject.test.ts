@@ -1,12 +1,11 @@
-// import React from 'react';
-/// <reference types="Cypress" />
+export {}
 
 describe('New Subject Test', () => {
   const localBaseUrl = 'http://localhost:3000';
 
   beforeEach(() => {
     cy.visit(localBaseUrl);
-  })
+  });
 
   it('should create new test subject', () => {
     cy.get('[data-testid="add-new-subject"]').click();
@@ -32,10 +31,4 @@ describe('New Subject Test', () => {
   });
 
   // todo: add test to check for snackbar message after saving
-
-  it('should delete subject after editing', () => {
-    cy.get('[data-testid="delete-Editing Test Subject"]').click();
-    cy.contains('Are you sure you want to delete Editing Test Subject?');
-    cy.get('[data-testid="app-dialog-confirm-button"]').click();
-  });
 });

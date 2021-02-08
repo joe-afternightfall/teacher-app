@@ -9,9 +9,6 @@ const useStyles = makeStyles(() =>
     formControl: {
       width: 160,
     },
-    textfield: {
-      minWidth: '100%',
-    },
   })
 );
 
@@ -25,10 +22,9 @@ export default function BookmarkForm(props: BookmarkFormProps): JSX.Element {
           <Grid container alignItems={'center'} justify={'space-between'}>
             <Grid item xs={7}>
               <TextField
+                fullWidth
                 label={'Title'}
                 margin={'normal'}
-                style={{ width: '100%' }}
-                className={classes.textfield}
                 data-testId={'bookmark-title'}
                 value={props.bookmarkValues.bookmarkTitle}
                 onChange={props.textfieldChangeHandler('bookmarkTitle')}
@@ -46,12 +42,12 @@ export default function BookmarkForm(props: BookmarkFormProps): JSX.Element {
 
         <Grid item xs={12}>
           <TextField
-            id={'bookmark-url'}
+            fullWidth
             label={'URL'}
-            className={classes.textfield}
+            margin={'normal'}
+            data-testId={'bookmark-url'}
             value={props.bookmarkValues.bookmarkUrl}
             onChange={props.textfieldChangeHandler('bookmarkUrl')}
-            margin={'normal'}
           />
         </Grid>
       </Grid>

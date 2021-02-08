@@ -19,13 +19,18 @@ const SubjectDropdown = (props: SubjectDropdownProps): JSX.Element => {
           name: 'subjectId',
           id: 'subject-dropdown',
         }}
+        data-testid={'subject-dropdown-list'}
       >
         <MenuItem value={''}>
           <em>{'None'}</em>
         </MenuItem>
         {props.subjectList.map((subject: Subject, index: number) => {
           return (
-            <MenuItem key={index} value={subject.id}>
+            <MenuItem
+              key={index}
+              value={subject.id}
+              data-testid={`subject-menu-${subject.subjectName}`}
+            >
               {subject.subjectName}
             </MenuItem>
           );

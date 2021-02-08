@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { connect } from 'react-redux';
 import MaterialTable from 'material-table';
 import { ThunkDispatch } from 'redux-thunk';
@@ -11,6 +11,7 @@ import NewBookmarkDialog from './components/NewBookmarkDialog';
 import { openNewBookmarkDialog } from '../../../creators/bookmarks/bookmarks-dialog';
 import { updateBookmark } from '../../../services/bookmarks/update-bookmark';
 import { deleteBookmark } from '../../../services/bookmarks/delete-bookmark';
+import { TextField } from '@material-ui/core';
 
 const getLink = (rowData: any) => (
   <AppLink
@@ -18,6 +19,18 @@ const getLink = (rowData: any) => (
     url={rowData.bookmark.bookmarkUrl}
   />
 );
+
+const editField = (props: any) => {
+  return (
+    <TextField
+      value={props.value}
+      data-testid={'edit-url-text-field'}
+      onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>
+        props.onChange(e.target.value)
+      }
+    />
+  );
+};
 
 const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
   const data = props.bookmarks.map((bookmark: Bookmark, index: number) => {
@@ -82,6 +95,8 @@ const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
           {
             title: 'URL',
             render: getLink,
+            field: 'bookmark.bookmarkUrl',
+            editComponent: editField,
           },
           {
             title: 'Subject',
