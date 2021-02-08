@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.2",
+    "@cypress/instrument-cra": "^1.4.0",
     "@firebase/auth-types": "^0.10.1",
     "@stryker-mutator/core": "^4.4.1",
     "@stryker-mutator/jest-runner": "^4.4.1",
@@ -77,6 +78,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-dev": "react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
     "test": "react-scripts test -- --config jest.config.js",
     "test:ci": "CI=true npm test",
