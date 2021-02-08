@@ -2,15 +2,15 @@ import React from 'react';
 import {
   Avatar,
   Grid,
-  InputAdornment,
   TextField,
   Typography,
+  InputAdornment,
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { getIcon } from '../../../../../utils/get-icon';
-import { updateSubjectName } from '../../../../../creators/subject-list/update-subject-name';
-import { State } from '../../../../../configs/redux/store';
+import { getIcon } from '../../../../utils/get-icon';
+import { State } from '../../../../configs/redux/store';
+import { updateSubjectName } from '../../../../creators/subject-list/update-subject-name';
 
 const SubjectName = (props: SubjectNameProps) => {
   const icon = getIcon(props.selectedIconId);
@@ -27,6 +27,7 @@ const SubjectName = (props: SubjectNameProps) => {
           value={props.subjectName}
           onChange={props.updateSubjectNameHandler}
           variant={'outlined'}
+          data-testid={'subject-name'}
           style={{
             width: '70%',
             marginBottom: props.subjectNameError ? 0 : 22,

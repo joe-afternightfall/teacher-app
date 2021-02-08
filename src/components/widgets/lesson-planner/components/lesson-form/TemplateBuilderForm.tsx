@@ -6,12 +6,12 @@ import { Grid, TextField } from '@material-ui/core';
 import { State } from '../../../../../configs/redux/store';
 import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import SubjectDropdown from '../../../subject-related/subject-dropdown/SubjectDropdown';
 import {
   updateLessonSubject,
   updateOtherLessonTypeName,
 } from '../../../../../creators/lesson-planner/update-items';
 import TypeCheckboxes from './components/TypeCheckboxes';
+import SubjectDropdown from '../../../../shared/SubjectDropdown';
 
 const useStyles = makeStyles(() =>
   createStyles({

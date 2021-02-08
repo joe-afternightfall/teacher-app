@@ -5,9 +5,9 @@ import { Grid, Paper, Tooltip, Typography } from '@material-ui/core';
 import {
   SubjectIcon,
   subjectIcons,
-} from '../../../../../configs/theme/subject-icon-choices';
-import { State } from '../../../../../configs/redux/store';
-import { selectIcon } from '../../../../../creators/subject-list/select-icon';
+} from '../../../../configs/theme/subject-icon-choices';
+import { State } from '../../../../configs/redux/store';
+import { selectIcon } from '../../../../creators/subject-list/select-icon';
 
 const IconSelector = (props: IconSelectorProps) => {
   const [isHovering, setIsHovering] = React.useState<string>('');
@@ -64,11 +64,17 @@ const IconSelector = (props: IconSelectorProps) => {
               ) : props.selectedIconId === icon.id ? (
                 <Paper elevation={3}>{React.createElement(icon.icon)}</Paper>
               ) : found ? (
-                <Paper style={{ opacity: 0.5 }} elevation={3}>
+                <Paper
+                  style={{ opacity: 0.5 }}
+                  elevation={3}
+                  data-testid={icon.name}
+                >
                   {React.createElement(icon.icon)}
                 </Paper>
               ) : (
-                React.createElement(icon.icon)
+                <div data-testid={icon.name}>
+                  {React.createElement(icon.icon)}
+                </div>
               )}
             </Grid>
           );

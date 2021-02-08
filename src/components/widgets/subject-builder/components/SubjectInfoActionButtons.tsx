@@ -5,13 +5,14 @@ import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { State } from '../../../../configs/redux/store';
 import {
-  clearSubjectInfoDialog,
-  closeSubjectInfoDialog,
-} from '../../../../creators/subject-list/subject-info-dialog';
+  clearSubjectBuilderDialog,
+  closeSubjectBuilderDialog,
+} from '../../../../creators/subject-list/subject-builder-dialog';
 import { clearEditing } from '../../../../creators/subject-list/editing-subject';
 import { saveSubjectInfo } from '../../../../services/subject-list/save-subject';
 import { editSubject } from '../../../../services/subject-list/edit-subject';
 
+// todo: rename to SubjectBuilderActionButtons
 const SubjectInfoActionButtons = (
   props: SubjectInfoActionButtonsProps
 ): JSX.Element => {
@@ -33,6 +34,7 @@ const SubjectInfoActionButtons = (
             : props.saveSubjectClickHandler();
         }}
         disabled={props.isDisabled}
+        data-testid={'subject-builder-save-button'}
       >
         {props.isEditing ? 'Save Changes' : 'Save'}
       </Button>
@@ -72,10 +74,10 @@ const mapDispatchToProps = (
     },
     closeSubjectInfoHandler: (isEditing: boolean) => {
       if (isEditing) {
-        dispatch(clearSubjectInfoDialog());
+        dispatch(clearSubjectBuilderDialog());
         dispatch(clearEditing());
       }
-      dispatch(closeSubjectInfoDialog());
+      dispatch(closeSubjectBuilderDialog());
     },
     editSubjectClickHandler: () => {
       (dispatch as ThunkDispatch<State, void, AnyAction>)(editSubject());

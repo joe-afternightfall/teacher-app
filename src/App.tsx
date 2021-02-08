@@ -12,6 +12,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import AppDialog from './components/app-shell/AppDialog';
 import { getLightTheme } from './configs/theme/light-theme';
 import AppSnackbar from './components/app-shell/AppSnackbar';
+import SubjectListDialog from './components/app-shell/SubjectListDialog';
 import ResponsiveSideDrawer from './components/app-shell/side-drawer/ResponsiveSideDrawer';
 
 const styles: Styles<Theme, StyledComponentProps> = (theme: Theme) => ({
@@ -38,6 +39,7 @@ class App extends Component<AppProps> {
           <CssBaseline />
           <AppDialog />
           <AppSnackbar />
+          <SubjectListDialog />
 
           <AppBar />
           <ResponsiveSideDrawer />

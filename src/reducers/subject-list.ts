@@ -37,11 +37,11 @@ export default {
         newState.subjectName = action.subjectName;
         break;
       }
-      case actions.OPEN_SUBJECT_INFO_DIALOG:
-        newState.displaySubjectInfo = true;
+      case actions.OPEN_SUBJECT_BUILDER_DIALOG:
+        newState.displaySubjectBuilder = true;
         break;
-      case actions.CLOSE_SUBJECT_INFO_DIALOG:
-        newState.displaySubjectInfo = false;
+      case actions.CLOSE_SUBJECT_BUILDER_DIALOG:
+        newState.displaySubjectBuilder = false;
         break;
       case actions.UPDATING_SUBJECT_INFO:
         newState.displayLoader = true;
@@ -52,7 +52,7 @@ export default {
       case actions.LOAD_SUBJECT_LIST:
         newState.subjectList = action.subjectList;
         break;
-      case actions.CLEAR_SUBJECT_INFO_DIALOG:
+      case actions.CLEAR_SUBJECT_BUILDER_DIALOG:
         newState.subjectName = '';
         newState.selectedColor = {
           id: '',
@@ -97,7 +97,7 @@ export interface SubjectListState {
   selectedIconId: string;
   subjectList: Subject[];
   selectedColor: ColorChoice;
-  displaySubjectInfo: boolean;
+  displaySubjectBuilder: boolean;
   displayLoader: boolean;
   editingFormFirebaseId: string;
   editingFormId: string;

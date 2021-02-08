@@ -12,6 +12,13 @@ interface CustomPalette extends Palette {
       contrastColor: string;
     };
     offWhite: string;
+    accents: {
+      pink: string;
+      orange: string;
+      green: string;
+      blue: string;
+      purple: string;
+    };
   };
 }
 
@@ -37,6 +44,13 @@ export function getLightTheme(): Theme {
           contrastColor: '#6B8E9B',
           // contrastColor: '#708C9B', // text and icon colors
           // background: '#b5aaf5', // left border highlight
+        },
+        accents: {
+          pink: '#E43F78',
+          orange: '#EF8C0A',
+          green: '#77C74B',
+          blue: '#2C9DF0',
+          purple: '#725FE7',
         },
       },
       text: {

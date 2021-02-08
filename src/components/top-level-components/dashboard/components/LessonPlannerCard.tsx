@@ -12,12 +12,11 @@ import {
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import SubjectListDialog from './SubjectListDialog';
 import { State } from '../../../../configs/redux/store';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { routerActions } from 'connected-react-router';
 import { routes } from '../../../../configs/constants/routes';
-import { clearSubjectInfoDialog } from '../../../../creators/subject-list/subject-info-dialog';
+import { clearSubjectBuilderDialog } from '../../../../creators/subject-list/subject-builder-dialog';
 import { clearEditing } from '../../../../creators/subject-list/editing-subject';
 
 const LessonPlannerCard = (props: PlannerWidgetProps): JSX.Element => {
@@ -55,7 +54,6 @@ const LessonPlannerCard = (props: PlannerWidgetProps): JSX.Element => {
               onClose={handleClose}
               open={Boolean(anchorEl)}
             >
-              <SubjectListDialog closeMenuClickHandler={handleClose} />
               <MenuItem
                 onClick={() => {
                   props.routeToTemplateBuilderHandler();
@@ -113,7 +111,7 @@ const mapStateToProps = (state: State): PlannerWidgetProps => {
 const mapDispatchToProps = (dispatch: Dispatch): PlannerWidgetProps =>
   (({
     clearDialogHandler: () => {
-      dispatch(clearSubjectInfoDialog());
+      dispatch(clearSubjectBuilderDialog());
       dispatch(clearEditing());
     },
     routeToLessonPlannerClickHandler: () => {

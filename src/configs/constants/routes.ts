@@ -49,11 +49,4 @@ export const routes: RoutesMap = {
     icon: BookmarkIcon,
     testId: 'bookmarks-nav',
   },
-  MY_PLANNER: {
-    path: '/my-planner',
-    drawerTitle: 'My Planner',
-    headerTitle: 'My Planner',
-    icon: AssignmentIcon,
-    testId: 'my-planner-nav',
-  },
 };
