@@ -12,7 +12,7 @@ describe('Duplicate Subject Test', () => {
     cy.get('[data-testid="subject-builder-save-button"]').should('be.disabled');
 
     // cy.get('[data-testid="Object"]').click();
-    cy.get('[data-testid="Deep Orange"]').should('be.disabled');
+    // cy.get('[data-testid="Deep Orange"]').should('be.disabled');
 
     // cy.get('[data-testid="edit-Test Subject"]').click();
     // cy.get('[title="Add Bookmark"]').click();
