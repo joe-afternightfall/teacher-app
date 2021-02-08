@@ -7,7 +7,9 @@ describe('Edit Subject Test', () => {
   it('should allow for editing subject', () => {
     cy.visit(localBaseUrl);
     cy.get('[data-testid="edit-Test Subject"]').click();
-    cy.get('[data-testid="subject-name"]').type('Editing Test Subject');
+    const subjectNameField = cy.get('[data-testid="subject-name"]');
+    subjectNameField.clear();
+    subjectNameField.type('Editing Test Subject');
     cy.get('[data-testid="subject-builder-save-button"]').should('be.enabled');
     cy.get('[data-testid="subject-builder-save-button"]').click();
   })
