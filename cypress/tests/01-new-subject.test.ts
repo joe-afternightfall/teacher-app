@@ -1,5 +1,4 @@
-// import React from 'react';
-/// <reference types="Cypress" />
+export {}
 
 describe('New Subject Test', () => {
   const localBaseUrl = 'http://localhost:3000';
