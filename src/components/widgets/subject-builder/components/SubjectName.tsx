@@ -27,6 +27,7 @@ const SubjectName = (props: SubjectNameProps) => {
           value={props.subjectName}
           onChange={props.updateSubjectNameHandler}
           variant={'outlined'}
+          data-testid={'subject-name'}
           style={{
             width: '70%',
             marginBottom: props.subjectNameError ? 0 : 22,

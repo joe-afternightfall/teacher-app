@@ -64,11 +64,17 @@ const IconSelector = (props: IconSelectorProps) => {
               ) : props.selectedIconId === icon.id ? (
                 <Paper elevation={3}>{React.createElement(icon.icon)}</Paper>
               ) : found ? (
-                <Paper style={{ opacity: 0.5 }} elevation={3}>
+                <Paper
+                  style={{ opacity: 0.5 }}
+                  elevation={3}
+                  data-testid={icon.name}
+                >
                   {React.createElement(icon.icon)}
                 </Paper>
               ) : (
-                React.createElement(icon.icon)
+                <div data-testid={icon.name}>
+                  {React.createElement(icon.icon)}
+                </div>
               )}
             </Grid>
           );

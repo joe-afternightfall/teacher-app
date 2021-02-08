@@ -67,7 +67,10 @@ const SubjectList = (props: SubjectListProps) => {
 
               <Grid item>
                 <Tooltip title={'Add New'} placement={'top'}>
-                  <IconButton onClick={props.newSubjectHandler}>
+                  <IconButton
+                    data-testid={'add-new-subject'}
+                    onClick={props.newSubjectHandler}
+                  >
                     <AddIcon style={{ color: '#fff' }} />
                   </IconButton>
                 </Tooltip>
@@ -103,6 +106,7 @@ const SubjectList = (props: SubjectListProps) => {
                       onClick={() => {
                         props.editClickHandler(subject.id);
                       }}
+                      data-testid={`edit-${subject.subjectName}`}
                     >
                       <EditIcon />
                     </IconButton>

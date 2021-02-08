@@ -68,6 +68,7 @@ const ColorChoices = (props: ColorChoicesProps) => {
                 onClick={() =>
                   found ? undefined : props.selectColorClickHandler(choice)
                 }
+                data-testid={choice.name}
               >
                 {found ? (
                   <Grid

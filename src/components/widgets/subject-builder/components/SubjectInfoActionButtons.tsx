@@ -33,6 +33,7 @@ const SubjectInfoActionButtons = (
             : props.saveSubjectClickHandler();
         }}
         disabled={props.isDisabled}
+        data-testid={'subject-builder-save-button'}
       >
         {props.isEditing ? 'Save Changes' : 'Save'}
       </Button>
