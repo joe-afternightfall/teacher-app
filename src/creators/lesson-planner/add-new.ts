@@ -1,33 +1,34 @@
 import actions from '../actions';
+import { AnyAction } from 'redux';
 
-export const addPlannerFromTemplate = () => {
+export const addPlannerFromTemplate = (): AnyAction => {
   return {
     type: actions.ADD_PLANNER_FROM_TEMPLATE,
   };
 };
 
-export const updateWeekNumber = (weekNumber: string) => {
+export const updateWeekNumber = (weekNumber: string): AnyAction => {
   return {
     type: actions.UPDATE_WEEK_NUMBER,
     weekNumber: weekNumber,
   };
 };
 
-export const updatePlannerStartDate = (date: string) => {
+export const updatePlannerStartDate = (date: string): AnyAction => {
   return {
     type: actions.UPDATE_PLANNER_START_DATE,
     startDate: date,
   };
 };
 
-export const updatePlannerEndDate = (date: string) => {
+export const updatePlannerEndDate = (date: string): AnyAction => {
   return {
     type: actions.UPDATE_PLANNER_END_DATE,
     endDate: date,
   };
 };
 
-export const clearNewPlannerInfo = () => {
+export const clearNewPlannerInfo = (): AnyAction => {
   return {
     type: actions.CLEAR_NEW_PLANNER_INFO,
   };
