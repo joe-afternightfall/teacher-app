@@ -20,13 +20,13 @@ export const setDrawerSize = (size: string): AnyAction => {
   };
 };
 
-export const userClickedCloseDrawer = () => {
+export const userClickedCloseDrawer = (): AnyAction => {
   return {
     type: actions.USER_CLICKED_CLOSE_DRAWER,
   };
 };
 
-export const userClickedOpenDrawer = () => {
+export const userClickedOpenDrawer = (): AnyAction => {
   return {
     type: actions.USER_CLICKED_OPEN_DRAWER,
   };
