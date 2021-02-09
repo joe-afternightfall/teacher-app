@@ -1,17 +1,17 @@
-import React, { ChangeEvent } from 'react';
 import { connect } from 'react-redux';
+import React, { ChangeEvent } from 'react';
 import MaterialTable from 'material-table';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import AppLink from '../../app-shell/AppLink';
+import { TextField } from '@material-ui/core';
 import { State } from '../../../configs/redux/store';
 import { Subject } from '../../../configs/models/Subject';
 import { Bookmark } from '../../../configs/models/Bookmark';
 import NewBookmarkDialog from './components/NewBookmarkDialog';
-import { openNewBookmarkDialog } from '../../../creators/bookmarks/bookmarks-dialog';
 import { updateBookmark } from '../../../services/bookmarks/update-bookmark';
 import { deleteBookmark } from '../../../services/bookmarks/delete-bookmark';
-import { TextField } from '@material-ui/core';
+import { openNewBookmarkDialog } from '../../../creators/bookmarks/bookmarks-dialog';
 
 const getLink = (rowData: any) => (
   <AppLink
@@ -61,7 +61,7 @@ const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
           actionsColumnIndex: -1,
         }}
         editable={{
-          onRowUpdate: (newData, oldData): Promise<void> =>
+          onRowUpdate: (newData): Promise<void> =>
             new Promise((resolve, reject) => {
               props.updateClickHandler(newData.bookmark);
               setTimeout(() => {

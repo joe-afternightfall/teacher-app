@@ -11,8 +11,7 @@ import {
 export const deleteSubject = (
   id: string
 ): ThunkAction<void, State, void, AnyAction> => async (
-  dispatch: Dispatch,
-  getState: () => State
+  dispatch: Dispatch
 ): Promise<void> => {
   dispatch(updatingSubjectInfo());
 

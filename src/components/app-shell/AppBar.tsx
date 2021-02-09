@@ -13,7 +13,7 @@ import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { AppTheme } from '../../configs/theme/light-theme';
 import icon from '../../configs/icons/rainbow-shades.svg';
 
-const drawerSize = (props: any) => props.size;
+const drawerSize = (props: { size: string }) => props.size;
 
 const useStyles = makeStyles((theme: AppTheme) =>
   createStyles({
@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme: AppTheme) =>
       background: '#fff',
       [theme.breakpoints.up('sm')]: {
         width: drawerSize,
-        // marginLeft: DRAWER_SIZE,
       },
       zIndex: theme.zIndex.drawer + 1,
       transition: theme.transitions.create(['width', 'margin'], {

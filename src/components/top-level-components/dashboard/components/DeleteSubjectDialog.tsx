@@ -90,7 +90,6 @@ const mapDispatchToProps = (
       );
     },
     deleteClickHandler: (id: string) => {
-      console.log('DELETING_ID = ' + id);
       (dispatch as ThunkDispatch<State, void, AnyAction>)(deleteSubject(id));
     },
   } as unknown) as DeleteSubjectDialogProps);

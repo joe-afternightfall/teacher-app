@@ -12,11 +12,11 @@ import DateFnsUtils from '@date-io/date-fns';
 import CardPopover from '../card-popover/CardPopover';
 import { Button, Typography } from '@material-ui/core';
 import { State } from '../../../../../configs/redux/store';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { updateDateTime } from '../../../../../creators/lesson-planner/update-items';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { saveDates } from '../../../../../services/template-builder/save-dates';
+import { updateDateTime } from '../../../../../creators/lesson-planner/update-items';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       width: 560,
