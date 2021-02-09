@@ -8,8 +8,7 @@ import { Bookmark } from '../../configs/models/Bookmark';
 export const updateBookmark = (
   bookmark: Bookmark
 ): ThunkAction<void, State, void, AnyAction> => async (
-  dispatch: Dispatch,
-  getState: () => State
+  dispatch: Dispatch
 ): Promise<void> => {
   return await firebase
     .database()
