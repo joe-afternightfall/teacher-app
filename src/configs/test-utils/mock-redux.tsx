@@ -2,10 +2,9 @@ import React from 'react';
 import { Store } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { render, RenderResult } from '@testing-library/react';
-import { buildLessonPlanner } from './test-util';
 import { createHashHistory, History } from 'history';
 import createStore, { MockStore } from 'redux-mock-store';
+import { render, RenderResult } from '@testing-library/react';
 import { createStore as createRealStore } from '../../configs/redux/store';
 
 const middleware = [thunk];
@@ -26,8 +25,6 @@ export async function renderAsyncWithRedux(
     }, 100);
   });
 }
-
-const lessonPlanners = [buildLessonPlanner()];
 
 export const initialState = {
   applicationState: {},
