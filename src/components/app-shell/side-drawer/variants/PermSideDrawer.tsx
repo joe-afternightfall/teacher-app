@@ -5,21 +5,22 @@ import Drawer from '@material-ui/core/Drawer';
 import { useMediaQuery } from '@material-ui/core';
 import Navigation from '../components/Navigation';
 import {
-  FULL_DRAWER_WIDTH,
   MIN_DRAWER_WIDTH,
+  FULL_DRAWER_WIDTH,
 } from '../../../../configs/constants/drawer-size';
 import {
   setDrawerSize,
-  userClickedCloseDrawer,
   userClickedOpenDrawer,
+  userClickedCloseDrawer,
 } from '../../../../creators/application/side-drawer';
+import { State } from '../../../../configs/redux/store';
 import SideDrawerAppBar from '../components/SideDrawerAppBar';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
   createStyles({
     drawerPaper: {
-      width: (props: any) => props.size,
+      width: (props: { size: string }) => props.size,
     },
   })
 );
@@ -73,7 +74,7 @@ export interface PermSideDrawerProps {
   logoClickHandler: () => void;
 }
 
-const mapStateToProps = (state: any): PermSideDrawerProps => {
+const mapStateToProps = (state: State): PermSideDrawerProps => {
   return ({
     drawerSize: state.applicationState.drawerSize,
     userClickedCloseDrawer: state.applicationState.userClickedCloseDrawer,

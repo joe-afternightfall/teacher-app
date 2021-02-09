@@ -26,7 +26,7 @@ export class Initializer {
     this.store = store;
   }
 
-  initializeFirebase() {
+  initializeFirebase(): void {
     firebase.initializeApp(firebaseConfig);
 
     const subjectsRef = firebase.database().ref('/subjects');

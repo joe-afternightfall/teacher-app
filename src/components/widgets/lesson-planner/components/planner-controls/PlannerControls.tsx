@@ -22,12 +22,11 @@ export default function PlannerControls(): JSX.Element {
       className={classes.root}
     >
       <Grid item xs={6}>
-        <Grid container alignItems={'center'} spacing={2}></Grid>
+        <Grid container alignItems={'center'} spacing={2} />
       </Grid>
 
       <Grid item>
         <AddNewMenu />
-        {/*<NewLessonButton />*/}
       </Grid>
     </Grid>
   );
