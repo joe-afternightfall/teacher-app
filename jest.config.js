@@ -34,4 +34,8 @@ module.exports = {
         "\\.tsx$": "ts-jest"
     },
     verbose: false,
+    setupFilesAfterEnv: [
+        "jest-extended",
+        "<rootDir>/src/configs/test-utils/setup-tests.ts"
+    ],
 };
