@@ -8,19 +8,10 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import ScheduleIcon from '@material-ui/icons/Schedule';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { State } from '../../../../../../configs/redux/store';
 import { updateDateTime } from '../../../../../../creators/lesson-planner/update-items';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {},
-  })
-);
-
 const TimeInput = (props: TimeInputProps): JSX.Element => {
-  const classes = useStyles();
-
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Grid container justify={'space-around'}>
