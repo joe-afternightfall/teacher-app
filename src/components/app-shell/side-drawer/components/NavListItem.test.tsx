@@ -1,3 +1,4 @@
+import React from 'react';
 import { NavListItem } from './NavListItem';
 import AddIcon from '@material-ui/icons/Add';
 import { renderWithTheme } from '../../../../configs/test-utils/mock-redux';
@@ -9,7 +10,7 @@ describe('Nav List Item Component', () => {
     headerTitle: 'Test Header Title',
     icon: AddIcon,
     testId: 'test-id',
-  }
+  };
 
   it('should render with nav text', () => {
     const clickHandler = jest.fn();
@@ -20,7 +21,8 @@ describe('Nav List Item Component', () => {
         activePath={'/test-active'}
         clickHandler={clickHandler}
         displayText={true}
-      />);
+      />
+    );
 
     expect(navListItem.getByText('Test Drawer Title')).toBeInTheDocument();
     const listButton = navListItem.getByTestId('test-id');
@@ -39,11 +41,11 @@ describe('Nav List Item Component', () => {
         activePath={'/test-active'}
         clickHandler={clickHandler}
         displayText={false}
-      />);
+      />
+    );
 
     navListItem.getByTestId('test-id').click();
     expect(clickHandler).toHaveBeenCalledTimes(1);
     // expect(navListItem.container.children.length).toBe(1);
-
   });
 });

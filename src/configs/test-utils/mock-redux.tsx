@@ -27,7 +27,11 @@ export async function renderAsyncWithRedux(
   store: any
 ): Promise<RenderResult> {
   return new Promise((resolve) => {
-    const result = render(<Provider store={store}>{ui}</Provider>);
+    const result = render(
+      <Provider store={store}>
+        <MockTheme>{ui}</MockTheme>
+      </Provider>
+    );
     setTimeout(() => {
       resolve(result);
     }, 100);
