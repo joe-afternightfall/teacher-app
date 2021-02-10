@@ -62,14 +62,14 @@ const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
         }}
         editable={{
           onRowUpdate: (newData): Promise<void> =>
-            new Promise((resolve, reject) => {
+            new Promise((resolve) => {
               props.updateClickHandler(newData.bookmark);
               setTimeout(() => {
                 resolve();
               }, 1000);
             }),
           onRowDelete: (newData): Promise<void> =>
-            new Promise((resolve, reject) => {
+            new Promise((resolve) => {
               props.deleteClickHandler(newData.bookmark.firebaseId);
               setTimeout(() => {
                 resolve();
