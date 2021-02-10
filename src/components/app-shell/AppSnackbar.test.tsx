@@ -1,6 +1,5 @@
 import React from 'react';
 import AppSnackbar from './AppSnackbar';
-import '@testing-library/jest-dom/extend-expect';
 import { getStore, renderWithRedux } from '../../configs/test-utils/mock-redux';
 
 describe('AppSnackbar Component', () => {

@@ -1,7 +1,6 @@
 import AppBar from './AppBar';
 import * as React from 'react';
 import AddIcon from '@material-ui/icons/Add';
-import '@testing-library/jest-dom/extend-expect';
 import { getStore, renderWithRedux } from '../../configs/test-utils/mock-redux';
 
 describe('App Bar Test', () => {
