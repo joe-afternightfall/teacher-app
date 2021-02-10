@@ -18,4 +18,4 @@ const chiFormat = (date: Date, dateFormat: string) => {
   const chiDate = utcToZonedTime(newDate, chiTimeZone);
 
   return format(chiDate, dateFormat, { timeZone: 'America/Chicago' });
-}
+};
