@@ -8,7 +8,7 @@ describe('App Link Component', () => {
     const appLink = render(<AppLink url={'www.google.com'} title={'Google'} />);
 
     expect(appLink.getByText('Google')).toBeInTheDocument();
-    expect(appLink.getByTestId('app-link')).toBeDefined();
+    expect(appLink.getByTestId('app-link-www.google.com')).toBeDefined();
   });
 
   it('should render with', () => {
@@ -17,6 +17,6 @@ describe('App Link Component', () => {
     );
 
     expect(appLink.getByText('NASA')).toBeInTheDocument();
-    expect(appLink.getByTestId('app-link')).toBeDefined();
+    expect(appLink.getByTestId('app-link-https://www.nasa.gov')).toBeDefined();
   });
 });
