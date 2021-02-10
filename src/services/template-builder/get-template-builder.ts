@@ -1,6 +1,7 @@
 import firebase from 'firebase';
+import { LessonPlannerDAO } from '../../configs/models/LessonPlannerDAO';
 
-export const getTemplateBuilder = async () => {
+export const getTemplateBuilder = async (): Promise<LessonPlannerDAO> => {
   return await firebase
     .database()
     .ref('/template-builder')

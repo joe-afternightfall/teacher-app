@@ -54,11 +54,14 @@ class WeeklySelector extends Component<WeeklySelectorProps> {
     selectedDate: new Date(),
   };
 
-  handleWeekChange = (date: any) => {
-    this.setState({
-      selectedDate: startOfWeek(date),
-    });
-    this.props.updateHandler(date);
+  handleWeekChange = (date: MaterialUiPickersDate) => {
+    if (date !== null) {
+      const newDate = new Date(date);
+      this.setState({
+        selectedDate: startOfWeek(newDate),
+      });
+      this.props.updateHandler(newDate.toString());
+    }
   };
 
   formatWeekSelectLabel = (

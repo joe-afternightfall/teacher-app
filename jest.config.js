@@ -37,4 +37,8 @@ module.exports = {
   },
   verbose: false,
   testPathIgnorePatterns: ['<rootDir>/cypress/'],
+  setupFilesAfterEnv: [
+    "jest-extended",
+    "<rootDir>/src/configs/test-utils/setup-tests.ts"
+  ],
 };

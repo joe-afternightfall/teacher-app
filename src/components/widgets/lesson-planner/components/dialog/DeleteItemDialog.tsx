@@ -5,20 +5,11 @@ import { ThunkDispatch } from 'redux-thunk';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { State } from '../../../../../configs/redux/store';
 import { Grid, IconButton, Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { LessonItem } from '../../../../../configs/models/LessonItem';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
 import { deleteItem } from '../../../../../services/template-builder/delete-item';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {},
-  })
-);
-
 const DeleteItemDialog = (props: DeleteDialogProps): JSX.Element => {
-  const classes = useStyles();
-
   return (
     <IconButton
       edge={'end'}
@@ -62,7 +53,7 @@ export interface DeleteDialogProps {
   ) => void;
 }
 
-const mapStateToProps = (state: any): DeleteDialogProps => {
+const mapStateToProps = (): DeleteDialogProps => {
   return ({} as unknown) as DeleteDialogProps;
 };
 

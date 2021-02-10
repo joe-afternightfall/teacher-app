@@ -5,10 +5,10 @@ import { ThunkDispatch } from 'redux-thunk';
 import { Tooltip } from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import { State } from '../../../../../configs/redux/store';
-import { updateLessonBoardOrder } from '../../../../../services/template-builder/update-board-order';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SquareIconButton from '../../../../shared/SquareIconButton';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { AppTheme } from '../../../../../configs/theme/light-theme';
+import { updateLessonBoardOrder } from '../../../../../services/template-builder/update-board-order';
 
 const useStyles = makeStyles((theme: AppTheme) =>
   createStyles({

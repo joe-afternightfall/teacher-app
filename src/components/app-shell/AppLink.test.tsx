@@ -1,7 +1,6 @@
 import React from 'react';
 import AppLink from './AppLink';
 import { render } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
 
 describe('App Link Component', () => {
   it('should render', () => {

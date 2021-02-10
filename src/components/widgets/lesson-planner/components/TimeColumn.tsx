@@ -31,8 +31,6 @@ function buildItem(text: string): JSX.Element {
 
 class TimeColumn extends Component<TimeColumnProps> {
   render(): JSX.Element {
-    const { classes } = this.props;
-
     return (
       <Grid item style={{ width: '15%' }}>
         <Card style={{ width: '100%' }}>

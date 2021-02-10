@@ -1,18 +1,18 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { Grid, Paper, Tooltip, Typography } from '@material-ui/core';
 import {
   SubjectIcon,
   subjectIcons,
 } from '../../../../configs/theme/subject-icon-choices';
 import { State } from '../../../../configs/redux/store';
+import { Grid, Paper, Tooltip, Typography } from '@material-ui/core';
 import { selectIcon } from '../../../../creators/subject-list/select-icon';
 
 const IconSelector = (props: IconSelectorProps) => {
   const [isHovering, setIsHovering] = React.useState<string>('');
 
-  const handleHover = (id: string) => (event: any) => {
+  const handleHover = (id: string) => () => {
     setIsHovering(id);
   };
 

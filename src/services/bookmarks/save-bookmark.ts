@@ -11,8 +11,7 @@ import { NewBookmarkForm } from '../../components/widgets/bookmarks-widget/compo
 export const saveBookmarkInfo = (
   bookmark: NewBookmarkForm
 ): ThunkAction<void, State, void, AnyAction> => async (
-  dispatch: Dispatch,
-  getState: () => State
+  dispatch: Dispatch
 ): Promise<void> => {
   const bookmarkRef = firebase.database().ref('/bookmarks');
   const newBookmarkRef = bookmarkRef.push();

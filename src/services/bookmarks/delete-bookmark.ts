@@ -7,8 +7,7 @@ import { displayAppSnackbar } from '../../creators/application/app-snackbar';
 export const deleteBookmark = (
   id: string
 ): ThunkAction<void, State, void, AnyAction> => async (
-  dispatch: Dispatch,
-  getState: () => State
+  dispatch: Dispatch
 ): Promise<void> => {
   return await firebase
     .database()

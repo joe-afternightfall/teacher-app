@@ -1,9 +1,8 @@
 import React from 'react';
-import '@testing-library/jest-dom/extend-expect';
-import { getStore, renderWithRedux } from '../../configs/test-utils/mock-redux';
 import AppDialog from './AppDialog';
 import { Typography } from '@material-ui/core';
 import { waitFor } from '@testing-library/react';
+import { getStore, renderWithRedux } from '../../configs/test-utils/mock-redux';
 
 describe('App Dialog Component', () => {
   const content = <Typography>{'testing content'}</Typography>;

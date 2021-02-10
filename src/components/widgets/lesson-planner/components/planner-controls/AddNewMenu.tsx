@@ -7,19 +7,14 @@ import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import LessonForm from '../lesson-form/LessonForm';
+import PlannerNameAndDate from './PlannerNameAndDate';
 import { State } from '../../../../../configs/redux/store';
 import LessonName from '../lesson-form/components/LessonName';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
 import { addNewFromTemplate } from '../../../../../services/lesson-planner/add-new';
-import PlannerNameAndDate from './PlannerNameAndDate';
-
-const useStyles = makeStyles(() => createStyles({}));
 
 const AddNewMenu = (props: AddNewMenuProps): JSX.Element => {
-  const classes = useStyles();
-
   return (
     <PopupState variant={'popover'} popupId={'demo-popup-menu'}>
       {(popupState) => (

@@ -1,10 +1,7 @@
 import React from 'react';
-import { Card, Grid, CardContent, CardActionArea } from '@material-ui/core';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { State } from '../../../../configs/redux/store';
 import { AppTheme } from '../../../../configs/theme/light-theme';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Card, Grid, CardContent, CardActionArea } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: AppTheme) =>
   createStyles({
@@ -23,7 +20,7 @@ const useStyles = makeStyles((theme: AppTheme) =>
   })
 );
 
-const HotKeys = (props: HotKeysProps): JSX.Element => {
+export default function HotKeys(): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -53,19 +50,4 @@ const HotKeys = (props: HotKeysProps): JSX.Element => {
       </Grid>
     </Grid>
   );
-};
-
-export interface HotKeysProps {
-  numberOfSubjects: number;
 }
-
-const mapStateToProps = (state: State): HotKeysProps => {
-  return ({
-    numberOfSubjects: state.subjectListState.subjectList.length,
-  } as unknown) as HotKeysProps;
-};
-
-const mapDispatchToProps = (dispatch: Dispatch): HotKeysProps =>
-  (({} as unknown) as HotKeysProps);
-
-export default connect(mapStateToProps, mapDispatchToProps)(HotKeys);

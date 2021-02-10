@@ -29,14 +29,14 @@ export const move = (
   destination: LessonItem[],
   droppableSource: DraggableLocation,
   droppableDestination: DraggableLocation
-): MoveLessonResult[] | any => {
+): MoveLessonResult => {
   const sourceClone = [...source];
   const destClone = destination === undefined ? [] : [...destination];
   const [removed] = sourceClone.splice(droppableSource.index, 1);
 
   destClone.splice(droppableDestination.index, 0, removed);
 
-  const result: any = {};
+  const result: MoveLessonResult = {};
   result[droppableSource.droppableId] = sourceClone;
   result[droppableDestination.droppableId] = destClone;
 

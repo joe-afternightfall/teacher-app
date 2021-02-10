@@ -1,7 +1,6 @@
 import {
   Bookmark as BookmarkIcon,
   DashboardRounded as DashboardIcon,
-  AssignmentRounded as AssignmentIcon,
   Edit as EditIcon,
   StarBorder,
 } from '@material-ui/icons';

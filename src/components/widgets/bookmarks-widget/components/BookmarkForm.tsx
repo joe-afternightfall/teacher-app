@@ -1,20 +1,9 @@
 import React from 'react';
-import { NewBookmarkForm } from './NewBookmarkDialog';
 import { Grid, TextField } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { NewBookmarkForm } from './NewBookmarkDialog';
 import SubjectDropdown from '../../../shared/SubjectDropdown';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    formControl: {
-      width: 160,
-    },
-  })
-);
-
 export default function BookmarkForm(props: BookmarkFormProps): JSX.Element {
-  const classes = useStyles();
-
   return (
     <form>
       <Grid container>

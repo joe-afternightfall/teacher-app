@@ -6,7 +6,7 @@ import { State } from '../../../configs/redux/store';
 import PermSideDrawer from './variants/PermSideDrawer';
 import TempSideDrawer from './variants/TempSideDrawer';
 
-const drawerSize = (props: any) => props.size;
+const drawerSize = (props: { size: string }) => props.size;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

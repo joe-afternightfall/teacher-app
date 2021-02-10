@@ -1,3 +1,0 @@
-jest.config.js
-src/configs/service-worker.ts
-src/__tests__/test-utils/mock-redux.tsx

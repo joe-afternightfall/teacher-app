@@ -22,8 +22,6 @@ export const saveNewTemplate = (): ThunkAction<
   const allDaysSelected = plannerState.allDaysSelected;
   let builtItems;
 
-  // todo:  plannerState.startTime.toISOString() or toLocaleDateString() is the visual format we want
-  // todo:  how to default values in object rather than having to do everywhere
   if (allDaysSelected) {
     builtItems = allWeekdays.reduce((obj: any, day: string) => {
       const newLessonItem = new LessonItem(
@@ -62,7 +60,6 @@ export const saveNewTemplate = (): ThunkAction<
     }, {});
   }
 
-  // todo:  remove "startDate" and "endDate" from lesson planner object and create its only endpoint
   const lessonPlannerDAO = new LessonPlannerDAO(
     new Date().toISOString(),
     uuidv4(),

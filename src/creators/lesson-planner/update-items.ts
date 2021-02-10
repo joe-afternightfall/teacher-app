@@ -50,7 +50,7 @@ export const updatedLessonBoard = (): AnyAction => {
   };
 };
 
-export const updateOtherLessonTypeName = (value: string) => {
+export const updateOtherLessonTypeName = (value: string): AnyAction => {
   return {
     type: actions.UPDATE_OTHER_LESSON_TYPE_NAME,
     value: value,
