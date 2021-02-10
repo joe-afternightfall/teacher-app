@@ -124,8 +124,6 @@ describe('Weekly Planner State', () => {
     });
 
     expect(state.templateBuilder).toEqual(lesson);
-    expect(state.endDate).toEqual(lesson.endDate);
-    expect(state.startDate).toEqual(lesson.startDate);
   });
 
   it('should return TEMPLATE_LESSON_SAVED action', () => {
