@@ -17,9 +17,18 @@
   "globals": {
     "chance": "writable"
   },
-  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "prettier"
+  ],
   "rules": {
-    "prettier/prettier": ["error", {"singleQuote": true}],
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true
+      }
+    ],
     "no-console": "off"
   },
   "settings": {
@@ -28,5 +37,10 @@
       "version": "detect"
     }
   },
-  "parser": "@typescript-eslint/parser"
+  "parser": "@typescript-eslint/parser",
+  "ignorePatterns": [
+    "jest.config.js",
+    "src/configs/test-utils/",
+    "src/configs/service-worker.ts"
+  ]
 }
