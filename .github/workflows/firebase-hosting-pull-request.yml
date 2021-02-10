@@ -4,6 +4,12 @@
 name: Deploy to Firebase Hosting on PR
 'on': pull_request
 jobs:
+  lint_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lint
+        with:
+          start: npm run lint
   cypress_run:
     runs-on: ubuntu-latest
     steps:
@@ -13,7 +19,6 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: npm start
-          # quote the url to be safe against YML parsing surprises
           wait-on: 'http://localhost:3000'
   build_and_preview:
     runs-on: ubuntu-latest
