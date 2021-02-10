@@ -13,7 +13,6 @@ const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class BookmarksScreen extends Component<BookmarksScreenProps> {
   render(): JSX.Element {
-
     return (
       <Grid container spacing={2}>
         <Grid item xs={12}>

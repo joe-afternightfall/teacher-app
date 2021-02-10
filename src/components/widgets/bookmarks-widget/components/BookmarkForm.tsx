@@ -4,7 +4,6 @@ import { NewBookmarkForm } from './NewBookmarkDialog';
 import SubjectDropdown from '../../../shared/SubjectDropdown';
 
 export default function BookmarkForm(props: BookmarkFormProps): JSX.Element {
-
   return (
     <form>
       <Grid container>
