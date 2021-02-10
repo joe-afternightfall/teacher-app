@@ -10,6 +10,10 @@ import { createStore as createRealStore } from '../../configs/redux/store';
 
 const middleware = [thunk];
 
+export function renderWithTheme(ui: JSX.Element) {
+  return render(<MockTheme>{ui}</MockTheme>);
+}
+
 export function renderWithRedux(ui: JSX.Element, store: Store): RenderResult {
   return render(
     <Provider store={store}>
