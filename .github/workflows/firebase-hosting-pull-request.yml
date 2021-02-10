@@ -4,12 +4,6 @@
 name: Deploy to Firebase Hosting on PR
 'on': pull_request
 jobs:
-  lint_check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Lint
-        with:
-          start: npm run lint
   cypress_run:
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: CI=false npm run deploy
+      - run: CI=false npm run prCheck
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'

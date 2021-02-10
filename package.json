@@ -86,6 +86,7 @@
     "eject": "react-scripts eject",
     "fixlint": "eslint './src/**/*.{ts,tsx}' --fix",
     "lint": "eslint './src/**/*.{ts,tsx}'",
+    "prCheck": "npm ci && npm run lint && npm run test && npm run build",
     "deploy": "npm ci && npm run build",
     "cypress:open": "cypress open",
     "cy": "npm run cypress:open"
