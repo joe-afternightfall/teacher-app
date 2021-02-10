@@ -1,7 +1,6 @@
+import * as React from 'react';
 import TimeColumn from './TimeColumn';
 import { render } from '@testing-library/react';
-import * as React from 'react';
-import '@testing-library/jest-dom/extend-expect';
 
 describe('Time Column Component', () => {
   it('should render with values', () => {

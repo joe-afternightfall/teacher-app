@@ -53,7 +53,7 @@ export interface DeleteDialogProps {
   ) => void;
 }
 
-const mapStateToProps = (state: any): DeleteDialogProps => {
+const mapStateToProps = (): DeleteDialogProps => {
   return ({} as unknown) as DeleteDialogProps;
 };
 
