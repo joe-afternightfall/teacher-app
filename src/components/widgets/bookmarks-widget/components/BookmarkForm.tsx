@@ -14,7 +14,7 @@ export default function BookmarkForm(props: BookmarkFormProps): JSX.Element {
                 fullWidth
                 label={'Title'}
                 margin={'normal'}
-                data-testId={'bookmark-title'}
+                data-testid={'bookmark-title'}
                 value={props.bookmarkValues.bookmarkTitle}
                 onChange={props.textfieldChangeHandler('bookmarkTitle')}
               />
@@ -34,7 +34,7 @@ export default function BookmarkForm(props: BookmarkFormProps): JSX.Element {
             fullWidth
             label={'URL'}
             margin={'normal'}
-            data-testId={'bookmark-url'}
+            data-testid={'bookmark-url'}
             value={props.bookmarkValues.bookmarkUrl}
             onChange={props.textfieldChangeHandler('bookmarkUrl')}
           />

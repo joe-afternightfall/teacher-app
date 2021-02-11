@@ -7,6 +7,7 @@ import { createHashHistory, History } from 'history';
 import createStore, { MockStore } from 'redux-mock-store';
 import { render, RenderResult } from '@testing-library/react';
 import { createStore as createRealStore } from '../../configs/redux/store';
+import { buildSubjectList } from './test-util';
 
 const middleware = [thunk];
 
@@ -47,6 +48,9 @@ export function getStore(state: any, dispatchMock: any): MockStore {
   const store = createStore(middleware)({
     ...initialState,
     applicationState: { ...initialState.applicationState, ...state },
+    subjectListState: {
+      subjectList: buildSubjectList(6),
+    },
   });
 
   if (dispatchMock) {
