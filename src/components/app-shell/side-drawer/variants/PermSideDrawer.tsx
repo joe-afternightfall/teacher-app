@@ -52,9 +52,7 @@ const PermSideDrawer = (props: PermSideDrawerProps): JSX.Element => {
     <Drawer
       open
       variant={'permanent'}
-      classes={{
-        paper: classes.drawerPaper,
-      }}
+      className={classes.drawerPaper}
       data-testid={'perm-side-drawer'}
     >
       <SideDrawerAppBar
