@@ -1,7 +1,7 @@
 import React from 'react';
 import { Store } from 'redux';
 import thunk from 'redux-thunk';
-import MockTheme from './test-theme';
+import MockTheme from './mock-theme';
 import { Provider } from 'react-redux';
 import { createHashHistory, History } from 'history';
 import createStore, { MockStore } from 'redux-mock-store';
@@ -42,6 +42,7 @@ export const initialState = {
   applicationState: {},
 };
 
+// todo:  remove dispatch mock
 export function getStore(state: any, dispatchMock: any): MockStore {
   const store = createStore(middleware)({
     ...initialState,

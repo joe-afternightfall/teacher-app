@@ -36,6 +36,7 @@ const TempSideDrawer = (props: TempSideDrawerProps): JSX.Element => {
       ModalProps={{
         keepMounted: true, // Better open performance on mobile.
       }}
+      data-testid={'temp-side-drawer'}
     >
       <SideDrawerAppBar />
 
