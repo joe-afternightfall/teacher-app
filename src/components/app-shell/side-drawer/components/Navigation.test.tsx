@@ -7,7 +7,10 @@ import {
   renderWithRedux,
 } from '../../../../configs/test-utils/mock-redux';
 import { RenderResult } from '@testing-library/react';
-import { FULL_DRAWER_WIDTH, MIN_DRAWER_WIDTH } from '../../../../configs/constants/drawer-size';
+import {
+  FULL_DRAWER_WIDTH,
+  MIN_DRAWER_WIDTH,
+} from '../../../../configs/constants/drawer-size';
 
 describe('Navigation Component', () => {
   const pageInfo = {

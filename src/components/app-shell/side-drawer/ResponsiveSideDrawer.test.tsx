@@ -1,9 +1,13 @@
+import React from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import { MuiThemeProvider } from '@material-ui/core';
 import ResponsiveSideDrawer from './ResponsiveSideDrawer';
 import { getThemeWithSize } from '../../../configs/test-utils/test-theme';
 import { FULL_DRAWER_WIDTH } from '../../../configs/constants/drawer-size';
-import { getStore, renderWithRedux } from '../../../configs/test-utils/mock-redux';
+import {
+  getStore,
+  renderWithRedux,
+} from '../../../configs/test-utils/mock-redux';
 
 describe('Responsive Side Drawer', () => {
   const pageInfo = {
@@ -20,12 +24,16 @@ describe('Responsive Side Drawer', () => {
     const sideDrawer = renderWithRedux(
       <MuiThemeProvider theme={theme}>
         <ResponsiveSideDrawer />
-      </MuiThemeProvider>
-      , getStore({
-        activePage: pageInfo,
-        sideDrawerIsOpen: true,
-        drawerSize: FULL_DRAWER_WIDTH,
-    }, null));
+      </MuiThemeProvider>,
+      getStore(
+        {
+          activePage: pageInfo,
+          sideDrawerIsOpen: true,
+          drawerSize: FULL_DRAWER_WIDTH,
+        },
+        null
+      )
+    );
 
     expect(sideDrawer.getByTestId('temp-side-drawer')).toBeInTheDocument();
   });
@@ -36,12 +44,16 @@ describe('Responsive Side Drawer', () => {
     const sideDrawer = renderWithRedux(
       <MuiThemeProvider theme={theme}>
         <ResponsiveSideDrawer />
-      </MuiThemeProvider>
-      , getStore({
-        activePage: pageInfo,
-        sideDrawerIsOpen: true,
-        drawerSize: FULL_DRAWER_WIDTH,
-      }, null));
+      </MuiThemeProvider>,
+      getStore(
+        {
+          activePage: pageInfo,
+          sideDrawerIsOpen: true,
+          drawerSize: FULL_DRAWER_WIDTH,
+        },
+        null
+      )
+    );
 
     expect(sideDrawer.getByTestId('perm-side-drawer')).toBeInTheDocument();
   });

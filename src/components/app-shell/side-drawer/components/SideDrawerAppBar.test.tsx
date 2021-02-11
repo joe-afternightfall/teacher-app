@@ -1,6 +1,10 @@
+import React from 'react';
 import { render } from '@testing-library/react';
 import SideDrawerAppBar from './SideDrawerAppBar';
-import { FULL_DRAWER_WIDTH, MIN_DRAWER_WIDTH } from '../../../../configs/constants/drawer-size';
+import {
+  FULL_DRAWER_WIDTH,
+  MIN_DRAWER_WIDTH,
+} from '../../../../configs/constants/drawer-size';
 
 describe('Side Drawer App Bar', () => {
   it('should click close', () => {
@@ -12,7 +16,8 @@ describe('Side Drawer App Bar', () => {
         logoClickHandler={logoHandler}
         closeHandler={closeHandler}
         drawerSize={FULL_DRAWER_WIDTH}
-      />);
+      />
+    );
 
     appBar.getByTestId('chevron-left-toggle-button').click();
     expect(closeHandler).toBeCalledTimes(1);
@@ -25,7 +30,8 @@ describe('Side Drawer App Bar', () => {
       <SideDrawerAppBar
         logoClickHandler={logoHandler}
         drawerSize={MIN_DRAWER_WIDTH}
-      />);
+      />
+    );
 
     appBar.getByTestId('logo-button').click();
     expect(logoHandler).toBeCalledTimes(1);

@@ -58,11 +58,7 @@ export default function SideDrawerAppBar(
                     }
                   }}
                 >
-                  <img
-                    alt={'min-logo'}
-                    src={icon}
-                    className={classes.icon}
-                  />
+                  <img alt={'min-logo'} src={icon} className={classes.icon} />
                 </IconButton>
               </Grid>
             </Grid>
