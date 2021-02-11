@@ -37,7 +37,7 @@ const TempSideDrawer = (props: TempSideDrawerProps): JSX.Element => {
         keepMounted: true, // Better open performance on mobile.
       }}
     >
-      <SideDrawerAppBar closeHandler={props.closeSideDrawerHandler} />
+      <SideDrawerAppBar />
 
       <Navigation tempDrawer={true} />
     </Drawer>
