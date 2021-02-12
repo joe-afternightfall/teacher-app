@@ -32,7 +32,7 @@ export default function SideDrawerAppBar(
           {props.drawerSize && props.drawerSize !== MIN_DRAWER_WIDTH ? (
             <Grid container alignItems={'center'} justify={'space-between'}>
               <Grid item>
-                <img src={icon} alt={'planner-logo'} className={classes.icon} />
+                <img src={icon} alt={'app-logo'} className={classes.icon} />
               </Grid>
 
               <Grid item>
@@ -51,17 +51,14 @@ export default function SideDrawerAppBar(
               <Grid item>
                 <IconButton
                   edge={'start'}
+                  data-testid={'logo-button'}
                   onClick={() => {
                     if (props.logoClickHandler) {
                       props.logoClickHandler();
                     }
                   }}
                 >
-                  <img
-                    alt={'planner-logo'}
-                    src={icon}
-                    className={classes.icon}
-                  />
+                  <img alt={'min-logo'} src={icon} className={classes.icon} />
                 </IconButton>
               </Grid>
             </Grid>
@@ -69,7 +66,7 @@ export default function SideDrawerAppBar(
         </Toolbar>
       ) : (
         <Toolbar className={classes.toolbar}>
-          <img alt={'planner-logo'} className={classes.icon} src={icon} />
+          <img alt={'app-logo'} className={classes.icon} src={icon} />
         </Toolbar>
       )}
     </AppBar>
@@ -77,7 +74,7 @@ export default function SideDrawerAppBar(
 }
 
 export interface SideDrawerAppBarProps {
-  closeHandler: () => void;
+  closeHandler?: () => void;
   logoClickHandler?: () => void;
   drawerSize?: string;
 }

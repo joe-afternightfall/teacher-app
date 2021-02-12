@@ -5,7 +5,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Navigation from '../components/Navigation';
 import { State } from '../../../../configs/redux/store';
 import SideDrawerAppBar from '../components/SideDrawerAppBar';
-import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { closeSideDrawer } from '../../../../creators/application/side-drawer';
 
 const useStyles = makeStyles(() =>
@@ -17,17 +17,13 @@ const useStyles = makeStyles(() =>
 );
 
 const TempSideDrawer = (props: TempSideDrawerProps): JSX.Element => {
-  const { window, open } = props;
+  const { open } = props;
   const classes = useStyles();
-  const theme = useTheme();
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Drawer
-      container={container}
       variant={'temporary'}
-      anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+      anchor={'left'}
       open={open}
       onClose={props.closeSideDrawerHandler}
       classes={{
@@ -36,8 +32,9 @@ const TempSideDrawer = (props: TempSideDrawerProps): JSX.Element => {
       ModalProps={{
         keepMounted: true, // Better open performance on mobile.
       }}
+      data-testid={'temp-side-drawer'}
     >
-      <SideDrawerAppBar closeHandler={props.closeSideDrawerHandler} />
+      <SideDrawerAppBar />
 
       <Navigation tempDrawer={true} />
     </Drawer>
@@ -46,7 +43,6 @@ const TempSideDrawer = (props: TempSideDrawerProps): JSX.Element => {
 
 export interface TempSideDrawerProps {
   open: boolean;
-  window?: () => Window;
   closeSideDrawerHandler: () => void;
 }
 

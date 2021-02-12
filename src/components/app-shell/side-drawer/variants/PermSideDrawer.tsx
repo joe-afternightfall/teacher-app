@@ -55,6 +55,7 @@ const PermSideDrawer = (props: PermSideDrawerProps): JSX.Element => {
       classes={{
         paper: classes.drawerPaper,
       }}
+      data-testid={'perm-side-drawer'}
     >
       <SideDrawerAppBar
         drawerSize={props.drawerSize}

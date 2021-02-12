@@ -9,7 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 
 const SubjectDropdown = (props: SubjectDropdownProps): JSX.Element => {
   return (
-    <FormControl style={{ width: '100%' }} data-testId={'subject-dropdown'}>
+    <FormControl style={{ width: '100%' }} data-testid={'subject-dropdown'}>
       <InputLabel htmlFor={'subject-dropdown'}>{'Subject'}</InputLabel>
       <Select
         value={props.value}
