@@ -7,13 +7,14 @@ import WeeklySelector from './WeeklySelector';
 import {
   updateWeekNumber,
   updatePlannerStartDate,
+  updatePlannerTitle,
 } from '../../../../../creators/lesson-planner/add-new';
 import { State } from '../../../../../configs/redux/store';
 import { Grid, TextField, Typography } from '@material-ui/core';
 
 const PlannerNameAndDate = (props: PlannerNameAndDateProps): JSX.Element => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    props.changeHandler(event.target.value);
+    props.changeHandler(event.target.name, event.target.value);
   };
 
   return (
@@ -42,6 +43,29 @@ const PlannerNameAndDate = (props: PlannerNameAndDateProps): JSX.Element => {
           </Grid>
         </Grid>
 
+        <Grid item xs={12} container alignItems={'center'} spacing={2}>
+          <Grid item xs={6} container justify={'flex-end'}>
+            <Grid item>
+              <Typography>{'Title'}</Typography>
+            </Grid>
+          </Grid>
+          <Grid item xs={6} container justify={'flex-start'}>
+            <Grid item>
+              <TextField
+                style={{ width: 96 }}
+                id={'planner-title'}
+                label={''}
+                fullWidth
+                inputProps={{
+                  name: 'plannerTitle',
+                }}
+                value={props.plannerTitle}
+                onChange={handleChange}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+
         <Grid item xs={12} container justify={'center'}>
           <Grid item>
             <WeeklySelector updateHandler={props.dateHandler} />
@@ -56,13 +80,15 @@ export interface PlannerNameAndDateProps {
   weekNumber: string;
   startDate: string;
   endDate: string;
-  changeHandler: (week: string) => void;
+  plannerTitle: string;
+  changeHandler: (name: string, value: string) => void;
   dateHandler: (date: string) => void;
 }
 
 const mapStateToProps = (state: State): PlannerNameAndDateProps => {
   return ({
     weekNumber: state.lessonPlannerState.weekNumber,
+    plannerTitle: state.lessonPlannerState.plannerTitle,
     endDate: state.lessonPlannerState.plannerEndDate,
     startDate: state.lessonPlannerState.plannerStartDate,
   } as unknown) as PlannerNameAndDateProps;
@@ -70,8 +96,12 @@ const mapStateToProps = (state: State): PlannerNameAndDateProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): PlannerNameAndDateProps =>
   (({
-    changeHandler: (week: string) => {
-      dispatch(updateWeekNumber(week));
+    changeHandler: (name: string, value: string) => {
+      if (name === 'weekNumber') {
+        dispatch(updateWeekNumber(value));
+      } else if (name === 'plannerTitle') {
+        dispatch(updatePlannerTitle(value));
+      }
     },
     dateHandler: (date: string) => {
       dispatch(updatePlannerStartDate(date));

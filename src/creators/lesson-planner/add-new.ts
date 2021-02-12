@@ -14,6 +14,13 @@ export const updateWeekNumber = (weekNumber: string): AnyAction => {
   };
 };
 
+export const updatePlannerTitle = (plannerTitle: string): AnyAction => {
+  return {
+    type: actions.UPDATE_PLANNER_TITLE,
+    plannerTitle: plannerTitle,
+  };
+};
+
 export const updatePlannerStartDate = (date: string): AnyAction => {
   return {
     type: actions.UPDATE_PLANNER_START_DATE,

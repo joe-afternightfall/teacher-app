@@ -4,6 +4,7 @@ export class LessonPlannerDAO {
   updatedAt: string;
   id: string;
   title: string;
+  weekNumber: string;
   weekdays: {
     [key: string]: Weekday;
   };
@@ -13,6 +14,7 @@ export class LessonPlannerDAO {
     updatedAt: string,
     id: string,
     title: string,
+    weekNumber: string,
     weekdays: {
       [key: string]: Weekday;
     },
@@ -21,6 +23,7 @@ export class LessonPlannerDAO {
     this.updatedAt = updatedAt;
     this.id = id;
     this.title = title;
+    this.weekNumber = weekNumber;
     this.weekdays = weekdays;
     this.notes = notes;
   }

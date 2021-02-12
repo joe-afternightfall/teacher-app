@@ -36,7 +36,8 @@ export const addNewFromTemplate = (): ThunkAction<
   const lessonPlannerDAO = new LessonPlannerDAO(
     new Date().toISOString(),
     uuidv4(),
-    `Week #${plannerState.weekNumber}`,
+    plannerState.plannerTitle,
+    plannerState.weekNumber,
     weekdays,
     []
   );

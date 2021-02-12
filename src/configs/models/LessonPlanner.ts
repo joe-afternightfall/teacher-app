@@ -9,12 +9,13 @@ export class LessonPlanner extends LessonPlannerDAO {
     updatedAt: string,
     id: string,
     title: string,
+    weekNumber: string,
     weekdays: {
       [key: string]: Weekday;
     },
     notes: LessonNote[]
   ) {
-    super(updatedAt, id, title, weekdays, notes);
+    super(updatedAt, id, title, weekNumber, weekdays, notes);
 
     this.firebaseId = firebaseId;
   }
