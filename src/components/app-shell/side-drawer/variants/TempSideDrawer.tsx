@@ -26,7 +26,9 @@ const TempSideDrawer = (props: TempSideDrawerProps): JSX.Element => {
       anchor={'left'}
       open={open}
       onClose={props.closeSideDrawerHandler}
-      className={classes.drawerPaper}
+      classes={{
+        paper: classes.drawerPaper,
+      }}
       ModalProps={{
         keepMounted: true, // Better open performance on mobile.
       }}
