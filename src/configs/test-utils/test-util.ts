@@ -34,6 +34,7 @@ export const buildLessonPlanner = (): LessonPlanner => {
     updatedAt: new Date().toLocaleDateString(),
     id: 'planner-id',
     title: 'planner-title',
+    weekNumber: 'week-number',
     weekdays: {
       monday: {
         date: '01/01/2021',

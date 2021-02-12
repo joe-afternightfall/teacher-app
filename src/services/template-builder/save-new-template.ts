@@ -64,6 +64,7 @@ export const saveNewTemplate = (): ThunkAction<
     new Date().toISOString(),
     uuidv4(),
     'Template Builder',
+    '',
     builtItems,
     []
   );

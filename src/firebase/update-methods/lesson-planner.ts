@@ -33,6 +33,7 @@ function buildPlanner(planner: any): LessonPlanner[] {
         updatedAt: planner[key].updatedAt,
         id: planner[key].id,
         title: planner[key].title,
+        weekNumber: planner[key].weekNumber,
         weekdays: {
           monday: planner[key].weekdays.monday,
           tuesday: planner[key].weekdays.tuesday,
