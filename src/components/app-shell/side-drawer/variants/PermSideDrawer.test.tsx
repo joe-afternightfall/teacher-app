@@ -34,11 +34,17 @@ describe('Perm Side Drawer Component', () => {
   });
 
   it('should render with drawer', () => {
-    const sideDrawer = renderWithRedux(<PermSideDrawer />, getStore({
-      activePage: pageInfo,
-      sideDrawerIsOpen: true,
-      drawerSize: FULL_DRAWER_WIDTH,
-    }, null));
+    const sideDrawer = renderWithRedux(
+      <PermSideDrawer />,
+      getStore(
+        {
+          activePage: pageInfo,
+          sideDrawerIsOpen: true,
+          drawerSize: FULL_DRAWER_WIDTH,
+        },
+        null
+      )
+    );
 
     expect(sideDrawer.getByTestId('perm-side-drawer')).toBeInTheDocument();
   });
@@ -64,12 +70,15 @@ describe('Perm Side Drawer Component', () => {
     sideDrawer.getByTestId('chevron-left-toggle-button').click();
 
     expect(store.getActions()).toHaveLength(2);
-    expect(store.getActions()).toStrictEqual([{
-      type: actions.USER_CLICKED_CLOSE_DRAWER
-    }, {
-      size: "56px",
-      type: actions.SET_DRAWER_SIZE
-    }]);
+    expect(store.getActions()).toStrictEqual([
+      {
+        type: actions.USER_CLICKED_CLOSE_DRAWER,
+      },
+      {
+        size: '56px',
+        type: actions.SET_DRAWER_SIZE,
+      },
+    ]);
   });
 
   it('should dispatch user clicked drawer open', () => {
@@ -85,11 +94,14 @@ describe('Perm Side Drawer Component', () => {
     sideDrawer.getByTestId('chevron-left-toggle-button').click();
 
     expect(store.getActions()).toHaveLength(2);
-    expect(store.getActions()).toStrictEqual([{
-      type: actions.USER_CLICKED_CLOSE_DRAWER
-    }, {
-      size: "56px",
-      type: actions.SET_DRAWER_SIZE
-    }]);
+    expect(store.getActions()).toStrictEqual([
+      {
+        type: actions.USER_CLICKED_CLOSE_DRAWER,
+      },
+      {
+        size: '56px',
+        type: actions.SET_DRAWER_SIZE,
+      },
+    ]);
   });
 });

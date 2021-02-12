@@ -1,18 +1,22 @@
+import React from 'react';
 import BookmarkForm from './BookmarkForm';
 import userEvent from '@testing-library/user-event';
-import { getStore, renderWithRedux } from '../../../../configs/test-utils/mock-redux';
+import {
+  getStore,
+  renderWithRedux,
+} from '../../../../configs/test-utils/mock-redux';
 
 describe('Bookmark Form Component', () => {
   it('should render with stuff', () => {
-    let textfieldChangeHandler = jest.fn();
-    let dropdownChangeHandler = jest.fn();
+    const textfieldChangeHandler = jest.fn();
+    const dropdownChangeHandler = jest.fn();
     const bookmarkForm = renderWithRedux(
       <BookmarkForm
-        bookmarkValues={ {
+        bookmarkValues={{
           id: 'test-id',
           bookmarkUrl: 'www.test-url.com',
           bookmarkTitle: 'test-title',
-          subjectId: 'test-subject-id'
+          subjectId: 'test-subject-id',
         }}
         dropdownChangeHandler={dropdownChangeHandler}
         textfieldChangeHandler={textfieldChangeHandler}

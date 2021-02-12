@@ -1,4 +1,8 @@
-import { getStore, renderWithRedux } from '../../../../configs/test-utils/mock-redux';
+import React from 'react';
+import {
+  getStore,
+  renderWithRedux,
+} from '../../../../configs/test-utils/mock-redux';
 import TempSideDrawer from './TempSideDrawer';
 import AddIcon from '@material-ui/icons/Add';
 import { FULL_DRAWER_WIDTH } from '../../../../configs/constants/drawer-size';
@@ -13,11 +17,14 @@ describe('Temp Side Drawer Component', () => {
   };
 
   it('should render with info', () => {
-    let store = getStore({
-      activePage: pageInfo,
-      sideDrawerIsOpen: true,
-      drawerSize: FULL_DRAWER_WIDTH,
-    }, null);
+    const store = getStore(
+      {
+        activePage: pageInfo,
+        sideDrawerIsOpen: true,
+        drawerSize: FULL_DRAWER_WIDTH,
+      },
+      null
+    );
     const drawer = renderWithRedux(<TempSideDrawer />, store);
 
     expect(drawer.getByTestId('temp-side-drawer')).toBeInTheDocument();
