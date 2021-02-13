@@ -61,8 +61,9 @@ const BuilderBoard = (props: BuilderBoardProps): JSX.Element => {
       selectedPlanner={props.templateBuilder}
       dragAndDropColumns={
         <React.Fragment>
-          {templateColumns.map((column) => (
+          {templateColumns.map((column, index) => (
             <DragAndDropColumn
+              key={index}
               subjectList={column.subjectList}
               dayOfWeek={column.dayOfWeek}
               plannerDay={column.plannerDay}
