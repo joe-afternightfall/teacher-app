@@ -9,12 +9,12 @@ import Grid from '@material-ui/core/Grid';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import DateFnsUtils from '@date-io/date-fns';
-import CardPopover from '../card-popover/CardPopover';
 import { Button, Typography } from '@material-ui/core';
+import CardPopover from '../../../../shared/CardPopover';
 import { State } from '../../../../../configs/redux/store';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { saveDates } from '../../../../../services/template-builder/save-dates';
-import { updateDateTime } from '../../../../../creators/lesson-planner/update-items';
+// import { updateDateTime } from '../../../../../creators/template-builder/builder';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -127,7 +127,7 @@ const mapStateToProps = (state: State): DateInputProps => {
 const mapDispatchToProps = (dispatch: Dispatch): DateInputProps =>
   (({
     updateDate: (name: string, value: Date) => {
-      dispatch(updateDateTime(name, value));
+      // dispatch(updateDateTime(name, value));
     },
     saveDates: () => {
       (dispatch as ThunkDispatch<State, void, AnyAction>)(saveDates());
