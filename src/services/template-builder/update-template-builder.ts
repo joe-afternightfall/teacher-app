@@ -4,8 +4,11 @@ import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../configs/redux/store';
 import { LessonItem } from '../../configs/models/LessonItem';
-import { savedTemplateBuilder } from '../../creators/template-builder/builder';
 import { displayAppSnackbar } from '../../creators/application/app-snackbar';
+import {
+  clearTemplateBuilderForm,
+  savedTemplateBuilder,
+} from '../../creators/template-builder/builder';
 
 const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
@@ -78,6 +81,7 @@ export const updateTemplate = (): ThunkAction<
             })
           );
           dispatch(savedTemplateBuilder());
+          dispatch(clearTemplateBuilderForm());
         }
       }
     );

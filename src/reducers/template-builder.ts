@@ -32,6 +32,7 @@ export default {
         newState.selectedDays = [];
         newState.startTime = new Date();
         newState.endTime = new Date();
+        newState.lessonType = '';
         break;
       case actions.LOAD_LESSON_TEMPLATE: {
         const endDate = action.template.endDate;
