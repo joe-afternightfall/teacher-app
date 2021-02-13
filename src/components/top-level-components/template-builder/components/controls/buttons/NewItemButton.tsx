@@ -16,10 +16,7 @@ const FABNewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
       <Fab
         color={'primary'}
         onClick={() => {
-          props.displayAppDialogHandler(
-            <NewItemForm />,
-            props.isNewTemplate
-          );
+          props.displayAppDialogHandler(<NewItemForm />, props.isNewTemplate);
         }}
       >
         <AddIcon />
@@ -35,10 +32,7 @@ const NewItemButton = (props: NewTemplateButtonProps): JSX.Element => {
       variant={'contained'}
       startIcon={<AddIcon />}
       onClick={() => {
-        props.displayAppDialogHandler(
-          <NewItemForm />,
-          props.isNewTemplate
-        );
+        props.displayAppDialogHandler(<NewItemForm />, props.isNewTemplate);
       }}
     >
       {'Add New'}
