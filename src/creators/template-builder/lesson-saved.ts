@@ -1,8 +1,8 @@
 import actions from '../actions';
 import { AnyAction } from 'redux';
 
-export const lessonSaved = (): AnyAction => {
+export const savedLessonTemplate = (): AnyAction => {
   return {
-    type: actions.TEMPLATE_LESSON_SAVED,
+    type: actions.SAVED_LESSON_TEMPLATE,
   };
 };

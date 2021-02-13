@@ -1,12 +1,12 @@
-import { lessonSaved } from './lesson-saved';
+import { savedLessonTemplate } from './lesson-saved';
 import actions from '../actions';
 
 describe('lesson saved creator', () => {
-  it('should return TEMPLATE_LESSON_SAVED action', () => {
-    const action = lessonSaved();
+  it('should return SAVED_LESSON_TEMPLATE action', () => {
+    const action = savedLessonTemplate();
 
     expect(action).toEqual({
-      type: actions.TEMPLATE_LESSON_SAVED,
+      type: actions.SAVED_LESSON_TEMPLATE,
     });
   });
 });
