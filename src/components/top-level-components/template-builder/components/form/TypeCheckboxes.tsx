@@ -1,9 +1,9 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { State } from '../../../../../../configs/redux/store';
+import { State } from '../../../../../configs/redux/store';
 import { Checkbox, FormControlLabel } from '@material-ui/core';
-import { updateLessonType } from '../../../../../../creators/lesson-planner/lesson-type';
+import { updateLessonType } from '../../../../../creators/template-builder/builder';
 
 const TypeCheckboxes = (props: TypeCheckboxesProps): JSX.Element => {
   const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +48,7 @@ export interface TypeCheckboxesProps {
 
 const mapStateToProps = (state: State): TypeCheckboxesProps => {
   return ({
-    lessonType: state.lessonPlannerState.lessonType,
+    lessonType: state.templateBuilderState.lessonType,
   } as unknown) as TypeCheckboxesProps;
 };
 
