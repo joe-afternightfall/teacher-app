@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { AnyAction, Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { State } from '../../../../../configs/redux/store';
+import { State } from '../../../configs/redux/store';
 import { Grid, IconButton, Typography } from '@material-ui/core';
-import { LessonItem } from '../../../../../configs/models/LessonItem';
-import { displayAppDialog } from '../../../../../creators/application/app-dialog';
-import { deleteItem } from '../../../../../services/template-builder/delete-item';
+import { LessonItem } from '../../../configs/models/LessonItem';
+import { displayAppDialog } from '../../../creators/application/app-dialog';
+import { deleteItem } from '../../../services/template-builder/delete-item';
 
 const DeleteItemDialog = (props: DeleteDialogProps): JSX.Element => {
   return (

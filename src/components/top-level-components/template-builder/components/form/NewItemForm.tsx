@@ -1,17 +1,17 @@
 import React from 'react';
 import { Dispatch } from 'redux';
+import TimeInput from './TimeInput';
 import { connect } from 'react-redux';
-import TimeInput from './components/TimeInput';
+import TypeCheckboxes from './TypeCheckboxes';
 import { Grid, TextField } from '@material-ui/core';
 import { State } from '../../../../../configs/redux/store';
-import WeekdaySelectionGroup from './components/WeekdaySelectionGroup';
+import WeekdaySelectionGroup from './WeekdaySelectionGroup';
+import SubjectDropdown from '../../../../shared/SubjectDropdown';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import {
   updateLessonSubject,
   updateOtherLessonTypeName,
-} from '../../../../../creators/lesson-planner/update-items';
-import TypeCheckboxes from './components/TypeCheckboxes';
-import SubjectDropdown from '../../../../shared/SubjectDropdown';
+} from '../../../../../creators/template-builder/builder';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -21,7 +21,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const TemplateBuilderForm = (props: TemplateBuilderFormProps): JSX.Element => {
+const NewItemForm = (props: TemplateBuilderFormProps): JSX.Element => {
   const classes = useStyles();
 
   const isChecked =
@@ -88,9 +88,9 @@ export interface TemplateBuilderFormProps {
 
 const mapStateToProps = (state: State): TemplateBuilderFormProps => {
   return ({
-    lessonType: state.lessonPlannerState.lessonType,
-    lessonSubjectId: state.lessonPlannerState.lessonSubjectId,
-    otherLessonTypeName: state.lessonPlannerState.otherLessonTypeName,
+    lessonType: state.templateBuilderState.lessonType,
+    lessonSubjectId: state.templateBuilderState.lessonSubjectId,
+    otherLessonTypeName: state.templateBuilderState.otherLessonTypeName,
   } as unknown) as TemplateBuilderFormProps;
 };
 
@@ -106,7 +106,4 @@ const mapDispatchToProps = (dispatch: Dispatch): TemplateBuilderFormProps =>
     },
   } as unknown) as TemplateBuilderFormProps);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TemplateBuilderForm);
+export default connect(mapStateToProps, mapDispatchToProps)(NewItemForm);

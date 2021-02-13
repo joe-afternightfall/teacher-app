@@ -8,12 +8,12 @@ import {
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import ToggleButton from '@material-ui/lab/ToggleButton';
-import { State } from '../../../../../../configs/redux/store';
+import { State } from '../../../../../configs/redux/store';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import {
   updateAllSelectedDays,
   updateSelectedDays,
-} from '../../../../../../creators/lesson-planner/update-items';
+} from '../../../../../creators/template-builder/builder';
 
 const WeekdaySelectionGroup = (
   props: WeekdaySelectionGroupProps
@@ -72,8 +72,8 @@ export interface WeekdaySelectionGroupProps {
 
 const mapStateToProps = (state: State): WeekdaySelectionGroupProps => {
   return ({
-    selectedDays: state.lessonPlannerState.selectedDays,
-    allDaysSelected: state.lessonPlannerState.allDaysSelected,
+    selectedDays: state.templateBuilderState.selectedDays,
+    allDaysSelected: state.templateBuilderState.allDaysSelected,
   } as unknown) as WeekdaySelectionGroupProps;
 };
 

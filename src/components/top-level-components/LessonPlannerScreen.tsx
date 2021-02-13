@@ -18,7 +18,7 @@ class LessonPlannerScreen extends Component<LessonPlannerScreenProps> {
       <Grid>
         <PlannerControls />
 
-        <LessonPlannerComp isTemplate={false} />
+        <LessonPlannerComp />
       </Grid>
     );
   }

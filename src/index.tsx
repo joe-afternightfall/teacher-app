@@ -14,7 +14,7 @@ import * as serviceWorker from './configs/service-worker';
 import BookmarksScreen from './components/top-level-components/BookmarksScreen';
 import LessonPlannerScreen from './components/top-level-components/LessonPlannerScreen';
 import DashboardScreen from './components/top-level-components/dashboard/DashboardScreen';
-import TemplateBuilderScreen from './components/top-level-components/TemplateBuilderScreen';
+import TemplateBuilderScreen from './components/top-level-components/template-builder/TemplateBuilderScreen';
 
 LogRocket.init('be9sx9/teacher-app');
 setupLogRocketReact(LogRocket);

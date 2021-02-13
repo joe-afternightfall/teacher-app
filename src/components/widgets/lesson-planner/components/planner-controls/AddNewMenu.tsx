@@ -6,10 +6,8 @@ import { ThunkDispatch } from 'redux-thunk';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
-import LessonForm from '../lesson-form/LessonForm';
 import PlannerNameAndDate from './PlannerNameAndDate';
 import { State } from '../../../../../configs/redux/store';
-import LessonName from '../lesson-form/components/LessonName';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { displayAppDialog } from '../../../../../creators/application/app-dialog';
 import { addNewFromTemplate } from '../../../../../services/lesson-planner/add-new';
@@ -39,7 +37,7 @@ const AddNewMenu = (props: AddNewMenuProps): JSX.Element => {
             <MenuItem
               onClick={() => {
                 popupState.close();
-                props.newItemClickHandler(<LessonForm />, <LessonName />);
+                // props.newItemClickHandler(<LessonForm />, <LessonName />);
               }}
             >
               {'Lesson Item'}

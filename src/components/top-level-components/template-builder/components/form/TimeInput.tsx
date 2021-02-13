@@ -8,8 +8,8 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import ScheduleIcon from '@material-ui/icons/Schedule';
-import { State } from '../../../../../../configs/redux/store';
-import { updateDateTime } from '../../../../../../creators/lesson-planner/update-items';
+import { State } from '../../../../../configs/redux/store';
+import { updateStartAndEndTime } from '../../../../../creators/template-builder/builder';
 
 const TimeInput = (props: TimeInputProps): JSX.Element => {
   return (
@@ -51,15 +51,15 @@ export interface TimeInputProps {
 
 const mapStateToProps = (state: State): TimeInputProps => {
   return ({
-    startTime: state.lessonPlannerState.startTime,
-    endTime: state.lessonPlannerState.endTime,
+    startTime: state.templateBuilderState.startTime,
+    endTime: state.templateBuilderState.endTime,
   } as unknown) as TimeInputProps;
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): TimeInputProps =>
   (({
     handleChange: (name: string, value: Date) => {
-      dispatch(updateDateTime(name, value));
+      dispatch(updateStartAndEndTime(name, value));
     },
   } as unknown) as TimeInputProps);
 

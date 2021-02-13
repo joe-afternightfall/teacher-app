@@ -3,6 +3,7 @@ import { ThunkAction } from 'redux-thunk';
 import { State } from '../../configs/redux/store';
 import { AnyAction, Dispatch } from 'redux';
 import firebase from 'firebase';
+import { displayAppSnackbar } from '../../creators/application/app-snackbar';
 
 export const deleteItem = (
   day: string,
@@ -11,9 +12,9 @@ export const deleteItem = (
   dispatch: Dispatch,
   getState: () => State
 ): Promise<void> => {
-  const plannerState = getState().lessonPlannerState;
-  const templateFirebaseId = plannerState.templateBuilder.firebaseId;
-  const weekdays = plannerState.templateBuilder.weekdays;
+  const builderState = getState().templateBuilderState;
+  const templateFirebaseId = builderState.templateBuilder.firebaseId;
+  const weekdays = builderState.templateBuilder.weekdays;
   const weekdayItems = weekdays[day];
 
   const updatedItems = weekdayItems.items.filter(
@@ -36,9 +37,27 @@ export const deleteItem = (
       },
       (error) => {
         if (error) {
-          // dispatch error snackbar
+          dispatch(
+            displayAppSnackbar({
+              text: 'Failed to delete',
+              severity: 'error',
+              position: {
+                vertical: 'bottom',
+                horizontal: 'right',
+              },
+            })
+          );
         } else {
-          // dispatch success snackbar
+          dispatch(
+            displayAppSnackbar({
+              text: 'Removed item',
+              severity: 'success',
+              position: {
+                vertical: 'bottom',
+                horizontal: 'right',
+              },
+            })
+          );
         }
       }
     );

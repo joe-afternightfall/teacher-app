@@ -12,20 +12,17 @@ import {
   withStyles,
   StyledComponentProps,
 } from '@material-ui/core/styles';
+import CardPopover from '../CardPopover';
 import React, { Component } from 'react';
-import {
-  formatDate,
-  formatDateWithout,
-} from '../../../../utils/date-formatter';
 import { Styles } from '@material-ui/styles';
-import CardPopover from './card-popover/CardPopover';
-import DeleteItemDialog from './dialog/DeleteItemDialog';
-import { getSubject } from '../../../../utils/subject-name';
+import DeleteItemDialog from './DeleteItemDialog';
+import { getSubject } from '../../../utils/subject-name';
+import { Subject } from '../../../configs/models/Subject';
+import { Weekday } from '../../../configs/types/LessonPlanner';
+import { LessonItem } from '../../../configs/models/LessonItem';
 import { Card, Grid, CardHeader, Typography } from '@material-ui/core';
-import { capitalizeFirstLetter } from '../../../../utils/string-formatter';
-import { Weekday } from '../../../../configs/types/LessonPlanner';
-import { LessonItem } from '../../../../configs/models/LessonItem';
-import { Subject } from '../../../../configs/models/Subject';
+import { capitalizeFirstLetter } from '../../../utils/string-formatter';
+import { formatDate, formatDateWithout } from '../../../utils/date-formatter';
 
 const getItemStyle = (
   draggableStyle: any,
@@ -54,7 +51,7 @@ const getListStyle = (isDraggingOver: boolean): Record<string, unknown> => ({
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
-class Column extends Component<ColumnProps> {
+class DragAndDropColumn extends Component<ColumnProps> {
   render(): JSX.Element {
     const { plannerDay, dayOfWeek, color, subjectList } = this.props;
 
@@ -159,4 +156,4 @@ export interface ColumnProps extends WithStyles<typeof styles> {
   subjectList: Subject[];
 }
 
-export default withStyles(styles, { withTheme: true })(Column);
+export default withStyles(styles, { withTheme: true })(DragAndDropColumn);

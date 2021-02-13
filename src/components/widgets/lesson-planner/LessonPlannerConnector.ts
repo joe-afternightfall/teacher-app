@@ -20,21 +20,17 @@ const mapStateToProps = (state: State): LessonPlannerProps => {
   return ({
     selectedPlanner: selectedPlanner,
     subjectList: state.subjectListState.subjectList,
-    templateBuilder: state.lessonPlannerState.templateBuilder,
   } as unknown) as LessonPlannerProps;
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch,
-  ownProps: any
-): LessonPlannerProps =>
+const mapDispatchToProps = (dispatch: Dispatch): LessonPlannerProps =>
   (({
     reorderHandler: (items: LessonItem[], dayOfWeek: string) => {
-      dispatch(reorderPlannerItems(items, dayOfWeek, ownProps.isTemplate));
+      dispatch(reorderPlannerItems(items, dayOfWeek));
       dispatch(lessonBoardChanged());
     },
     moveHandler: (days: LessonWeekdays) => {
-      dispatch(movePlannerItems(days, ownProps.isTemplate));
+      dispatch(movePlannerItems(days));
       dispatch(lessonBoardChanged());
     },
   } as unknown) as LessonPlannerProps);

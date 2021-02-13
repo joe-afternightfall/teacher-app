@@ -16,6 +16,9 @@ import subjectListState, {
   SubjectListState,
 } from '../../reducers/subject-list';
 import bookmarksState, { BookmarksState } from '../../reducers/bookmarks';
+import templateBuilderState, {
+  TemplateBuilderState,
+} from '../../reducers/template-builder';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import LogRocket from 'logrocket';
 import { FULL_DRAWER_WIDTH } from '../constants/drawer-size';
@@ -31,6 +34,7 @@ export const createStore = (history: History): Store => {
       lessonPlannerState: lessonPlannerState.reducer,
       subjectListState: subjectListState.reducer,
       bookmarksState: bookmarksState.reducer,
+      templateBuilderState: templateBuilderState.reducer,
       router: connectRouter(history),
       routing: routerReducer,
     });
@@ -75,4 +79,5 @@ export interface State {
   lessonPlannerState: LessonPlannerState;
   subjectListState: SubjectListState;
   bookmarksState: BookmarksState;
+  templateBuilderState: TemplateBuilderState;
 }

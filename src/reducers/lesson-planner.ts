@@ -16,16 +16,11 @@ export default {
         newState.selectedLessonId = action.lessonPlanners[0].id;
         break;
       case actions.REORDER_LESSON_PLANNER: {
-        let selectedPlanner;
-        if (action.isTemplate) {
-          selectedPlanner = newState.templateBuilder;
-        } else {
-          selectedPlanner = newState.lessonPlanners.find(
-            (planner: LessonPlanner) => {
-              return planner.id === newState.selectedLessonId;
-            }
-          );
-        }
+        const selectedPlanner = newState.lessonPlanners.find(
+          (planner: LessonPlanner) => {
+            return planner.id === newState.selectedLessonId;
+          }
+        );
 
         if (selectedPlanner !== undefined) {
           selectedPlanner.weekdays[action.dayOfWeek].items = action.items;
@@ -33,16 +28,11 @@ export default {
         break;
       }
       case actions.MOVE_PLANNER_ITEMS: {
-        let selectedPlanner;
-        if (action.isTemplate) {
-          selectedPlanner = newState.templateBuilder;
-        } else {
-          selectedPlanner = newState.lessonPlanners.find(
-            (planner: LessonPlanner) => {
-              return planner.id === newState.selectedLessonId;
-            }
-          );
-        }
+        const selectedPlanner = newState.lessonPlanners.find(
+          (planner: LessonPlanner) => {
+            return planner.id === newState.selectedLessonId;
+          }
+        );
 
         if (selectedPlanner !== undefined) {
           selectedPlanner.weekdays.monday.items = action.days.monday;
@@ -53,59 +43,17 @@ export default {
         }
         break;
       }
-      case actions.UPDATE_LESSON_SUBJECT:
-        newState.lessonSubjectId = action.id;
-        break;
       case actions.UPDATE_LESSON_CONTENT:
         newState.lessonContent = action.content;
         break;
       case actions.UPDATE_LESSON_NAME:
         newState.lessonName = action.name;
         break;
-      case actions.UPDATE_DATE_TIME:
-        newState[action.name] = action.value;
-        break;
-      case actions.UPDATE_ITEM_TYPE:
-        newState.lessonType = action.lessonType;
-        break;
-      case actions.UPDATE_OTHER_LESSON_TYPE_NAME:
-        newState.otherLessonTypeName = action.value;
-        break;
       case actions.LESSON_BOARD_CHANGE:
         newState.lessonBoardChanged = true;
         break;
       case actions.UPDATED_LESSON_BOARD:
         newState.lessonBoardChanged = false;
-        break;
-      case actions.UPDATE_SELECTED_DAYS: {
-        const value = action.selectedDay;
-        if (newState.selectedDays.indexOf(value) === -1) {
-          newState.selectedDays = [...newState.selectedDays, value];
-        } else {
-          newState.selectedDays = newState.selectedDays.filter((day) => {
-            return day !== value;
-          });
-        }
-        break;
-      }
-      case actions.UPDATE_ALL_SELECTED_DAYS: {
-        newState.allDaysSelected = action.checked;
-        break;
-      }
-      case actions.LOAD_LESSON_TEMPLATE: {
-        const endDate = action.template.endDate;
-        const startDate = action.template.startDate;
-        newState.templateBuilder = action.template;
-        newState.endDate = endDate && new Date(endDate);
-        newState.startDate = startDate && new Date(startDate);
-        break;
-      }
-      case actions.TEMPLATE_LESSON_SAVED:
-        newState.lessonSubjectId = '';
-        newState.allDaysSelected = false;
-        newState.selectedDays = [];
-        newState.startTime = new Date();
-        newState.endTime = new Date();
         break;
       case actions.UPDATE_WEEK_NUMBER:
         newState.weekNumber = action.weekNumber;

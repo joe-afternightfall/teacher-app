@@ -13,12 +13,11 @@ describe('move items creator', () => {
       friday: items,
     };
 
-    const action = movePlannerItems(planner, true);
+    const action = movePlannerItems(planner);
 
     expect(action).toEqual({
       type: actions.MOVE_PLANNER_ITEMS,
       days: planner,
-      isTemplate: true,
     });
   });
 });

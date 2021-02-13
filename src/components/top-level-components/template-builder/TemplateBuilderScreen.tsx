@@ -7,8 +7,8 @@ import {
 import React, { Component } from 'react';
 import { Grid } from '@material-ui/core';
 import { Styles } from '@material-ui/styles';
-import LessonPlannerComp from '../widgets/lesson-planner/LessonPlannerConnector';
-import TemplateBuilderControls from '../widgets/lesson-planner/components/planner-controls/TemplateBuilderControls';
+import BuilderBoard from './components/BuilderBoard';
+import BuilderControls from './components/controls/BuilderControls';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
@@ -16,9 +16,9 @@ class TemplateBuilderScreen extends Component<TemplateBuilderScreenProps> {
   render(): JSX.Element {
     return (
       <Grid>
-        <TemplateBuilderControls />
+        <BuilderControls />
 
-        <LessonPlannerComp isTemplate={true} />
+        <BuilderBoard />
       </Grid>
     );
   }

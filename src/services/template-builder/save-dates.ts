@@ -10,8 +10,8 @@ export const saveDates = (): ThunkAction<
   void,
   AnyAction
 > => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
-  const plannerState = getState().lessonPlannerState;
-  const templateFirebaseId = plannerState.templateBuilder.firebaseId;
+  const builderState = getState().templateBuilderState;
+  const templateFirebaseId = builderState.templateBuilder.firebaseId;
 
   return await firebase
     .database()
@@ -19,8 +19,8 @@ export const saveDates = (): ThunkAction<
     .child(templateFirebaseId)
     .update(
       {
-        endDate: plannerState.endDate,
-        startDate: plannerState.startDate,
+        endDate: builderState.endDate,
+        startDate: builderState.startDate,
       },
       (error) => {
         if (error) {
