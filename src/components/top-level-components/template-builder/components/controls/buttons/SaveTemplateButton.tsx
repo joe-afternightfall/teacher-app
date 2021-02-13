@@ -19,9 +19,7 @@ const useStyles = makeStyles((theme: AppTheme) =>
   })
 );
 
-const SaveTemplateButton = (
-  props: SaveTemplateButtonProps
-): JSX.Element => {
+const SaveTemplateButton = (props: SaveTemplateButtonProps): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -47,9 +45,7 @@ const mapStateToProps = (state: State): SaveTemplateButtonProps => {
   } as unknown) as SaveTemplateButtonProps;
 };
 
-const mapDispatchToProps = (
-  dispatch: Dispatch
-): SaveTemplateButtonProps =>
+const mapDispatchToProps = (dispatch: Dispatch): SaveTemplateButtonProps =>
   (({
     saveHandler: () => {
       (dispatch as ThunkDispatch<State, void, AnyAction>)(
@@ -58,7 +54,4 @@ const mapDispatchToProps = (
     },
   } as unknown) as SaveTemplateButtonProps);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SaveTemplateButton);
+export default connect(mapStateToProps, mapDispatchToProps)(SaveTemplateButton);
