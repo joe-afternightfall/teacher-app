@@ -10,6 +10,7 @@ import { LessonItem } from '../../../configs/models/LessonItem';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { LessonPlanner } from '../../../configs/models/LessonPlanner';
 import { move, reorder, updateAllItems } from '../../../utils/weekly-planner';
+import { templateBuilderChanged } from '../../../creators/template-builder/builder';
 
 const DragAndDropZone = (props: DragAndDropZoneProps): JSX.Element => {
   const { selectedPlanner } = props;
@@ -80,9 +81,11 @@ const mapDispatchToProps = (
   (({
     dispatchMove: (updatedDays: LessonWeekdays): void => {
       dispatch(ownProps.moveHandler(updatedDays));
+      dispatch(templateBuilderChanged());
     },
     dispatchReorder: (items: LessonItem[], dayOfWeek: string): void => {
       dispatch(ownProps.reorderHandler(items, dayOfWeek));
+      dispatch(templateBuilderChanged());
     },
   } as unknown) as DragAndDropZoneProps);
 

@@ -71,6 +71,9 @@ export default {
       case actions.UPDATE_START_AND_END_TIME:
         newState[action.name] = action.value;
         break;
+      case actions.TEMPLATE_BUILDER_CHANGE:
+        newState.boardChanged = true;
+        break;
       default:
         break;
     }

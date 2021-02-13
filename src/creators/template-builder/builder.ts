@@ -55,3 +55,9 @@ export const clearTemplateBuilderForm = () => {
     type: actions.CLEAR_TEMPLATE_BUILDER_FORM,
   };
 };
+
+export const templateBuilderChanged = () => {
+  return {
+    type: actions.TEMPLATE_BUILDER_CHANGE,
+  };
+};

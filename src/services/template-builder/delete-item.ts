@@ -3,6 +3,7 @@ import { ThunkAction } from 'redux-thunk';
 import { State } from '../../configs/redux/store';
 import { AnyAction, Dispatch } from 'redux';
 import firebase from 'firebase';
+import { displayAppSnackbar } from '../../creators/application/app-snackbar';
 
 export const deleteItem = (
   day: string,
@@ -36,9 +37,27 @@ export const deleteItem = (
       },
       (error) => {
         if (error) {
-          // dispatch error snackbar
+          dispatch(
+            displayAppSnackbar({
+              text: 'Failed to delete',
+              severity: 'error',
+              position: {
+                vertical: 'bottom',
+                horizontal: 'right',
+              },
+            })
+          );
         } else {
-          // dispatch success snackbar
+          dispatch(
+            displayAppSnackbar({
+              text: 'Removed item',
+              severity: 'success',
+              position: {
+                vertical: 'bottom',
+                horizontal: 'right',
+              },
+            })
+          );
         }
       }
     );
