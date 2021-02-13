@@ -36,10 +36,16 @@ export const updateLessonSubject = (subjectId: string): AnyAction => {
   };
 };
 
-export const updateDateTime = (name: string, value: Date): AnyAction => {
+// export const updateDateTime = (name: string, value: Date): AnyAction => {
+//   return {
+//     type: actions.UPDATE_DATE_TIME,
+//     name: name,
+//     value: value,
+//   };
+// };
+
+export const savedTemplateBuilder = () => {
   return {
-    type: actions.UPDATE_DATE_TIME,
-    name: name,
-    value: value,
-  };
-};
+    type: actions.SAVED_TEMPLATE_BUILDER,
+  }
+}
