@@ -3,7 +3,10 @@ import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../configs/redux/store';
 import { displayAppSnackbar } from '../../creators/application/app-snackbar';
-import { savedTemplateBuilder } from '../../creators/template-builder/builder';
+import {
+  clearTemplateBuilderForm,
+  savedTemplateBuilder,
+} from '../../creators/template-builder/builder';
 
 export const saveTemplateChanges = (): ThunkAction<
   void,
@@ -11,9 +14,9 @@ export const saveTemplateChanges = (): ThunkAction<
   void,
   AnyAction
 > => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
-  const plannerState = getState().lessonPlannerState;
-  const templateFirebaseId = plannerState.templateBuilder.firebaseId;
-  const weekdays = plannerState.templateBuilder.weekdays;
+  const builderState = getState().templateBuilderState;
+  const templateFirebaseId = builderState.templateBuilder.firebaseId;
+  const weekdays = builderState.templateBuilder.weekdays;
 
   return await firebase
     .database()
@@ -68,6 +71,7 @@ export const saveTemplateChanges = (): ThunkAction<
             })
           );
           dispatch(savedTemplateBuilder());
+          dispatch(clearTemplateBuilderForm());
         }
       }
     );

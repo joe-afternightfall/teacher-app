@@ -6,7 +6,10 @@ import { State } from '../../configs/redux/store';
 import { LessonItem } from '../../configs/models/LessonItem';
 import { LessonPlannerDAO } from '../../configs/models/LessonPlannerDAO';
 import { displayAppSnackbar } from '../../creators/application/app-snackbar';
-import { savedTemplateBuilder } from '../../creators/template-builder/builder';
+import {
+  clearTemplateBuilderForm,
+  savedTemplateBuilder,
+} from '../../creators/template-builder/builder';
 
 const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
@@ -16,10 +19,10 @@ export const saveNewTemplate = (): ThunkAction<
   void,
   AnyAction
 > => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
-  const plannerState = getState().lessonPlannerState;
+  const builderState = getState().templateBuilderState;
   const templateRef = firebase.database().ref('/template-builder');
   const newTemplateRef = templateRef.push();
-  const allDaysSelected = plannerState.allDaysSelected;
+  const allDaysSelected = builderState.allDaysSelected;
   let builtItems;
 
   if (allDaysSelected) {
@@ -27,11 +30,11 @@ export const saveNewTemplate = (): ThunkAction<
       const newLessonItem = new LessonItem(
         uuidv4(),
         '',
-        plannerState.startTime,
-        plannerState.endTime,
-        plannerState.lessonSubjectId ? plannerState.lessonSubjectId : '',
-        plannerState.lessonType,
-        plannerState.otherLessonTypeName
+        builderState.startTime,
+        builderState.endTime,
+        builderState.lessonSubjectId ? builderState.lessonSubjectId : '',
+        builderState.lessonType,
+        builderState.otherLessonTypeName
       );
 
       obj[day] = {
@@ -41,15 +44,15 @@ export const saveNewTemplate = (): ThunkAction<
       return obj;
     }, {});
   } else {
-    builtItems = plannerState.selectedDays.reduce((obj: any, day: string) => {
+    builtItems = builderState.selectedDays.reduce((obj: any, day: string) => {
       const newLessonItem = new LessonItem(
         uuidv4(),
         '',
-        plannerState.startTime,
-        plannerState.endTime,
-        plannerState.lessonSubjectId,
-        plannerState.lessonType,
-        plannerState.otherLessonTypeName
+        builderState.startTime,
+        builderState.endTime,
+        builderState.lessonSubjectId,
+        builderState.lessonType,
+        builderState.otherLessonTypeName
       );
 
       obj[day] = {
@@ -82,7 +85,18 @@ export const saveNewTemplate = (): ThunkAction<
         })
       );
     } else {
+      dispatch(
+        displayAppSnackbar({
+          text: 'Saved Template Builder',
+          severity: 'success',
+          position: {
+            vertical: 'bottom',
+            horizontal: 'right',
+          },
+        })
+      );
       dispatch(savedTemplateBuilder());
+      dispatch(clearTemplateBuilderForm());
     }
   });
 };

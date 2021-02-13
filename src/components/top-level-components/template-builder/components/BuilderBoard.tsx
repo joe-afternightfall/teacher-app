@@ -19,8 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const BuilderBoard = (props: BuilderBoardProps): JSX.Element => {
-  const weekdays =
-    props.templateBuilder.weekdays && props.templateBuilder.weekdays;
+  const weekdays = props.templateBuilder && props.templateBuilder.weekdays;
 
   const templateColumns = [
     {

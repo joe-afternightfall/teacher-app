@@ -36,16 +36,22 @@ export const updateLessonSubject = (subjectId: string): AnyAction => {
   };
 };
 
-// export const updateDateTime = (name: string, value: Date): AnyAction => {
-//   return {
-//     type: actions.UPDATE_DATE_TIME,
-//     name: name,
-//     value: value,
-//   };
-// };
+export const updateStartAndEndTime = (name: string, value: Date): AnyAction => {
+  return {
+    type: actions.UPDATE_START_AND_END_TIME,
+    name: name,
+    value: value,
+  };
+};
 
 export const savedTemplateBuilder = () => {
   return {
     type: actions.SAVED_TEMPLATE_BUILDER,
+  };
+};
+
+export const clearTemplateBuilderForm = () => {
+  return {
+    type: actions.CLEAR_TEMPLATE_BUILDER_FORM,
   };
 };

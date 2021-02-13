@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import { State } from '../../../../../configs/redux/store';
-// import { updateDateTime } from '../../../../../creators/template-builder/builder';
+import { updateStartAndEndTime } from '../../../../../creators/template-builder/builder';
 
 const TimeInput = (props: TimeInputProps): JSX.Element => {
   return (
@@ -59,7 +59,7 @@ const mapStateToProps = (state: State): TimeInputProps => {
 const mapDispatchToProps = (dispatch: Dispatch): TimeInputProps =>
   (({
     handleChange: (name: string, value: Date) => {
-      // dispatch(updateDateTime(name, value));
+      dispatch(updateStartAndEndTime(name, value));
     },
   } as unknown) as TimeInputProps);
 

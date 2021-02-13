@@ -5,6 +5,7 @@ import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../configs/redux/store';
 import { LessonItem } from '../../configs/models/LessonItem';
 import { savedTemplateBuilder } from '../../creators/template-builder/builder';
+import { displayAppSnackbar } from '../../creators/application/app-snackbar';
 
 const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
@@ -14,23 +15,23 @@ export const updateTemplate = (): ThunkAction<
   void,
   AnyAction
 > => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
-  const plannerState = getState().lessonPlannerState;
-  const selectedDays = plannerState.selectedDays;
-  const allDaysSelected = plannerState.allDaysSelected;
+  const builderState = getState().templateBuilderState;
+  const selectedDays = builderState.selectedDays;
+  const allDaysSelected = builderState.allDaysSelected;
 
-  const templateFirebaseId = plannerState.templateBuilder.firebaseId;
-  const lessonPlanner = plannerState.templateBuilder;
+  const templateFirebaseId = builderState.templateBuilder.firebaseId;
+  const lessonPlanner = builderState.templateBuilder;
 
   if (allDaysSelected) {
     allWeekdays.map((day: string) => {
       const newLessonItem = new LessonItem(
         uuidv4(),
         '',
-        plannerState.startTime,
-        plannerState.endTime,
-        plannerState.lessonSubjectId,
-        plannerState.lessonType,
-        plannerState.otherLessonTypeName
+        builderState.startTime,
+        builderState.endTime,
+        builderState.lessonSubjectId,
+        builderState.lessonType,
+        builderState.otherLessonTypeName
       );
 
       if (lessonPlanner.weekdays[day].items !== undefined) {
@@ -44,11 +45,11 @@ export const updateTemplate = (): ThunkAction<
       const newLessonItem = new LessonItem(
         uuidv4(),
         '',
-        plannerState.startTime,
-        plannerState.endTime,
-        plannerState.lessonSubjectId,
-        plannerState.lessonType,
-        plannerState.otherLessonTypeName
+        builderState.startTime,
+        builderState.endTime,
+        builderState.lessonSubjectId,
+        builderState.lessonType,
+        builderState.otherLessonTypeName
       );
       lessonPlanner.weekdays[day].items.push(newLessonItem);
     });
@@ -66,6 +67,16 @@ export const updateTemplate = (): ThunkAction<
         if (error) {
           // error
         } else {
+          dispatch(
+            displayAppSnackbar({
+              text: 'Added Item to Template',
+              severity: 'success',
+              position: {
+                vertical: 'bottom',
+                horizontal: 'right',
+              },
+            })
+          );
           dispatch(savedTemplateBuilder());
         }
       }

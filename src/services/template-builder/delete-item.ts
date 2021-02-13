@@ -11,9 +11,9 @@ export const deleteItem = (
   dispatch: Dispatch,
   getState: () => State
 ): Promise<void> => {
-  const plannerState = getState().lessonPlannerState;
-  const templateFirebaseId = plannerState.templateBuilder.firebaseId;
-  const weekdays = plannerState.templateBuilder.weekdays;
+  const builderState = getState().templateBuilderState;
+  const templateFirebaseId = builderState.templateBuilder.firebaseId;
+  const weekdays = builderState.templateBuilder.weekdays;
   const weekdayItems = weekdays[day];
 
   const updatedItems = weekdayItems.items.filter(
