@@ -8,7 +8,10 @@ import { State } from '../../../../../configs/redux/store';
 import WeekdaySelectionGroup from './WeekdaySelectionGroup';
 import SubjectDropdown from '../../../../shared/SubjectDropdown';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { updateLessonSubject, updateOtherLessonTypeName } from '../../../../../creators/template-builder/builder';
+import {
+  updateLessonSubject,
+  updateOtherLessonTypeName,
+} from '../../../../../creators/template-builder/builder';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -103,7 +106,4 @@ const mapDispatchToProps = (dispatch: Dispatch): TemplateBuilderFormProps =>
     },
   } as unknown) as TemplateBuilderFormProps);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewItemForm);
+export default connect(mapStateToProps, mapDispatchToProps)(NewItemForm);
