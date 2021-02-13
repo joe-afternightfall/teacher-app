@@ -4,42 +4,28 @@ import {
   withStyles,
   StyledComponentProps,
 } from '@material-ui/core/styles';
-import Column from './components/Column';
 import { Grid } from '@material-ui/core';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import {
+  Weekday,
   LessonWeekdays,
   MoveLessonResult,
-  Weekday,
 } from '../../../configs/types/LessonPlanner';
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import { move, reorder, updateAllItems } from '../../../utils/weekly-planner';
-import { LessonItem } from '../../../configs/models/LessonItem';
-import { LessonPlanner } from '../../../configs/models/LessonPlanner';
 import { Subject } from '../../../configs/models/Subject';
+import { LessonItem } from '../../../configs/models/LessonItem';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { LessonPlanner } from '../../../configs/models/LessonPlanner';
+import DragAndDropColumn from '../../shared/drag-n-drop/DragAndDropColumn';
+import { move, reorder, updateAllItems } from '../../../utils/weekly-planner';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class LessonPlannerComp extends Component<LessonPlannerProps> {
   render(): JSX.Element {
-    const {
-      isTemplate,
-      templateBuilder,
-      selectedPlanner,
-      subjectList,
-    } = this.props;
+    const { selectedPlanner, subjectList } = this.props;
 
-    let currentPlanner: LessonPlanner;
-    let plannerItems: { [key: string]: Weekday };
-
-    if (isTemplate) {
-      currentPlanner = templateBuilder;
-      plannerItems = templateBuilder && templateBuilder.weekdays;
-    } else {
-      currentPlanner = selectedPlanner;
-      plannerItems = selectedPlanner && selectedPlanner.weekdays;
-    }
+    const plannerItems: { [key: string]: Weekday } = selectedPlanner.weekdays;
 
     const getList = (dayOfWeek: string): LessonItem[] => {
       return plannerItems[dayOfWeek].items;
@@ -71,7 +57,7 @@ class LessonPlannerComp extends Component<LessonPlannerProps> {
 
         const updatedDays: LessonWeekdays = updateAllItems(
           resultFromMove,
-          currentPlanner
+          selectedPlanner
         );
 
         this.props.moveHandler(updatedDays);
@@ -82,32 +68,32 @@ class LessonPlannerComp extends Component<LessonPlannerProps> {
       <DragDropContext onDragEnd={onDragEnd}>
         <Grid container justify={'center'} spacing={1}>
           {/*<TimeColumn />*/}
-          <Column
+          <DragAndDropColumn
             subjectList={subjectList}
             dayOfWeek={'monday'}
             plannerDay={plannerItems && plannerItems.monday}
             color={'#E43F78'}
           />
-          <Column
+          <DragAndDropColumn
             subjectList={subjectList}
             dayOfWeek={'tuesday'}
             plannerDay={plannerItems && plannerItems.tuesday}
             // color={'#f2b645'}
             color={'#EF8C0A'}
           />
-          <Column
+          <DragAndDropColumn
             subjectList={subjectList}
             dayOfWeek={'wednesday'}
             plannerDay={plannerItems && plannerItems.wednesday}
             color={'#77C74B'}
           />
-          <Column
+          <DragAndDropColumn
             subjectList={subjectList}
             dayOfWeek={'thursday'}
             plannerDay={plannerItems && plannerItems.thursday}
             color={'#2C9DF0'}
           />
-          <Column
+          <DragAndDropColumn
             subjectList={subjectList}
             dayOfWeek={'friday'}
             plannerDay={plannerItems && plannerItems.friday}
@@ -124,8 +110,6 @@ export interface LessonPlannerProps extends WithStyles<typeof styles> {
   reorderHandler: (items: LessonItem[], sourceId: string) => void;
   moveHandler: (days: LessonWeekdays) => void;
   subjectList: Subject[];
-  isTemplate: boolean;
-  templateBuilder: LessonPlanner;
 }
 
 export default withStyles(styles, { withTheme: true })(LessonPlannerComp);
