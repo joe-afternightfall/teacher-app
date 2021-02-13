@@ -1,8 +1,7 @@
 import React from 'react';
-import DateInput from './DateInput';
 import { Grid } from '@material-ui/core';
-import SaveLessonButton from './SaveLessonButton';
-import NewTemplateButton from '../dialog/NewTemplateButton';
+import NewItemButton from './buttons/NewItemButton';
+import SaveTemplateButton from './buttons/SaveTemplateButton';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() =>
@@ -13,7 +12,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-export default function TemplateBuilderControls(): JSX.Element {
+export default function BuilderControls(): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -25,15 +24,11 @@ export default function TemplateBuilderControls(): JSX.Element {
       className={classes.root}
     >
       <Grid item>
-        <DateInput />
+        <SaveTemplateButton />
       </Grid>
 
       <Grid item>
-        <SaveLessonButton />
-      </Grid>
-
-      <Grid item>
-        <NewTemplateButton />
+        <NewItemButton />
       </Grid>
     </Grid>
   );
