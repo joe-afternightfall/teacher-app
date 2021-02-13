@@ -1,21 +1,18 @@
-import { ThunkAction } from 'redux-thunk';
-import { State } from '../../configs/redux/store';
-import { AnyAction, Dispatch } from 'redux';
 import firebase from 'firebase';
+import { ThunkAction } from 'redux-thunk';
+import { AnyAction, Dispatch } from 'redux';
+import { State } from '../../configs/redux/store';
 import { displayAppSnackbar } from '../../creators/application/app-snackbar';
-import { updatedLessonBoard } from '../../creators/lesson-planner/update-items';
+import { savedTemplateBuilder } from '../../creators/template-builder/builder';
 
-export const updateLessonBoardOrder = (): ThunkAction<
-  void,
+export const saveTemplateChanges = (): ThunkAction<void,
   State,
   void,
-  AnyAction
-> => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
+  AnyAction> => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
   const plannerState = getState().lessonPlannerState;
   const templateFirebaseId = plannerState.templateBuilder.firebaseId;
   const weekdays = plannerState.templateBuilder.weekdays;
 
-  // todo:  try defaulting the items values in model object
   return await firebase
     .database()
     .ref('/template-builder')
@@ -68,7 +65,7 @@ export const updateLessonBoardOrder = (): ThunkAction<
               },
             })
           );
-          dispatch(updatedLessonBoard());
+          dispatch(savedTemplateBuilder());
         }
       }
     );

@@ -1,14 +1,14 @@
-import { ThunkAction } from 'redux-thunk';
-import { State } from '../../configs/redux/store';
-import { AnyAction, Dispatch } from 'redux';
-import { LessonItem } from '../../configs/models/LessonItem';
-import { v4 as uuidv4 } from 'uuid';
 import firebase from 'firebase';
-import { lessonSaved } from '../../creators/template-builder/lesson-saved';
+import { v4 as uuidv4 } from 'uuid';
+import { ThunkAction } from 'redux-thunk';
+import { AnyAction, Dispatch } from 'redux';
+import { State } from '../../configs/redux/store';
+import { LessonItem } from '../../configs/models/LessonItem';
+import { savedTemplateBuilder } from '../../creators/template-builder/builder';
 
 const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
-export const editTemplate = (): ThunkAction<
+export const updateTemplate = (): ThunkAction<
   void,
   State,
   void,
@@ -66,7 +66,7 @@ export const editTemplate = (): ThunkAction<
         if (error) {
           // error
         } else {
-          dispatch(lessonSaved());
+          dispatch(savedTemplateBuilder());
         }
       }
     );
