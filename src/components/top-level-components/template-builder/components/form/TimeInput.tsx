@@ -51,8 +51,8 @@ export interface TimeInputProps {
 
 const mapStateToProps = (state: State): TimeInputProps => {
   return ({
-    startTime: state.lessonPlannerState.startTime,
-    endTime: state.lessonPlannerState.endTime,
+    startTime: state.templateBuilderState.startTime,
+    endTime: state.templateBuilderState.endTime,
   } as unknown) as TimeInputProps;
 };
 

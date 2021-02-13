@@ -69,8 +69,8 @@ export interface WeekdaySelectionGroupProps {
 
 const mapStateToProps = (state: State): WeekdaySelectionGroupProps => {
   return ({
-    selectedDays: state.lessonPlannerState.selectedDays,
-    allDaysSelected: state.lessonPlannerState.allDaysSelected,
+    selectedDays: state.templateBuilderState.selectedDays,
+    allDaysSelected: state.templateBuilderState.allDaysSelected,
   } as unknown) as WeekdaySelectionGroupProps;
 };
 
