@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import AddIcon from '@material-ui/icons/Add';
+import NewItemForm from '../../form/NewItemForm';
 import { Button, Fab, Tooltip } from '@material-ui/core';
-import { State } from '../../../../../configs/redux/store';
-import TemplateBuilderForm from '../lesson-form/TemplateBuilderForm';
-import { displayAppDialog } from '../../../../../creators/application/app-dialog';
-import { editTemplate } from '../../../../../services/template-builder/edit-template';
-import { saveNewTemplate } from '../../../../../services/template-builder/save-new-template';
+import { State } from '../../../../../../configs/redux/store';
+import { displayAppDialog } from '../../../../../../creators/application/app-dialog';
+import { saveNewTemplate } from '../../../../../../services/template-builder/save-new-template';
+import { updateTemplate } from '../../../../../../services/template-builder/update-template-builder';
 
 const FABNewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
   return (
@@ -17,7 +17,7 @@ const FABNewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
         color={'primary'}
         onClick={() => {
           props.displayAppDialogHandler(
-            <TemplateBuilderForm />,
+            <NewItemForm />,
             props.isNewTemplate
           );
         }}
@@ -28,7 +28,7 @@ const FABNewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
   );
 };
 
-const NewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
+const NewItemButton = (props: NewTemplateButtonProps): JSX.Element => {
   return (
     <Button
       color={'primary'}
@@ -36,7 +36,7 @@ const NewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
       startIcon={<AddIcon />}
       onClick={() => {
         props.displayAppDialogHandler(
-          <TemplateBuilderForm />,
+          <NewItemForm />,
           props.isNewTemplate
         );
       }}
@@ -56,7 +56,7 @@ export interface NewTemplateButtonProps {
 
 const mapStateToProps = (state: State): NewTemplateButtonProps => {
   return ({
-    isNewTemplate: Boolean(!state.lessonPlannerState.templateBuilder),
+    isNewTemplate: Boolean(!state.templateBuilderState.templateBuilder),
   } as unknown) as NewTemplateButtonProps;
 };
 
@@ -77,7 +77,7 @@ const mapDispatchToProps = (dispatch: Dispatch): NewTemplateButtonProps =>
               );
             } else {
               (dispatch as ThunkDispatch<State, void, AnyAction>)(
-                editTemplate()
+                updateTemplate()
               );
             }
           },
@@ -86,4 +86,4 @@ const mapDispatchToProps = (dispatch: Dispatch): NewTemplateButtonProps =>
     },
   } as unknown) as NewTemplateButtonProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewTemplateButton);
+export default connect(mapStateToProps, mapDispatchToProps)(NewItemButton);
