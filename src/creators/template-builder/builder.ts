@@ -47,5 +47,5 @@ export const updateLessonSubject = (subjectId: string): AnyAction => {
 export const savedTemplateBuilder = () => {
   return {
     type: actions.SAVED_TEMPLATE_BUILDER,
-  }
-}
+  };
+};
