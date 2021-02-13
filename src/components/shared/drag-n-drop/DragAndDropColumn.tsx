@@ -12,10 +12,6 @@ import {
   withStyles,
   StyledComponentProps,
 } from '@material-ui/core/styles';
-import {
-  formatDate,
-  formatDateWithout,
-} from '../../../utils/date-formatter';
 import CardPopover from '../CardPopover';
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
@@ -26,6 +22,7 @@ import { Weekday } from '../../../configs/types/LessonPlanner';
 import { LessonItem } from '../../../configs/models/LessonItem';
 import { Card, Grid, CardHeader, Typography } from '@material-ui/core';
 import { capitalizeFirstLetter } from '../../../utils/string-formatter';
+import { formatDate, formatDateWithout } from '../../../utils/date-formatter';
 
 const getItemStyle = (
   draggableStyle: any,
