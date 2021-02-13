@@ -10,7 +10,10 @@ import { connect } from 'react-redux';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import { State } from '../../../../../configs/redux/store';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import { updateAllSelectedDays, updateSelectedDays } from '../../../../../creators/template-builder/builder';
+import {
+  updateAllSelectedDays,
+  updateSelectedDays,
+} from '../../../../../creators/template-builder/builder';
 
 const WeekdaySelectionGroup = (
   props: WeekdaySelectionGroupProps
