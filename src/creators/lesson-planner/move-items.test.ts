@@ -17,7 +17,7 @@ describe('move items creator', () => {
 
     expect(action).toEqual({
       type: actions.MOVE_PLANNER_ITEMS,
-      days: planner
+      days: planner,
     });
   });
 });

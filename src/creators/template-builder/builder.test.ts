@@ -2,12 +2,14 @@ import actions from '../actions';
 import { v4 as uuidv4 } from 'uuid';
 import {
   clearTemplateBuilderForm,
-  savedTemplateBuilder, templateBuilderChanged,
+  savedTemplateBuilder,
+  templateBuilderChanged,
   updateAllSelectedDays,
   updateLessonSubject,
-  updateLessonType, updateOtherLessonTypeName,
+  updateLessonType,
+  updateOtherLessonTypeName,
   updateSelectedDays,
-  updateStartAndEndTime
+  updateStartAndEndTime,
 } from './builder';
 
 describe('builder actions', () => {

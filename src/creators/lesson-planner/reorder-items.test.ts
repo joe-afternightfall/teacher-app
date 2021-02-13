@@ -10,7 +10,7 @@ describe('reorder items creator', () => {
     expect(action).toEqual({
       type: actions.REORDER_LESSON_PLANNER,
       items: items,
-      dayOfWeek: 'wednesday'
+      dayOfWeek: 'wednesday',
     });
   });
 });

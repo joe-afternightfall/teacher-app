@@ -1,12 +1,8 @@
 import actions from '../actions';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  updateLessonName,
-  updateLessonContent,
-} from './update-items';
+import { updateLessonName, updateLessonContent } from './update-items';
 
 describe('update items creator', () => {
-
   it('should return action', () => {
     const content = uuidv4();
     const action = updateLessonContent(content);
