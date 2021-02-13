@@ -19,37 +19,38 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const BuilderBoard = (props: BuilderBoardProps): JSX.Element => {
-  const classes = useStyles();
+  const weekdays =
+    props.templateBuilder.weekdays && props.templateBuilder.weekdays;
 
   const templateColumns = [
     {
       subjectList: props.subjectList,
       dayOfWeek: 'monday',
-      plannerDay: props.templateBuilder.weekdays.monday,
+      plannerDay: weekdays && weekdays.monday,
       color: '#E43F78',
     },
     {
       subjectList: props.subjectList,
       dayOfWeek: 'tuesday',
-      plannerDay: props.templateBuilder.weekdays.tuesday,
+      plannerDay: weekdays && weekdays.tuesday,
       color: '#E43F78',
     },
     {
       subjectList: props.subjectList,
       dayOfWeek: 'wednesday',
-      plannerDay: props.templateBuilder.weekdays.wednesday,
+      plannerDay: weekdays && weekdays.wednesday,
       color: '#E43F78',
     },
     {
       subjectList: props.subjectList,
       dayOfWeek: 'thursday',
-      plannerDay: props.templateBuilder.weekdays.thursday,
+      plannerDay: weekdays && weekdays.thursday,
       color: '#E43F78',
     },
     {
       subjectList: props.subjectList,
       dayOfWeek: 'friday',
-      plannerDay: props.templateBuilder.weekdays.friday,
+      plannerDay: weekdays && weekdays.friday,
       color: '#E43F78',
     },
   ];
@@ -64,10 +65,10 @@ const BuilderBoard = (props: BuilderBoardProps): JSX.Element => {
           {templateColumns.map((column, index) => (
             <DragAndDropColumn
               key={index}
-              subjectList={column.subjectList}
+              color={column.color}
               dayOfWeek={column.dayOfWeek}
               plannerDay={column.plannerDay}
-              color={column.color}
+              subjectList={column.subjectList}
             />
           ))}
         </React.Fragment>
