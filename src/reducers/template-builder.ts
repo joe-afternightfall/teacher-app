@@ -10,7 +10,7 @@ export default {
     const newState = Object.assign({}, state);
 
     switch (action.type) {
-      case actions.MOVE_TEMPLATE_ITEMS:
+      case actions.MOVE_TEMPLATE_ITEMS: {
         const templateBuilder = newState.templateBuilder;
         templateBuilder.weekdays.monday.items = action.days.monday;
         templateBuilder.weekdays.tuesday.items = action.days.tuesday;
@@ -18,6 +18,7 @@ export default {
         templateBuilder.weekdays.thursday.items = action.days.thursday;
         templateBuilder.weekdays.friday.items = action.days.friday;
         break;
+      }
       case actions.REORDER_TEMPLATE_BUILDER: {
         const selectedPlanner = newState.templateBuilder;
         if (selectedPlanner !== undefined) {
