@@ -1,12 +1,12 @@
-import { ThunkAction } from 'redux-thunk';
-import { State } from '../../configs/redux/store';
-import { AnyAction, Dispatch } from 'redux';
 import firebase from 'firebase';
-import { LessonItem } from '../../configs/models/LessonItem';
 import { v4 as uuidv4 } from 'uuid';
+import { ThunkAction } from 'redux-thunk';
+import { AnyAction, Dispatch } from 'redux';
+import { State } from '../../configs/redux/store';
+import { LessonItem } from '../../configs/models/LessonItem';
 import { LessonPlannerDAO } from '../../configs/models/LessonPlannerDAO';
 import { displayAppSnackbar } from '../../creators/application/app-snackbar';
-import { lessonSaved } from '../../creators/template-builder/lesson-saved';
+import { savedTemplateBuilder } from '../../creators/template-builder/builder';
 
 const allWeekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
@@ -82,7 +82,7 @@ export const saveNewTemplate = (): ThunkAction<
         })
       );
     } else {
-      dispatch(lessonSaved());
+      dispatch(savedTemplateBuilder());
     }
   });
 };
