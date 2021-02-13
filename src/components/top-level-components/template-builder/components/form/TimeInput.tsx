@@ -8,8 +8,8 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import ScheduleIcon from '@material-ui/icons/Schedule';
-import { State } from '../../../../../../configs/redux/store';
-import { updateDateTime } from '../../../../../../creators/lesson-planner/update-items';
+import { State } from '../../../../../configs/redux/store';
+import { updateDateTime } from '../../../../../creators/template-builder/builder';
 
 const TimeInput = (props: TimeInputProps): JSX.Element => {
   return (
