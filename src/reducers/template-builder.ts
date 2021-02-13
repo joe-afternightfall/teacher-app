@@ -34,7 +34,7 @@ export default {
         newState.endTime = new Date();
         newState.lessonType = '';
         break;
-      case actions.LOAD_LESSON_TEMPLATE: {
+      case actions.LOAD_TEMPLATE_BUILDER: {
         const endDate = action.template.endDate;
         const startDate = action.template.startDate;
         newState.templateBuilder = action.template;

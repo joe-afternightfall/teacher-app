@@ -49,7 +49,6 @@ export default {
       case actions.UPDATE_LESSON_NAME:
         newState.lessonName = action.name;
         break;
-
       case actions.LESSON_BOARD_CHANGE:
         newState.lessonBoardChanged = true;
         break;

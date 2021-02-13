@@ -4,7 +4,7 @@ import { LessonPlanner } from '../../configs/models/LessonPlanner';
 
 export const loadTemplate = (template: LessonPlanner | null): AnyAction => {
   return {
-    type: actions.LOAD_LESSON_TEMPLATE,
+    type: actions.LOAD_TEMPLATE_BUILDER,
     template: template,
   };
 };

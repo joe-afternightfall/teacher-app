@@ -1,6 +1,6 @@
+import actions from '../actions';
 import { loadTemplate } from './load-templates';
 import { buildLessonPlanner } from '../../configs/test-utils/test-util';
-import actions from '../actions';
 
 describe('load templates creator', () => {
   it('should return LOAD_LESSON_TEMPLATE action', () => {
@@ -8,7 +8,7 @@ describe('load templates creator', () => {
     const action = loadTemplate(lesson);
 
     expect(action).toEqual({
-      type: actions.LOAD_LESSON_TEMPLATE,
+      type: actions.LOAD_TEMPLATE_BUILDER,
       template: lesson,
     });
   });
