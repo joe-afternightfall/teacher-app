@@ -5,18 +5,18 @@ import { LessonWeekdays } from '../../configs/types/LessonPlanner';
 
 export const reorderTemplateBuilder = (
   items: LessonItem[],
-  dayOfWeek: string,
+  dayOfWeek: string
 ): AnyAction => {
   return {
     type: actions.REORDER_TEMPLATE_BUILDER,
     items: items,
     dayOfWeek: dayOfWeek,
   };
-}
+};
 
 export const moveTemplateItem = (days: LessonWeekdays) => {
   return {
     type: actions.MOVE_TEMPLATE_ITEMS,
     days: days,
-  }
-}
+  };
+};
