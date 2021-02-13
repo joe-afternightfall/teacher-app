@@ -2,10 +2,10 @@ import React from 'react';
 import Popover from '@material-ui/core/Popover';
 import EventIcon from '@material-ui/icons/Event';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { AppTheme } from '../../configs/theme/light-theme';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Button, Card, CardContent, IconButton } from '@material-ui/core';
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { AppTheme } from '../../../../../configs/theme/light-theme';
 
 const useStyles = makeStyles((theme: AppTheme) =>
   createStyles({
@@ -17,8 +17,6 @@ const useStyles = makeStyles((theme: AppTheme) =>
 
 export default function CardPopover(props: CardPopoverProps): JSX.Element {
   const classes = useStyles();
-  // todo:  rip out to app-shell
-  // todo:  take in icon as prop
   return (
     <PopupState variant={'popover'} popupId={'lesson-popover'}>
       {(popupState) => (
