@@ -71,6 +71,10 @@ export const createStore = (history: History): Store => {
       selectedDays: [],
       lessonBoardChanged: false,
     } as unknown) as LessonPlannerState,
+    templateBuilderState: ({
+      selectedDays: [],
+      boardChanged: false,
+    } as unknown) as TemplateBuilderState,
   });
 };
 
