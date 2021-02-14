@@ -8,7 +8,6 @@ jest.mock('../../services/bookmarks/get-bookmarks');
 const getBookmarksListMock = getBookmarksList as jest.Mock;
 
 describe('bookmarks util', () => {
-
   const builtBookmarks = buildBookmarkDAOList(4);
 
   it('should return bookmarks', async () => {
@@ -24,15 +23,17 @@ describe('bookmarks util', () => {
         bookmarkTitle: bookmark.bookmarkTitle,
         subjectId: bookmark.subjectId,
         plannerItemIds: bookmark.plannerItemIds,
-      }
+      };
     });
 
     await updateBookmarks(store);
 
-    expect(store.getActions()).toEqual([{
-      type: actions.LOAD_BOOKMARKS_LIST,
-      bookmarks: expected,
-    }]);
+    expect(store.getActions()).toEqual([
+      {
+        type: actions.LOAD_BOOKMARKS_LIST,
+        bookmarks: expected,
+      },
+    ]);
   });
 
   it('should dispatch empty array when null', async () => {
@@ -42,10 +43,12 @@ describe('bookmarks util', () => {
 
     await updateBookmarks(store);
 
-    expect(store.getActions()).toEqual([{
-      type: actions.LOAD_BOOKMARKS_LIST,
-      bookmarks: [],
-    }]);
+    expect(store.getActions()).toEqual([
+      {
+        type: actions.LOAD_BOOKMARKS_LIST,
+        bookmarks: [],
+      },
+    ]);
   });
 
   it('should dispatch empty array when undefined', async () => {
@@ -55,9 +58,11 @@ describe('bookmarks util', () => {
 
     await updateBookmarks(store);
 
-    expect(store.getActions()).toEqual([{
-      type: actions.LOAD_BOOKMARKS_LIST,
-      bookmarks: [],
-    }]);
+    expect(store.getActions()).toEqual([
+      {
+        type: actions.LOAD_BOOKMARKS_LIST,
+        bookmarks: [],
+      },
+    ]);
   });
 });

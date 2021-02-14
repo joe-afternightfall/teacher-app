@@ -24,10 +24,12 @@ describe('lesson planner util method', () => {
 
     await updateTemplateBuilder(store);
 
-    expect(store.getActions()).toStrictEqual([{
-      type: actions.LOAD_TEMPLATE_BUILDER,
-      template: expected[0]
-    }])
+    expect(store.getActions()).toStrictEqual([
+      {
+        type: actions.LOAD_TEMPLATE_BUILDER,
+        template: expected[0],
+      },
+    ]);
   });
 
   it('should dispatch load lesson planners', async () => {
@@ -40,10 +42,12 @@ describe('lesson planner util method', () => {
 
     await updateLessonPlanners(store);
 
-    expect(store.getActions()).toStrictEqual([{
-      type: actions.LOAD_LESSON_PLANNERS,
-      lessonPlanners: expected,
-    }])
+    expect(store.getActions()).toStrictEqual([
+      {
+        type: actions.LOAD_LESSON_PLANNERS,
+        lessonPlanners: expected,
+      },
+    ]);
   });
 
   it('should dispatch null when no lesson planner returned', async () => {
@@ -52,10 +56,12 @@ describe('lesson planner util method', () => {
 
     await updateLessonPlanners(store);
 
-    expect(store.getActions()).toStrictEqual([{
-      type: actions.LOAD_LESSON_PLANNERS,
-      lessonPlanners: null,
-    }])
+    expect(store.getActions()).toStrictEqual([
+      {
+        type: actions.LOAD_LESSON_PLANNERS,
+        lessonPlanners: null,
+      },
+    ]);
   });
 
   it('should dispatch null when no template builder returned', async () => {
@@ -64,10 +70,12 @@ describe('lesson planner util method', () => {
 
     await updateTemplateBuilder(store);
 
-    expect(store.getActions()).toStrictEqual([{
-      type: actions.LOAD_TEMPLATE_BUILDER,
-      template: null,
-    }])
+    expect(store.getActions()).toStrictEqual([
+      {
+        type: actions.LOAD_TEMPLATE_BUILDER,
+        template: null,
+      },
+    ]);
   });
 
   function buildExpected(list: LessonPlannerDAO[]): LessonPlanner[] {
