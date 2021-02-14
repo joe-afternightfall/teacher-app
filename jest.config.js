@@ -15,13 +15,13 @@ module.exports = {
   },
   coverageDirectory: 'coverage',
   coveragePathIgnorePatterns: [
-    '/coverage/',
-    '/src/configs',
-    '/src/App.tsx',
-    '/src/index.tsx',
-    '/node_modules/',
-    '/src/react-app-env.d.ts',
-    '<rootDir>/cypress/'
+    '<rootDir>/coverage/',
+    '<rootDir>/cypress/',
+    '<rootDir>/src/configs',
+    '<rootDir>/src/App.tsx',
+    '<rootDir>/src/index.tsx',
+    '<rootDir>/node_modules/',
+    '<rootDir>/src/react-app-env.d.ts'
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],
   rootDir: '.',
