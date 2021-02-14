@@ -10,7 +10,7 @@ describe('Subject Dropdown Component', () => {
 
     const subjectDropdown = renderWithRedux(
       <SubjectDropdown value={''} changeHandler={changeHandler} />,
-      getStore({}, null)
+      getStore({})
     );
 
     expect(subjectDropdown.getByLabelText('Subject')).toBeInTheDocument();

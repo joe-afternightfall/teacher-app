@@ -25,14 +25,11 @@ describe('Responsive Side Drawer', () => {
       <MuiThemeProvider theme={theme}>
         <ResponsiveSideDrawer />
       </MuiThemeProvider>,
-      getStore(
-        {
-          activePage: pageInfo,
-          sideDrawerIsOpen: true,
-          drawerSize: FULL_DRAWER_WIDTH,
-        },
-        null
-      )
+      getStore({
+        activePage: pageInfo,
+        sideDrawerIsOpen: true,
+        drawerSize: FULL_DRAWER_WIDTH,
+      })
     );
 
     expect(sideDrawer.getByTestId('temp-side-drawer')).toBeInTheDocument();
@@ -45,14 +42,11 @@ describe('Responsive Side Drawer', () => {
       <MuiThemeProvider theme={theme}>
         <ResponsiveSideDrawer />
       </MuiThemeProvider>,
-      getStore(
-        {
-          activePage: pageInfo,
-          sideDrawerIsOpen: true,
-          drawerSize: FULL_DRAWER_WIDTH,
-        },
-        null
-      )
+      getStore({
+        activePage: pageInfo,
+        sideDrawerIsOpen: true,
+        drawerSize: FULL_DRAWER_WIDTH,
+      })
     );
 
     expect(sideDrawer.getByTestId('perm-side-drawer')).toBeInTheDocument();

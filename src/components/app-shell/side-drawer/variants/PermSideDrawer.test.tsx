@@ -23,27 +23,21 @@ describe('Perm Side Drawer Component', () => {
   let store: MockStore;
 
   beforeEach(() => {
-    store = getStore(
-      {
-        activePage: pageInfo,
-        sideDrawerIsOpen: true,
-        drawerSize: FULL_DRAWER_WIDTH,
-      },
-      null
-    );
+    store = getStore({
+      activePage: pageInfo,
+      sideDrawerIsOpen: true,
+      drawerSize: FULL_DRAWER_WIDTH,
+    });
   });
 
   it('should render with drawer', () => {
     const sideDrawer = renderWithRedux(
       <PermSideDrawer />,
-      getStore(
-        {
-          activePage: pageInfo,
-          sideDrawerIsOpen: true,
-          drawerSize: FULL_DRAWER_WIDTH,
-        },
-        null
-      )
+      getStore({
+        activePage: pageInfo,
+        sideDrawerIsOpen: true,
+        drawerSize: FULL_DRAWER_WIDTH,
+      })
     );
 
     expect(sideDrawer.getByTestId('perm-side-drawer')).toBeInTheDocument();
@@ -57,8 +51,7 @@ describe('Perm Side Drawer Component', () => {
     //     activePage: pageInfo,
     //     sideDrawerIsOpen: true,
     //     drawerSize: FULL_DRAWER_WIDTH,
-    //   },
-    //   null
+    //   }
     // );
     const sideDrawer = renderWithRedux(
       <MuiThemeProvider theme={theme}>

@@ -26,14 +26,11 @@ describe('Navigation Component', () => {
 
   describe('when side drawer is open', () => {
     beforeEach(() => {
-      store = getStore(
-        {
-          activePage: pageInfo,
-          sideDrawerIsOpen: true,
-          drawerSize: FULL_DRAWER_WIDTH,
-        },
-        null
-      );
+      store = getStore({
+        activePage: pageInfo,
+        sideDrawerIsOpen: true,
+        drawerSize: FULL_DRAWER_WIDTH,
+      });
 
       nav = renderWithRedux(<Navigation tempDrawer={false} />, store);
     });
@@ -82,14 +79,11 @@ describe('Navigation Component', () => {
 
   describe('when side drawer is closed', () => {
     beforeEach(() => {
-      store = getStore(
-        {
-          activePage: pageInfo,
-          sideDrawerIsOpen: false,
-          drawerSize: MIN_DRAWER_WIDTH,
-        },
-        null
-      );
+      store = getStore({
+        activePage: pageInfo,
+        sideDrawerIsOpen: false,
+        drawerSize: MIN_DRAWER_WIDTH,
+      });
 
       nav = renderWithRedux(<Navigation tempDrawer={true} />, store);
     });
