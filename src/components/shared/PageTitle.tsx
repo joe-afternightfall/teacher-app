@@ -1,8 +1,7 @@
 import React from 'react';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Toolbar from '@material-ui/core/Toolbar';
 import { AppTheme } from '../../configs/theme/light-theme';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: AppTheme) =>
   createStyles({

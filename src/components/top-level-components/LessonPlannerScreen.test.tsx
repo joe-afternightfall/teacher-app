@@ -1,9 +1,13 @@
-import { getStore, renderWithRedux } from '../../configs/test-utils/mock-redux';
+import React from 'react';
 import LessonPlannerScreen from './LessonPlannerScreen';
+import { getStore, renderWithRedux } from '../../configs/test-utils/mock-redux';
 
 describe('Lesson Planner Screen Component', () => {
   it('should render with data', () => {
-    const lessonPlannerScreen = renderWithRedux(<LessonPlannerScreen/>, getStore({}));
+    const lessonPlannerScreen = renderWithRedux(
+      <LessonPlannerScreen />,
+      getStore({})
+    );
 
     expect(lessonPlannerScreen.getByText('Add New')).toBeInTheDocument();
     expect(lessonPlannerScreen.getByText('Monday')).toBeInTheDocument();

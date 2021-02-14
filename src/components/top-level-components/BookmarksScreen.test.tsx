@@ -1,5 +1,6 @@
-import { getStore, renderWithRedux } from '../../configs/test-utils/mock-redux';
+import React from 'react';
 import BookmarksScreen from './BookmarksScreen';
+import { getStore, renderWithRedux } from '../../configs/test-utils/mock-redux';
 
 describe('Bookmarks Screen Component', () => {
   it('should render with data', () => {
