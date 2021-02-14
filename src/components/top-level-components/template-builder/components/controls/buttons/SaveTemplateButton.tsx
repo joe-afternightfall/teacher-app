@@ -25,10 +25,11 @@ const SaveTemplateButton = (props: SaveTemplateButtonProps): JSX.Element => {
   return (
     <Tooltip title={'Save Lesson'}>
       <SquareIconButton
-        disabled={props.isDisabled}
         icon={<SaveIcon />}
-        clickHandler={props.saveHandler}
         customStyle={classes.root}
+        disabled={props.isDisabled}
+        testId={'save-template-button'}
+        clickHandler={props.saveHandler}
       />
     </Tooltip>
   );

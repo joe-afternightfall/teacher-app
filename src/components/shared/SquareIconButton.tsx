@@ -23,6 +23,7 @@ export default function SquareIconButton(
       onClick={() => {
         props.clickHandler();
       }}
+      data-testid={props.testId}
     >
       {props.icon}
     </Button>
@@ -34,4 +35,5 @@ export interface SquareIconButtonProps {
   icon: JSX.Element;
   clickHandler: () => void;
   customStyle?: string;
+  testId: string;
 }
