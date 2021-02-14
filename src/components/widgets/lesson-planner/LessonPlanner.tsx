@@ -25,7 +25,8 @@ class LessonPlannerComp extends Component<LessonPlannerProps> {
   render(): JSX.Element {
     const { selectedPlanner, subjectList } = this.props;
 
-    const plannerItems: { [key: string]: Weekday } = selectedPlanner.weekdays;
+    const plannerItems: { [key: string]: Weekday } =
+      selectedPlanner && selectedPlanner.weekdays;
 
     const getList = (dayOfWeek: string): LessonItem[] => {
       return plannerItems[dayOfWeek].items;
