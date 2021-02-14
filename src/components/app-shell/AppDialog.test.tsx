@@ -18,7 +18,7 @@ describe('App Dialog Component', () => {
   };
 
   it('should call confirm handler and then close dialog', () => {
-    const store = getStore(dialogState, null);
+    const store = getStore(dialogState);
 
     const appDialog = renderWithRedux(<AppDialog />, store);
 
@@ -32,7 +32,7 @@ describe('App Dialog Component', () => {
   });
 
   it('should dispatch close app dialog action', async () => {
-    const store = getStore(dialogState, null);
+    const store = getStore(dialogState);
 
     const appDialog = renderWithRedux(<AppDialog />, store);
 

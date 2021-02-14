@@ -5,6 +5,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import AppLink from '../../app-shell/AppLink';
 import { TextField } from '@material-ui/core';
+import PageTitle from '../../shared/PageTitle';
 import { State } from '../../../configs/redux/store';
 import { Subject } from '../../../configs/models/Subject';
 import { Bookmark } from '../../../configs/models/Bookmark';
@@ -53,7 +54,8 @@ const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
 
       <MaterialTable
         data={data}
-        title={''}
+        data-testid={'bookmarks-widget'}
+        title={<PageTitle title={'Bookmarks'} />}
         options={{
           pageSize: 6,
           draggable: false,

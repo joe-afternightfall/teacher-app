@@ -60,6 +60,7 @@ const SubjectList = (props: SubjectListProps) => {
         component={'nav'}
         aria-labelledby={'nested-list-subheader'}
         className={classes.root}
+        data-testid={'subject-list'}
         subheader={
           <ListSubheader component={'div'} className={classes.subheader}>
             <Grid container justify={'space-between'} alignItems={'center'}>

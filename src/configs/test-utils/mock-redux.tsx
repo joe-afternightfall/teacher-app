@@ -3,11 +3,11 @@ import { Store } from 'redux';
 import thunk from 'redux-thunk';
 import MockTheme from './mock-theme';
 import { Provider } from 'react-redux';
+import { buildBookmarkList, buildLessonPlanner, buildSubjectList } from './test-util';
 import { createHashHistory, History } from 'history';
 import createStore, { MockStore } from 'redux-mock-store';
 import { render, RenderResult } from '@testing-library/react';
 import { createStore as createRealStore } from '../../configs/redux/store';
-import { buildSubjectList } from './test-util';
 
 const middleware = [thunk];
 
@@ -43,21 +43,24 @@ export const initialState = {
   applicationState: {},
 };
 
-// todo:  remove dispatch mock
-export function getStore(state: any, dispatchMock: any): MockStore {
-  const store = createStore(middleware)({
+export function getStore(state: any): MockStore {
+  return createStore(middleware)({
     ...initialState,
     applicationState: { ...initialState.applicationState, ...state },
     subjectListState: {
       subjectList: buildSubjectList(6),
     },
+    bookmarksState: {
+      bookmarks: buildBookmarkList(5),
+      displayNewBookmarkDialog: false,
+    },
+    lessonPlannerState: {
+      lessonPlanners: [buildLessonPlanner()]
+    },
+    templateBuilderState: {
+      boardChanged: false,
+    }
   });
-
-  if (dispatchMock) {
-    return { ...store, dispatch: dispatchMock };
-  } else {
-    return store;
-  }
 }
 
 export function getRealStore(): Store {

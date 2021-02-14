@@ -7,21 +7,21 @@ module.exports = {
   ],
   coverageThreshold: {
     global: {
-      branches: 21,
-      functions: 26,
-      lines: 29,
-      statements: 29
+      branches: 27,
+      functions: 42,
+      lines: 56,
+      statements: 57
     }
   },
   coverageDirectory: 'coverage',
   coveragePathIgnorePatterns: [
-    '/coverage/',
-    '/src/configs',
-    '/src/App.tsx',
-    '/src/index.tsx',
-    '/node_modules/',
-    '/src/react-app-env.d.ts',
-    '<rootDir>/cypress/'
+    '<rootDir>/coverage/',
+    '<rootDir>/cypress/',
+    '<rootDir>/src/configs',
+    '<rootDir>/src/App.tsx',
+    '<rootDir>/src/index.tsx',
+    '<rootDir>/node_modules/',
+    '<rootDir>/src/react-app-env.d.ts'
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],
   rootDir: '.',

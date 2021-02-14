@@ -1,22 +1,14 @@
 import React from 'react';
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { State } from '../../../../configs/redux/store';
-import { Subject } from '../../../../configs/models/Subject';
 import {
   moveTemplateItem,
   reorderTemplateBuilder,
 } from '../../../../creators/template-builder/drag-and-drop';
+import { Subject } from '../../../../configs/models/Subject';
 import { LessonPlanner } from '../../../../configs/models/LessonPlanner';
 import DragAndDropZone from '../../../shared/drag-n-drop/DragAndDropZone';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import DragAndDropColumn from '../../../shared/drag-n-drop/DragAndDropColumn';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {},
-  })
-);
 
 const BuilderBoard = (props: BuilderBoardProps): JSX.Element => {
   const weekdays = props.templateBuilder && props.templateBuilder.weekdays;
@@ -88,7 +80,7 @@ const mapStateToProps = (state: State): BuilderBoardProps => {
   } as unknown) as BuilderBoardProps;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch): BuilderBoardProps =>
+const mapDispatchToProps = (): BuilderBoardProps =>
   (({} as unknown) as BuilderBoardProps);
 
 export default connect(mapStateToProps, mapDispatchToProps)(BuilderBoard);

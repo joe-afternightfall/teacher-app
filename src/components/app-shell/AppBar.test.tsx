@@ -1,27 +1,21 @@
 import AppBar from './AppBar';
 import * as React from 'react';
-import AddIcon from '@material-ui/icons/Add';
+import actions from '../../creators/actions';
 import { getStore, renderWithRedux } from '../../configs/test-utils/mock-redux';
 
 describe('App Bar Test', () => {
   it('should render with title', () => {
-    const appBar = renderWithRedux(
-      <AppBar />,
-      getStore(
-        {
-          activePage: {
-            path: '/testing',
-            drawerTitle: 'Test Drawer Title',
-            headerTitle: 'Test Header Title',
-            icon: AddIcon,
-            testId: 'testId',
-          },
-        },
-        null
-      )
-    );
+    const store = getStore({});
+    const appBar = renderWithRedux(<AppBar />, store);
 
-    expect(appBar.getByTestId('app-bar-title')).toBeInTheDocument();
-    expect(appBar.getByText('Test Header Title')).toBeInTheDocument();
+    expect(appBar.getByAltText('cool-shades-icon')).toBeInTheDocument();
+
+    appBar.getByTestId('toggle-app-drawer-button').click();
+
+    expect(store.getActions()).toStrictEqual([
+      {
+        type: actions.OPEN_SIDE_DRAWER,
+      },
+    ]);
   });
 });

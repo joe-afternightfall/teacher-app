@@ -1,17 +1,16 @@
 import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { Grid } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import { State } from '../../configs/redux/store';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import { RouteProp } from '../../configs/constants/routes';
-import { openSideDrawer } from '../../creators/application/side-drawer';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { AppTheme } from '../../configs/theme/light-theme';
 import icon from '../../configs/icons/rainbow-shades.svg';
+import { AppTheme } from '../../configs/theme/light-theme';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { openSideDrawer } from '../../creators/application/side-drawer';
 
 const drawerSize = (props: { size: string }) => props.size;
 
@@ -35,10 +34,6 @@ const useStyles = makeStyles((theme: AppTheme) =>
         display: 'none',
       },
     },
-    title: {
-      flex: 1,
-      color: theme.palette.colors.active.highlight,
-    },
     icon: {
       height: '40px',
     },
@@ -54,25 +49,23 @@ function TopAppBar(props: AppBarProps): JSX.Element {
   return (
     <AppBar position={'fixed'} className={classes.appBar}>
       <Toolbar>
-        <IconButton
-          edge={'start'}
-          color={'inherit'}
-          className={classes.menuButton}
-          data-testid={'toggle-app-drawer-button'}
-          onClick={props.openSideDrawerHandler}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Typography
-          noWrap
-          variant={'h6'}
-          data-testid={'app-bar-title'}
-          className={classes.title}
-        >
-          {props.activePage.headerTitle}
-        </Typography>
+        <Grid container alignItems={'center'} justify={'space-between'}>
+          <Grid item>
+            <IconButton
+              edge={'start'}
+              color={'inherit'}
+              className={classes.menuButton}
+              data-testid={'toggle-app-drawer-button'}
+              onClick={props.openSideDrawerHandler}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Grid>
 
-        <img className={classes.icon} src={icon} />
+          <Grid item>
+            <img alt={'cool-shades-icon'} className={classes.icon} src={icon} />
+          </Grid>
+        </Grid>
       </Toolbar>
     </AppBar>
   );
@@ -80,13 +73,11 @@ function TopAppBar(props: AppBarProps): JSX.Element {
 
 export interface AppBarProps {
   drawerSize: string;
-  activePage: RouteProp;
   openSideDrawerHandler: () => void;
 }
 
 const mapStateToProps = (state: State): AppBarProps => {
   return ({
-    activePage: state.applicationState.activePage,
     drawerSize: state.applicationState.drawerSize,
   } as unknown) as AppBarProps;
 };
