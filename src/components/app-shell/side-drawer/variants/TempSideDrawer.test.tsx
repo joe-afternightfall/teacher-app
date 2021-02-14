@@ -17,14 +17,11 @@ describe('Temp Side Drawer Component', () => {
   };
 
   it('should render with info', () => {
-    const store = getStore(
-      {
-        activePage: pageInfo,
-        sideDrawerIsOpen: true,
-        drawerSize: FULL_DRAWER_WIDTH,
-      },
-      null
-    );
+    const store = getStore({
+      activePage: pageInfo,
+      sideDrawerIsOpen: true,
+      drawerSize: FULL_DRAWER_WIDTH,
+    });
     const drawer = renderWithRedux(<TempSideDrawer />, store);
 
     expect(drawer.getByTestId('temp-side-drawer')).toBeInTheDocument();

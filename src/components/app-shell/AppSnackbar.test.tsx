@@ -15,8 +15,7 @@ describe('AppSnackbar Component', () => {
             horizontal: 'left',
           },
         },
-      },
-      null
+      }
     );
 
     const snackbar = renderWithRedux(<AppSnackbar />, store);

@@ -21,7 +21,7 @@ describe('Bookmark Form Component', () => {
         dropdownChangeHandler={dropdownChangeHandler}
         textfieldChangeHandler={textfieldChangeHandler}
       />,
-      getStore({}, null)
+      getStore({})
     );
 
     expect(bookmarkForm.getByText('Title')).toBeInTheDocument();
