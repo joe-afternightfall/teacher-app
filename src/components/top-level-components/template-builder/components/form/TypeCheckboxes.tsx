@@ -33,6 +33,7 @@ const TypeCheckboxes = (props: TypeCheckboxesProps): JSX.Element => {
             name={'subject'}
             checked={props.lessonType === 'subject'}
             onChange={handleCheck}
+            data-testid={'subject-checkbox'}
           />
         }
         label={'Class'}

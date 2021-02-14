@@ -18,7 +18,7 @@ const TimeInput = (props: TimeInputProps): JSX.Element => {
         <KeyboardTimePicker
           label={'Start time'}
           margin={'normal'}
-          id={'start-time-picker'}
+          data-testid={'start-time-picker'}
           value={props.startTime}
           onChange={(date) => props.handleChange('startTime', date)}
           KeyboardButtonProps={{
@@ -30,7 +30,7 @@ const TimeInput = (props: TimeInputProps): JSX.Element => {
         <KeyboardTimePicker
           label={'End time'}
           margin={'normal'}
-          id={'end-time-picker'}
+          data-testid={'end-time-picker'}
           value={props.endTime}
           onChange={(date) => props.handleChange('endTime', date)}
           KeyboardButtonProps={{

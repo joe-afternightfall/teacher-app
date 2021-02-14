@@ -34,6 +34,7 @@ const NewItemButton = (props: NewTemplateButtonProps): JSX.Element => {
       onClick={() => {
         props.displayAppDialogHandler(<NewItemForm />, props.isNewTemplate);
       }}
+      data-testid={'new-template-builder-item-button'}
     >
       {'Add New'}
     </Button>

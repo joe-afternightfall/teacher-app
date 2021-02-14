@@ -52,6 +52,7 @@ const WeekdaySelectionGroup = (
           control={
             <Checkbox
               name={'everyday'}
+              data-testid={'everyday-checkbox'}
               checked={props.allDaysSelected}
               onChange={props.checkboxHandler}
             />
