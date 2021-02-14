@@ -8,26 +8,26 @@ describe('New Subject Test', () => {
   });
 
   it('should create new test subject', () => {
-    cy.get('[data-testid="add-new-subject"]').click();
-    cy.get('[data-testid="subject-name"]').type('Test Subject');
-    cy.get('[data-testid="subject-builder-save-button"]').should('be.disabled');
-    cy.get('[data-testid="Object"]').click();
-    cy.get('[data-testid="Deep Orange"]').click();
-    cy.get('[data-testid="subject-builder-save-button"]').should('be.enabled');
-    cy.get('[data-testid="subject-builder-save-button"]').click();
+    cy.findByTestId('add-new-subject').click();
+    cy.findByTestId('subject-name').type('Test Subject');
+    cy.findByTestId('subject-builder-save-button').should('be.disabled');
+    cy.findByTestId('Object').click();
+    cy.findByTestId('Deep Orange').click();
+    cy.findByTestId('subject-builder-save-button').should('be.enabled');
+    cy.findByTestId('subject-builder-save-button').click();
   });
 
   it('should block user from saving when duplicate exists', () => {
-    cy.get('[data-testid="add-new-subject"]').click();
-    cy.get('[data-testid="subject-name"]').type('Test Subject');
-    cy.get('[data-testid="subject-builder-save-button"]').should('be.disabled');
+    cy.findByTestId('add-new-subject').click();
+    cy.findByTestId('subject-name').type('Test Subject');
+    cy.findByTestId('subject-builder-save-button').should('be.disabled');
   });
 
   it('should allow for editing subject', () => {
-    cy.get('[data-testid="edit-Test Subject"]').click();
-    cy.get('[data-testid="subject-name"]').find('input').clear().type('Editing Test Subject');
-    cy.get('[data-testid="subject-builder-save-button"]').should('be.enabled');
-    cy.get('[data-testid="subject-builder-save-button"]').click();
+    cy.findByTestId('edit-Test Subject').click();
+    cy.findByTestId('subject-name').find('input').clear().type('Editing Test Subject');
+    cy.findByTestId('subject-builder-save-button').should('be.enabled');
+    cy.findByTestId('subject-builder-save-button').click();
   });
 
   // todo: add test to check for snackbar message after saving
