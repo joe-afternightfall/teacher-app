@@ -10,11 +10,15 @@ jest.mock('firebase', () => ({
     initializeApp: jest.fn(),
     database: jest.fn().mockReturnValue({
       ref: jest.fn().mockReturnThis(),
-      once: jest.fn().mockReturnValue(new Promise(resolve => resolve({
-        val: jest.fn(() => bookmarks)
-      })))
-    })
-  }
+      once: jest.fn().mockReturnValue(
+        new Promise((resolve) =>
+          resolve({
+            val: jest.fn(() => bookmarks),
+          })
+        )
+      ),
+    }),
+  },
 }));
 
 describe('get bookmarks service', () => {
