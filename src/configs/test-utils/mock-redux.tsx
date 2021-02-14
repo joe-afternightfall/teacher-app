@@ -3,7 +3,7 @@ import { Store } from 'redux';
 import thunk from 'redux-thunk';
 import MockTheme from './mock-theme';
 import { Provider } from 'react-redux';
-import { buildSubjectList } from './test-util';
+import { buildBookmarkList, buildLessonPlanner, buildSubjectList } from './test-util';
 import { createHashHistory, History } from 'history';
 import createStore, { MockStore } from 'redux-mock-store';
 import { render, RenderResult } from '@testing-library/react';
@@ -50,6 +50,16 @@ export function getStore(state: any): MockStore {
     subjectListState: {
       subjectList: buildSubjectList(6),
     },
+    bookmarksState: {
+      bookmarks: buildBookmarkList(5),
+      displayNewBookmarkDialog: false,
+    },
+    lessonPlannerState: {
+      lessonPlanners: [buildLessonPlanner()]
+    },
+    templateBuilderState: {
+      boardChanged: false,
+    }
   });
 }
 

@@ -54,6 +54,7 @@ const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
 
       <MaterialTable
         data={data}
+        data-testid={'bookmarks-widget'}
         title={<PageTitle title={'Bookmarks'} />}
         options={{
           pageSize: 6,
