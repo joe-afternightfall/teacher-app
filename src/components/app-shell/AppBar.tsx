@@ -8,7 +8,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { State } from '../../configs/redux/store';
 import IconButton from '@material-ui/core/IconButton';
 import icon from '../../configs/icons/rainbow-shades.svg';
-import { RouteProp } from '../../configs/constants/routes';
 import { AppTheme } from '../../configs/theme/light-theme';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { openSideDrawer } from '../../creators/application/side-drawer';
@@ -64,7 +63,7 @@ function TopAppBar(props: AppBarProps): JSX.Element {
           </Grid>
 
           <Grid item>
-            <img className={classes.icon} src={icon} />
+            <img alt={'cool-shades-icon'} className={classes.icon} src={icon} />
           </Grid>
         </Grid>
       </Toolbar>
@@ -74,13 +73,11 @@ function TopAppBar(props: AppBarProps): JSX.Element {
 
 export interface AppBarProps {
   drawerSize: string;
-  activePage: RouteProp;
   openSideDrawerHandler: () => void;
 }
 
 const mapStateToProps = (state: State): AppBarProps => {
   return ({
-    activePage: state.applicationState.activePage,
     drawerSize: state.applicationState.drawerSize,
   } as unknown) as AppBarProps;
 };
