@@ -26,7 +26,7 @@ export default function HotKeys(): JSX.Element {
   return (
     <Grid container spacing={2}>
       <Grid item xs={4}>
-        <Card>
+        <Card data-testid={'template-builder-hot-key'}>
           <CardActionArea className={classes.templateBuilder}>
             <CardContent>{'Template Builder'}</CardContent>
           </CardActionArea>
@@ -34,7 +34,7 @@ export default function HotKeys(): JSX.Element {
       </Grid>
 
       <Grid item xs={4}>
-        <Card>
+        <Card data-testid={'bookmarks-hot-key'}>
           <CardActionArea className={classes.bookmarks}>
             <CardContent>{'Bookmarks'}</CardContent>
           </CardActionArea>
@@ -42,7 +42,7 @@ export default function HotKeys(): JSX.Element {
       </Grid>
 
       <Grid item xs={4}>
-        <Card>
+        <Card data-testid={'empty-hot-key'}>
           <CardActionArea className={classes.blank}>
             <CardContent>{'Empty'}</CardContent>
           </CardActionArea>
