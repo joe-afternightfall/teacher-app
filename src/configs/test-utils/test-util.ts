@@ -6,6 +6,7 @@ import { Subject } from '../models/Subject';
 import { Bookmark } from '../models/Bookmark';
 import { BookmarkDAO } from '../models/BookmarkDAO';
 import { LessonPlannerDAO } from '../models/LessonPlannerDAO';
+import { SubjectDAO } from '../models/SubjectDAO';
 
 export const buildLessonItems = (items: number): LessonItem[] => {
   let index = 0;
@@ -77,6 +78,27 @@ export const buildSubjectList = (amount: number): Subject[] => {
 
     builtList.push({
       firebaseId: uuidv4(),
+      id: `id-${index}`,
+      subjectName: `subject-name-${index}`,
+      primaryColorId: uuidv4(),
+      primaryColor: uuidv4(),
+      secondaryColor: uuidv4(),
+      iconId: uuidv4(),
+    });
+  }
+
+  return builtList;
+};
+
+
+export const buildSubjectDAOList = (amount: number): SubjectDAO[] => {
+  let index = 0;
+  const builtList = [];
+
+  while (index < amount) {
+    index += 1;
+
+    builtList.push({
       id: `id-${index}`,
       subjectName: `subject-name-${index}`,
       primaryColorId: uuidv4(),
