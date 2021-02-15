@@ -3,7 +3,6 @@ import {
   Grid,
   Paper,
   Select,
-  Button,
   MenuItem,
   InputLabel,
   FormControl,
@@ -11,19 +10,11 @@ import {
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { State } from '../../../../../configs/redux/store';
-import { ArrowBack, ArrowForward } from '@material-ui/icons';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { LessonPlanner } from '../../../../../configs/models/LessonPlanner';
 import { selectLessonById } from '../../../../../creators/lesson-planner/select-lesson';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {},
-  })
-);
-
 const PlannerNav = (props: PlannerNavProps): JSX.Element => {
-  const classes = useStyles();
+  const { lessonPlanners, selectedLessonId } = props;
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     props.selectHandler(event.target.value as string);
@@ -31,24 +22,18 @@ const PlannerNav = (props: PlannerNavProps): JSX.Element => {
 
   return (
     <Grid container alignItems={'center'} spacing={2}>
-      <Grid item>
-        <Button variant={'contained'} color={'primary'}>
-          <ArrowBack />
-        </Button>
-      </Grid>
-
       <Grid item xs={6}>
-        <Paper elevation={3} style={{ padding: '0px 8px 8px 8px' }}>
+        <Paper elevation={3} style={{ padding: 8 }}>
           <FormControl style={{ width: '100%' }}>
             <InputLabel id={'current-week'}>{'Current Week'}</InputLabel>
             <Select
-              value={props.selectedLessonId}
+              value={selectedLessonId}
               onChange={handleChange}
               labelId={'current-week'}
               id={'current-week'}
             >
-              {props.lessonPlanners &&
-                props.lessonPlanners.map((lesson, index) => (
+              {lessonPlanners &&
+                lessonPlanners.map((lesson, index) => (
                   <MenuItem key={index} value={lesson.id}>
                     {lesson.title}
                   </MenuItem>
@@ -57,19 +42,13 @@ const PlannerNav = (props: PlannerNavProps): JSX.Element => {
           </FormControl>
         </Paper>
       </Grid>
-
-      <Grid item>
-        <Button variant={'contained'} color={'primary'}>
-          <ArrowForward />
-        </Button>
-      </Grid>
     </Grid>
   );
 };
 
 export interface PlannerNavProps {
-  lessonPlanners: LessonPlanner[];
   selectedLessonId: string;
+  lessonPlanners: LessonPlanner[];
   selectHandler: (id: string) => void;
 }
 
