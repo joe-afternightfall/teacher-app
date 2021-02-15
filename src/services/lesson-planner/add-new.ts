@@ -24,7 +24,7 @@ export const addNewFromTemplate = (): ThunkAction<
   const plannerRef = firebase.database().ref('/lesson-planners');
   const newPlannerRef = plannerRef.push();
 
-  const weekdays = plannerState.templateBuilder.weekdays;
+  const weekdays = getState().templateBuilderState.templateBuilder.weekdays;
   const plannerStartDate = plannerState.plannerStartDate;
 
   weekdays.monday.date = addDays(plannerStartDate, 1);
