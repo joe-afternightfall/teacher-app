@@ -90,7 +90,8 @@
     "prCheck": "npm ci && npm run lint && npm run test && npm run build",
     "deploy": "npm ci && npm run build",
     "cypress:open": "cypress open",
-    "cy": "npm run cypress:open"
+    "cy": "npm run cypress:open",
+    "strk": "npx stryker run"
   },
   "eslintConfig": {
     "extends": "react-app"
