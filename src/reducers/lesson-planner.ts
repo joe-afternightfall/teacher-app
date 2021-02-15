@@ -11,8 +11,8 @@ export default {
 
     switch (action.type) {
       case actions.LOAD_LESSON_PLANNERS:
-        // todo:  rewrite load lesson planners logic below
         newState.lessonPlanners = action.lessonPlanners;
+        newState.selectedPlanner = action.lessonPlanners[0];
         newState.selectedLessonId = action.lessonPlanners[0].id;
         break;
       case actions.REORDER_LESSON_PLANNER: {
@@ -41,6 +41,13 @@ export default {
           selectedPlanner.weekdays.thursday.items = action.days.thursday;
           selectedPlanner.weekdays.friday.items = action.days.friday;
         }
+        break;
+      }
+      case actions.SELECT_LESSON_BY_ID: {
+        newState.selectedLessonId = action.id;
+        newState.selectedPlanner = newState.lessonPlanners.find((planner) => {
+          return planner.id === action.id;
+        });
         break;
       }
       case actions.UPDATE_LESSON_CONTENT:
@@ -89,7 +96,7 @@ export interface LessonPlannerState {
     | Date
     | LessonPlanner
     | undefined;
-  selectedLessonId: string;
+  selectedLessonId: string | undefined;
   displayEditingForm: boolean;
   lessonPlanners: LessonPlanner[];
   lessonSubjectId: string;
@@ -107,4 +114,5 @@ export interface LessonPlannerState {
   plannerStartDate: string;
   plannerEndDate: string;
   plannerTitle: string;
+  selectedPlanner: LessonPlanner | undefined;
 }
