@@ -1,4 +1,5 @@
 import React from 'react';
+import PlannerNav from './PlannerNav';
 import AddNewMenu from './AddNewMenu';
 import { Grid } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -22,7 +23,7 @@ export default function PlannerControls(): JSX.Element {
       className={classes.root}
     >
       <Grid item xs={6}>
-        <Grid container alignItems={'center'} spacing={2} />
+        <PlannerNav />
       </Grid>
 
       <Grid item>
