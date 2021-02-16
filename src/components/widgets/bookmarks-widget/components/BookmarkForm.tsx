@@ -1,9 +1,23 @@
 import React from 'react';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 import { Grid, TextField } from '@material-ui/core';
-import { NewBookmarkForm } from './NewBookmarkDialog';
+import {
+  updateBookmarkUrl,
+  updateBookmarkTitle,
+  updateBookmarkSubject
+} from '../../../../creators/bookmarks/bookmark-form';
+import { State } from '../../../../configs/redux/store';
 import SubjectDropdown from '../../../shared/SubjectDropdown';
 
-export default function BookmarkForm(props: BookmarkFormProps): JSX.Element {
+const BookmarkForm = (
+  props: BookmarkFormProps
+): JSX.Element => {
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    props.titleTextFieldHandler(e.target.name, e.target.value);
+  }
+
   return (
     <form>
       <Grid container>
@@ -12,17 +26,18 @@ export default function BookmarkForm(props: BookmarkFormProps): JSX.Element {
             <Grid item xs={7}>
               <TextField
                 fullWidth
+                name={'title'}
                 label={'Title'}
                 margin={'normal'}
                 data-testid={'bookmark-title'}
-                value={props.bookmarkValues.bookmarkTitle}
-                onChange={props.textfieldChangeHandler('bookmarkTitle')}
+                value={props.title}
+                onChange={handleChange}
               />
             </Grid>
 
             <Grid item xs={4}>
               <SubjectDropdown
-                value={props.bookmarkValues.subjectId}
+                value={props.subjectId}
                 changeHandler={props.dropdownChangeHandler}
               />
             </Grid>
@@ -34,22 +49,54 @@ export default function BookmarkForm(props: BookmarkFormProps): JSX.Element {
             fullWidth
             label={'URL'}
             margin={'normal'}
+            name={'url'}
             data-testid={'bookmark-url'}
-            value={props.bookmarkValues.bookmarkUrl}
-            onChange={props.textfieldChangeHandler('bookmarkUrl')}
+            value={props.url}
+            onChange={handleChange}
           />
         </Grid>
       </Grid>
     </form>
   );
-}
+};
 
 export interface BookmarkFormProps {
-  bookmarkValues: NewBookmarkForm;
+  title: string;
+  url: string;
+  subjectId: string;
   dropdownChangeHandler: (
-    e: React.ChangeEvent<{ name?: string; value: unknown }>
+    e: React.ChangeEvent<{ name?: string; value: string }>
   ) => void;
-  textfieldChangeHandler: (
-    name: keyof NewBookmarkForm
-  ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+  titleTextFieldHandler: (name: string, value: string) => void;
 }
+
+const mapStateToProps = (state: State): BookmarkFormProps => {
+  return ({
+    title: state.bookmarksState.title,
+    url: state.bookmarksState.url,
+    subjectId: state.bookmarksState.subjectId,
+  } as unknown) as BookmarkFormProps;
+};
+
+const mapDispatchToProps = (
+  dispatch: Dispatch
+): BookmarkFormProps =>
+  (({
+    titleTextFieldHandler: (name: string, value: string) => {
+      if (name === 'url') {
+        dispatch(updateBookmarkUrl(value));
+      } else if (name === 'title') {
+        dispatch(updateBookmarkTitle(value));
+      }
+    },
+    dropdownChangeHandler: (
+      e: React.ChangeEvent<{ name?: string; value: string }>
+    ) => {
+      dispatch(updateBookmarkSubject(e.target.value));
+    },
+  } as unknown) as BookmarkFormProps);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BookmarkForm);
