@@ -15,7 +15,7 @@ describe('subject list reducer', () => {
   });
 
   it('should return selected color', () => {
-    const color = buildColor();
+    const color = buildColor(1);
 
     const state = subjectList.reducer(undefined, {
       type: actions.SELECT_COLOR,

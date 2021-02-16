@@ -111,14 +111,22 @@ export const buildSubjectDAOList = (amount: number): SubjectDAO[] => {
   return builtList;
 };
 
-// todo:  make dynamic by taking in number
-export const buildColor = (): ColorChoice => {
-  return {
-    id: 'color-id',
-    name: 'test-name',
-    primaryColor: 'primary',
-    secondaryColor: 'secondary',
-  };
+export const buildColor = (amount: number): ColorChoice[] => {
+  let index = 0;
+  const builtList = [];
+
+  while (index < amount) {
+    index += 1;
+
+    builtList.push({
+      id: `color-id-${index}`,
+      name: `test-name-${index}`,
+      primaryColor: `primary-${index}`,
+      secondaryColor: `secondary-${index}`,
+    });
+  }
+
+  return builtList;
 };
 
 export const buildBookmarkList = (amount: number): Bookmark[] => {

@@ -1,3 +1,4 @@
+import React from 'react';
 import PageTitle from './PageTitle';
 import { renderWithTheme } from '../../configs/test-utils/mock-redux';
 
