@@ -28,6 +28,11 @@ export default {
       case actions.UPDATE_BOOKMARK_SUBJECT_ID:
         newState.subjectId = action.value;
         break;
+      case actions.CLEAR_BOOKMARK_DIALOG:
+        newState.subjectId = '';
+        newState.title = '';
+        newState.url = '';
+        break;
       default:
         newState = state;
     }

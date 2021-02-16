@@ -5,12 +5,14 @@ import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../configs/redux/store';
 import { BookmarkDAO } from '../../configs/models/BookmarkDAO';
 import { displayAppSnackbar } from '../../creators/application/app-snackbar';
-import { closeNewBookmarkDialog } from '../../creators/bookmarks/bookmarks-dialog';
+import { clearBookmarkDialog } from '../../creators/bookmarks/bookmarks';
 
-export const saveBookmarkInfo = (): ThunkAction<void, State, void, AnyAction> => async (
-  dispatch: Dispatch,
-  getState: () => State
-): Promise<void> => {
+export const saveBookmarkInfo = (): ThunkAction<
+  void,
+  State,
+  void,
+  AnyAction
+> => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
   const bookmarkRef = firebase.database().ref('/bookmarks');
   const newBookmarkRef = bookmarkRef.push();
 
@@ -46,8 +48,8 @@ export const saveBookmarkInfo = (): ThunkAction<void, State, void, AnyAction> =>
         })
       );
       setTimeout(() => {
-        dispatch(closeNewBookmarkDialog());
-      }, 1000);
+        dispatch(clearBookmarkDialog());
+      }, 500);
     }
   });
 };

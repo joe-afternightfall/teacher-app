@@ -1,7 +1,7 @@
 import { Store } from 'redux';
-import { getBookmarksList } from '../../services/bookmarks/get-bookmarks';
-import { loadBookmarksList } from '../../creators/bookmarks/load-bookmarks';
 import { Bookmark } from '../../configs/models/Bookmark';
+import { getBookmarksList } from '../../services/bookmarks/get-bookmarks';
+import { loadBookmarksList } from '../../creators/bookmarks/bookmarks';
 
 export const updateBookmarks = async (store: Store): Promise<void> => {
   const bookmarksList = await getBookmarksList();
