@@ -19,6 +19,15 @@ export default {
       case actions.CLOSE_NEW_BOOKMARK_DIALOG:
         newState.displayNewBookmarkDialog = false;
         break;
+      case actions.UPDATE_BOOKMARK_URL:
+        newState.url = action.value;
+        break;
+      case actions.UPDATE_BOOKMARK_TITLE:
+        newState.title = action.value;
+        break;
+      case actions.UPDATE_BOOKMARK_SUBJECT_ID:
+        newState.subjectId = action.value;
+        break;
       default:
         newState = state;
     }
@@ -28,6 +37,9 @@ export default {
 };
 
 export interface BookmarksState {
+  url: string;
+  title: string;
+  subjectId: string;
   bookmarks: Bookmark[];
   displayNewBookmarkDialog: boolean;
 }
