@@ -42,7 +42,7 @@ describe('bookmarks reducer', () => {
     const url = uuidv4();
     const response = bookmarks.reducer(undefined, {
       type: actions.UPDATE_BOOKMARK_URL,
-      value: url
+      value: url,
     });
 
     expect(response).toEqual({
@@ -54,7 +54,7 @@ describe('bookmarks reducer', () => {
     const title = uuidv4();
     const response = bookmarks.reducer(undefined, {
       type: actions.UPDATE_BOOKMARK_TITLE,
-      value: title
+      value: title,
     });
 
     expect(response).toEqual({
@@ -66,7 +66,7 @@ describe('bookmarks reducer', () => {
     const subjectId = uuidv4();
     const response = bookmarks.reducer(undefined, {
       type: actions.UPDATE_BOOKMARK_SUBJECT_ID,
-      value: subjectId
+      value: subjectId,
     });
 
     expect(response).toEqual({
@@ -83,12 +83,12 @@ describe('bookmarks reducer', () => {
     expect(response).toEqual({
       subjectId: '',
       title: '',
-      url: ''
+      url: '',
     });
   });
 
   it('should return object', () => {
-    let appState = getStore({}).getState();
+    const appState = getStore({}).getState();
     const response = bookmarks.reducer(appState, {
       type: 'TESTING',
     });

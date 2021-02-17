@@ -145,7 +145,7 @@ describe('subject list reducer', () => {
   it('should return EDITING_SUBJECT action', () => {
     const state = subjectList.reducer(buildSubjectListState(), {
       type: actions.EDITING_SUBJECT,
-      subjectId: 'id-3'
+      subjectId: 'id-3',
     });
 
     expect(state.editingForm).toEqual(true);
@@ -185,6 +185,6 @@ function buildSubjectListState(): SubjectListState {
     editingFormFirebaseId: 'firebase-edit-id',
     editingFormId: 'edit-id',
     subjectNameError: false,
-    ableToSubmit: true
+    ableToSubmit: true,
   };
 }

@@ -8,10 +8,7 @@ import {
 describe('Bookmark Form Component', () => {
   it('should render with stuff', () => {
     const store = getStore({});
-    const bookmarkForm = renderWithRedux(
-      <BookmarkForm />,
-      store
-    );
+    const bookmarkForm = renderWithRedux(<BookmarkForm />, store);
 
     expect(bookmarkForm.getByText('Bookmark Information')).toBeInTheDocument();
     expect(bookmarkForm.getByText('Title')).toBeInTheDocument();

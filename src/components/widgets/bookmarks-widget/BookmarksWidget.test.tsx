@@ -1,6 +1,9 @@
 import React from 'react';
 import BookmarksWidget from './BookmarksWidget';
-import { getStore, renderWithRedux } from '../../../configs/test-utils/mock-redux';
+import {
+  getStore,
+  renderWithRedux,
+} from '../../../configs/test-utils/mock-redux';
 
 describe('Bookmarks Widget Table', () => {
   it('should render with data', () => {

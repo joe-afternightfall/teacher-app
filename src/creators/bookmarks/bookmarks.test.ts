@@ -5,7 +5,7 @@ import {
   loadBookmarksList,
   updateBookmarkSubject,
   updateBookmarkTitle,
-  updateBookmarkUrl
+  updateBookmarkUrl,
 } from './bookmarks';
 
 describe('bookmarks creators', () => {
@@ -25,7 +25,7 @@ describe('bookmarks creators', () => {
     expect(response).toEqual({
       type: actions.UPDATE_BOOKMARK_SUBJECT_ID,
       value: 'test-subject',
-    })
+    });
   });
 
   it('should return UPDATE_BOOKMARK_URL', () => {
@@ -34,7 +34,7 @@ describe('bookmarks creators', () => {
     expect(response).toEqual({
       type: actions.UPDATE_BOOKMARK_URL,
       value: 'test-url',
-    })
+    });
   });
 
   it('should return UPDATE_BOOKMARK_TITLE', () => {
@@ -43,7 +43,7 @@ describe('bookmarks creators', () => {
     expect(response).toEqual({
       type: actions.UPDATE_BOOKMARK_TITLE,
       value: 'test-title',
-    })
+    });
   });
 
   it('should return CLEAR_BOOKMARK_DIALOG', () => {
@@ -51,6 +51,6 @@ describe('bookmarks creators', () => {
 
     expect(response).toEqual({
       type: actions.CLEAR_BOOKMARK_DIALOG,
-    })
+    });
   });
 });

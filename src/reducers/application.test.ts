@@ -105,7 +105,7 @@ describe('Application Reducer', () => {
   it('should return SET_DRAWER_SIZE action', () => {
     const state = application.reducer(undefined, {
       type: actions.SET_DRAWER_SIZE,
-      size: '240'
+      size: '240',
     });
 
     expect(state.drawerSize).toEqual('240');

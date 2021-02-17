@@ -72,7 +72,7 @@ describe('Weekly Planner State', () => {
 
     const state = lessonPlanner.reducer(undefined, {
       type: actions.UPDATE_WEEK_NUMBER,
-      weekNumber: weekNumber
+      weekNumber: weekNumber,
     });
 
     expect(state).toEqual({
@@ -85,7 +85,7 @@ describe('Weekly Planner State', () => {
 
     const state = lessonPlanner.reducer(undefined, {
       type: actions.UPDATE_PLANNER_TITLE,
-      plannerTitle: title
+      plannerTitle: title,
     });
 
     expect(state).toEqual({
@@ -98,7 +98,7 @@ describe('Weekly Planner State', () => {
 
     const state = lessonPlanner.reducer(undefined, {
       type: actions.UPDATE_PLANNER_START_DATE,
-      startDate: date
+      startDate: date,
     });
 
     expect(state).toEqual({
@@ -111,7 +111,7 @@ describe('Weekly Planner State', () => {
 
     const state = lessonPlanner.reducer(undefined, {
       type: actions.UPDATE_PLANNER_END_DATE,
-      endDate: date
+      endDate: date,
     });
 
     expect(state).toEqual({
@@ -127,7 +127,7 @@ describe('Weekly Planner State', () => {
     expect(state).toEqual({
       weekNumber: '',
       plannerStartDate: new Date().toLocaleDateString(),
-      plannerEndDate: new Date().toLocaleDateString()
+      plannerEndDate: new Date().toLocaleDateString(),
     });
   });
 

@@ -3,7 +3,7 @@ import {
   openSideDrawer,
   setDrawerSize,
   userClickedCloseDrawer,
-  userClickedOpenDrawer
+  userClickedOpenDrawer,
 } from './side-drawer';
 import actions from '../actions';
 
@@ -12,7 +12,7 @@ describe('side drawer creator', () => {
     const response = closeSideDrawer();
 
     expect(response).toEqual({
-      type: actions.CLOSE_SIDE_DRAWER
+      type: actions.CLOSE_SIDE_DRAWER,
     });
   });
 
@@ -20,7 +20,7 @@ describe('side drawer creator', () => {
     const response = openSideDrawer();
 
     expect(response).toEqual({
-      type: actions.OPEN_SIDE_DRAWER
+      type: actions.OPEN_SIDE_DRAWER,
     });
   });
 
@@ -29,7 +29,7 @@ describe('side drawer creator', () => {
 
     expect(response).toEqual({
       type: actions.SET_DRAWER_SIZE,
-      size: '45px'
+      size: '45px',
     });
   });
 
@@ -37,7 +37,7 @@ describe('side drawer creator', () => {
     const response = userClickedCloseDrawer();
 
     expect(response).toEqual({
-      type: actions.USER_CLICKED_CLOSE_DRAWER
+      type: actions.USER_CLICKED_CLOSE_DRAWER,
     });
   });
 
@@ -45,7 +45,7 @@ describe('side drawer creator', () => {
     const response = userClickedOpenDrawer();
 
     expect(response).toEqual({
-      type: actions.USER_CLICKED_OPEN_DRAWER
+      type: actions.USER_CLICKED_OPEN_DRAWER,
     });
   });
 });

@@ -22,8 +22,8 @@ describe('drag and drop creator', () => {
       tuesday: tuesdayItems,
       wednesday: tuesdayItems,
       thursday: tuesdayItems,
-      friday: tuesdayItems
-    }
+      friday: tuesdayItems,
+    };
     const response = moveTemplateItem(days);
 
     expect(response).toEqual({

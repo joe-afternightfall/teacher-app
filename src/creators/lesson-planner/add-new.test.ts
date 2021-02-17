@@ -4,7 +4,7 @@ import {
   clearNewPlannerInfo,
   updatePlannerEndDate,
   addPlannerFromTemplate,
-  updatePlannerStartDate
+  updatePlannerStartDate,
 } from './add-new';
 import actions from '../actions';
 
