@@ -1,5 +1,6 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
+import { updateWeekdays } from '../utils/update-weekdays';
 import { LessonPlanner } from '../configs/models/LessonPlanner';
 
 export default {
@@ -28,18 +29,14 @@ export default {
         break;
       }
       case actions.MOVE_PLANNER_ITEMS: {
-        const selectedPlanner = newState.lessonPlanners.find(
+        let selectedPlanner = newState.lessonPlanners.find(
           (planner: LessonPlanner) => {
             return planner.id === newState.selectedLessonId;
           }
         );
 
         if (selectedPlanner !== undefined) {
-          selectedPlanner.weekdays.monday.items = action.days.monday;
-          selectedPlanner.weekdays.tuesday.items = action.days.tuesday;
-          selectedPlanner.weekdays.wednesday.items = action.days.wednesday;
-          selectedPlanner.weekdays.thursday.items = action.days.thursday;
-          selectedPlanner.weekdays.friday.items = action.days.friday;
+          selectedPlanner = updateWeekdays(selectedPlanner, action.days);
         }
         break;
       }

@@ -1,6 +1,7 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
 import { LessonPlanner } from '../configs/models/LessonPlanner';
+import { updateWeekdays } from '../utils/update-weekdays';
 
 export default {
   reducer(
@@ -11,12 +12,10 @@ export default {
 
     switch (action.type) {
       case actions.MOVE_TEMPLATE_ITEMS: {
-        const templateBuilder = newState.templateBuilder;
-        templateBuilder.weekdays.monday.items = action.days.monday;
-        templateBuilder.weekdays.tuesday.items = action.days.tuesday;
-        templateBuilder.weekdays.wednesday.items = action.days.wednesday;
-        templateBuilder.weekdays.thursday.items = action.days.thursday;
-        templateBuilder.weekdays.friday.items = action.days.friday;
+        const templateCopy = newState.templateBuilder;
+
+        console.log('action.days: ' + JSON.stringify(action.days));
+        newState.templateBuilder = updateWeekdays(templateCopy, action.days);
         break;
       }
       case actions.REORDER_TEMPLATE_BUILDER: {

@@ -43,6 +43,10 @@ export const buildLessonPlanner = (): LessonPlanner => {
         date: '01/01/2021',
         items: buildLessonItems(3),
       },
+      tuesday: {
+        date: '01/02/2021',
+        items: buildLessonItems(4),
+      },
       wednesday: {
         date: '01/03/2021',
         items: buildLessonItems(2),
@@ -184,6 +188,10 @@ export const buildLessonPlannerDAOList = (amount: number): LessonPlannerDAO[] =>
         monday: {
           date: '01/01/2021',
           items: buildLessonItems(3),
+        },
+        tuesday: {
+          date: '01/02/2021',
+          items: buildLessonItems(2),
         },
         wednesday: {
           date: '01/03/2021',
