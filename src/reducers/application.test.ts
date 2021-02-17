@@ -2,6 +2,7 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import application from './application';
 import actions from '../creators/actions';
+import { getStore } from '../configs/test-utils/mock-redux';
 
 describe('Application Reducer', () => {
   it('should update current location', () => {
@@ -15,6 +16,22 @@ describe('Application Reducer', () => {
     });
 
     expect(state.currentLocation).toBe('/testing-pathname');
+  });
+
+  it('should return CLOSE_SIDE_DRAWER', () => {
+    const state = application.reducer(undefined, {
+      type: actions.CLOSE_SIDE_DRAWER,
+    });
+
+    expect(state.sideDrawerIsOpen).toEqual(false);
+  });
+
+  it('should return OPEN_SIDE_DRAWER', () => {
+    const state = application.reducer(undefined, {
+      type: actions.OPEN_SIDE_DRAWER,
+    });
+
+    expect(state.sideDrawerIsOpen).toEqual(true);
   });
 
   it('should return DISPLAY_APP_SNACKBAR action', () => {
@@ -85,11 +102,45 @@ describe('Application Reducer', () => {
     expect(state.confirmClickHandler).toEqual(null);
   });
 
+  it('should return SET_DRAWER_SIZE action', () => {
+    const state = application.reducer(undefined, {
+      type: actions.SET_DRAWER_SIZE,
+      size: '240'
+    });
+
+    expect(state.drawerSize).toEqual('240');
+  });
+
+  it('should return USER_CLICKED_CLOSE_DRAWER action', () => {
+    const state = application.reducer(undefined, {
+      type: actions.USER_CLICKED_CLOSE_DRAWER,
+    });
+
+    expect(state.userClickedCloseDrawer).toEqual(true);
+  });
+
+  it('should return USER_CLICKED_OPEN_DRAWER action', () => {
+    const state = application.reducer(undefined, {
+      type: actions.USER_CLICKED_OPEN_DRAWER,
+    });
+
+    expect(state.userClickedCloseDrawer).toEqual(false);
+  });
+
   it('should return empty object', () => {
     const state = application.reducer(undefined, {
       type: 'TESTING',
     });
 
     expect(state).toEqual({});
+  });
+
+  it('should return state object', () => {
+    const appState = getStore({}).getState();
+    const state = application.reducer(appState, {
+      type: 'TESTING',
+    });
+
+    expect(state).toEqual(appState);
   });
 });
