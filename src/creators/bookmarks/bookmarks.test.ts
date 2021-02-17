@@ -1,6 +1,12 @@
 import actions from '../actions';
 import { buildBookmarkList } from '../../configs/test-utils/test-util';
-import { loadBookmarksList, updateBookmarkSubject, updateBookmarkTitle, updateBookmarkUrl } from './bookmarks';
+import {
+  clearBookmarkDialog,
+  loadBookmarksList,
+  updateBookmarkSubject,
+  updateBookmarkTitle,
+  updateBookmarkUrl
+} from './bookmarks';
 
 describe('bookmarks creators', () => {
   it('should return LOAD_BOOKMARKS_LIST action', () => {
@@ -37,6 +43,14 @@ describe('bookmarks creators', () => {
     expect(response).toEqual({
       type: actions.UPDATE_BOOKMARK_TITLE,
       value: 'test-title',
+    })
+  });
+
+  it('should return CLEAR_BOOKMARK_DIALOG', () => {
+    const response = clearBookmarkDialog();
+
+    expect(response).toEqual({
+      type: actions.CLEAR_BOOKMARK_DIALOG,
     })
   });
 });

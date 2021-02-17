@@ -1,6 +1,5 @@
 import React from 'react';
 import BookmarkForm from './BookmarkForm';
-import userEvent from '@testing-library/user-event';
 import {
   getStore,
   renderWithRedux,
@@ -8,26 +7,15 @@ import {
 
 describe('Bookmark Form Component', () => {
   it('should render with stuff', () => {
-    const textfieldChangeHandler = jest.fn();
-    const dropdownChangeHandler = jest.fn();
+    const store = getStore({});
     const bookmarkForm = renderWithRedux(
-      <BookmarkForm
-        bookmarkValues={{
-          id: 'test-id',
-          bookmarkUrl: 'www.test-url.com',
-          bookmarkTitle: 'test-title',
-          subjectId: 'test-subject-id',
-        }}
-        dropdownChangeHandler={dropdownChangeHandler}
-        textfieldChangeHandler={textfieldChangeHandler}
-      />,
-      getStore({})
+      <BookmarkForm />,
+      store
     );
 
+    expect(bookmarkForm.getByText('Bookmark Information')).toBeInTheDocument();
     expect(bookmarkForm.getByText('Title')).toBeInTheDocument();
-    userEvent.type(bookmarkForm.getByTestId('bookmark-title'), 'My Bookmark');
-    userEvent.type(bookmarkForm.getByTestId('bookmark-url'), 'www.google.com');
-    bookmarkForm.getByTestId('subject-dropdown-list').click();
-    expect(textfieldChangeHandler).toHaveBeenCalledTimes(2);
+    expect(bookmarkForm.getByTestId('bookmark-title')).toBeInTheDocument();
+    expect(bookmarkForm.getByTestId('bookmark-url')).toBeInTheDocument();
   });
 });

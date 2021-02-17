@@ -56,6 +56,9 @@ export function getStore(state: any): MockStore {
     bookmarksState: {
       bookmarks: buildBookmarkList(5),
       displayNewBookmarkDialog: false,
+      subjectId: '',
+      url: '',
+      title: ''
     },
     lessonPlannerState: {
       lessonPlanners: [buildLessonPlanner()]
