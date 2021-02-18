@@ -31,46 +31,61 @@ export const buildLessonItems = (items: number): LessonItem[] => {
   return builtList;
 };
 
-export const buildLessonPlanner = (): LessonPlanner => {
-  return {
-    firebaseId: 'firebase-planner',
-    updatedAt: new Date().toLocaleDateString(),
-    id: 'planner-id',
-    title: 'planner-title',
-    weekNumber: 'week-number',
-    weekdays: {
-      monday: {
-        date: '01/01/2021',
-        items: buildLessonItems(3),
+export const buildLessonPlanners = (amount: number): LessonPlanner[] => {
+  let index = 0;
+  const builtList = [];
+
+  while (index < amount) {
+    index += 1;
+
+    const monDate = new Date().setDate(index);
+    const tuesDate = new Date().setDate(index + 1);
+    const wedDate = new Date().setDate(index + 2);
+    const thursDate = new Date().setDate(index + 3);
+    const friDate = new Date().setDate(index + 4);
+
+    builtList.push({
+      firebaseId: `firebase-planner-${index}`,
+      updatedAt: new Date().toLocaleDateString(),
+      id: `planner-id-${index}`,
+      title: `planner-title-${index}`,
+      weekNumber: `week-number-${index}`,
+      weekdays: {
+        monday: {
+          date: monDate.toLocaleString(),
+          items: buildLessonItems(3),
+        },
+        tuesday: {
+          date: tuesDate.toLocaleString(),
+          items: buildLessonItems(4),
+        },
+        wednesday: {
+          date: wedDate.toLocaleString(),
+          items: buildLessonItems(2),
+        },
+        thursday: {
+          date: thursDate.toLocaleString(),
+          items: buildLessonItems(1),
+        },
+        friday: {
+          date: friDate.toLocaleString(),
+          items: buildLessonItems(2),
+        },
       },
-      tuesday: {
-        date: '01/02/2021',
-        items: buildLessonItems(4),
-      },
-      wednesday: {
-        date: '01/03/2021',
-        items: buildLessonItems(2),
-      },
-      thursday: {
-        date: '01/04/2021',
-        items: buildLessonItems(1),
-      },
-      friday: {
-        date: '01/05/2021',
-        items: buildLessonItems(2),
-      },
-    },
-    notes: [
-      {
-        id: 'note-id-one',
-        content: 'note-content-one',
-      },
-      {
-        id: 'note-id-two',
-        content: 'note-content-two',
-      },
-    ],
-  };
+      notes: [
+        {
+          id: `note-id-${index}`,
+          content: `note-content-${index}`,
+        },
+        {
+          id: `note-id-${index}`,
+          content: `note-content-${index}`,
+        },
+      ],
+    });
+  }
+
+  return builtList;
 };
 
 export const buildSubjectList = (amount: number): Subject[] => {
