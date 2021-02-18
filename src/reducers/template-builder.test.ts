@@ -42,6 +42,7 @@ describe('template builder reducer', () => {
     });
 
     expect(state.templateBuilder.weekdays.thursday.items).toEqual(items);
+    expect(state.allDaysSelected).toEqual(false);
   });
 
   it('should return REORDER_TEMPLATE_BUILDER action undefined', () => {
@@ -59,6 +60,24 @@ describe('template builder reducer', () => {
     });
 
     expect(state.allDaysSelected).toEqual(true);
+  });
+
+  it('should return UPDATE_OTHER_LESSON_TYPE_NAME action', () => {
+    const state = templateBuilder.reducer(undefined, {
+      type: actions.UPDATE_OTHER_LESSON_TYPE_NAME,
+      value: 'other-lesson-type',
+    });
+
+    expect(state.otherLessonTypeName).toEqual('other-lesson-type');
+  });
+
+  it('should return UPDATE_ITEM_TYPE action', () => {
+    const state = templateBuilder.reducer(undefined, {
+      type: actions.UPDATE_ITEM_TYPE,
+      lessonType: 'update-lesson-type',
+    });
+
+    expect(state.lessonType).toEqual('update-lesson-type');
   });
 
   it('should return action for end date', () => {
@@ -145,6 +164,26 @@ describe('template builder reducer', () => {
     expect(state.templateBuilder).toEqual(lesson);
   });
 
+  it('should return UPDATE_SELECTED_DAYS action', () => {
+
+    const state = templateBuilder.reducer(buildTemplateBuilderState(), {
+      type: actions.UPDATE_SELECTED_DAYS,
+      selectedDay: 'mon',
+    });
+
+    expect(state.selectedDays).toEqual(['tues', 'wed', 'mon']);
+  });
+
+  it('should return UPDATE_SELECTED_DAYS without', () => {
+
+    const state = templateBuilder.reducer(buildTemplateBuilderState(), {
+      type: actions.UPDATE_SELECTED_DAYS,
+      selectedDay: 'tues',
+    });
+
+    expect(state.selectedDays).toEqual(['wed']);
+  });
+
   it('should return UPDATE_LESSON_SUBJECT action', () => {
     const id = uuidv4();
     const state = templateBuilder.reducer(undefined, {
@@ -154,13 +193,29 @@ describe('template builder reducer', () => {
 
     expect(state.lessonSubjectId).toEqual(id);
   });
+
+  it('should return empty object', () => {
+    const state = templateBuilder.reducer(undefined, {
+      type: 'TESTING',
+    });
+
+    expect(state).toEqual({});
+  });
+
+  // it('should return state', () => {
+  //   const state = templateBuilder.reducer(buildTemplateBuilderState(), {
+  //     type: 'TESTING',
+  //   });
+  //
+  //   expect(state).toEqual({});
+  // });
 });
 
 function buildTemplateBuilderState(): TemplateBuilderState {
   return {
     lessonSubjectId: 'string;',
     allDaysSelected: false,
-    selectedDays: [],
+    selectedDays: ['tues', 'wed'],
     startTime: new Date(),
     endTime: new Date(),
     templateBuilder: buildLessonPlanners(1)[0],
