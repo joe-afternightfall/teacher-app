@@ -165,7 +165,6 @@ describe('template builder reducer', () => {
   });
 
   it('should return UPDATE_SELECTED_DAYS action', () => {
-
     const state = templateBuilder.reducer(buildTemplateBuilderState(), {
       type: actions.UPDATE_SELECTED_DAYS,
       selectedDay: 'mon',
@@ -175,7 +174,6 @@ describe('template builder reducer', () => {
   });
 
   it('should return UPDATE_SELECTED_DAYS without', () => {
-
     const state = templateBuilder.reducer(buildTemplateBuilderState(), {
       type: actions.UPDATE_SELECTED_DAYS,
       selectedDay: 'tues',

@@ -32,11 +32,7 @@ export default {
         newState.lessonType = '';
         break;
       case actions.LOAD_TEMPLATE_BUILDER: {
-        const endDate = action.template.endDate;
-        const startDate = action.template.startDate;
         newState.templateBuilder = action.template;
-        newState.endDate = endDate && new Date(endDate);
-        newState.startDate = startDate && new Date(startDate);
         break;
       }
       case actions.UPDATE_SELECTED_DAYS: {
@@ -95,8 +91,6 @@ export interface TemplateBuilderState {
   startTime: Date;
   endTime: Date;
   templateBuilder: LessonPlanner;
-  endDate: Date;
-  startDate: Date;
   otherLessonTypeName: string;
   boardChanged: boolean;
   lessonType: string;
