@@ -1,9 +1,57 @@
 import { v4 as uuidv4 } from 'uuid';
+import {
+  buildLessonItems,
+  buildLessonPlanners,
+} from '../configs/test-utils/test-util';
 import actions from '../creators/actions';
-import templateBuilder from './template-builder';
-import { buildLessonPlanners } from '../configs/test-utils/test-util';
+import templateBuilder, { TemplateBuilderState } from './template-builder';
 
 describe('template builder reducer', () => {
+  it('should return MOVE_TEMPLATE_ITEMS action', () => {
+    const days = {
+      monday: buildLessonItems(3),
+      tuesday: buildLessonItems(2),
+      wednesday: buildLessonItems(4),
+      thursday: buildLessonItems(1),
+      friday: buildLessonItems(3),
+    };
+
+    const state = templateBuilder.reducer(buildTemplateBuilderState(), {
+      type: actions.MOVE_TEMPLATE_ITEMS,
+      days: days,
+    });
+
+    expect(state.templateBuilder.weekdays.monday.items).toEqual(days.monday);
+    expect(state.templateBuilder.weekdays.tuesday.items).toEqual(days.tuesday);
+    expect(state.templateBuilder.weekdays.wednesday.items).toEqual(
+      days.wednesday
+    );
+    expect(state.templateBuilder.weekdays.thursday.items).toEqual(
+      days.thursday
+    );
+    expect(state.templateBuilder.weekdays.friday.items).toEqual(days.friday);
+  });
+
+  it('should return REORDER_TEMPLATE_BUILDER action', () => {
+    const items = buildLessonItems(3);
+
+    const state = templateBuilder.reducer(buildTemplateBuilderState(), {
+      type: actions.REORDER_TEMPLATE_BUILDER,
+      items: items,
+      dayOfWeek: 'thursday',
+    });
+
+    expect(state.templateBuilder.weekdays.thursday.items).toEqual(items);
+  });
+
+  it('should return REORDER_TEMPLATE_BUILDER action undefined', () => {
+    const state = templateBuilder.reducer(undefined, {
+      type: actions.REORDER_TEMPLATE_BUILDER,
+    });
+
+    expect(state.templateBuilder).toEqual(undefined);
+  });
+
   it('should return UPDATE_ALL_SELECTED_DAYS action', () => {
     const state = templateBuilder.reducer(undefined, {
       type: actions.UPDATE_ALL_SELECTED_DAYS,
@@ -107,3 +155,19 @@ describe('template builder reducer', () => {
     expect(state.lessonSubjectId).toEqual(id);
   });
 });
+
+function buildTemplateBuilderState(): TemplateBuilderState {
+  return {
+    lessonSubjectId: 'string;',
+    allDaysSelected: false,
+    selectedDays: [],
+    startTime: new Date(),
+    endTime: new Date(),
+    templateBuilder: buildLessonPlanners(1)[0],
+    endDate: new Date(),
+    startDate: new Date(),
+    otherLessonTypeName: '',
+    boardChanged: false,
+    lessonType: '',
+  };
+}

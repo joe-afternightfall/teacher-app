@@ -17,9 +17,9 @@ export default {
         break;
       }
       case actions.REORDER_TEMPLATE_BUILDER: {
-        const selectedPlanner = newState.templateBuilder;
-        if (selectedPlanner !== undefined) {
-          selectedPlanner.weekdays[action.dayOfWeek].items = action.items;
+        if (newState.templateBuilder !== undefined) {
+          newState.templateBuilder.weekdays[action.dayOfWeek].items =
+            action.items;
         }
         break;
       }

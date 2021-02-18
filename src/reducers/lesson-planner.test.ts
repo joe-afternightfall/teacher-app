@@ -49,7 +49,6 @@ describe('Weekly Planner State', () => {
   });
 
   it('should return MOVE_PLANNER_ITEMS action', () => {
-
     const days = {
       monday: buildLessonItems(3),
       tuesday: buildLessonItems(2),
@@ -65,7 +64,9 @@ describe('Weekly Planner State', () => {
 
     expect(state.selectedPlanner?.weekdays.monday.items).toBe(days.monday);
     expect(state.selectedPlanner?.weekdays.tuesday.items).toBe(days.tuesday);
-    expect(state.selectedPlanner?.weekdays.wednesday.items).toBe(days.wednesday);
+    expect(state.selectedPlanner?.weekdays.wednesday.items).toBe(
+      days.wednesday
+    );
     expect(state.selectedPlanner?.weekdays.thursday.items).toBe(days.thursday);
     expect(state.selectedPlanner?.weekdays.friday.items).toBe(days.friday);
     expect(state.selectedLessonId).toBe('planner-id-2');
