@@ -14,6 +14,7 @@ const DeleteItemDialog = (props: DeleteDialogProps): JSX.Element => {
     <IconButton
       edge={'end'}
       aria-label={'delete'}
+      data-testid={`delete-button-${props.item.id}`}
       onClick={() => {
         props.displayAppDialogHandler(
           <Grid
