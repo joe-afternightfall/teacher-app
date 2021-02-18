@@ -31,19 +31,56 @@ describe('Weekly Planner State', () => {
     expect(state.selectedPlanner?.weekdays.wednesday.items).toBe(lessonItems);
     expect(state.selectedLessonId).toBe('planner-id-2');
   });
-  // it('should return SELECT_LESSON_BY_ID action', () => {
-  //   const id = uuidv4();
-  //   const appState = getStore({}).getState();
-  //
-  //   const state = lessonPlanner.reducer(appState, {
-  //     type: actions.SELECT_LESSON_BY_ID,
-  //     id: 'planner-id',
-  //   });
-  //
-  //   expect(state).toEqual({
-  //     selectedLessonId: id,
-  //   });
-  // });
+
+  it('should return REORDER_LESSON_PLANNER action with undefined', () => {
+    const state = lessonPlanner.reducer(undefined, {
+      type: actions.REORDER_LESSON_PLANNER,
+    });
+
+    expect(state.selectedPlanner).toBe(undefined);
+  });
+
+  it('should return MOVE_PLANNER_ITEMS action with undefined', () => {
+    const state = lessonPlanner.reducer(undefined, {
+      type: actions.MOVE_PLANNER_ITEMS,
+    });
+
+    expect(state.selectedPlanner).toBe(undefined);
+  });
+
+  it('should return MOVE_PLANNER_ITEMS action', () => {
+
+    const days = {
+      monday: buildLessonItems(3),
+      tuesday: buildLessonItems(2),
+      wednesday: buildLessonItems(4),
+      thursday: buildLessonItems(1),
+      friday: buildLessonItems(3),
+    };
+
+    const state = lessonPlanner.reducer(buildLessonPlannerState(), {
+      type: actions.MOVE_PLANNER_ITEMS,
+      days: days,
+    });
+
+    expect(state.selectedPlanner?.weekdays.monday.items).toBe(days.monday);
+    expect(state.selectedPlanner?.weekdays.tuesday.items).toBe(days.tuesday);
+    expect(state.selectedPlanner?.weekdays.wednesday.items).toBe(days.wednesday);
+    expect(state.selectedPlanner?.weekdays.thursday.items).toBe(days.thursday);
+    expect(state.selectedPlanner?.weekdays.friday.items).toBe(days.friday);
+    expect(state.selectedLessonId).toBe('planner-id-2');
+  });
+
+  it('should return SELECT_LESSON_BY_ID action', () => {
+    const mockState = buildLessonPlannerState();
+
+    const state = lessonPlanner.reducer(mockState, {
+      type: actions.SELECT_LESSON_BY_ID,
+      id: 'planner-id-3',
+    });
+
+    expect(state.selectedPlanner).toEqual(mockState.lessonPlanners[2]);
+  });
 
   it('should return UPDATE_LESSON_CONTENT action', () => {
     const content = uuidv4();
