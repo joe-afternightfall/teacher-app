@@ -13,8 +13,6 @@ export default {
     switch (action.type) {
       case actions.MOVE_TEMPLATE_ITEMS: {
         const templateCopy = newState.templateBuilder;
-
-        console.log('action.days: ' + JSON.stringify(action.days));
         newState.templateBuilder = updateWeekdays(templateCopy, action.days);
         break;
       }
