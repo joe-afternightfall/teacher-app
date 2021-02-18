@@ -17,26 +17,18 @@ export default {
         newState.selectedLessonId = action.lessonPlanners[0].id;
         break;
       case actions.REORDER_LESSON_PLANNER: {
-        const selectedPlanner = newState.lessonPlanners.find(
-          (planner: LessonPlanner) => {
-            return planner.id === newState.selectedLessonId;
-          }
-        );
-
-        if (selectedPlanner !== undefined) {
-          selectedPlanner.weekdays[action.dayOfWeek].items = action.items;
+        if (newState.selectedPlanner !== undefined) {
+          newState.selectedPlanner.weekdays[action.dayOfWeek].items =
+            action.items;
         }
         break;
       }
       case actions.MOVE_PLANNER_ITEMS: {
-        let selectedPlanner = newState.lessonPlanners.find(
-          (planner: LessonPlanner) => {
-            return planner.id === newState.selectedLessonId;
-          }
-        );
-
-        if (selectedPlanner !== undefined) {
-          selectedPlanner = updateWeekdays(selectedPlanner, action.days);
+        if (newState.selectedPlanner !== undefined) {
+          newState.selectedPlanner = updateWeekdays(
+            newState.selectedPlanner,
+            action.days
+          );
         }
         break;
       }
