@@ -1,6 +1,7 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
 import { LessonPlanner } from '../configs/models/LessonPlanner';
+import { updateWeekdays } from '../utils/update-weekdays';
 
 export default {
   reducer(
@@ -11,18 +12,14 @@ export default {
 
     switch (action.type) {
       case actions.MOVE_TEMPLATE_ITEMS: {
-        const templateBuilder = newState.templateBuilder;
-        templateBuilder.weekdays.monday.items = action.days.monday;
-        templateBuilder.weekdays.tuesday.items = action.days.tuesday;
-        templateBuilder.weekdays.wednesday.items = action.days.wednesday;
-        templateBuilder.weekdays.thursday.items = action.days.thursday;
-        templateBuilder.weekdays.friday.items = action.days.friday;
+        const templateCopy = newState.templateBuilder;
+        newState.templateBuilder = updateWeekdays(templateCopy, action.days);
         break;
       }
       case actions.REORDER_TEMPLATE_BUILDER: {
-        const selectedPlanner = newState.templateBuilder;
-        if (selectedPlanner !== undefined) {
-          selectedPlanner.weekdays[action.dayOfWeek].items = action.items;
+        if (newState.templateBuilder !== undefined) {
+          newState.templateBuilder.weekdays[action.dayOfWeek].items =
+            action.items;
         }
         break;
       }
@@ -35,11 +32,7 @@ export default {
         newState.lessonType = '';
         break;
       case actions.LOAD_TEMPLATE_BUILDER: {
-        const endDate = action.template.endDate;
-        const startDate = action.template.startDate;
         newState.templateBuilder = action.template;
-        newState.endDate = endDate && new Date(endDate);
-        newState.startDate = startDate && new Date(startDate);
         break;
       }
       case actions.UPDATE_SELECTED_DAYS: {
@@ -98,8 +91,6 @@ export interface TemplateBuilderState {
   startTime: Date;
   endTime: Date;
   templateBuilder: LessonPlanner;
-  endDate: Date;
-  startDate: Date;
   otherLessonTypeName: string;
   boardChanged: boolean;
   lessonType: string;

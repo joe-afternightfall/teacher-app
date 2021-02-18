@@ -6,13 +6,14 @@ import { AnyAction, Dispatch } from 'redux';
 import AppLink from '../../app-shell/AppLink';
 import { TextField } from '@material-ui/core';
 import PageTitle from '../../shared/PageTitle';
+import BookmarkForm from './components/BookmarkForm';
 import { State } from '../../../configs/redux/store';
 import { Subject } from '../../../configs/models/Subject';
 import { Bookmark } from '../../../configs/models/Bookmark';
-import NewBookmarkDialog from './components/NewBookmarkDialog';
 import { updateBookmark } from '../../../services/bookmarks/update-bookmark';
 import { deleteBookmark } from '../../../services/bookmarks/delete-bookmark';
-import { openNewBookmarkDialog } from '../../../creators/bookmarks/bookmarks-dialog';
+import { displayAppDialog } from '../../../creators/application/app-dialog';
+import { saveBookmarkInfo } from '../../../services/bookmarks/save-bookmark';
 
 const getLink = (rowData: any) => (
   <AppLink
@@ -50,8 +51,6 @@ const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
 
   return (
     <React.Fragment>
-      <NewBookmarkDialog />
-
       <MaterialTable
         data={data}
         data-testid={'bookmarks-widget'}
@@ -144,7 +143,20 @@ const mapStateToProps = (state: State): BookmarksWidgetProps => {
 const mapDispatchToProps = (dispatch: Dispatch): BookmarksWidgetProps =>
   (({
     addNewClickHandler: () => {
-      dispatch(openNewBookmarkDialog());
+      dispatch(
+        displayAppDialog({
+          maxWidth: 'sm',
+          titleColor: '#3baafc',
+          content: <BookmarkForm />,
+          title: 'Add New Bookmark',
+          confirmButtonTitle: 'Save',
+          confirmClickHandler: async () => {
+            (dispatch as ThunkDispatch<State, void, AnyAction>)(
+              saveBookmarkInfo()
+            );
+          },
+        })
+      );
     },
     deleteClickHandler: (id: string) => {
       (dispatch as ThunkDispatch<State, void, AnyAction>)(deleteBookmark(id));

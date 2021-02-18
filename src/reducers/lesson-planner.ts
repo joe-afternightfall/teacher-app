@@ -1,5 +1,6 @@
 import { AnyAction } from 'redux';
 import actions from '../creators/actions';
+import { updateWeekdays } from '../utils/update-weekdays';
 import { LessonPlanner } from '../configs/models/LessonPlanner';
 
 export default {
@@ -11,36 +12,31 @@ export default {
 
     switch (action.type) {
       case actions.LOAD_LESSON_PLANNERS:
-        // todo:  rewrite load lesson planners logic below
         newState.lessonPlanners = action.lessonPlanners;
+        newState.selectedPlanner = action.lessonPlanners[0];
         newState.selectedLessonId = action.lessonPlanners[0].id;
         break;
       case actions.REORDER_LESSON_PLANNER: {
-        const selectedPlanner = newState.lessonPlanners.find(
-          (planner: LessonPlanner) => {
-            return planner.id === newState.selectedLessonId;
-          }
-        );
-
-        if (selectedPlanner !== undefined) {
-          selectedPlanner.weekdays[action.dayOfWeek].items = action.items;
+        if (newState.selectedPlanner !== undefined) {
+          newState.selectedPlanner.weekdays[action.dayOfWeek].items =
+            action.items;
         }
         break;
       }
       case actions.MOVE_PLANNER_ITEMS: {
-        const selectedPlanner = newState.lessonPlanners.find(
-          (planner: LessonPlanner) => {
-            return planner.id === newState.selectedLessonId;
-          }
-        );
-
-        if (selectedPlanner !== undefined) {
-          selectedPlanner.weekdays.monday.items = action.days.monday;
-          selectedPlanner.weekdays.tuesday.items = action.days.tuesday;
-          selectedPlanner.weekdays.wednesday.items = action.days.wednesday;
-          selectedPlanner.weekdays.thursday.items = action.days.thursday;
-          selectedPlanner.weekdays.friday.items = action.days.friday;
+        if (newState.selectedPlanner !== undefined) {
+          newState.selectedPlanner = updateWeekdays(
+            newState.selectedPlanner,
+            action.days
+          );
         }
+        break;
+      }
+      case actions.SELECT_LESSON_BY_ID: {
+        newState.selectedLessonId = action.id;
+        newState.selectedPlanner = newState.lessonPlanners.find((planner) => {
+          return planner.id === action.id;
+        });
         break;
       }
       case actions.UPDATE_LESSON_CONTENT:
@@ -89,7 +85,7 @@ export interface LessonPlannerState {
     | Date
     | LessonPlanner
     | undefined;
-  selectedLessonId: string;
+  selectedLessonId: string | undefined;
   displayEditingForm: boolean;
   lessonPlanners: LessonPlanner[];
   lessonSubjectId: string;
@@ -107,4 +103,5 @@ export interface LessonPlannerState {
   plannerStartDate: string;
   plannerEndDate: string;
   plannerTitle: string;
+  selectedPlanner: LessonPlanner | undefined;
 }

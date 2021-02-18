@@ -20,7 +20,9 @@ const PreviewCard = (props: PreviewCardProps) => {
           avatar={
             <Avatar aria-label={'subject-icon'}>
               {icon !== undefined ? (
-                <Avatar>{React.createElement(icon)}</Avatar>
+                <Avatar data-testid={`${props.selectedIconId}-icon`}>
+                  {React.createElement(icon)}
+                </Avatar>
               ) : (
                 <React.Fragment />
               )}

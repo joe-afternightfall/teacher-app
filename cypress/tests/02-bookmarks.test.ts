@@ -14,7 +14,7 @@ describe('Bookmarks Test', () => {
     cy.findByTestId('subject-dropdown-list').click();
     cy.findByTestId('subject-menu-Editing Test Subject').click();
     cy.findByTestId('bookmark-url').type('www.google.com');
-    cy.findByTestId('save-bookmark-button').click();
+    cy.findByTestId('app-dialog-confirm-button').click();
     cy.contains('Bookmark Saved').should('be.visible');
   });
 

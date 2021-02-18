@@ -5,22 +5,22 @@ import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../configs/redux/store';
 import { BookmarkDAO } from '../../configs/models/BookmarkDAO';
 import { displayAppSnackbar } from '../../creators/application/app-snackbar';
-import { closeNewBookmarkDialog } from '../../creators/bookmarks/bookmarks-dialog';
-import { NewBookmarkForm } from '../../components/widgets/bookmarks-widget/components/NewBookmarkDialog';
+import { clearBookmarkDialog } from '../../creators/bookmarks/bookmarks';
 
-export const saveBookmarkInfo = (
-  bookmark: NewBookmarkForm
-): ThunkAction<void, State, void, AnyAction> => async (
-  dispatch: Dispatch
-): Promise<void> => {
+export const saveBookmarkInfo = (): ThunkAction<
+  void,
+  State,
+  void,
+  AnyAction
+> => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
   const bookmarkRef = firebase.database().ref('/bookmarks');
   const newBookmarkRef = bookmarkRef.push();
 
   const bookmarkDAO = new BookmarkDAO(
     uuidv4(),
-    bookmark.bookmarkUrl,
-    bookmark.bookmarkTitle,
-    bookmark.subjectId,
+    getState().bookmarksState.url,
+    getState().bookmarksState.title,
+    getState().bookmarksState.subjectId,
     []
   );
 
@@ -48,8 +48,8 @@ export const saveBookmarkInfo = (
         })
       );
       setTimeout(() => {
-        dispatch(closeNewBookmarkDialog());
-      }, 1000);
+        dispatch(clearBookmarkDialog());
+      }, 500);
     }
   });
 };

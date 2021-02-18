@@ -9,16 +9,8 @@ import { lessonBoardChanged } from '../../../creators/lesson-planner/lesson-boar
 import { LessonItem } from '../../../configs/models/LessonItem';
 
 const mapStateToProps = (state: State): LessonPlannerProps => {
-  const lessons = state.lessonPlannerState.lessonPlanners;
-
-  const selectedPlanner =
-    lessons &&
-    lessons.find((planner) => {
-      return planner.id === state.lessonPlannerState.selectedLessonId;
-    });
-
   return ({
-    selectedPlanner: selectedPlanner,
+    selectedPlanner: state.lessonPlannerState.selectedPlanner,
     subjectList: state.subjectListState.subjectList,
   } as unknown) as LessonPlannerProps;
 };
