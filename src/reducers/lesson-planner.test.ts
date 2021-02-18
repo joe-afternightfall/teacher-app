@@ -1,12 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
 import actions from '../creators/actions';
-import lessonPlanner from './lesson-planner';
-import { buildLessonPlanner } from '../configs/test-utils/test-util';
-import { getStore } from '../configs/test-utils/mock-redux';
+import lessonPlanner, { LessonPlannerState } from './lesson-planner';
+import {
+  buildLessonItems,
+  buildLessonPlanners,
+} from '../configs/test-utils/test-util';
 
 describe('Weekly Planner State', () => {
   it('should load weekly planners', () => {
-    const lessonPlanners = [buildLessonPlanner()];
+    const lessonPlanners = buildLessonPlanners(4);
 
     const state = lessonPlanner.reducer(undefined, {
       type: actions.LOAD_LESSON_PLANNERS,
@@ -14,9 +16,21 @@ describe('Weekly Planner State', () => {
     });
 
     expect(state.lessonPlanners).toBe(lessonPlanners);
-    expect(state.selectedLessonId).toBe('planner-id');
+    expect(state.selectedLessonId).toBe('planner-id-1');
   });
 
+  it('should return REORDER_LESSON_PLANNER action', () => {
+    const lessonItems = buildLessonItems(3);
+
+    const state = lessonPlanner.reducer(buildLessonPlannerState(), {
+      type: actions.REORDER_LESSON_PLANNER,
+      items: lessonItems,
+      dayOfWeek: 'wednesday',
+    });
+
+    expect(state.selectedPlanner?.weekdays.wednesday.items).toBe(lessonItems);
+    expect(state.selectedLessonId).toBe('planner-id-2');
+  });
   // it('should return SELECT_LESSON_BY_ID action', () => {
   //   const id = uuidv4();
   //   const appState = getStore({}).getState();
@@ -139,3 +153,27 @@ describe('Weekly Planner State', () => {
     expect(state).toEqual({});
   });
 });
+
+function buildLessonPlannerState(): LessonPlannerState {
+  return {
+    selectedLessonId: 'planner-id-2',
+    displayEditingForm: false,
+    lessonPlanners: buildLessonPlanners(5),
+    lessonSubjectId: 'string;',
+    selectedDays: [],
+    allDaysSelected: false,
+    lessonContent: '',
+    lessonName: '',
+    startTime: new Date(),
+    endTime: new Date(),
+    templateBuilder: buildLessonPlanners(1)[0],
+    lessonBoardChanged: false,
+    lessonType: undefined,
+    otherLessonTypeName: '',
+    weekNumber: '',
+    plannerStartDate: '01/14/2021',
+    plannerEndDate: '11/14/2021',
+    plannerTitle: '',
+    selectedPlanner: buildLessonPlanners(3)[2],
+  };
+}

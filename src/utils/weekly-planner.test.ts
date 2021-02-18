@@ -1,7 +1,7 @@
 import { move, reorder, updateAllItems } from './weekly-planner';
 import {
   buildLessonItems,
-  buildLessonPlanner,
+  buildLessonPlanners,
 } from '../configs/test-utils/test-util';
 
 describe('Weekly Schedule', () => {
@@ -44,7 +44,7 @@ describe('Weekly Schedule', () => {
       tuesday: buildLessonItems(1),
     };
 
-    const result = updateAllItems(moveResult, buildLessonPlanner());
+    const result = updateAllItems(moveResult, buildLessonPlanners(1)[0]);
 
     expect(result.monday.length).toEqual(3);
     expect(result.tuesday.length).toEqual(1);

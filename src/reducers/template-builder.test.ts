@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import actions from '../creators/actions';
 import templateBuilder from './template-builder';
-import { buildLessonPlanner } from '../configs/test-utils/test-util';
+import { buildLessonPlanners } from '../configs/test-utils/test-util';
 
 describe('template builder reducer', () => {
   it('should return UPDATE_ALL_SELECTED_DAYS action', () => {
@@ -87,7 +87,7 @@ describe('template builder reducer', () => {
   });
 
   it('should return LOAD_TEMPLATE_BUILDER action', () => {
-    const lesson = buildLessonPlanner();
+    const lesson = buildLessonPlanners(1)[0];
 
     const state = templateBuilder.reducer(undefined, {
       type: actions.LOAD_TEMPLATE_BUILDER,

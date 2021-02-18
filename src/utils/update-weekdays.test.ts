@@ -1,12 +1,12 @@
 import { updateWeekdays } from './update-weekdays';
 import {
   buildLessonItems,
-  buildLessonPlanner,
+  buildLessonPlanners,
 } from '../configs/test-utils/test-util';
 
 describe('updating weekdays util', () => {
   it('should return updated lesson planner', () => {
-    const builtPlanner = buildLessonPlanner();
+    const builtPlanner = buildLessonPlanners(1)[0];
 
     const days = {
       monday: buildLessonItems(4),
