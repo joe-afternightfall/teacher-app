@@ -11,15 +11,15 @@ import {
 } from '@material-ui/core';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import SubjectBuilder from './SubjectBuilder';
 import CloseIcon from '@material-ui/icons/Close';
-import { State } from '../../configs/redux/store';
+import { State } from '../../../configs/redux/store';
+import ActionButtons from './components/ActionButtons';
 import {
   openSubjectBuilderDialog,
-  closeSubjectBuilderDialog,
-} from '../../creators/subject-list/subject-builder-dialog';
-import SubjectBuilder from '../widgets/subject-builder/SubjectBuilder';
+  closeSubjectBuilderDialog
+} from '../../../creators/subject-list/subject-builder-dialog';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import SubjectInfoActionButtons from '../widgets/subject-builder/components/SubjectInfoActionButtons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const SubjectListDialog = (props: SubjectListDialogProps): JSX.Element => {
+const SubjectBuilderDialog = (props: SubjectListDialogProps): JSX.Element => {
   const classes = useStyles();
   const [open, setOpen] = React.useState<boolean>(false);
 
@@ -94,7 +94,7 @@ const SubjectListDialog = (props: SubjectListDialogProps): JSX.Element => {
           </DialogContent>
 
           <DialogActions>
-            <SubjectInfoActionButtons />
+            <ActionButtons />
           </DialogActions>
         </React.Fragment>
       )}
@@ -128,4 +128,4 @@ const mapDispatchToProps = (dispatch: Dispatch): SubjectListDialogProps =>
     },
   } as unknown) as SubjectListDialogProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubjectListDialog);
+export default connect(mapStateToProps, mapDispatchToProps)(SubjectBuilderDialog);

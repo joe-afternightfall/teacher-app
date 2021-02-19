@@ -41,6 +41,7 @@ export async function renderAsyncWithRedux(
 
 export const initialState = {
   applicationState: {},
+  subjectListState: {},
 };
 
 export function getStore(state: any): MockStore {
@@ -66,6 +67,13 @@ export function getStore(state: any): MockStore {
     templateBuilderState: {
       boardChanged: false,
     }
+  });
+}
+
+export function getSubjectListStore(state: any): MockStore {
+  return createStore(middleware)({
+    ...initialState,
+    subjectListState: { ...initialState.subjectListState, ...state },
   });
 }
 

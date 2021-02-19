@@ -12,13 +12,13 @@ import { clearEditing } from '../../../../creators/subject-list/editing-subject'
 import { saveSubjectInfo } from '../../../../services/subject-list/save-subject';
 import { editSubject } from '../../../../services/subject-list/edit-subject';
 
-// todo: rename to SubjectBuilderActionButtons
-const SubjectInfoActionButtons = (
+const ActionButtons = (
   props: SubjectInfoActionButtonsProps
 ): JSX.Element => {
   return (
     <React.Fragment>
       <Button
+        data-testid={'subject-builder-cancel-button'}
         color={'secondary'}
         onClick={() => {
           props.closeSubjectInfoHandler(props.isEditing);
@@ -87,4 +87,4 @@ const mapDispatchToProps = (
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SubjectInfoActionButtons);
+)(ActionButtons);
