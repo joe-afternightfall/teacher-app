@@ -1,7 +1,7 @@
-import { ThunkAction } from 'redux-thunk';
-import { State } from '../../configs/redux/store';
-import { AnyAction, Dispatch } from 'redux';
 import firebase from 'firebase';
+import { ThunkAction } from 'redux-thunk';
+import { AnyAction, Dispatch } from 'redux';
+import { State } from '../../configs/redux/store';
 import { displayAppSnackbar } from '../../creators/application/app-snackbar';
 
 export const deleteBookmark = (

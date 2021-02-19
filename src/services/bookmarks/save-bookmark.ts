@@ -4,8 +4,8 @@ import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../configs/redux/store';
 import { BookmarkDAO } from '../../configs/models/BookmarkDAO';
-import { displayAppSnackbar } from '../../creators/application/app-snackbar';
 import { clearBookmarkDialog } from '../../creators/bookmarks/bookmarks';
+import { displayAppSnackbar } from '../../creators/application/app-snackbar';
 
 export const saveBookmarkInfo = (): ThunkAction<
   void,

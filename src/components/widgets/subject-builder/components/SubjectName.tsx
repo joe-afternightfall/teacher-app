@@ -38,7 +38,10 @@ const SubjectName = (props: SubjectNameProps) => {
             startAdornment: (
               <InputAdornment position={'start'}>
                 {icon !== undefined ? (
-                  <Avatar style={{ backgroundColor: props.subjectColor }}>
+                  <Avatar
+                    data-testid={'lesson-avatar'}
+                    style={{ backgroundColor: props.subjectColor }}
+                  >
                     {React.createElement(icon)}
                   </Avatar>
                 ) : (

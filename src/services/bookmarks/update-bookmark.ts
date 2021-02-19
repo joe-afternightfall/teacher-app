@@ -1,9 +1,9 @@
-import { ThunkAction } from 'redux-thunk';
-import { State } from '../../configs/redux/store';
-import { AnyAction, Dispatch } from 'redux';
 import firebase from 'firebase';
-import { displayAppSnackbar } from '../../creators/application/app-snackbar';
+import { ThunkAction } from 'redux-thunk';
+import { AnyAction, Dispatch } from 'redux';
+import { State } from '../../configs/redux/store';
 import { Bookmark } from '../../configs/models/Bookmark';
+import { displayAppSnackbar } from '../../creators/application/app-snackbar';
 
 export const updateBookmark = (
   bookmark: Bookmark
