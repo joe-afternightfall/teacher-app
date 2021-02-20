@@ -34,6 +34,9 @@ const SubjectName = (props: SubjectNameProps) => {
           }}
           error={props.subjectNameError}
           helperText={props.subjectNameError ? 'name already exists' : ''}
+          inputProps={{
+            'data-testid': 'subject-name-input',
+          }}
           InputProps={{
             startAdornment: (
               <InputAdornment position={'start'}>

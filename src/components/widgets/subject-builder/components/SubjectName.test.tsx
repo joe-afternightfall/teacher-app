@@ -48,4 +48,26 @@ describe('Subject Name Component', () => {
 
     expect(subjectName.getByTestId('lesson-avatar')).toBeInTheDocument();
   });
+
+  it('should render', () => {
+    const store = getSubjectListStore({
+      subjectNameError: true,
+      subjectName: '',
+      selectedColor: buildColor(1)[0],
+      selectedIconId: 'c9adb6f1-f832-4186-a7db-40cc2cd8706c',
+    });
+
+    const subjectName = renderWithRedux(<SubjectName />, store);
+
+    userEvent.type(subjectName.getByTestId('subject-name-input'), 'typing');
+
+    expect(store.getActions()).toEqual([
+      { subjectName: 't', type: 'UPDATE_SUBJECT_NAME' },
+      { subjectName: 'y', type: 'UPDATE_SUBJECT_NAME' },
+      { subjectName: 'p', type: 'UPDATE_SUBJECT_NAME' },
+      { subjectName: 'i', type: 'UPDATE_SUBJECT_NAME' },
+      { subjectName: 'n', type: 'UPDATE_SUBJECT_NAME' },
+      { subjectName: 'g', type: 'UPDATE_SUBJECT_NAME' },
+    ]);
+  });
 });
