@@ -18,15 +18,16 @@ const PreviewCard = (props: PreviewCardProps) => {
             color: props.selectedColor.secondaryColor,
           }}
           avatar={
-            <Avatar aria-label={'subject-icon'}>
-              {icon !== undefined ? (
-                <Avatar data-testid={`${props.selectedIconId}-icon`}>
-                  {React.createElement(icon)}
-                </Avatar>
-              ) : (
-                <React.Fragment />
-              )}
-            </Avatar>
+            icon !== undefined ? (
+              <Avatar data-testid={`${props.selectedIconId}-icon`}>
+                {React.createElement(icon)}
+              </Avatar>
+            ) : (
+              <Avatar
+                data-testid={'empty-avatar'}
+                aria-label={'subject-icon'}
+              />
+            )
           }
         />
         <CardContent>{'Sample Card Content'}</CardContent>

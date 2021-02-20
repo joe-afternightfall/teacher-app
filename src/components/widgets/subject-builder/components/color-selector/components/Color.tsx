@@ -10,7 +10,10 @@ export default function Color(props: ColorProps): JSX.Element {
       alignItems={'center'}
       style={{ height: '100%' }}
     >
-      <CheckIcon style={{ margin: 'auto', color: props.color }} />
+      <CheckIcon
+        data-testid={`color-box-${props.color}`}
+        style={{ margin: 'auto', color: props.color }}
+      />
     </Grid>
   );
 }
