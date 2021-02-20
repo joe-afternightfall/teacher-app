@@ -17,7 +17,7 @@ import { State } from '../../../configs/redux/store';
 import ActionButtons from './components/ActionButtons';
 import {
   openSubjectBuilderDialog,
-  closeSubjectBuilderDialog
+  closeSubjectBuilderDialog,
 } from '../../../creators/subject-list/subject-builder-dialog';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
@@ -128,4 +128,7 @@ const mapDispatchToProps = (dispatch: Dispatch): SubjectListDialogProps =>
     },
   } as unknown) as SubjectListDialogProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubjectBuilderDialog);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SubjectBuilderDialog);

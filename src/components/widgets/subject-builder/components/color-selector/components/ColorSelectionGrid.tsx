@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
+import Color from './Color';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import CheckIcon from '@material-ui/icons/Check';
 import { Grid, Tooltip } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import {
@@ -33,7 +33,7 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const ColorChoices = (props: ColorChoicesProps) => {
+const ColorSelectionGrid = (props: ColorChoicesProps) => {
   const classes = useStyles();
 
   return (
@@ -58,6 +58,7 @@ const ColorChoices = (props: ColorChoicesProps) => {
               <Grid
                 item
                 xs={3}
+                data-testid={choice.name}
                 className={clsx(classes.colorChoice, {
                   [classes.selected]: selectedColorName === choice.name,
                   [classes.chosen]: found,
@@ -68,28 +69,11 @@ const ColorChoices = (props: ColorChoicesProps) => {
                 onClick={() =>
                   found ? undefined : props.selectColorClickHandler(choice)
                 }
-                data-testid={choice.name}
               >
                 {found ? (
-                  <Grid
-                    container
-                    alignItems={'center'}
-                    justify={'center'}
-                    style={{ height: '100%' }}
-                  >
-                    <CheckIcon style={{ margin: 'auto', color: '#000' }} />
-                  </Grid>
+                  <Color color={'#000'} />
                 ) : (
-                  selectedColorName === choice.name && (
-                    <Grid
-                      container
-                      alignItems={'center'}
-                      justify={'center'}
-                      style={{ height: '100%' }}
-                    >
-                      <CheckIcon style={{ margin: 'auto', color: '#fff' }} />
-                    </Grid>
-                  )
+                  selectedColorName === choice.name && <Color color={'#fff'} />
                 )}
               </Grid>
             </Tooltip>
@@ -125,4 +109,4 @@ const mapDispatchToProps = (dispatch: Dispatch): ColorChoicesProps =>
     },
   } as unknown) as ColorChoicesProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ColorChoices);
+export default connect(mapStateToProps, mapDispatchToProps)(ColorSelectionGrid);
