@@ -80,22 +80,26 @@ describe('Action Buttons Component', () => {
     expect(store.getActions()).toEqual([{ type: 'UPDATING_SUBJECT_INFO' }]);
   });
 
-  // it('should dispatch save', () => {
-  //   const store = getSubjectListStore({
-  //     selectedIconId: uuidv4(),
-  //     selectedColor: {
-  //       id: uuidv4(),
-  //       name: '',
-  //       primaryColor: '',
-  //       secondaryColor: '',
-  //     },
-  //     subjectName: 'subject-name',
-  //     subjectNameError: false,
-  //     editingForm: false,
-  //   });
-  //
-  //   const actionButtons = renderWithRedux(<ActionButtons />, store);
-  //
-  //   actionButtons.getByTestId('subject-builder-save-button').click();
-  // });
+  it('should dispatch save', () => {
+    const store = getSubjectListStore({
+      selectedIconId: uuidv4(),
+      selectedColor: {
+        id: uuidv4(),
+        name: '',
+        primaryColor: '',
+        secondaryColor: '',
+      },
+      subjectName: 'subject-name',
+      subjectNameError: false,
+      editingForm: false,
+    });
+
+    const actionButtons = renderWithRedux(<ActionButtons />, store);
+
+    actionButtons.getByTestId('subject-builder-save-button').click();
+
+    expect(store.getActions()).toStrictEqual([
+      { type: 'UPDATING_SUBJECT_INFO' },
+    ]);
+  });
 });
