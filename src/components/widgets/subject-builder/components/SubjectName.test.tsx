@@ -2,19 +2,22 @@ import React from 'react';
 import SubjectName from './SubjectName';
 import {
   getSubjectListStore,
-  renderWithRedux
+  renderWithRedux,
 } from '../../../../configs/test-utils/mock-redux';
 import { buildColor } from '../../../../configs/test-utils/test-util';
 import userEvent from '@testing-library/user-event';
 
 describe('Subject Name Component', () => {
   it('should render with error text', () => {
-    const subjectName = renderWithRedux(<SubjectName />, getSubjectListStore({
-      subjectNameError: true,
-      subjectName: '',
-      selectedColor: buildColor(1)[0],
-      selectedIconId: ''
-    }));
+    const subjectName = renderWithRedux(
+      <SubjectName />,
+      getSubjectListStore({
+        subjectNameError: true,
+        subjectName: '',
+        selectedColor: buildColor(1)[0],
+        selectedIconId: '',
+      })
+    );
 
     expect(subjectName.getByText('name already exists'));
   });
@@ -24,7 +27,7 @@ describe('Subject Name Component', () => {
       subjectNameError: true,
       subjectName: '',
       selectedColor: buildColor(1)[0],
-      selectedIconId: ''
+      selectedIconId: '',
     });
 
     const subjectName = renderWithRedux(<SubjectName />, store);
@@ -38,7 +41,7 @@ describe('Subject Name Component', () => {
       subjectNameError: true,
       subjectName: '',
       selectedColor: buildColor(1)[0],
-      selectedIconId: 'c9adb6f1-f832-4186-a7db-40cc2cd8706c'
+      selectedIconId: 'c9adb6f1-f832-4186-a7db-40cc2cd8706c',
     });
 
     const subjectName = renderWithRedux(<SubjectName />, store);
