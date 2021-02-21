@@ -15,10 +15,7 @@ import SubjectBuilder from './SubjectBuilder';
 import CloseIcon from '@material-ui/icons/Close';
 import { State } from '../../../configs/redux/store';
 import ActionButtons from './components/ActionButtons';
-import {
-  openSubjectBuilderDialog,
-  closeSubjectBuilderDialog,
-} from '../../../creators/subject-list/subject-builder-dialog';
+import { closeSubjectBuilderDialog } from '../../../creators/subject-list/subject-builder-dialog';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -58,8 +55,9 @@ const SubjectBuilderDialog = (props: SubjectListDialogProps): JSX.Element => {
         {dialogMessage}
         <IconButton
           aria-label={'close'}
-          className={classes.closeButton}
           onClick={toggleDialog}
+          className={classes.closeButton}
+          data-testid={'builder-dialog-close-button'}
         >
           <CloseIcon />
         </IconButton>
@@ -106,7 +104,6 @@ export interface SubjectListDialogProps {
   displayLoader: boolean;
   isEditing: boolean;
   open: boolean;
-  openSubjectInfoHandler: () => void;
   closeSubjectInfoHandler: () => void;
 }
 
@@ -120,9 +117,6 @@ const mapStateToProps = (state: State): SubjectListDialogProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): SubjectListDialogProps =>
   (({
-    openSubjectInfoHandler: () => {
-      dispatch(openSubjectBuilderDialog());
-    },
     closeSubjectInfoHandler: () => {
       dispatch(closeSubjectBuilderDialog());
     },
