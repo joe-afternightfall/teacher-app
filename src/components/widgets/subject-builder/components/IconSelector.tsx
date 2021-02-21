@@ -117,7 +117,6 @@ const mapStateToProps = (state: State): IconSelectorProps => {
 const mapDispatchToProps = (dispatch: Dispatch): IconSelectorProps =>
   (({
     selectIconHandler: (iconId: string) => {
-      // todo: test me
       dispatch(selectIcon(iconId));
     },
   } as unknown) as IconSelectorProps);
