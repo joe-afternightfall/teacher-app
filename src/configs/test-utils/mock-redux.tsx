@@ -41,7 +41,10 @@ export async function renderAsyncWithRedux(
 
 export const initialState = {
   applicationState: {},
-  subjectListState: {},
+  templateBuilderState: {},
+  subjectListState: {
+    subjectList: buildSubjectList(4),
+  },
 };
 
 export function getStore(state: any): MockStore {
@@ -78,6 +81,13 @@ export function getSubjectListStore(state: any): MockStore {
   return createStore(middleware)({
     ...initialState,
     subjectListState: { ...initialState.subjectListState, ...state },
+  });
+}
+
+export function getTemplateBuilderStore(state: any): MockStore {
+  return createStore(middleware)({
+    ...initialState,
+    templateBuilderState: { ...initialState.templateBuilderState, ...state },
   });
 }
 

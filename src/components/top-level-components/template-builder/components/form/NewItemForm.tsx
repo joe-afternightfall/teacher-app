@@ -43,13 +43,14 @@ const NewItemForm = (props: TemplateBuilderFormProps): JSX.Element => {
             props.lessonType === 'other' ? (
               <TextField
                 fullWidth
-                id={'activity-field'}
                 label={'Other'}
                 inputProps={{
                   name: 'activity',
+                  'data-testid': 'activity-textfield',
                 }}
-                value={props.otherLessonTypeName}
                 onChange={handleChange}
+                data-testid={'activity-field'}
+                value={props.otherLessonTypeName}
               />
             ) : (
               <SubjectDropdown
