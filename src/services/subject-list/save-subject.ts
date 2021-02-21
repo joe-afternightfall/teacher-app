@@ -20,11 +20,10 @@ export const saveSubjectInfo = (): ThunkAction<
   void,
   AnyAction
 > => async (dispatch: Dispatch, getState: () => State): Promise<void> => {
+  dispatch(updatingSubjectInfo());
   const listState = getState().subjectListState;
   const subjectListRef = firebase.database().ref('/subjects');
   const newSubjectRef = subjectListRef.push();
-
-  dispatch(updatingSubjectInfo());
 
   const subjectDAO = new SubjectDAO(
     uuidv4(),

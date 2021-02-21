@@ -35,8 +35,12 @@ const IconSelector = (props: IconSelectorProps) => {
               style={{
                 textAlign: 'center',
               }}
+              data-testid={`icon-${icon.id}`}
               onMouseLeave={handleHover('')}
               onMouseEnter={handleHover(icon.id)}
+              onClick={() =>
+                found ? undefined : props.selectIconHandler(icon.id)
+              }
             >
               {isHovering === icon.id ? (
                 <Paper
@@ -45,29 +49,38 @@ const IconSelector = (props: IconSelectorProps) => {
                     width: '100%',
                     cursor: 'pointer',
                   }}
-                  onClick={() =>
-                    found ? undefined : props.selectIconHandler(icon.id)
-                  }
+                  data-testid={`hovering-${icon.id}`}
                 >
                   {found ? (
-                    <Tooltip title={'Taken'} placement={'top'}>
+                    <Tooltip
+                      title={'Taken'}
+                      placement={'top'}
+                      data-testid={'taken-tooltip'}
+                    >
                       <Grid container alignItems={'center'} justify={'center'}>
                         <Grid item>{React.createElement(icon.icon)}</Grid>
                       </Grid>
                     </Tooltip>
                   ) : (
-                    <Grid container alignItems={'center'} justify={'center'}>
+                    <Grid
+                      data-testid={`no-tooltip-${icon.id}`}
+                      container
+                      alignItems={'center'}
+                      justify={'center'}
+                    >
                       <Grid item>{React.createElement(icon.icon)}</Grid>
                     </Grid>
                   )}
                 </Paper>
               ) : props.selectedIconId === icon.id ? (
-                <Paper elevation={3}>{React.createElement(icon.icon)}</Paper>
+                <Paper data-testid={`selected-${icon.name}`} elevation={3}>
+                  {React.createElement(icon.icon)}
+                </Paper>
               ) : found ? (
                 <Paper
-                  style={{ opacity: 0.5 }}
                   elevation={3}
-                  data-testid={icon.name}
+                  style={{ opacity: 0.5 }}
+                  data-testid={`found-${icon.name}`}
                 >
                   {React.createElement(icon.icon)}
                 </Paper>

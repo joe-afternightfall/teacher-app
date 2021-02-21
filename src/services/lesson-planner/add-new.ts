@@ -1,12 +1,12 @@
+import firebase from 'firebase';
+import { v4 as uuidv4 } from 'uuid';
+import { startOfWeek } from 'date-fns';
 import { ThunkAction } from 'redux-thunk';
 import { AnyAction, Dispatch } from 'redux';
-import firebase from 'firebase';
 import { State } from '../../configs/redux/store';
 import { LessonPlannerDAO } from '../../configs/models/LessonPlannerDAO';
-import { v4 as uuidv4 } from 'uuid';
 import { displayAppSnackbar } from '../../creators/application/app-snackbar';
 import { clearNewPlannerInfo } from '../../creators/lesson-planner/add-new';
-import { startOfWeek } from 'date-fns';
 
 function addDays(startDate: string, days: number): string {
   const date = startOfWeek(new Date(startDate));

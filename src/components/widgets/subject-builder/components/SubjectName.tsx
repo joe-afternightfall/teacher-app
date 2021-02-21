@@ -34,11 +34,17 @@ const SubjectName = (props: SubjectNameProps) => {
           }}
           error={props.subjectNameError}
           helperText={props.subjectNameError ? 'name already exists' : ''}
+          inputProps={{
+            'data-testid': 'subject-name-input',
+          }}
           InputProps={{
             startAdornment: (
               <InputAdornment position={'start'}>
                 {icon !== undefined ? (
-                  <Avatar style={{ backgroundColor: props.subjectColor }}>
+                  <Avatar
+                    data-testid={'lesson-avatar'}
+                    style={{ backgroundColor: props.subjectColor }}
+                  >
                     {React.createElement(icon)}
                   </Avatar>
                 ) : (

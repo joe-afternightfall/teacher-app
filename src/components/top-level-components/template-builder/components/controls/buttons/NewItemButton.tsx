@@ -10,20 +10,20 @@ import { displayAppDialog } from '../../../../../../creators/application/app-dia
 import { saveNewTemplate } from '../../../../../../services/template-builder/save-new-template';
 import { updateTemplate } from '../../../../../../services/template-builder/update-template-builder';
 
-const FABNewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
-  return (
-    <Tooltip title={'Add New'}>
-      <Fab
-        color={'primary'}
-        onClick={() => {
-          props.displayAppDialogHandler(<NewItemForm />, props.isNewTemplate);
-        }}
-      >
-        <AddIcon />
-      </Fab>
-    </Tooltip>
-  );
-};
+// const FABNewTemplateButton = (props: NewTemplateButtonProps): JSX.Element => {
+//   return (
+//     <Tooltip title={'Add New'}>
+//       <Fab
+//         color={'primary'}
+//         onClick={() => {
+//           props.displayAppDialogHandler(<NewItemForm />, props.isNewTemplate);
+//         }}
+//       >
+//         <AddIcon />
+//       </Fab>
+//     </Tooltip>
+//   );
+// };
 
 const NewItemButton = (props: NewTemplateButtonProps): JSX.Element => {
   return (
@@ -32,7 +32,7 @@ const NewItemButton = (props: NewTemplateButtonProps): JSX.Element => {
       variant={'contained'}
       startIcon={<AddIcon />}
       onClick={() => {
-        props.displayAppDialogHandler(<NewItemForm />, props.isNewTemplate);
+        props.displayAppDialogHandler(props.isNewTemplate);
       }}
       data-testid={'new-template-builder-item-button'}
     >
@@ -42,10 +42,7 @@ const NewItemButton = (props: NewTemplateButtonProps): JSX.Element => {
 };
 
 export interface NewTemplateButtonProps {
-  displayAppDialogHandler: (
-    content: JSX.Element,
-    isNewTemplate: boolean
-  ) => void;
+  displayAppDialogHandler: (isNewTemplate: boolean) => void;
   isNewTemplate: boolean;
 }
 
@@ -57,12 +54,12 @@ const mapStateToProps = (state: State): NewTemplateButtonProps => {
 
 const mapDispatchToProps = (dispatch: Dispatch): NewTemplateButtonProps =>
   (({
-    displayAppDialogHandler: (content: JSX.Element, isNewTemplate: boolean) => {
+    displayAppDialogHandler: (isNewTemplate: boolean) => {
       dispatch(
         displayAppDialog({
           maxWidth: 'sm',
           titleColor: '#3baafc',
-          content: content,
+          content: <NewItemForm />,
           title: 'Add Item to Template',
           confirmButtonTitle: 'Save',
           confirmClickHandler: async () => {
