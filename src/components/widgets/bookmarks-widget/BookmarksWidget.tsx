@@ -50,74 +50,72 @@ const BookmarksWidget = (props: BookmarksWidgetProps): JSX.Element => {
   }, {});
 
   return (
-    <React.Fragment>
-      <MaterialTable
-        data={data}
-        data-testid={'bookmarks-widget'}
-        title={<PageTitle title={'Bookmarks'} />}
-        options={{
-          pageSize: 6,
-          draggable: false,
-          pageSizeOptions: [6, 12, 18],
-          actionsColumnIndex: -1,
-        }}
-        editable={{
-          onRowUpdate: (newData): Promise<void> =>
-            new Promise((resolve) => {
-              props.updateClickHandler(newData.bookmark);
-              setTimeout(() => {
-                resolve();
-              }, 1000);
-            }),
-          onRowDelete: (newData): Promise<void> =>
-            new Promise((resolve) => {
-              props.deleteClickHandler(newData.bookmark.firebaseId);
-              setTimeout(() => {
-                resolve();
-              }, 1500);
-            }),
-        }}
-        columns={[
-          {
-            title: '#',
-            field: 'number',
-            editable: 'never',
-            cellStyle: {
-              width: '10%',
-            },
+    <MaterialTable
+      data={data}
+      data-testid={'bookmarks-widget'}
+      title={<PageTitle title={'Bookmarks'} />}
+      options={{
+        pageSize: 6,
+        draggable: false,
+        pageSizeOptions: [6, 12, 18],
+        actionsColumnIndex: -1,
+      }}
+      editable={{
+        onRowUpdate: (newData): Promise<void> =>
+          new Promise((resolve) => {
+            props.updateClickHandler(newData.bookmark);
+            setTimeout(() => {
+              resolve();
+            }, 1000);
+          }),
+        onRowDelete: (newData): Promise<void> =>
+          new Promise((resolve) => {
+            props.deleteClickHandler(newData.bookmark.firebaseId);
+            setTimeout(() => {
+              resolve();
+            }, 1500);
+          }),
+      }}
+      columns={[
+        {
+          title: '#',
+          field: 'number',
+          editable: 'never',
+          cellStyle: {
+            width: '10%',
           },
-          {
-            title: 'Title',
-            field: 'bookmark.bookmarkTitle',
-            cellStyle: {
-              width: '20%',
-            },
+        },
+        {
+          title: 'Title',
+          field: 'bookmark.bookmarkTitle',
+          cellStyle: {
+            width: '20%',
           },
-          {
-            title: 'URL',
-            render: getLink,
-            field: 'bookmark.bookmarkUrl',
-            editComponent: editField,
+        },
+        {
+          title: 'URL',
+          render: getLink,
+          field: 'bookmark.bookmarkUrl',
+          editComponent: editField,
+        },
+        {
+          title: 'Subject',
+          field: 'bookmark.subjectId',
+          lookup: subjects,
+          cellStyle: {
+            width: '20%',
           },
-          {
-            title: 'Subject',
-            field: 'bookmark.subjectId',
-            lookup: subjects,
-            cellStyle: {
-              width: '20%',
-            },
-          },
-        ]}
-        actions={[
-          {
-            icon: 'add',
-            tooltip: 'Add Bookmark',
-            isFreeAction: true,
-            onClick: () => props.addNewClickHandler(),
-          },
-        ]}
-      />
-    </React.Fragment>
+        },
+      ]}
+      actions={[
+        {
+          icon: 'add',
+          tooltip: 'Add Bookmark',
+          isFreeAction: true,
+          onClick: () => props.addNewClickHandler(),
+        },
+      ]}
+    />
   );
 };
 
