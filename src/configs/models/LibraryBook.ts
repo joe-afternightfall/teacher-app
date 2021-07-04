@@ -14,15 +14,7 @@ export class LibraryBook extends LibraryBookDAO {
     gradeLevel: number,
     pages: number
   ) {
-    super(
-      id,
-      isbn,
-      title,
-      genre,
-      author,
-      gradeLevel,
-      pages
-    );
+    super(id, isbn, title, genre, author, gradeLevel, pages);
 
     this.firebaseId = firebaseId;
   }
