@@ -3,6 +3,7 @@ import {
   DashboardRounded as DashboardIcon,
   Edit as EditIcon,
   StarBorder,
+  LocalLibrary as LibraryIcon,
 } from '@material-ui/icons';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { SvgIconTypeMap } from '@material-ui/core';
@@ -17,7 +18,14 @@ export interface RouteProp {
 
 // export type Route = 'DASHBOARD' | 'LESSON_PLANNER' | 'TEMPLATE_BUILDER' | 'BOOKMARKS';
 
-export type RoutesMap = { [key: string]: RouteProp };
+export type RoutesMap = {
+  [key: string]: RouteProp;
+  DASHBOARD: RouteProp;
+  LESSON_PLANNER: RouteProp;
+  BOOKMARKS: RouteProp;
+  TEMPLATE_BUILDER: RouteProp;
+  LIBRARY: RouteProp;
+};
 
 export const routes: RoutesMap = {
   DASHBOARD: {
@@ -47,5 +55,12 @@ export const routes: RoutesMap = {
     headerTitle: 'My Bookmarks List',
     icon: BookmarkIcon,
     testId: 'bookmarks-nav',
+  },
+  LIBRARY: {
+    path: '/classroom-library',
+    drawerTitle: 'Classroom Library',
+    headerTitle: 'Classroom Library',
+    icon: LibraryIcon,
+    testId: 'library-nav',
   },
 };
