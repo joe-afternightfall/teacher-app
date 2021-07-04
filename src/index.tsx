@@ -11,10 +11,6 @@ import { createStore } from './configs/redux/store';
 import { Initializer } from './firebase/Initializer';
 import { ConnectedRouter } from 'connected-react-router';
 import * as serviceWorker from './configs/service-worker';
-import BookmarksScreen from './components/top-level-components/BookmarksScreen';
-import LessonPlannerScreen from './components/top-level-components/LessonPlannerScreen';
-import DashboardScreen from './components/top-level-components/dashboard/DashboardScreen';
-import TemplateBuilderScreen from './components/top-level-components/template-builder/TemplateBuilderScreen';
 
 LogRocket.init('be9sx9/teacher-app');
 setupLogRocketReact(LogRocket);
@@ -40,26 +36,16 @@ ReactDOM.render(
       <ConnectedRouter history={history}>
         <App>
           <div className={'route'}>
-            <Route
-              component={DashboardScreen}
-              exact
-              path={routes.DASHBOARD.path}
-            />
-            <Route
-              component={LessonPlannerScreen}
-              exact
-              path={routes.LESSON_PLANNER.path}
-            />
-            <Route
-              component={TemplateBuilderScreen}
-              exact
-              path={routes.TEMPLATE_BUILDER.path}
-            />
-            <Route
-              component={BookmarksScreen}
-              exact
-              path={routes.BOOKMARKS.path}
-            />
+            {Object.keys(routes).map((value: string, index: number) => {
+              return (
+                <Route
+                  key={index}
+                  component={routes[value].routerComponent}
+                  exact
+                  path={routes[value].path}
+                />
+              );
+            })}
           </div>
         </App>
       </ConnectedRouter>
