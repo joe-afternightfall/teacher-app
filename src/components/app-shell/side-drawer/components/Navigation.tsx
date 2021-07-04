@@ -17,9 +17,6 @@ const useStyles = makeStyles((theme: Theme) =>
       maxWidth: 360,
       backgroundColor: theme.palette.background.paper,
     },
-    iconButton: {
-      color: theme.palette.primary.contrastText,
-    },
   })
 );
 
@@ -45,41 +42,19 @@ const Navigation = (props: NavigationProps): JSX.Element => {
       className={classes.root}
       aria-labelledby={'nested-list-subheader'}
     >
-      <NavListItem
-        displayText={shouldDisplayText}
-        pageInfo={routes.DASHBOARD}
-        activePath={props.activePage.path}
-        clickHandler={() => {
-          closeAndRoute(routes.DASHBOARD.path);
-        }}
-      />
-
-      <NavListItem
-        displayText={shouldDisplayText}
-        pageInfo={routes.BOOKMARKS}
-        activePath={props.activePage.path}
-        clickHandler={() => {
-          closeAndRoute(routes.BOOKMARKS.path);
-        }}
-      />
-
-      <NavListItem
-        displayText={shouldDisplayText}
-        activePath={props.activePage.path}
-        pageInfo={routes.LESSON_PLANNER}
-        clickHandler={() => {
-          closeAndRoute(routes.LESSON_PLANNER.path);
-        }}
-      />
-
-      <NavListItem
-        displayText={shouldDisplayText}
-        activePath={props.activePage.path}
-        pageInfo={routes.TEMPLATE_BUILDER}
-        clickHandler={() => {
-          closeAndRoute(routes.TEMPLATE_BUILDER.path);
-        }}
-      />
+      {Object.keys(routes).map((value: string, index: number) => {
+        return (
+          <NavListItem
+            key={index}
+            displayText={shouldDisplayText}
+            activePath={props.activePage.path}
+            pageInfo={routes[value]}
+            clickHandler={() => {
+              closeAndRoute(routes[value].path);
+            }}
+          />
+        );
+      })}
     </List>
   );
 };
