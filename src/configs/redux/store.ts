@@ -5,6 +5,7 @@ import {
   createStore as originalCreateStore,
 } from 'redux';
 import { History } from 'history';
+import LogRocket from 'logrocket';
 import thunkMiddleware from 'redux-thunk';
 import { routerReducer } from 'react-router-redux';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
@@ -20,8 +21,8 @@ import templateBuilderState, {
   TemplateBuilderState,
 } from '../../reducers/template-builder';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import LogRocket from 'logrocket';
 import { FULL_DRAWER_WIDTH } from '../constants/drawer-size';
+import libraryBookState, { LibraryBookState } from '../../reducers/library';
 
 export const createStore = (history: History): Store => {
   const createStoreFunc = applyMiddleware(
@@ -35,6 +36,7 @@ export const createStore = (history: History): Store => {
       subjectListState: subjectListState.reducer,
       bookmarksState: bookmarksState.reducer,
       templateBuilderState: templateBuilderState.reducer,
+      libraryBookState: libraryBookState.reducer,
       router: connectRouter(history),
       routing: routerReducer,
     });
@@ -75,6 +77,9 @@ export const createStore = (history: History): Store => {
       selectedDays: [],
       boardChanged: false,
     } as unknown) as TemplateBuilderState,
+    libraryBookState: ({
+      books: [],
+    } as unknown) as LibraryBookState,
   });
 };
 
@@ -84,4 +89,5 @@ export interface State {
   subjectListState: SubjectListState;
   bookmarksState: BookmarksState;
   templateBuilderState: TemplateBuilderState;
+  libraryBookState: LibraryBookState;
 }
