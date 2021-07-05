@@ -7,17 +7,16 @@ import {
 import React, { Component } from 'react';
 import { Styles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
+import LibraryWidget from './LibraryWidget';
 
 const styles: Styles<Theme, StyledComponentProps> = () => ({});
 
 class LibraryScreen extends Component<LibraryScreenProps> {
   render(): JSX.Element {
-    const { classes } = this.props;
-
     return (
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          {'LIBRARY SCREEN'}
+          <LibraryWidget />
         </Grid>
       </Grid>
     );
