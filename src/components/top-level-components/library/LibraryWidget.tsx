@@ -127,7 +127,8 @@ const mapDispatchToProps = (dispatch: Dispatch): LibraryWidgetProps =>
       );
     },
     deleteClickHandler: (id: string) => {
-      (dispatch as ThunkDispatch<State, void, AnyAction>)(deleteBookmark(id));
+      // todo: create delete handler
+      // (dispatch as ThunkDispatch<State, void, AnyAction>)(deleteBookmark(id));
     },
   } as unknown) as LibraryWidgetProps);
 
