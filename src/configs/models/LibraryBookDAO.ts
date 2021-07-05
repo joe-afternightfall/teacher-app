@@ -4,8 +4,8 @@ export class LibraryBookDAO {
   title: string;
   genre: string;
   author: string;
-  gradeLevel: number;
-  pages: number;
+  gradeLevel: number | undefined;
+  pages: number | undefined;
 
   constructor(
     id: string,
@@ -13,8 +13,8 @@ export class LibraryBookDAO {
     title: string,
     genre: string,
     author: string,
-    gradeLevel: number,
-    pages: number
+    gradeLevel: number | undefined,
+    pages: number | undefined
   ) {
     this.id = id;
     this.isbn = isbn;

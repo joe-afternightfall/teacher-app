@@ -4,14 +4,27 @@ import { LibraryBook } from '../configs/models/LibraryBook';
 
 export default {
   reducer(
-    state: LibraryState = ({} as unknown) as LibraryState,
+    state: LibraryBookState = ({} as unknown) as LibraryBookState,
     action: AnyAction
-  ): LibraryState {
+  ): LibraryBookState {
     let newState = Object.assign({}, state);
 
     switch (action.type) {
       case actions.INITIALIZE:
-        newState.libraryBooks = action.libraryBooks;
+        newState.books = action.libraryBooks;
+        newState.currentBook = {
+          firebaseId: '',
+          id: '',
+          isbn: '',
+          title: '',
+          genre: '',
+          author: '',
+          gradeLevel: 0,
+          pages: 9,
+        };
+        break;
+      case actions.UPDATE_CURRENT_BOOK:
+        newState.currentBook = action.book;
         break;
       default:
         newState = state;
@@ -21,6 +34,7 @@ export default {
   },
 };
 
-export interface LibraryState {
-  libraryBooks: LibraryBook[];
+export interface LibraryBookState {
+  books: LibraryBook[];
+  currentBook: LibraryBook;
 }

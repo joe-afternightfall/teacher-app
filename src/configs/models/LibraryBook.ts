@@ -2,7 +2,7 @@ import { LibraryBookDAO } from './LibraryBookDAO';
 
 export class LibraryBook extends LibraryBookDAO {
   firebaseId: string;
-  [key: string]: string | number;
+  [key: string]: string | number | undefined;
 
   constructor(
     firebaseId: string,
@@ -11,8 +11,8 @@ export class LibraryBook extends LibraryBookDAO {
     title: string,
     genre: string,
     author: string,
-    gradeLevel: number,
-    pages: number
+    gradeLevel: number | undefined,
+    pages: number | undefined
   ) {
     super(id, isbn, title, genre, author, gradeLevel, pages);
 
