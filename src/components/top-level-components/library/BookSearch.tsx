@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Button, Grid, TextField, Typography } from '@material-ui/core';
+import React, { useState } from 'react';
+import { AnyAction, Dispatch } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { State } from '../../../configs/redux/store';
+import { Button, Grid, TextField } from '@material-ui/core';
+import { searchISBN } from '../../../services/library/isbn-search';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {},
   })
@@ -39,11 +42,11 @@ const BookSearch = (props: BookSearchProps): JSX.Element => {
       <Grid item xs={4} container justify={'center'}>
         <Grid item>
           <Button
-            color={'primary'}
             variant={'contained'}
             onClick={() => {
               props.searchHandler(book);
             }}
+            disabled={book.length === 0}
           >
             {'Search'}
           </Button>
@@ -64,15 +67,7 @@ const mapStateToProps = (state: any): BookSearchProps => {
 const mapDispatchToProps = (dispatch: Dispatch): BookSearchProps =>
   (({
     searchHandler: (isbn: string) => {
-      fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=isbn:${encodeURIComponent(
-          isbn
-        )}`
-      )
-        .then((response) => response.json())
-        .then((responseData) => {
-          console.log('responseData: ' + JSON.stringify(responseData));
-        });
+      (dispatch as ThunkDispatch<State, void, AnyAction>)(searchISBN(isbn));
     },
   } as unknown) as BookSearchProps);
 
