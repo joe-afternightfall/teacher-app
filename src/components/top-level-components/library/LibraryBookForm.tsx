@@ -6,6 +6,8 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { State } from '../../../configs/redux/store';
 import { LibraryBook } from '../../../configs/models/LibraryBook';
 import { updateBookInfo } from '../../../creators/library-books/update-book-info';
+import BookSearch from './BookSearch';
+import { capitalizeAndSplitString } from '../../../utils/string-formatter';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -67,8 +69,8 @@ const LibraryBookForm = (props: LibraryBookFormProps): JSX.Element => {
       alignItems={'center'}
       style={{ margin: '24px 0' }}
     >
-      <Grid item>
-        <Typography variant={'h6'}>{'Library Book Information'}</Typography>
+      <Grid item xs={12}>
+        <BookSearch />
       </Grid>
 
       <form>
@@ -79,7 +81,7 @@ const LibraryBookForm = (props: LibraryBookFormProps): JSX.Element => {
                 <TextField
                   fullWidth
                   name={field}
-                  label={field}
+                  label={capitalizeAndSplitString(field)}
                   margin={'normal'}
                   data-testid={`book-${field}`}
                   value={state[field]}
