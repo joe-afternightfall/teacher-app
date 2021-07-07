@@ -37,16 +37,16 @@ describe('Side Drawer App Bar', () => {
     expect(logoHandler).toBeCalledTimes(1);
   });
 
-  // it('should not call click handler', () => {
-  //   const appBar = render(
-  //     <SideDrawerAppBar
-  //       logoClickHandler={undefined}
-  //       drawerSize={MIN_DRAWER_WIDTH}
-  //     />);
-  //
-  //   appBar.getByTestId('logo-button').click();
-  //   expect(appBar.getByAltText('min-logo')).toBeInTheDocument();
-  // });
+  it('should not call click handler', () => {
+    const appBar = render(
+      <SideDrawerAppBar
+        logoClickHandler={undefined}
+        drawerSize={MIN_DRAWER_WIDTH}
+      />);
+
+    expect(appBar.queryByTestId('logo-button')).not.toBeInTheDocument();
+    expect(appBar.queryByTestId('min-logo')).not.toBeInTheDocument();
+  });
 
   it('should render without', () => {
     const appBar = render(<SideDrawerAppBar />);
