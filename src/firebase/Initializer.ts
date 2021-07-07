@@ -6,6 +6,7 @@ import {
   updateLessonPlanners,
   updateTemplateBuilder,
 } from './update-methods/lesson-planner';
+import { updateLibraryBooks } from './update-methods/library';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -33,6 +34,7 @@ export class Initializer {
     const bookmarksRef = firebase.database().ref('/bookmarks');
     const templateBuilderRef = firebase.database().ref('/template-builder');
     const plannerRef = firebase.database().ref('/lesson-planners');
+    const libraryBooks = firebase.database().ref('/library/books');
 
     bookmarksRef.on('child_added', async () => {
       await updateBookmarks(this.store);
@@ -80,6 +82,18 @@ export class Initializer {
 
     plannerRef.on('child_removed', async () => {
       await updateLessonPlanners(this.store);
+    });
+
+    libraryBooks.on('child_added', async () => {
+      await updateLibraryBooks(this.store);
+    });
+
+    libraryBooks.on('child_changed', async () => {
+      await updateLibraryBooks(this.store);
+    });
+
+    libraryBooks.on('child_removed', async () => {
+      await updateLibraryBooks(this.store);
     });
   }
 }
