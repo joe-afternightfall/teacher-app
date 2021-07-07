@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { Grid, TextField, Typography } from '@material-ui/core';
+import { CircularProgress, Grid } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { State } from '../../../configs/redux/store';
 import { LibraryBook } from '../../../configs/models/LibraryBook';
-import { updateBookInfo } from '../../../creators/library-books/update-book-info';
+import { updateBookInfo } from '../../../creators/library-books/book-info';
 import BookSearch from './BookSearch';
-import { capitalizeAndSplitString } from '../../../utils/string-formatter';
+import BookInfo from './BookInfo';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface BookFormState {
+export interface BookFormState {
   [key: string]: string | undefined | number;
   firebaseId: string;
   id: string;
@@ -29,6 +29,7 @@ interface BookFormState {
 
 const LibraryBookForm = (props: LibraryBookFormProps): JSX.Element => {
   const classes = useStyles();
+  const [display, setDisplay] = useState<boolean>(false);
 
   const [state, setState] = useState<BookFormState>({
     firebaseId: props.book ? props.book.firebaseId : '',
@@ -40,6 +41,11 @@ const LibraryBookForm = (props: LibraryBookFormProps): JSX.Element => {
     pages: props.book ? props.book.pages : undefined,
     isbn: props.book ? props.book.isbn : '',
   });
+
+  useEffect(() => {
+    setDisplay(props.displayLoader);
+    setState(props.book);
+  }, [props.displayLoader, props.book]);
 
   const fieldsToRender = [
     'title',
@@ -74,24 +80,24 @@ const LibraryBookForm = (props: LibraryBookFormProps): JSX.Element => {
       </Grid>
 
       <form>
-        <Grid container spacing={2}>
-          {fieldsToRender.map((field: string, index: number) => {
-            return (
-              <Grid item xs={6} key={index}>
-                <TextField
-                  fullWidth
-                  name={field}
-                  label={capitalizeAndSplitString(field)}
-                  margin={'normal'}
-                  data-testid={`book-${field}`}
-                  value={state[field]}
-                  onChange={handleChange}
-                  style={{ marginBottom: 0 }}
-                  onBlur={handleBlur}
-                />
-              </Grid>
-            );
-          })}
+        <Grid
+          container
+          alignItems={'center'}
+          spacing={2}
+          style={{ minHeight: '40vh' }}
+        >
+          {display ? (
+            <Grid item>
+              <CircularProgress />
+            </Grid>
+          ) : (
+            <BookInfo
+              info={state}
+              fieldsToRender={fieldsToRender}
+              blurHandler={handleBlur}
+              changeHandler={handleChange}
+            />
+          )}
         </Grid>
       </form>
     </Grid>
@@ -101,11 +107,15 @@ const LibraryBookForm = (props: LibraryBookFormProps): JSX.Element => {
 export interface LibraryBookFormProps {
   book: LibraryBook;
   blurHandler: (book: LibraryBook) => void;
+  displayLoader: boolean;
+  bookInfoError: boolean;
 }
 
 const mapStateToProps = (state: State): LibraryBookFormProps => {
   return ({
     book: state.libraryBookState.currentBook,
+    displayLoader: state.libraryBookState.displaySearchingLoader,
+    bookInfoError: state.libraryBookState.bookInfoError,
   } as unknown) as LibraryBookFormProps;
 };
 

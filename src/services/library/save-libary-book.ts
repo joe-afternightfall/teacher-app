@@ -5,6 +5,7 @@ import { AnyAction, Dispatch } from 'redux';
 import { State } from '../../configs/redux/store';
 import { LibraryBookDAO } from '../../configs/models/LibraryBookDAO';
 import { displayAppSnackbar } from '../../creators/application/app-snackbar';
+import { clearBookForm } from '../../creators/library-books/book-info';
 
 export const saveLibraryBookInfo = (): ThunkAction<
   void,
@@ -23,7 +24,7 @@ export const saveLibraryBookInfo = (): ThunkAction<
     currentBook.title,
     currentBook.genre,
     currentBook.author,
-    currentBook.gradeLevel,
+    0,
     currentBook.pages
   );
 
@@ -51,8 +52,7 @@ export const saveLibraryBookInfo = (): ThunkAction<
         })
       );
       setTimeout(() => {
-        // todo: create clear book dialog
-        // dispatch(clearBookmarkDialog());
+        dispatch(clearBookForm());
       }, 500);
     }
   });
