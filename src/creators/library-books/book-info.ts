@@ -8,3 +8,16 @@ export const updateBookInfo = (book: LibraryBook): AnyAction => {
     book: book,
   };
 };
+
+export const clearBookForm = () => {
+  return {
+    type: actions.CLEAR_BOOK_INFO,
+  };
+};
+
+export const loadLibraryBooks = (books: LibraryBook[]) => {
+  return {
+    type: actions.LOAD_LIBRARY_BOOKS,
+    books: books,
+  };
+};
