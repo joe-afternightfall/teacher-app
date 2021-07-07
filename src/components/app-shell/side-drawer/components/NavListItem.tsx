@@ -41,7 +41,10 @@ export function NavListItem(props: NavListItemProps): JSX.Element {
         {React.createElement(props.pageInfo.icon)}
       </ListItemIcon>
       {props.displayText ? (
-        <ListItemText primary={props.pageInfo.drawerTitle} />
+        <ListItemText
+          data-testid={`list-item-${props.pageInfo.testId}`}
+          primary={props.pageInfo.drawerTitle}
+        />
       ) : undefined}
     </ListItem>
   );
