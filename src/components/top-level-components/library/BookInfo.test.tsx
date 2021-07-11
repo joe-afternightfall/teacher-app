@@ -5,20 +5,19 @@ import { chance, getChance } from 'jest-chance';
 
 describe('Book Info Component', () => {
   it('should render 2 text fields', () => {
-
-    let title = chance.string();
-    let author = chance.string();
+    const title = chance.string();
+    const author = chance.string();
 
     const info = {
       firebaseId: chance.string(),
-    id: chance.string(),
-    title: title,
-    author: author,
-    genre: chance.string(),
-    gradeLevel: chance.integer(),
-    pages: chance.integer(),
-    isbn: chance.string(),
-  };
+      id: chance.string(),
+      title: title,
+      author: author,
+      genre: chance.string(),
+      gradeLevel: chance.integer(),
+      pages: chance.integer(),
+      isbn: chance.string(),
+    };
 
     const bookInfo = render(
       <BookInfo
@@ -27,7 +26,7 @@ describe('Book Info Component', () => {
         blurHandler={jest.fn()}
         changeHandler={jest.fn()}
       />
-      );
+    );
 
     const titleInput = bookInfo.getByDisplayValue(title) as HTMLInputElement;
     const authorInput = bookInfo.getByDisplayValue(author) as HTMLInputElement;

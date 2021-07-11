@@ -1,10 +1,12 @@
 import React from 'react';
-import { getStore, renderWithRedux } from '../../../configs/test-utils/mock-redux';
-import BookSearch from './BookSearch';
-import userEvent from '@testing-library/user-event';
-import actions from '../../../creators/actions';
-import { searchISBN } from '../../../services/library/isbn-search';
 import { chance } from 'jest-chance';
+import BookSearch from './BookSearch';
+import {
+  getStore,
+  renderWithRedux,
+} from '../../../configs/test-utils/mock-redux';
+import userEvent from '@testing-library/user-event';
+import { searchISBN } from '../../../services/library/isbn-search';
 
 jest.mock('../../../services/library/isbn-search');
 
