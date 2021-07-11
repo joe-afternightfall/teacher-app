@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { LessonItem } from '../models/LessonItem';
 import { ColorChoice } from '../theme/subject-color-choices';
 import { LessonPlanner } from '../models/LessonPlanner';
@@ -7,6 +6,8 @@ import { Bookmark } from '../models/Bookmark';
 import { BookmarkDAO } from '../models/BookmarkDAO';
 import { LessonPlannerDAO } from '../models/LessonPlannerDAO';
 import { SubjectDAO } from '../models/SubjectDAO';
+import { chance } from 'jest-chance';
+import { LibraryBook } from '../models/LibraryBook';
 
 export const buildLessonItems = (items: number): LessonItem[] => {
   let index = 0;
@@ -96,13 +97,13 @@ export const buildSubjectList = (amount: number): Subject[] => {
     index += 1;
 
     builtList.push({
-      firebaseId: uuidv4(),
+      firebaseId: chance.string(),
       id: `id-${index}`,
       subjectName: `subject-name-${index}`,
-      primaryColorId: uuidv4(),
-      primaryColor: uuidv4(),
-      secondaryColor: uuidv4(),
-      iconId: uuidv4(),
+      primaryColorId: chance.string(),
+      primaryColor: chance.string(),
+      secondaryColor: chance.string(),
+      iconId: chance.string(),
     });
   }
 
@@ -120,10 +121,10 @@ export const buildSubjectDAOList = (amount: number): SubjectDAO[] => {
     builtList.push({
       id: `id-${index}`,
       subjectName: `subject-name-${index}`,
-      primaryColorId: uuidv4(),
-      primaryColor: uuidv4(),
-      secondaryColor: uuidv4(),
-      iconId: uuidv4(),
+      primaryColorId: chance.string(),
+      primaryColor: chance.string(),
+      secondaryColor: chance.string(),
+      iconId: chance.string(),
     });
   }
 
@@ -156,12 +157,12 @@ export const buildBookmarkList = (amount: number): Bookmark[] => {
     index += 1;
 
     builtList.push({
-      firebaseId: uuidv4(),
-      id: uuidv4(),
-      bookmarkUrl: uuidv4(),
-      bookmarkTitle: uuidv4(),
-      subjectId: uuidv4(),
-      plannerItemIds: [uuidv4()],
+      firebaseId: chance.string(),
+      id: chance.string(),
+      bookmarkUrl: chance.string(),
+      bookmarkTitle: chance.string(),
+      subjectId: chance.string(),
+      plannerItemIds: [chance.string()],
     });
   }
 
@@ -176,11 +177,11 @@ export const buildBookmarkDAOList = (amount: number): BookmarkDAO[] => {
     index += 1;
 
     builtList.push({
-      id: uuidv4(),
-      bookmarkUrl: uuidv4(),
-      bookmarkTitle: uuidv4(),
-      subjectId: uuidv4(),
-      plannerItemIds: [uuidv4()],
+      id: chance.string(),
+      bookmarkUrl: chance.string(),
+      bookmarkTitle: chance.string(),
+      subjectId: chance.string(),
+      plannerItemIds: [chance.string()],
     });
   }
 
@@ -232,6 +233,31 @@ export const buildLessonPlannerDAOList = (amount: number): LessonPlannerDAO[] =>
         },
       ],
     });
+  }
+
+  return builtList;
+}
+
+export const buildLibraryBook = (): LibraryBook => {
+  return new LibraryBook(
+    chance.string(),
+    chance.string(),
+    chance.string(),
+    chance.string(),
+    chance.string(),
+    chance.integer(),
+    chance.integer(),
+    chance.integer(),
+  )
+}
+
+export const buildLibraryBooksList = (amount: number): LibraryBook[] => {
+  let index = 0;
+  const builtList = [];
+
+  while (index < amount) {
+    index += 1;
+    builtList.push(buildLibraryBook());
   }
 
   return builtList;

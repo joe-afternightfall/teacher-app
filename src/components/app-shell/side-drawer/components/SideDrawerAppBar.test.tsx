@@ -42,7 +42,8 @@ describe('Side Drawer App Bar', () => {
       <SideDrawerAppBar
         logoClickHandler={undefined}
         drawerSize={MIN_DRAWER_WIDTH}
-      />);
+      />
+    );
 
     expect(appBar.queryByTestId('logo-button')).not.toBeInTheDocument();
     expect(appBar.queryByTestId('min-logo')).not.toBeInTheDocument();

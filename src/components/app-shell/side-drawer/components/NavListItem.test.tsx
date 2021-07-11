@@ -47,6 +47,8 @@ describe('Nav List Item Component', () => {
 
     navListItem.getByTestId('test-id').click();
     expect(clickHandler).toHaveBeenCalledTimes(1);
-    expect(navListItem.queryByTestId('list-item-test-id')).not.toBeInTheDocument();
+    expect(
+      navListItem.queryByTestId('list-item-test-id')
+    ).not.toBeInTheDocument();
   });
 });
