@@ -47,8 +47,8 @@ export const initialState = {
   },
 };
 
-export function getStore(state: any): MockStore {
-  return createStore(middleware)({
+export function getStore(state: any, dispatchMock?: any): MockStore {
+  const store = createStore(middleware)({
     ...initialState,
     applicationState: { ...initialState.applicationState, ...state },
     //todo: remove and make use of new get store
@@ -75,6 +75,12 @@ export function getStore(state: any): MockStore {
       boardChanged: false,
     }
   });
+
+  if (dispatchMock) {
+    return {...store, dispatch: dispatchMock};
+  } else {
+    return store;
+  }
 }
 
 export function getSubjectListStore(state: any): MockStore {
