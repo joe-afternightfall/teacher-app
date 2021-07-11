@@ -5,16 +5,8 @@ import { ThunkDispatch } from 'redux-thunk';
 import { State } from '../../../configs/redux/store';
 import { Button, Grid, TextField } from '@material-ui/core';
 import { searchISBN } from '../../../services/library/isbn-search';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {},
-  })
-);
 
 const BookSearch = (props: BookSearchProps): JSX.Element => {
-  const classes = useStyles();
   const [book, setBook] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +28,7 @@ const BookSearch = (props: BookSearchProps): JSX.Element => {
           value={book}
           onChange={handleChange}
           label={'Search By ISBN'}
+          data-testid={'isbn-search-textfield'}
         />
       </Grid>
 
@@ -47,6 +40,7 @@ const BookSearch = (props: BookSearchProps): JSX.Element => {
               props.searchHandler(book);
             }}
             disabled={book.length === 0}
+            data-testid={'isbn-search-button'}
           >
             {'Search'}
           </Button>
@@ -60,7 +54,7 @@ export interface BookSearchProps {
   searchHandler: (isbn: string) => void;
 }
 
-const mapStateToProps = (state: any): BookSearchProps => {
+const mapStateToProps = (): BookSearchProps => {
   return ({} as unknown) as BookSearchProps;
 };
 
