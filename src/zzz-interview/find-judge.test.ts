@@ -7,8 +7,6 @@ describe('find judge test', () => {
 
     console.log(found);
     expect(found).toEqual(3);
-
-    // [[2,1],[3,1],[4,2],[4,3],[4,5],[5,1]]
   });
 
   it('should hand back -1', () => {
@@ -16,6 +14,6 @@ describe('find judge test', () => {
     const found = findJudge(6, trust);
 
     console.log(found);
-    expect(found).toEqual(3);
+    expect(found).toEqual(-1);
   });
 });
