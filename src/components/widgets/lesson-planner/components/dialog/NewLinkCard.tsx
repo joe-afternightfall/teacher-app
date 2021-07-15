@@ -49,6 +49,7 @@ class NewLinkCard extends Component<NewLinkCardProps> {
           <Grid item xs={12}>
             <TextField
               id={'new-link-title'}
+              data-testid={'new-link-title-textfield'}
               label={'Link Title'}
               variant={'outlined'}
               fullWidth
@@ -64,6 +65,7 @@ class NewLinkCard extends Component<NewLinkCardProps> {
             <TextField
               fullWidth
               id={'new-link-url'}
+              data-testid={'new-link-url-textfield'}
               label={'URL'}
               variant={'outlined'}
               inputProps={{
@@ -82,6 +84,7 @@ class NewLinkCard extends Component<NewLinkCardProps> {
             color={'primary'}
             variant={'contained'}
             startIcon={<SaveIcon />}
+            data-testid={'new-link-save-button'}
           >
             {'Save'}
           </Button>
