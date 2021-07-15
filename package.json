@@ -65,6 +65,7 @@
     "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-prettier": "^3.3.0",
     "flush-promises": "^1.0.2",
+    "jest-canvas-mock": "^2.3.1",
     "jest-chance": "^0.1.8",
     "jest-extended": "^0.11.5",
     "jest-fetch-mock": "^3.0.3",
