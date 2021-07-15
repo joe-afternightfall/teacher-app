@@ -45,6 +45,7 @@ export const initialState = {
   subjectListState: {
     subjectList: buildSubjectList(4),
   },
+  lessonPlannerState: {},
 };
 
 export function getStore(state: any, dispatchMock?: any): MockStore {
@@ -87,6 +88,13 @@ export function getSubjectListStore(state: any): MockStore {
   return createStore(middleware)({
     ...initialState,
     subjectListState: { ...initialState.subjectListState, ...state },
+  });
+}
+
+export function getLessonPlannerStore(state: any): MockStore {
+  return createStore(middleware)({
+    ...initialState,
+    lessonPlannerState: { ...initialState.lessonPlannerState, ...state },
   });
 }
 
