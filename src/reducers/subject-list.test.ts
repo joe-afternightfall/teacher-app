@@ -1,9 +1,8 @@
-import { v4 as uuidv4 } from 'uuid';
 import actions from '../creators/actions';
 import subjectList, { SubjectListState } from '../reducers/subject-list';
 import { buildColor, buildSubjectList } from '../configs/test-utils/test-util';
-import { getStore } from '../configs/test-utils/mock-redux';
 import { checkForDuplicates } from '../utils/validate-name';
+import { chance } from 'jest-chance';
 
 jest.mock('../utils/validate-name');
 
@@ -32,7 +31,7 @@ describe('subject list reducer', () => {
   });
 
   it('should return SELECT_ICON action', () => {
-    const id = uuidv4();
+    const id = chance.string();
 
     const state = subjectList.reducer(undefined, {
       type: actions.SELECT_ICON,
@@ -43,7 +42,7 @@ describe('subject list reducer', () => {
   });
 
   it('should return UPDATE_SUBJECT_NAME when duplicate true', () => {
-    const subjectName = uuidv4();
+    const subjectName = chance.string();
 
     checkForDuplicatesMock.mockReturnValue(true);
     const state = subjectList.reducer(buildSubjectListState(), {
@@ -56,7 +55,7 @@ describe('subject list reducer', () => {
   });
 
   it('should return UPDATE_SUBJECT_NAME when duplicate false', () => {
-    const subjectName = uuidv4();
+    const subjectName = chance.string();
 
     checkForDuplicatesMock.mockReturnValue(false);
     const state = subjectList.reducer(buildSubjectListState(), {
@@ -69,7 +68,7 @@ describe('subject list reducer', () => {
   });
 
   it('should return UPDATE_SUBJECT_NAME when editing form true', () => {
-    const subjectName = uuidv4();
+    const subjectName = chance.string();
 
     checkForDuplicatesMock.mockReturnValue(true);
     const appState = buildSubjectListState();
